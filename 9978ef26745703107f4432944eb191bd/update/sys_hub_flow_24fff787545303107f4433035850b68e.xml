@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,timeFromCreateToActivate=8621000,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Creates a student rental and updates the campus asset when a student requests an available asset.</description>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source/>
+        <internal_name>campus_asset_rental_flow</internal_name>
+        <label_cache>[{"name":"Service Catalog_1.request_item","label":"Trigger - Service Catalog➛Requested Item Record","reference":"sc_req_item","reference_display":"Requested Item","type":"reference","base_type":"reference","usedInstances":{"74eae484-1d53-4351-bf3f-71031df064a7":["requested_item"]},"attributes":{"default_search_field":"number"}},{"name":"74eae484-1d53-4351-bf3f-71031df064a7.student","label":"1 - Get Catalog Variables➛student","reference":"sys_user","reference_display":"User","type":"reference","base_type":"reference","usedInstances":{"653edbbd-5cd1-4896-b3ee-1c0f126e3bd8":["u_student"],"e2a696c2-a1a7-40a7-8acf-08d60b8b736b":["u_student"],"89f0966b-3c9d-489e-81bc-3a340a08ea25":["u_current_student"]},"attributes":{"catalogType":"8","catalogTypeLabel":"Reference"}},{"name":"74eae484-1d53-4351-bf3f-71031df064a7.select_asset","label":"1 - Get Catalog Variables➛select_asset","reference":"u_campus_asset","reference_display":"Campus Asset","type":"reference","base_type":"reference","column_name":"","usedInstances":{"653edbbd-5cd1-4896-b3ee-1c0f126e3bd8":["u_asset"],"43284bc2-fb90-4200-bc45-3fd9cf0b73fa":[null],"e2a696c2-a1a7-40a7-8acf-08d60b8b736b":["u_asset"]},"attributes":{"catalogType":"8","catalogTypeLabel":"Reference"}},{"name":"74eae484-1d53-4351-bf3f-71031df064a7.expected_return_date","label":"1 - Get Catalog Variables➛expected_return_date","reference":"","reference_display":"expected_return_date","type":"glide_date","base_type":"glide_date","usedInstances":{"653edbbd-5cd1-4896-b3ee-1c0f126e3bd8":["u_return_date"],"e2a696c2-a1a7-40a7-8acf-08d60b8b736b":["u_return_date"]},"attributes":{"catalogType":"9","catalogTypeLabel":"Date"}},{"name":"74eae484-1d53-4351-bf3f-71031df064a7.remarks","label":"1 - Get Catalog Variables➛remarks","reference":"","reference_display":"remarks","type":"multi_small","base_type":"multi_small","usedInstances":{"653edbbd-5cd1-4896-b3ee-1c0f126e3bd8":["u_remarks"],"e2a696c2-a1a7-40a7-8acf-08d60b8b736b":["u_remarks"]},"attributes":{"catalogType":"2","catalogTypeLabel":"Multi Line Text"}},{"name":"Service Catalog_1.run_start_date_time","label":"Trigger - Service Catalog➛Run Start Date/Time","type":"glide_date_time","base_type":"glide_date_time","usedInstances":{"653edbbd-5cd1-4896-b3ee-1c0f126e3bd8":["u_rental_date"],"e2a696c2-a1a7-40a7-8acf-08d60b8b736b":["u_rental_date"]},"attributes":{"test_input_hidden":"true"}},{"name":"undefined","usedInstances":{"43284bc2-fb90-4200-bc45-3fd9cf0b73fa":[null]}},{"name":"43284bc2-fb90-4200-bc45-3fd9cf0b73fa.status","label":"2 - Look Up Record➛Status","reference_display":"Status","type":"choice","base_type":"choice","choices":[{"label":"Error","value":"1","order":0.0},{"label":"Success","value":"0","order":1.0}],"usedInstances":{"e4152dea-93a6-4d34-a709-5952fe2b567d":["condition"],"e2a696c2-a1a7-40a7-8acf-08d60b8b736b":["u_status"]},"attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"5e478657-3a84-4a60-a92b-d3e80005ad34"}},{"name":"43284bc2-fb90-4200-bc45-3fd9cf0b73fa.Record","label":"2 - Look Up Record➛Campus Asset Record","reference":"u_campus_asset","reference_display":"Campus Asset","type":"reference","base_type":"reference","usedInstances":{"ddf9ed38-8198-443c-90b2-c5585a460e0d":["condition"],"89f0966b-3c9d-489e-81bc-3a340a08ea25":["record"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"74eae484-1d53-4351-bf3f-71031df064a7.select_asset.u_asset_id","label":"1 - Get Catalog Variables➛select_asset➛Asset ID","reference":"","reference_display":"Asset ID","type":"string","base_type":"string","parent_table_name":"u_campus_asset","column_name":"u_asset_id","usedInstances":{"43284bc2-fb90-4200-bc45-3fd9cf0b73fa":[null]}}]</label_cache>
+        <master_snapshot>030d801354d303107f4433035850b6d5</master_snapshot>
+        <master_snapshot_digest/>
+        <name>Campus Asset Rental Flow</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>d30dc01354d303107f4433035850b653</remote_trigger_id>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 04:56:22</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>24fff787545303107f4433035850b68e</sys_id>
+        <sys_mod_count>39</sys_mod_count>
+        <sys_name>Campus Asset Rental Flow</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_hub_flow_24fff787545303107f4433035850b68e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:20:06</sys_updated_on>
+        <type>flow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record>6ed0201b545703107f4433035850b64d</version_record>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=24fff787545303107f4433035850b68e"/>
+    <sys_variable_value action="delete_multiple" query="document_key=24fff787545303107f4433035850b68e"/>
+    <sys_flow_catalog_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <catalog_item/>
+        <name/>
+        <published_version/>
+        <run_flow_in/>
+        <sys_class_name>sys_flow_catalog_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:38</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d30dc01354d303107f4433035850b653</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:20:06</sys_updated_on>
+        <trigger_definition/>
+    </sys_flow_catalog_trigger>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=24fff787545303107f4433035850b68e"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=24fff787545303107f4433035850b68e"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=24fff787545303107f4433035850b68e^sys_idNOT INa0fff787545303107f4433035850b691"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>24fff787545303107f4433035850b68e</id>
+        <name>Campus Asset Rental Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 04:56:22</sys_created_on>
+        <sys_id>a0fff787545303107f4433035850b691</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 04:56:22</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=a0fff787545303107f4433035850b691"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=24fff787545303107f4433035850b68e^sys_idNOT IN6b908cd7545303107f4433035850b67f,93904cd7545303107f4433035850b60b"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>sc_req_item</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Campus Asset Rental Flow">24fff787545303107f4433035850b68e</model>
+        <model_id>24fff787545303107f4433035850b68e</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_24fff787545303107f4433035850b68e</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 04:59:18</sys_created_on>
+        <sys_id>6b908cd7545303107f4433035850b67f</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:20:03</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=6b908cd7545303107f4433035850b67f"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>default_search_field=number,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>request_item</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Request Item</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Campus Asset Rental Flow">24fff787545303107f4433035850b68e</model>
+        <model_id>24fff787545303107f4433035850b68e</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_24fff787545303107f4433035850b68e</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference display_value="" name="sc_req_item">sc_req_item</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 04:59:17</sys_created_on>
+        <sys_id>93904cd7545303107f4433035850b60b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 05:15:16</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=93904cd7545303107f4433035850b60b"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=24fff787545303107f4433035850b68e"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=24fff787545303107f4433035850b68e"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=24fff787545303107f4433035850b68e^sys_idNOT IN03904cd7545303107f4433035850b603"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">24fff787545303107f4433035850b68e</flow>
+        <generation_source/>
+        <name>Service Catalog</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 04:59:16</sys_created_on>
+        <sys_id>03904cd7545303107f4433035850b603</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 05:53:13</sys_updated_on>
+        <trigger_definition display_value="Service Catalog">c43a1011c36813002841b63b12d3ae15</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/61T32vbMBD+V4KeNvDATtZm8dsYFALdCk3Xl1KMIp0SMVlyJdmtF/q/7y62k7TzxqB70/38vrv7dLdjhq/BsJxd13ZyYdzjZGlZwrSN4C03N20FGBRbpwWgv3tc6hBZfrdjagUPNVgM5R+yhKlbbmrKX3PxY+NdbSXWqMsTCEUQ2k6OGZN3EhSvTXxPucuSb6gDvVdgQESQLFfcBEDP93BqfdUhaLvpHc/Jn/ko5+HvfF5mvIHFfcJKbiWPzrfHJO/KGygrwyMcnM5L8CzP0jRhDRFdtWEpO1TLS8L3tS2IYaHpKE0/DT6lDtisvT16xFYb6cHiXZBCxT12iNR/9yqkCeI8XaRiPl3M59N0NktTdbZWQgkx/5Sl59nZAhuOC2OUWHylktPJ4CmClScL+307Hri8subo2KL8uqlK/hT0T2z+MaU8Bb67LsUOZtFvY1gEsQh7fZp/V14zJt1+kJS0NdbrhWqaMbENqyBd9Ghf/j/B7M0Ep0SwW91VFbVDsbAZnZavDdWENnQH9yCwpIhebzZYiEXO1KX9NqaLnv2JSuuA14KKFEEnHr7Hauser4dzXmi7p9QHjRPcHCweEXldR9rfjnHZcKwgRUePGM97VRQPNVXs/8mAVewnooQgvK7iZxF1A4dP+wt8tA/9CQUAAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>service_catalog</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=24fff787545303107f4433035850b68e^sys_idNOT INed4404df545303107f4433035850b64b,469b0c1f549303107f4433035850b638,f2c78c57549303107f4433035850b634,09dac4db549303107f4433035850b633"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Get Catalog Variables">330ba3abc31013002841b63b12d3aee8</action_type>
+        <action_type_parent display_value="Get Catalog Variables">22f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>330ba3abc31013002841b63b12d3aee8</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">24fff787545303107f4433035850b68e</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:15:17</sys_created_on>
+        <sys_id>ed4404df545303107f4433035850b64b</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:22:37</sys_updated_on>
+        <ui_id>74eae484-1d53-4351-bf3f-71031df064a7</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/91VW2vbMBT+K0HPJjhxLm3eto7CYFthGX0ZQ0jycSMmy64uybLQ/74jW07cdE1bWAfbW3J0Lt+5fJ+/7ojMyYLwIuUsY1xko3SUpen4bDLis4yPxnnGABhJiGYloKeBWw/WQU6lgxLta6Z8eNjtlmDWUsDggjmmqhs6GkbnxvXuDp1zaWvFttcxBi1iJVVuQJPF128JqZnBMg4MWeyOnp6LUzEOCl2XnpfSIdDB5xbFiR7ctm7tBWA9AdH0Iab63LNXJg/o0oTADwc6B4RVMGUhISXTOXOV2ZKFMx4NBlh+pdV277GS2rVtl+yHlT+xaDZOenUXxAqK8Dpg+xcaJ9egiegH71un4h0OfIklhfNmP9YKV2Hb0eVQMK/cRd/WOlzVTla6DXGMqy66Ur7Un9ppkX2C3tq8RUhQhwGElmJ/xXJVbfbTupS6mVV8VJVgqucKzIjVpQQVFqt9ydE3Icw5I7l3AeeOgIISC9CS1bXUN7Q21Vo2SRFjObxR+GdYqGqDYKy80UMmQkND3AMbXqL9XWO+ZkaG7j5imqZKhVuhuanqOjYdFkbuEmK39kIxaw+94wrorQ/I20nEnmk7thAijKzdGyy8htjeXdLxip+612J0uElcJe7XARWRPUf0Op/MzudczKcTzIPZ5sVkkuGv6dk05TMxfUiuC1bW3g7eWAsOOaAx7cv59jT+jm9fYgMd/ZvrtAPkxKAb/2AJzj7d8svZOHo1NjqKF3EPoKWYmK5jS9S2Lf2OqE8P4r9gbqj1t3grLapjWeHNND3T/q4aCiMdsRHcSoB4MK6wHjVeO1kCbShFpaZVbdcSNq9H//lp+swPXOgurLsr26P+eCY40r14hPrzRThLbCZMkGrYJDN+JlArHgmA8YOA8/OMZZngvw+YzR4E5NOJwIBHKszgOOChOv0fTb1MTZ9xDp2adtpx3buHE6cSJdMqb1fci+/gjkRzGV4Gb7unqJvj07oZLc8RztE4TdP72vmIKv6rsndf4FCICvx24ewOe8CbgGaSpAnBoq8lg8+SMzw6LZRHzxJHIQ1W2UMNn5+9WxhNDwQYujFtpb1LbTDGrMPnToFwTZOd3lbeiKjHaD3myJ8T1W+/AD0vGrStDAAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=ed4404df545303107f4433035850b64b"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">24fff787545303107f4433035850b68e</flow>
+        <generation_source/>
+        <order>5</order>
+        <parent_ui_id>ddf9ed38-8198-443c-90b2-c5585a460e0d</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:47:15</sys_created_on>
+        <sys_id>469b0c1f549303107f4433035850b638</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:22:37</sys_updated_on>
+        <ui_id>89f0966b-3c9d-489e-81bc-3a340a08ea25</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVTU/jMBD9K5XPTZQ0aUt7Q62QVmJBghUXlo0cewKWnI/1B9CN+t93nDilC4gtEntAm1M8M89+8/Imvm6J4GRJUuBRvIhnLImTZBJFk6M0zmdJHk94QgFiMiYVLQErFbBacVzfU2ldoG3TBMtzNgmKfBEFKcKDnKXTICn4ghVRPk8KGl50uO0WkVzoRtLNld8AI+xOSK6gIsvrmzFpqMKzDCiybJ+lDiUraQ4SSy8Gts/Zm03j1rxmtoTKZGIInnrk2mdGX9aYQZCjE0djAo8GKg5IpKBSw5iUtOLU1GpDlkZZDCig/LySm13FnahM32hJH7X4hSenkasrADtjXoTdMvMC9eFiTQ29xJ2ZsWqnVy0Y6F4TDgW10qz2Y33BeWNEXfUQQ3M5oGtpy+qsV4TsNtj7HlYjCWhcn45531ZxeVc/XAwkT0TVSeJblDWjcreixiiRW+PotAQkdBqXtGlEdZs1qr4XHRiplOGtxEVYyPoBz9Titgopc7xDVJWGJxhfd+ErqoRr4itug+DtmOiNXkmq9VMrqGH20zomfWO+haxToZMg65zgwEyJxhzjUffgiW/Hfhzy6VsOY4snQ+3t+TQSNmO0bKzOkBuYl45fddnRsc++z/0HcBvc/6375q9z9QPwIna6jx2d9Qlv/+mH2f/oM9nft/Hp/f8310eTN/+re07qjK7/cLw21Fj93UZR4gxrgP/AMbDKvWPSOhp9tm3nKVBIj9Ig5tMkSJNpHORFUgTzOEpiXkSzlM5Dj3ntxvjHp71vHg9QbZjHEwGS61dkHIYRSmzTQNbL+mwgfXJ05ZO7O+nDpjKeRd3ziWbzv7mabn4DCTQH0KsJAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=469b0c1f549303107f4433035850b638"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
+        <action_type_parent display_value="Look Up Record">b93f42810b30030085c083eb37673a63</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>9d09f99587003300663ca1bb36cb0ba3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">24fff787545303107f4433035850b68e</flow>
+        <generation_source/>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:30:39</sys_created_on>
+        <sys_id>f2c78c57549303107f4433035850b634</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:22:37</sys_updated_on>
+        <ui_id>43284bc2-fb90-4200-bc45-3fd9cf0b73fa</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VYUW/iOBD+K1GegUtIINC3VSuklfa20ra3L3t7lhM7xTpjZ22Hbov47zuJHeAgBaKjp1b3GM94/M34+yaTfFv5jPhXPpkG03w6HU2SIIiiIBiPowyHaRqNszRIcez3fIEXFDwNTjmFxyXmZfVcogwvilIjrDU1YCBMFxw/fXX269rqfXDWbM44UVT4V9++9/wCK4hqqPKvVnumc2FxnFIOrvcO1x5M81RsHlFts2ufdrd5n61BKlJBCXo+/WmoIBQw5Jhr2vMXWBBspHrarCiKya3g24U5EwYi+pXzT82e4dxJUPnlFLLKqLVtHpErlF3Ob7DBd0aVmSmVc83mkmVU23oQmuOSm+vdNetwWxgmhd1i07a7JS8X4rMth78J0NwLrJQaQNCiSrRC7tLI7+by8UuDcsZEXRNn5DLDfPOEjVEsLU2FZ+VTThcQCC1wUTDxgAoll6zeDFgWgwcOD4Ocy0c4VLMHMcBZBXwAdcWDGazf1MtfsWJVFr9DGNgMgBgHhiB7hVqWqi7lEmW81LVBYaFtLH/d8/WTvuZAxm3mUHL0o6xw2zq4jJEtWrUlU6wwHyDEkrrk1r1GGaOjFJxuKZdJQViFQv9DHrUuECN/lhCArFZJTDGNJ3E/JKOoH0ejsJ/mUd5PwiAKSR6MY5wMNBQzM3bvYBtjvf6rRNpgU2obDi8x447qe8L7D0/uKOrTFW1Efb1b0rYyO3kfrH1qC+DkHV5M3nEQvCeBw+FvT9/dFWtLcEK2ITlKMrLlk5bKIFvLHd0e6qkzz8+A0PD8tmKmlz69hMrRPGeUk7a32Kwy7L3Fhv/Pt9ibJDkAIsjeHhOciXokAaCvxf7RUeql4R7PanptuV+vYZ0dagB7RnrPnZVwBpxGCXdwtndv8bRAbPp9TZn9Xt8sOgFEFxNANLyMAFabNDeFbKl5M4VWt9n4P1f+eN8fKLizIVy3CazTmWHXM4frQwFHnRS8SzZruXmBcxceV19QZO81W8ActrrzkNUvemTkgZrt6Y0XkeYR87/b7I5xqLmoOr1XGH3Do19f6c7oy3K0gJtjBUzoimZADvgeVBTlshQEudl8ZyiGm8yZ0sY5HzaaLxT0IzwJwvTMnHq1t7fx7vgiPp1HU8qPudck4k7THiTi1Yl4m0S6pd2lacUXHE4v3bRmMPHXtwGfXcXOdVKlpHqhcZ24yCOMOLOrnQkqvCiof9/22iTQ2v5OYH0X3/CXb00ZxWk8xOMkCsMgCAOSBJMkCSfjNB/jJM63GkVIiwy6KUTOgSoQHjXUaO45OOw/tqV2bTRnoGooeCNF9R09TIxXwYL79RpYp4G7hpJKySkWex3lHt4Tv80cfsfX0ZvrKu/ij1bJ7vcrbZdaa/1ac0PJ/hDsR0k/VhSb0GA4CUnWnyRh0o9zMu5PCR718TQdJRGhWZxfchT4/guhP8viIRYAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=f2c78c57549303107f4433035850b634"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">24fff787545303107f4433035850b68e</flow>
+        <generation_source/>
+        <order>4</order>
+        <parent_ui_id>ddf9ed38-8198-443c-90b2-c5585a460e0d</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:43:54</sys_created_on>
+        <sys_id>09dac4db549303107f4433035850b633</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:22:37</sys_updated_on>
+        <ui_id>e2a696c2-a1a7-40a7-8acf-08d60b8b736b</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K5Wf0ygmoUDfJhBPG0h04oVtkRPftNYcJ/NHoav633cdO9Ax0FZpmoS0PlTy/Tj33OPrm7stEZzMyYxCdnxGZ3VO8/woy45OC1rN8ooe8ZwBFCQhirWAkZZVEsrhkJA1k84bXWms46BsqfGPSXRxYXrJNrcxYhH8k5vRX6+E5BhN5nefE9IzjYgWNJlvn7n+lJ9kFUgM/egJvsLXbvoXbe/3cydXwdFp7vlkCYEHC4oDEmmYNJCQlinObKc3ZG61Q4MGxq+V3DxGrISyCEh87IMR37HsaebjGsDOagi+x2MZ5Qrm5oJZtkDk2jodQ+tVJ2owQRMODXPSnu/bQsB1b0WnQsrQZszupGvVVZCEPAKMt4MWZ5AE9L5Pzzy20SxW3f3NyPJSqEGS6JRdjVc5npi1WlTOej5bAhJaPw8t63uhlmWvu7UYkpFLmy4lHtJGdvdY1IilSlntiacoK0sv0X4xmG+ZFr6LDwiDybuEmI05l8yYp15QxPKb80xCZ7GHMsjgU2otevsOC6wh0t0l4+BzyM5eHSxaPQ3SMOvmpaH/5LIs59vtSQEMitNiSvlxPi3yYzqtmryZntAsp7zJZgU7SWPObvfFldgGHJiNutY2JA4QGnBEVImywUFA8NAjEPB9gAjYMv3VHAQWc2K+f+A/EVqAXuNoTs7xbmW3LGmqnULxmLZDXGlFG4qjzbpYm4X7+mWT/Jf938h+4IL+/TsaF/SlAMnNCw9r3M7Q4n0jv/DQnm3o6JzcRmfc0vRvbWk6y4bfG9rVobk3v6r3vsqvLO3PPwAJkT4zrwgAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=09dac4db549303107f4433035850b633"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=24fff787545303107f4433035850b68e"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=24fff787545303107f4433035850b68e^sys_idNOT IN6d2ac09b549303107f4433035850b610,ad2c885f549303107f4433035850b6cb"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">5dfcccdf549303107f4433035850b653</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">24fff787545303107f4433035850b68e</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>3</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:40:56</sys_created_on>
+        <sys_id>6d2ac09b549303107f4433035850b610</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:20:03</sys_updated_on>
+        <ui_id>ddf9ed38-8198-443c-90b2-c5585a460e0d</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXWvbMBT9K8PPiZG/0jpvZVsh0DajCYUxirmWpURMljxLTpqF/Pdd+SMJW8rG1se9SUe6uucen4P3nm5s1Viz1DfGiJXypl+eR55QDsP13uNSb+/0StCZMhYUZYudmRXe1JsUIVCS5kmcRiQKyBWP4whXyXVC8klAvJGnoGR4k2pVCCu0ylpg5G1ANu4Al4UwlYTd0wmhayGLmvVMKqixxrLam+5/OrK7imUSciaxcGFroVZYLhw3ToAHKQ1oFE6ikJDwOg7ySZQHYREBgwjvDYXvB3Lv7lrkddauH+Jm6KTrwtEKyMhjL5apgmFrDtKwkVeCKsDqendEagbFXMkTsBbKdhOX8GLEd3w7TBJ3kTOckfZyHLdZL9WgkhaUzStHsEMs5HKQUMumVA/dHE5kxqGR9kzkxuB7rHKkHYueEl+s9fZxaHgrVDtgfyg1BXncgUUZ8sYy4z4Mk6zEh7ISqgrFyapab0RbjFxKfyVx4zsnYVPnMh+oI+6jRuDfIv6hhZ+gFm6Ke3wGizuaORhBs9aR+JytcYRDK0v2rXGEugH7UbJODbxgaC0qe4N9NqxnfRi9rZ3PnLzfxxGaLKfhmOcpGcdounFO42Qc8SKlnORXEQf/kVF0zeEwWzzMlx/vPy0//xqBf3nqLbKTQsKTgCSXsxNPLmXnsjivBCb8TWDcJ/7DvBBC/gfmPDDCZJ3x+9na5n+dl2dn8K6D6XxTMCoMElk6bDb8JdzBDg3gUnWCtrr+6kY4YYcfm6e8NW8GAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">a5fcccdf549303107f4433035850b657</block>
+        <comment/>
+        <connected_to>ddf9ed38-8198-443c-90b2-c5585a460e0d</connected_to>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">24fff787545303107f4433035850b68e</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="Else">1f781bf3c32232002841b63b12d3aee6</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:49:41</sys_created_on>
+        <sys_id>ad2c885f549303107f4433035850b6cb</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:20:03</sys_updated_on>
+        <ui_id>50788d43-e501-4a5d-9e06-3f65a396d126</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/6tWyi8tKSgtKQ7JdywuzkzPU7KKjtVRyswDiUHYZYlFmYlJOalQbkpqcmZxZn5eCEjME0ldSmVeYm5mMrJQeX5RdlpOfjlCrBYAD1ouqHEAAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=24fff787545303107f4433035850b68e"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=24fff787545303107f4433035850b68e"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>request_item</element>
+        <help/>
+        <hint/>
+        <label>Request Item</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_24fff787545303107f4433035850b68e</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 04:59:18</sys_created_on>
+        <sys_id>27908cd7545303107f4433035850b67a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 04:59:18</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_24fff787545303107f4433035850b68e</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 04:59:18</sys_created_on>
+        <sys_id>bf908cd7545303107f4433035850b6d7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 04:59:18</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_24fff787545303107f4433035850b68e"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_24fff787545303107f4433035850b68e"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Creates a student rental and updates the campus asset when a student requests an available asset.</description>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>campus_asset_rental_flow</internal_name>
+        <label_cache>[{"name":"Service Catalog_1.request_item","label":"Trigger - Service Catalog➛Requested Item Record","reference":"sc_req_item","reference_display":"Requested Item","type":"reference","base_type":"reference","usedInstances":{"74eae484-1d53-4351-bf3f-71031df064a7":["requested_item"]},"attributes":{"default_search_field":"number"}},{"name":"74eae484-1d53-4351-bf3f-71031df064a7.student","label":"1 - Get Catalog Variables➛student","reference":"sys_user","reference_display":"User","type":"reference","base_type":"reference","usedInstances":{"653edbbd-5cd1-4896-b3ee-1c0f126e3bd8":["u_student"],"e2a696c2-a1a7-40a7-8acf-08d60b8b736b":["u_student"],"89f0966b-3c9d-489e-81bc-3a340a08ea25":["u_current_student"]},"attributes":{"catalogType":"8","catalogTypeLabel":"Reference"}},{"name":"74eae484-1d53-4351-bf3f-71031df064a7.select_asset","label":"1 - Get Catalog Variables➛select_asset","reference":"u_campus_asset","reference_display":"Campus Asset","type":"reference","base_type":"reference","column_name":"","usedInstances":{"653edbbd-5cd1-4896-b3ee-1c0f126e3bd8":["u_asset"],"43284bc2-fb90-4200-bc45-3fd9cf0b73fa":[null],"e2a696c2-a1a7-40a7-8acf-08d60b8b736b":["u_asset"]},"attributes":{"catalogType":"8","catalogTypeLabel":"Reference"}},{"name":"74eae484-1d53-4351-bf3f-71031df064a7.expected_return_date","label":"1 - Get Catalog Variables➛expected_return_date","reference":"","reference_display":"expected_return_date","type":"glide_date","base_type":"glide_date","usedInstances":{"653edbbd-5cd1-4896-b3ee-1c0f126e3bd8":["u_return_date"],"e2a696c2-a1a7-40a7-8acf-08d60b8b736b":["u_return_date"]},"attributes":{"catalogType":"9","catalogTypeLabel":"Date"}},{"name":"74eae484-1d53-4351-bf3f-71031df064a7.remarks","label":"1 - Get Catalog Variables➛remarks","reference":"","reference_display":"remarks","type":"multi_small","base_type":"multi_small","usedInstances":{"653edbbd-5cd1-4896-b3ee-1c0f126e3bd8":["u_remarks"],"e2a696c2-a1a7-40a7-8acf-08d60b8b736b":["u_remarks"]},"attributes":{"catalogType":"2","catalogTypeLabel":"Multi Line Text"}},{"name":"Service Catalog_1.run_start_date_time","label":"Trigger - Service Catalog➛Run Start Date/Time","type":"glide_date_time","base_type":"glide_date_time","usedInstances":{"653edbbd-5cd1-4896-b3ee-1c0f126e3bd8":["u_rental_date"],"e2a696c2-a1a7-40a7-8acf-08d60b8b736b":["u_rental_date"]},"attributes":{"test_input_hidden":"true"}},{"name":"undefined","usedInstances":{"43284bc2-fb90-4200-bc45-3fd9cf0b73fa":[null]}},{"name":"43284bc2-fb90-4200-bc45-3fd9cf0b73fa.status","label":"2 - Look Up Record➛Status","reference_display":"Status","type":"choice","base_type":"choice","choices":[{"label":"Error","value":"1","order":0.0},{"label":"Success","value":"0","order":1.0}],"usedInstances":{"e4152dea-93a6-4d34-a709-5952fe2b567d":["condition"],"e2a696c2-a1a7-40a7-8acf-08d60b8b736b":["u_status"]},"attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"5e478657-3a84-4a60-a92b-d3e80005ad34"}},{"name":"43284bc2-fb90-4200-bc45-3fd9cf0b73fa.Record","label":"2 - Look Up Record➛Campus Asset Record","reference":"u_campus_asset","reference_display":"Campus Asset","type":"reference","base_type":"reference","usedInstances":{"ddf9ed38-8198-443c-90b2-c5585a460e0d":["condition"],"89f0966b-3c9d-489e-81bc-3a340a08ea25":["record"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"74eae484-1d53-4351-bf3f-71031df064a7.select_asset.u_asset_id","label":"1 - Get Catalog Variables➛select_asset➛Asset ID","reference":"","reference_display":"Asset ID","type":"string","base_type":"string","parent_table_name":"u_campus_asset","column_name":"u_asset_id","usedInstances":{"43284bc2-fb90-4200-bc45-3fd9cf0b73fa":[null]}}]</label_cache>
+        <master>true</master>
+        <name>Campus Asset Rental Flow</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="Campus Asset Rental Flow">24fff787545303107f4433035850b68e</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:36</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>030d801354d303107f4433035850b6d5</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:20:06</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=030d801354d303107f4433035850b6d5"/>
+    <sys_variable_value action="delete_multiple" query="document_key=030d801354d303107f4433035850b6d5"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=030d801354d303107f4433035850b6d5"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=030d801354d303107f4433035850b6d5^sys_idNOT IN8b0d801354d303107f4433035850b6d6"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>030d801354d303107f4433035850b6d5</id>
+        <name>Campus Asset Rental Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:36</sys_created_on>
+        <sys_id>8b0d801354d303107f4433035850b6d6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 05:53:36</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=8b0d801354d303107f4433035850b6d6"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=030d801354d303107f4433035850b6d5^sys_idNOT IN030d801354d303107f4433035850b6d8,cb0dc01354d303107f4433035850b619"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>sc_req_item</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Campus Asset Rental Flow">030d801354d303107f4433035850b6d5</model>
+        <model_id>030d801354d303107f4433035850b6d5</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_030d801354d303107f4433035850b6d5</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>true</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:36</sys_created_on>
+        <sys_id>030d801354d303107f4433035850b6d8</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:20:05</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=030d801354d303107f4433035850b6d8"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>default_search_field=number,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>request_item</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Request Item</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Campus Asset Rental Flow">030d801354d303107f4433035850b6d5</model>
+        <model_id>030d801354d303107f4433035850b6d5</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_030d801354d303107f4433035850b6d5</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference display_value="" name="sc_req_item">sc_req_item</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:36</sys_created_on>
+        <sys_id>cb0dc01354d303107f4433035850b619</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:20:05</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=cb0dc01354d303107f4433035850b619"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=030d801354d303107f4433035850b6d5"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=030d801354d303107f4433035850b6d5"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=030d801354d303107f4433035850b6d5^sys_idNOT IN030dc01354d303107f4433035850b631"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">030d801354d303107f4433035850b6d5</flow>
+        <generation_source/>
+        <name>Service Catalog</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:37</sys_created_on>
+        <sys_id>030dc01354d303107f4433035850b631</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 05:53:37</sys_updated_on>
+        <trigger_definition display_value="Service Catalog">c43a1011c36813002841b63b12d3ae15</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/61T32vbMBD+V4KeNvDATtZm8dsYFALdCk3Xl1KMIp0SMVlyJdmtF/q/7y62k7TzxqB70/38vrv7dLdjhq/BsJxd13ZyYdzjZGlZwrSN4C03N20FGBRbpwWgv3tc6hBZfrdjagUPNVgM5R+yhKlbbmrKX3PxY+NdbSXWqMsTCEUQ2k6OGZN3EhSvTXxPucuSb6gDvVdgQESQLFfcBEDP93BqfdUhaLvpHc/Jn/ko5+HvfF5mvIHFfcJKbiWPzrfHJO/KGygrwyMcnM5L8CzP0jRhDRFdtWEpO1TLS8L3tS2IYaHpKE0/DT6lDtisvT16xFYb6cHiXZBCxT12iNR/9yqkCeI8XaRiPl3M59N0NktTdbZWQgkx/5Sl59nZAhuOC2OUWHylktPJ4CmClScL+307Hri8subo2KL8uqlK/hT0T2z+MaU8Bb67LsUOZtFvY1gEsQh7fZp/V14zJt1+kJS0NdbrhWqaMbENqyBd9Ghf/j/B7M0Ep0SwW91VFbVDsbAZnZavDdWENnQH9yCwpIhebzZYiEXO1KX9NqaLnv2JSuuA14KKFEEnHr7Hauser4dzXmi7p9QHjRPcHCweEXldR9rfjnHZcKwgRUePGM97VRQPNVXs/8mAVewnooQgvK7iZxF1A4dP+wt8tA/9CQUAAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>service_catalog</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=030d801354d303107f4433035850b6d5^sys_idNOT INcb0dc01354d303107f4433035850b62d,c70dc01354d303107f4433035850b62e,c30dc01354d303107f4433035850b62f,cf0dc01354d303107f4433035850b62f"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Get Catalog Variables">330ba3abc31013002841b63b12d3aee8</action_type>
+        <action_type_parent display_value="Get Catalog Variables">22f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>330ba3abc31013002841b63b12d3aee8</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">030d801354d303107f4433035850b6d5</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:37</sys_created_on>
+        <sys_id>cb0dc01354d303107f4433035850b62d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 05:53:37</sys_updated_on>
+        <ui_id>74eae484-1d53-4351-bf3f-71031df064a7</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/91VW2vbMBT+K0HPJjhxLm3eto7CYFthGX0ZQ0jycSMmy64uybLQ/74jW07cdE1bWAfbW3J0Lt+5fJ+/7ojMyYLwIuUsY1xko3SUpen4bDLis4yPxnnGABhJiGYloKeBWw/WQU6lgxLta6Z8eNjtlmDWUsDggjmmqhs6GkbnxvXuDp1zaWvFttcxBi1iJVVuQJPF128JqZnBMg4MWeyOnp6LUzEOCl2XnpfSIdDB5xbFiR7ctm7tBWA9AdH0Iab63LNXJg/o0oTADwc6B4RVMGUhISXTOXOV2ZKFMx4NBlh+pdV277GS2rVtl+yHlT+xaDZOenUXxAqK8Dpg+xcaJ9egiegH71un4h0OfIklhfNmP9YKV2Hb0eVQMK/cRd/WOlzVTla6DXGMqy66Ur7Un9ppkX2C3tq8RUhQhwGElmJ/xXJVbfbTupS6mVV8VJVgqucKzIjVpQQVFqt9ydE3Icw5I7l3AeeOgIISC9CS1bXUN7Q21Vo2SRFjObxR+GdYqGqDYKy80UMmQkND3AMbXqL9XWO+ZkaG7j5imqZKhVuhuanqOjYdFkbuEmK39kIxaw+94wrorQ/I20nEnmk7thAijKzdGyy8htjeXdLxip+612J0uElcJe7XARWRPUf0Op/MzudczKcTzIPZ5sVkkuGv6dk05TMxfUiuC1bW3g7eWAsOOaAx7cv59jT+jm9fYgMd/ZvrtAPkxKAb/2AJzj7d8svZOHo1NjqKF3EPoKWYmK5jS9S2Lf2OqE8P4r9gbqj1t3grLapjWeHNND3T/q4aCiMdsRHcSoB4MK6wHjVeO1kCbShFpaZVbdcSNq9H//lp+swPXOgurLsr26P+eCY40r14hPrzRThLbCZMkGrYJDN+JlArHgmA8YOA8/OMZZngvw+YzR4E5NOJwIBHKszgOOChOv0fTb1MTZ9xDp2adtpx3buHE6cSJdMqb1fci+/gjkRzGV4Gb7unqJvj07oZLc8RztE4TdP72vmIKv6rsndf4FCICvx24ewOe8CbgGaSpAnBoq8lg8+SMzw6LZRHzxJHIQ1W2UMNn5+9WxhNDwQYujFtpb1LbTDGrMPnToFwTZOd3lbeiKjHaD3myJ8T1W+/AD0vGrStDAAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=cb0dc01354d303107f4433035850b62d"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
+        <action_type_parent display_value="Look Up Record">b93f42810b30030085c083eb37673a63</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>9d09f99587003300663ca1bb36cb0ba3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">030d801354d303107f4433035850b6d5</flow>
+        <generation_source/>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:37</sys_created_on>
+        <sys_id>c70dc01354d303107f4433035850b62e</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:20:05</sys_updated_on>
+        <ui_id>43284bc2-fb90-4200-bc45-3fd9cf0b73fa</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VYUW/iOBD+K1GegUtIINC3VSuklfa20ra3L3t7lhM7xTpjZ22Hbov47zuJHeAgBaKjp1b3GM94/M34+yaTfFv5jPhXPpkG03w6HU2SIIiiIBiPowyHaRqNszRIcez3fIEXFDwNTjmFxyXmZfVcogwvilIjrDU1YCBMFxw/fXX269rqfXDWbM44UVT4V9++9/wCK4hqqPKvVnumc2FxnFIOrvcO1x5M81RsHlFts2ufdrd5n61BKlJBCXo+/WmoIBQw5Jhr2vMXWBBspHrarCiKya3g24U5EwYi+pXzT82e4dxJUPnlFLLKqLVtHpErlF3Ob7DBd0aVmSmVc83mkmVU23oQmuOSm+vdNetwWxgmhd1i07a7JS8X4rMth78J0NwLrJQaQNCiSrRC7tLI7+by8UuDcsZEXRNn5DLDfPOEjVEsLU2FZ+VTThcQCC1wUTDxgAoll6zeDFgWgwcOD4Ocy0c4VLMHMcBZBXwAdcWDGazf1MtfsWJVFr9DGNgMgBgHhiB7hVqWqi7lEmW81LVBYaFtLH/d8/WTvuZAxm3mUHL0o6xw2zq4jJEtWrUlU6wwHyDEkrrk1r1GGaOjFJxuKZdJQViFQv9DHrUuECN/lhCArFZJTDGNJ3E/JKOoH0ejsJ/mUd5PwiAKSR6MY5wMNBQzM3bvYBtjvf6rRNpgU2obDi8x447qe8L7D0/uKOrTFW1Efb1b0rYyO3kfrH1qC+DkHV5M3nEQvCeBw+FvT9/dFWtLcEK2ITlKMrLlk5bKIFvLHd0e6qkzz8+A0PD8tmKmlz69hMrRPGeUk7a32Kwy7L3Fhv/Pt9ibJDkAIsjeHhOciXokAaCvxf7RUeql4R7PanptuV+vYZ0dagB7RnrPnZVwBpxGCXdwtndv8bRAbPp9TZn9Xt8sOgFEFxNANLyMAFabNDeFbKl5M4VWt9n4P1f+eN8fKLizIVy3CazTmWHXM4frQwFHnRS8SzZruXmBcxceV19QZO81W8ActrrzkNUvemTkgZrt6Y0XkeYR87/b7I5xqLmoOr1XGH3Do19f6c7oy3K0gJtjBUzoimZADvgeVBTlshQEudl8ZyiGm8yZ0sY5HzaaLxT0IzwJwvTMnHq1t7fx7vgiPp1HU8qPudck4k7THiTi1Yl4m0S6pd2lacUXHE4v3bRmMPHXtwGfXcXOdVKlpHqhcZ24yCOMOLOrnQkqvCiof9/22iTQ2v5OYH0X3/CXb00ZxWk8xOMkCsMgCAOSBJMkCSfjNB/jJM63GkVIiwy6KUTOgSoQHjXUaO45OOw/tqV2bTRnoGooeCNF9R09TIxXwYL79RpYp4G7hpJKySkWex3lHt4Tv80cfsfX0ZvrKu/ij1bJ7vcrbZdaa/1ac0PJ/hDsR0k/VhSb0GA4CUnWnyRh0o9zMu5PCR718TQdJRGhWZxfchT4/guhP8viIRYAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c70dc01354d303107f4433035850b62e"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">030d801354d303107f4433035850b6d5</flow>
+        <generation_source/>
+        <order>4</order>
+        <parent_ui_id>ddf9ed38-8198-443c-90b2-c5585a460e0d</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:37</sys_created_on>
+        <sys_id>c30dc01354d303107f4433035850b62f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 05:53:37</sys_updated_on>
+        <ui_id>e2a696c2-a1a7-40a7-8acf-08d60b8b736b</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K5Wf0ygmoUDfJhBPG0h04oVtkRPftNYcJ/NHoav633cdO9Ax0FZpmoS0PlTy/Tj33OPrm7stEZzMyYxCdnxGZ3VO8/woy45OC1rN8ooe8ZwBFCQhirWAkZZVEsrhkJA1k84bXWms46BsqfGPSXRxYXrJNrcxYhH8k5vRX6+E5BhN5nefE9IzjYgWNJlvn7n+lJ9kFUgM/egJvsLXbvoXbe/3cydXwdFp7vlkCYEHC4oDEmmYNJCQlinObKc3ZG61Q4MGxq+V3DxGrISyCEh87IMR37HsaebjGsDOagi+x2MZ5Qrm5oJZtkDk2jodQ+tVJ2owQRMODXPSnu/bQsB1b0WnQsrQZszupGvVVZCEPAKMt4MWZ5AE9L5Pzzy20SxW3f3NyPJSqEGS6JRdjVc5npi1WlTOej5bAhJaPw8t63uhlmWvu7UYkpFLmy4lHtJGdvdY1IilSlntiacoK0sv0X4xmG+ZFr6LDwiDybuEmI05l8yYp15QxPKb80xCZ7GHMsjgU2otevsOC6wh0t0l4+BzyM5eHSxaPQ3SMOvmpaH/5LIs59vtSQEMitNiSvlxPi3yYzqtmryZntAsp7zJZgU7SWPObvfFldgGHJiNutY2JA4QGnBEVImywUFA8NAjEPB9gAjYMv3VHAQWc2K+f+A/EVqAXuNoTs7xbmW3LGmqnULxmLZDXGlFG4qjzbpYm4X7+mWT/Jf938h+4IL+/TsaF/SlAMnNCw9r3M7Q4n0jv/DQnm3o6JzcRmfc0vRvbWk6y4bfG9rVobk3v6r3vsqvLO3PPwAJkT4zrwgAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c30dc01354d303107f4433035850b62f"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">030d801354d303107f4433035850b6d5</flow>
+        <generation_source/>
+        <order>5</order>
+        <parent_ui_id>ddf9ed38-8198-443c-90b2-c5585a460e0d</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:37</sys_created_on>
+        <sys_id>cf0dc01354d303107f4433035850b62f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 05:53:37</sys_updated_on>
+        <ui_id>89f0966b-3c9d-489e-81bc-3a340a08ea25</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVTU/jMBD9K5XPTZQ0aUt7Q62QVmJBghUXlo0cewKWnI/1B9CN+t93nDilC4gtEntAm1M8M89+8/Imvm6J4GRJUuBRvIhnLImTZBJFk6M0zmdJHk94QgFiMiYVLQErFbBacVzfU2ldoG3TBMtzNgmKfBEFKcKDnKXTICn4ghVRPk8KGl50uO0WkVzoRtLNld8AI+xOSK6gIsvrmzFpqMKzDCiybJ+lDiUraQ4SSy8Gts/Zm03j1rxmtoTKZGIInnrk2mdGX9aYQZCjE0djAo8GKg5IpKBSw5iUtOLU1GpDlkZZDCig/LySm13FnahM32hJH7X4hSenkasrADtjXoTdMvMC9eFiTQ29xJ2ZsWqnVy0Y6F4TDgW10qz2Y33BeWNEXfUQQ3M5oGtpy+qsV4TsNtj7HlYjCWhcn45531ZxeVc/XAwkT0TVSeJblDWjcreixiiRW+PotAQkdBqXtGlEdZs1qr4XHRiplOGtxEVYyPoBz9Titgopc7xDVJWGJxhfd+ErqoRr4itug+DtmOiNXkmq9VMrqGH20zomfWO+haxToZMg65zgwEyJxhzjUffgiW/Hfhzy6VsOY4snQ+3t+TQSNmO0bKzOkBuYl45fddnRsc++z/0HcBvc/6375q9z9QPwIna6jx2d9Qlv/+mH2f/oM9nft/Hp/f8310eTN/+re07qjK7/cLw21Fj93UZR4gxrgP/AMbDKvWPSOhp9tm3nKVBIj9Ig5tMkSJNpHORFUgTzOEpiXkSzlM5Dj3ntxvjHp71vHg9QbZjHEwGS61dkHIYRSmzTQNbL+mwgfXJ05ZO7O+nDpjKeRd3ziWbzv7mabn4DCTQH0KsJAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=cf0dc01354d303107f4433035850b62f"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=030d801354d303107f4433035850b6d5"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=030d801354d303107f4433035850b6d5^sys_idNOT IN4b0dc01354d303107f4433035850b62a,c30dc01354d303107f4433035850b62c"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">5dfcccdf549303107f4433035850b653</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">030d801354d303107f4433035850b6d5</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>3</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:36</sys_created_on>
+        <sys_id>4b0dc01354d303107f4433035850b62a</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:20:05</sys_updated_on>
+        <ui_id>ddf9ed38-8198-443c-90b2-c5585a460e0d</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXWvbMBT9K0PPTpC/0iZvpV0h0DajCYUyirmWpVRMljxLTpqF/Pdd2U5StoyttI97k450r845vgdviWlc1Ti7MBfWyqUmk69PAZHaY7jeEqHM+sYsJZtq60AzPt/YaUEmZFREwOg4T5NxTOOQnokkiXGVnqc0H4WUBERDyfEmM7qQThqdtUBAVqAaf4DLQtpKwebhiLBnqYqa90wqqLHG8ZpMtr8cSc9CUBDhmIUsjkZxRGl0noT5KM7DqIiBQ4wNFeRc4dXLPY1PNy3yZ35uU3nculrqZb+/6bvM96CpC88qpAHhL47rgiMfAcrygJSgC3Cm3hyQmkMx0+oIPEvtOsElvFj5Ax+M0tRfFBwlst6NwzbrnepgcQUOkErDXFMfjDOScduZU3ABjXKXr7HuwqzyUrsSB7naVxvVlPquc4QcGrz6MI1FErzySj31XoeYP5v1/Z7ltdStK/2hMgzUYQcOvcsb5/lsCVe8xEZZCVWFjmZVbVayLUYu5XCpcDP004eP+skcAvPEh2gsDK8Rv2rhB6ilV3GLbbC4o5mDlSxrpxjboU2c7AJiN/ZSgbVHkehu9r3xFDvJvbis88eXsFpW7gJfXvFexy742FC8ysN2m8Q4wDmLBiIf00GCAz3IWZIOYlGMmaD5WSxgeM8ZDt9uN53fzRafb78sHn8P0ntavS2BY0hFGtL0dAKT0akEnrbhLbGL/hI7/83/MXWU0v+xe3fspM26sPTa2sc/MHVPPibdmwevmbRIbeGx6f6P5Q82OFw+m0dobepvXtQR2/0EukYiqvsGAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">a5fcccdf549303107f4433035850b657</block>
+        <comment/>
+        <connected_to>ddf9ed38-8198-443c-90b2-c5585a460e0d</connected_to>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Rental Flow">030d801354d303107f4433035850b6d5</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="Else">1f781bf3c32232002841b63b12d3aee6</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:37</sys_created_on>
+        <sys_id>c30dc01354d303107f4433035850b62c</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:20:06</sys_updated_on>
+        <ui_id>50788d43-e501-4a5d-9e06-3f65a396d126</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/6tWyi8tKSgtKQ7JdywuzkzPU7KKjtVRyswDiUHYZYlFmYlJOalQbkpqcmZxZn5eCEjME0ldSmVeYm5mMrJQeX5RdlpOfjlCrBYAD1ouqHEAAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=030d801354d303107f4433035850b6d5"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=030d801354d303107f4433035850b6d5"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_030d801354d303107f4433035850b6d5</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:36</sys_created_on>
+        <sys_id>070dc01354d303107f4433035850b615</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 05:53:36</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>request_item</element>
+        <help/>
+        <hint/>
+        <label>Request Item</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_030d801354d303107f4433035850b6d5</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:36</sys_created_on>
+        <sys_id>470dc01354d303107f4433035850b620</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 05:53:36</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_030d801354d303107f4433035850b6d5"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_030d801354d303107f4433035850b6d5"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>24fff787545303107f4433035850b68e</sys_id>
+        <latest_snapshot>030d801354d303107f4433035850b6d5</latest_snapshot>
+        <compiler_build>glide-australia-02-11-2026__patch3-hotfix1-06-18-2026_06-19-2026_0938.zip</compiler_build>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=24fff787545303107f4433035850b68e^sys_idNOT IN130dc01354d303107f4433035850b654"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.RunAlways</binding_strategy>
+        <plan>{"@class":"com.snc.process_flow.engine.serialization.plan_data.ChunkingPlanData","chunk_data":{"table":"sys_flow_trigger_plan","id":"130dc01354d303107f4433035850b654","name":"plan","plan_signature":null},"plan_data":"CHUNKING_PLAN"}</plan>
+        <plan_id>24fff787545303107f4433035850b68e</plan_id>
+        <snapshot>b661e05b545703107f4433035850b645</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 05:53:38</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>130dc01354d303107f4433035850b654</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 07:20:06</sys_updated_on>
+        <trigger display_value="">d30dc01354d303107f4433035850b653</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=24fff787545303107f4433035850b68e"/>
+</record_update>

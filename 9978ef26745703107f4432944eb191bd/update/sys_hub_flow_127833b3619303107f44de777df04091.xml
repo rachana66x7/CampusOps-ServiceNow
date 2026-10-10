@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,timeFromCreateToActivate=2225000,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Automatically identifies overdue campus asset rentals and updates their status for follow-up.</description>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source/>
+        <internal_name>campus_asset_overdue_reminder_flow</internal_name>
+        <label_cache>[{"name":"3854126c-7894-436e-bc67-1e40e59f20d4.item.u_student.email","label":"2 - For Each➛Student Rental Record➛Student➛Email","reference":"","reference_display":"Email","type":"email","base_type":"email","parent_table_name":"sys_user","column_name":"email","usedInstances":{"ce957b17-e287-4b28-b447-fe3e6d98eb08":["ah_to"]}},{"name":"3854126c-7894-436e-bc67-1e40e59f20d4.item.u_student","label":"2 - For Each➛Student Rental Record➛Student","reference":"sys_user","reference_display":"User","type":"reference","base_type":"reference","parent_table_name":"u_student_rental","column_name":"u_student","usedInstances":{}},{"name":"3854126c-7894-436e-bc67-1e40e59f20d4.item","label":"2 - For Each➛Student Rental Record","reference":"u_student_rental","reference_display":"Student Rental","type":"reference","base_type":"reference","usedInstances":{"ad6a28a5-0f90-4926-a34d-b7dddfc0315a":["record"],"ce957b17-e287-4b28-b447-fe3e6d98eb08":["record"]},"attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"9ef0c0f9-4c29-487c-a6fd-1fcec0fc486e.Records","label":"1 - Look Up Records➛Student Rental Records","reference":"u_student_rental","reference_display":"Student Rental","type":"records","base_type":"records","usedInstances":{"3854126c-7894-436e-bc67-1e40e59f20d4":["items"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Daily_1.run_start_date_time","label":"Trigger - Run Daily ➛Run Start Date/Time","type":"glide_date_time","base_type":"glide_date_time","usedInstances":{"9ef0c0f9-4c29-487c-a6fd-1fcec0fc486e":[null,"conditions"]},"attributes":{"test_input_hidden":"true"}},{"name":"undefined","label":" - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email","usedInstances":{"9ef0c0f9-4c29-487c-a6fd-1fcec0fc486e":[null]},"attributes":{}}]</label_cache>
+        <master_snapshot>ebeb733761d303107f44de777df04087</master_snapshot>
+        <master_snapshot_digest/>
+        <name>Campus Asset Overdue Reminder Flow</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>dcfbb33761d303107f44de777df04016</remote_trigger_id>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:19:10</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>127833b3619303107f44de777df04091</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_name>Campus Asset Overdue Reminder Flow</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_hub_flow_127833b3619303107f44de777df04091</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:56:18</sys_updated_on>
+        <type>flow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record>2ef0808c61e303107f44de777df04097</version_record>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=127833b3619303107f44de777df04091"/>
+    <sys_variable_value action="delete_multiple" query="document_key=127833b3619303107f44de777df04091"/>
+    <sys_flow_timer_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <day_of_month>1</day_of_month>
+        <day_of_week/>
+        <name/>
+        <published_version/>
+        <run_period/>
+        <run_start>2026-09-20 12:34:20</run_start>
+        <sys_class_name>sys_flow_timer_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:34:20</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>dcfbb33761d303107f44de777df04016</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:34:20</sys_updated_on>
+        <time>1970-01-01 09:00:00</time>
+        <timer_type>11</timer_type>
+        <trigger_definition display_value="Daily">89142dc0c32222002841b63b12d3ae8a</trigger_definition>
+    </sys_flow_timer_trigger>
+    <sys_flow_trigger_auto_script action="delete_multiple" query="name=Trigger:dcfbb33761d303107f44de777df04016^sys_idNOT IN90fbb33761d303107f44de777df04062"/>
+    <sys_flow_trigger_auto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>false</advanced>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_run_end/>
+        <entered_run_start/>
+        <entered_time/>
+        <max_drift/>
+        <name>Trigger:dcfbb33761d303107f44de777df04016</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <repeat_every/>
+        <run_as display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek/>
+        <run_daysofweek/>
+        <run_end/>
+        <run_month/>
+        <run_period/>
+        <run_start>2026-09-20 12:34:20</run_start>
+        <run_time>1970-01-01 09:00:00</run_time>
+        <run_type>daily</run_type>
+        <run_weekinmonth/>
+        <script><![CDATA[sn_flow_trigger.FlowTriggerAPI.fireTimerTrigger('dcfbb33761d303107f44de777df04016');]]></script>
+        <sys_class_name>sys_flow_trigger_auto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:34:20</sys_created_on>
+        <sys_id>90fbb33761d303107f44de777df04062</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:34:20</sys_updated_on>
+        <time_zone/>
+        <trigger display_value="">dcfbb33761d303107f44de777df04016</trigger>
+        <upgrade_safe>true</upgrade_safe>
+    </sys_flow_trigger_auto_script>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=127833b3619303107f44de777df04091"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=127833b3619303107f44de777df04091"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=127833b3619303107f44de777df04091^sys_idNOT IN1278f3b3619303107f44de777df04040"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>127833b3619303107f44de777df04091</id>
+        <name>Campus Asset Overdue Reminder Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:19:10</sys_created_on>
+        <sys_id>1278f3b3619303107f44de777df04040</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:19:10</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=1278f3b3619303107f44de777df04040"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=127833b3619303107f44de777df04091"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=127833b3619303107f44de777df04091"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=127833b3619303107f44de777df04091"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=127833b3619303107f44de777df04091^sys_idNOT IN239833f3619303107f44de777df04051"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Campus Asset Overdue Reminder Flow">127833b3619303107f44de777df04091</flow>
+        <generation_source/>
+        <name>Daily</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:19:49</sys_created_on>
+        <sys_id>239833f3619303107f44de777df04051</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:34:15</sys_updated_on>
+        <trigger_definition display_value="Daily">89142dc0c32222002841b63b12d3ae8a</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/21STWvcMBD9K0XnjZF3k7bxrRAWemgDyZJLCGYsjXcFo4/K8iZuyH/vyFaWfFToMm80b9576P5ZEHRIohE7Y1GshHEJowPaTQEZ3ZPR2KalZ8FpSD5OoklxxJXoo7c7tIEg8eMeaGDQR41RNLWUK3EEGvF2Gn5q5mIGBzazFr65y2V9+U2eyZrvF3nZSMmXu+pgSEd0orl/WIkAkWdTZn7+0DKZfAP6HLWSarPmI+X6+3ndfd109VpvAPGCCT84fa8l/cfvWyf4lNBp1Cebn8KICPra0XR6ceAsF9sWngbzFwtVxB5ZvMKleSpbbQaOclpgdfBG4XVIxrsFSdBRmVGeRut+Lw641tjDSOmuBMrIODAfhqw5qyiS+tuDf7x5Xbg1bjZYmuQV0KmClKLpxoRDThwJLRO1FkIwbt+G6I9mHmYttppjq3ryj7x0MHtXgcrCK44Iqi3jVzN8B9FkF7+YhodfZvftnzHvXXwUxe1imh+UULYGqXyiQUUT0g9ecHz9dS8P/wDp+Er5ygIAAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>daily</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=127833b3619303107f44de777df04091^sys_idNOT IN57f8ffb3619303107f44de777df040f0,751bb7b361d303107f44de777df0406b,43df333f61d303107f44de777df04051"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
+        <action_type_parent display_value="Look Up Records">d1c56ec50b30030085c083eb37673a50</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>43400a1587003300663ca1bb36cb0b4b</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Overdue Reminder Flow">127833b3619303107f44de777df04091</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:21:26</sys_created_on>
+        <sys_id>57f8ffb3619303107f44de777df040f0</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-21 09:00:08</sys_updated_on>
+        <ui_id>9ef0c0f9-4c29-487c-a6fd-1fcec0fc486e</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VX227iMBD9FZRnhJJCabdvq6JKK/Uilaov3a7lxA5Ya5ysL1CK+PcdxzZEkHZBSqVW+4LkudhnZs5xzNMqYiS6iM7zQRzj5PT8LI77/TgeDvsZTtK0P8zSOB2kUTcSeEYhUuOUU1jOMTd2bZDShlChkYQfzMFFmCo5Xj76iLHzd+6DP5syTiA6unh67kYllrCzpjK6WO24DoXGcUo5hD54bDtQ9bLcLFHlc7brelrn1jkKSSyUuBvRF00FoYAhx1zRbjTDgmBdyOXGIikmd4JvDVMmNOwY2eAXxV7h3PPYxuUUqsqo822WyLfKmfMR1nispcm0kT40mxYso8r1g9AcG64v6zYXcFdqVgiX4sp22QU3M3Hr2hFtNgiTAYtRAIKWtlCL3JeRj6fF4j6gvGKi6ol38iKDMYYV1lqy1GiLZxVRTmeWCzNclkxMUCmLOauSAcusN+Gw6OW8WMChik1ED2cWeA/6intXYB9V5kcsma3iBraBZADEODAEuRGqwsiqlXOUcaMqh8RCub2idTdSS3XJsVLbyqHl6I+xuF0ffMXINc2mZJKV+jtsMae+uHX3IHWcxlvKZYUgzKJQOxLB2qifBtIJro74ZRAx0HqsaWXOnHO1GmHGlyjpSSNsmtRVDNJsRtfrfXG1unebwqy6EoR5WW9LU6u8RPds100beIkmrUkU6vhKIoXDP59Gj1eda8E/pJedvUuy0y2fVAF8dr2saW9fMUfz/AAIged3lpmddPkWKk/znFFOmr5EV9ax8yU6+T+/RJ+S5ACIIDc9JjgT1bMCgH4U++P3r9hvOzyr6LXlfmXDKtvXAO7oovN6tBIOgBOUMIazOw8OTwPEcN9XlNm964PRC6DfmgD6J+0IYLUpc9PIhp6Hl6SdZoh/tfF4Nx4oWEtI1k0CO+rM5NgzT9b7Au4fpeA62Zxn9AbnWn5yvqHI7kdeAVNI9echp1+0YGRC9fb0EEUKvcD8d5PfMw6FQVXlfcDzdfCubIfJVqKgFPgbp2B49fdrAs+j/Tsk6TrzcVfIAVhCO27wC/xnDGAaEfprBJROJ9Vs6vfIj43Vk3zQ4oPx035Jw7AaNRhm9iX+9bUnhOe/fONvTecQAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=57f8ffb3619303107f44de777df040f0"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Overdue Reminder Flow">127833b3619303107f44de777df04091</flow>
+        <generation_source/>
+        <order>3</order>
+        <parent_ui_id>3854126c-7894-436e-bc67-1e40e59f20d4</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:30:36</sys_created_on>
+        <sys_id>751bb7b361d303107f44de777df0406b</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-21 09:00:08</sys_updated_on>
+        <ui_id>ad6a28a5-0f90-4926-a34d-b7dddfc0315a</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVy27aQBT9FTRrQH5BgF0UhFQpTSSo2KSRNZ65DiONH50HCUX8e6/tMSBIUyJlg+rd3Mfcc47vsZ+2RHAyIRFwzx/7Qxb6YRh4XjCK/GQYJn7AQwrgky7JaQZYqYAViuN5TaWtAtttOBpEfjBkvZvROOpF4RB6CRve9HyIPBiM08DjUV8YyHY77ONCl5Julq4dI2wlJFeQk8nTc5eUVOEkA4pMtiepS6FKmoDE0nmL9RS72ZTVmRfMZpCbWLTBe9c5dZnOtylmsKmC43tdAm8Gcg4IJKVSQ5dkNOfUFGpDJkZZDCig/DGXm33FSuSmIZrRNy1+4+TIq+pSQGbMibA/xk6gJpxOqaELvJkZq/Z6FYKBbjThkFIrzd1xrCl4LI0o8qbF0ES23YW0Wf7QKEL2Fxy9D6sRBJQVzwp5QytdrIrXeQtyJvJaEkdRFozK/Ykao0RiTQVnS0BCrXFGy1LkL3GpirWomxFK1n+ReOinsnjFmVq85H3KKtx9VJX2Zxif1uElVaIi8R2vweZdl+iNvpNU6wMV1DD+ZSskDTFHIa5VqCWI602ompkSpbnFUWtwwHddZ4Zk8NGGsfFhoY7uPBjCxtrYei5KZRDN2c4vmnxn3uY/54AL8LUO+FG/9/fxOhOcxe6PezsPTcJZYPBlFhhdkwUcjav3wL823ws+/LYebVK97Ppk66mx+qf1vJAXa1Dcwvnq/63scw64AGfrgJkAyfU7wNv1hwzxGYgbIicWcMnO0iX3f4Iv84E/9Ornitzw3/wQnv8Af9qMUR8JAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=751bb7b361d303107f44de777df0406b"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Overdue Reminder Flow">127833b3619303107f44de777df04091</flow>
+        <generation_source/>
+        <order>4</order>
+        <parent_ui_id>3854126c-7894-436e-bc67-1e40e59f20d4</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:51:27</sys_created_on>
+        <sys_id>43df333f61d303107f44de777df04051</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-21 09:00:08</sys_updated_on>
+        <ui_id>ce957b17-e287-4b28-b447-fe3e6d98eb08</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2YW2/bNhTHvwqhZ0eRb7KdtyxGsAJJO9RBh6EpDIqibC6UqJFUXC/wd9+hSEu+pK4de1iC5cnQ4eVc+P/x4q9PHou9C68T94MwSjq4F7Rb7SDotwaDqD1Ign5vEDRJ7DW8DKcUekpKhDTfj5gXxvD01O53O81WSM56/UHnrNMO6VlEwt5Zk3YC2h0krSDu+EzTdLGAcTFTOcfzL244WMiU8VjSzLv4+q3h5ViCJ02ld/G00bRvqBxHlEPXOywnVKPPy5A3U9Dz3HzHghQpzfSYLY03boKha0EfhtACg0xUQcOj3zXNYgrhJJgr2vBSnMVYCzmvLJLi+FPGa8OUZRqmvFRKEIY1VUhPKaIpZhzNmJ4ijGxgvmfm+67Y3xBcu2WmSijUgJhYWUZYDBF5K+axKyk0f6ibkyHWeKRlQXQhq0oLRqiy1Yxpgguur1ZttsOnXDOR2SEaR3w5WvAizT7aInrVBCsrWSgIhuamNiZZcA6JJ6OpmH1eBnvNsrKKripcEMyrr2REsSTTa0a5WeqsSCPo2/Cw1pJFhTZhgig49Kr9jMtQjS/oSTktlzLFec6yyTiX4pGVDiH81J9w+PATLmYwXrFJ5mNicvVh9bB/DfZhaf6CJTOJ38I0MHjR8NRcXXGsVJ0+1H/8V2Git8VYD8eMHpeCM4OJZLm+BFeP1CW7aDj0moNdeo47tW5X5qzxK8ZKF6VfKK+GaLYIG9l2wMC1H8bbHvHVvBmtPB+vY23LdrM6Fn20DY605oGkWb050O6ALm03AMsV0i68Cq5+sA7XD6B6HTBViOxN0zo1/w4ZIBI1tvJ2uZXOX0DMzzgJwjCKwqjba9c6HJAk7kVJiHukXetuBrurTLF8GJe76woszW063L5xGBN7xLJkAnZkDvyh35dB7YrTQRIJAVtctkkIRHp+XVa3IqR11FlkpYm0QLCYfA4nUBWSMdbnk55ijZhCClbLR3cCMZfVyogGmosCpYXS0E1Dyxp8a4da5/Vy5+TgrMNntfImwDw9gN3dBwGuhY2nYy1edkX0q/PML6W3WKBtZo+e7zDa90i8OgHFdhUc1ArWPJtsMD1aGh3P7d082wNuC+eVAy14vWi9FXJM4JylrBSEZf70MMU7NUWDNRkRsgLTCZ5QezhfCvrqajuSQwTdedkB9a7oN6fo5s53OQ3XdBSdWtJ7eF9K+pcNTUcHi7r7Lur/iai7u2VF1oSkiuhPSvSKsK9wmhcKXSpFl+9v9OmRyrig8JnaEm6Jf89RB15ifp7JEpBRlcdzuR0CSvh+nfnPOTk9FHinlJLW+u4q4vkKEfdFELRJjkzMZ5pl85RQKYSOoDAPZWN8793bbnRIsUTu76uGHXme26b77KCZ/hCFRMRyhUuu7L9l5lGbiRkSFi//KCe/waNdUZgZFJiVr2fjhMbOI4b3s4DnNvzmQikGS3Scv7spzh7Mq9vVJpLWvrZ/3OIMT0pdrfva3nac7/1Lf5LSnrp0PyoNOj+sOIftrnsgUV0/LBBbhLh9dapTvrGr/np3e1Pvqb0jLx9ht9sO33fVo28f+SxuxVLkucvtxDeQb/8A8fNC+JsbAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=43df333f61d303107f44de777df04051"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=127833b3619303107f44de777df04091"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=127833b3619303107f44de777df04091^sys_idNOT IN3fdab3f7619303107f44de777df040b7"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">c9ebbff361d303107f44de777df040da</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Overdue Reminder Flow">127833b3619303107f44de777df04091</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="For Each">098e1dc5c3e232002841b63b12d3ae33</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:29:39</sys_created_on>
+        <sys_id>3fdab3f7619303107f44de777df040b7</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:56:15</sys_updated_on>
+        <ui_id>3854126c-7894-436e-bc67-1e40e59f20d4</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/51SwW7bMAz9F50Tw3YCL86twFCgh7VAV/QyFAYtUYkwWdIkOaln+N9HxU5a9LhLHD6Sj++JHJnto+tjeLF3IaiDYftfbyumTMLo/8gMdMj2TEXsAluxE+g+xeNYo8x5Luv1lpf0s/vG11BJsS4kR8L5dldh9ozcehGmiVqFCk7D8Pr/DPyotPC4iHTgSVtEz/bjl1QcHDYaWtQ0aGGgfiUoLGoh6yKv+aasNmWel7tt0VabtijFBlBUVHftfFhMf3mDxE6hv/HSJ6ko8xXD94hGIA2SoAOuWAdGQLR+YPvoewI8gngyerhVHJWJRMdS7XtQf4m7yPNUKJEccZyTt7BZHnKG+dEqjk8uKmtmJEKrlx5udd+Zx1l+WgFK6HW8roCQPhAfuqQ5qVgkyZ9He36+DrxX5uJvSWrLQd8iiNGrto8Y0hpQY0dETQfOKXNonLcndWkmLV120BRkUtszDU3nlgFPwjN6IsjuCf9+gV/Bq+TiB9FQ83Rx3/zp09zZx6K4mU1TQeBeuXhHdCdcxE1v6V5npjAfhkCuAg18SdjD9cpTYqAlK/4ZOlv/O0n9wKZ/tjjmhy8DAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=127833b3619303107f44de777df04091"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=127833b3619303107f44de777df04091"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_127833b3619303107f44de777df04091"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_127833b3619303107f44de777df04091"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Automatically identifies overdue campus asset rentals and updates their status for follow-up.</description>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>campus_asset_overdue_reminder_flow</internal_name>
+        <label_cache>[{"name":"3854126c-7894-436e-bc67-1e40e59f20d4.item.u_student.email","label":"2 - For Each➛Student Rental Record➛Student➛Email","reference":"","reference_display":"Email","type":"email","base_type":"email","parent_table_name":"sys_user","column_name":"email","usedInstances":{"ce957b17-e287-4b28-b447-fe3e6d98eb08":["ah_to"]}},{"name":"3854126c-7894-436e-bc67-1e40e59f20d4.item.u_student","label":"2 - For Each➛Student Rental Record➛Student","reference":"sys_user","reference_display":"User","type":"reference","base_type":"reference","parent_table_name":"u_student_rental","column_name":"u_student","usedInstances":{}},{"name":"3854126c-7894-436e-bc67-1e40e59f20d4.item","label":"2 - For Each➛Student Rental Record","reference":"u_student_rental","reference_display":"Student Rental","type":"reference","base_type":"reference","usedInstances":{"ad6a28a5-0f90-4926-a34d-b7dddfc0315a":["record"],"ce957b17-e287-4b28-b447-fe3e6d98eb08":["record"]},"attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"9ef0c0f9-4c29-487c-a6fd-1fcec0fc486e.Records","label":"1 - Look Up Records➛Student Rental Records","reference":"u_student_rental","reference_display":"Student Rental","type":"records","base_type":"records","usedInstances":{"3854126c-7894-436e-bc67-1e40e59f20d4":["items"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Daily_1.run_start_date_time","label":"Trigger - Run Daily ➛Run Start Date/Time","type":"glide_date_time","base_type":"glide_date_time","usedInstances":{"9ef0c0f9-4c29-487c-a6fd-1fcec0fc486e":[null,"conditions"]},"attributes":{"test_input_hidden":"true"}},{"name":"undefined","label":" - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email - Send Email","usedInstances":{"9ef0c0f9-4c29-487c-a6fd-1fcec0fc486e":[null]},"attributes":{}}]</label_cache>
+        <master>true</master>
+        <name>Campus Asset Overdue Reminder Flow</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="Campus Asset Overdue Reminder Flow">127833b3619303107f44de777df04091</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:34:16</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ebeb733761d303107f44de777df04087</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:56:17</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=ebeb733761d303107f44de777df04087"/>
+    <sys_variable_value action="delete_multiple" query="document_key=ebeb733761d303107f44de777df04087"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=ebeb733761d303107f44de777df04087"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=ebeb733761d303107f44de777df04087^sys_idNOT IN63eb733761d303107f44de777df04089"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>ebeb733761d303107f44de777df04087</id>
+        <name>Campus Asset Overdue Reminder Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:34:16</sys_created_on>
+        <sys_id>63eb733761d303107f44de777df04089</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:34:16</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=63eb733761d303107f44de777df04089"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=ebeb733761d303107f44de777df04087"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=ebeb733761d303107f44de777df04087"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=ebeb733761d303107f44de777df04087"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=ebeb733761d303107f44de777df04087^sys_idNOT INbfeb733761d303107f44de777df040df"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Campus Asset Overdue Reminder Flow">ebeb733761d303107f44de777df04087</flow>
+        <generation_source/>
+        <name>Daily</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:34:17</sys_created_on>
+        <sys_id>bfeb733761d303107f44de777df040df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:34:17</sys_updated_on>
+        <trigger_definition display_value="Daily">89142dc0c32222002841b63b12d3ae8a</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/21STWvcMBD9K0XnjZF3k7bxrRAWemgDyZJLCGYsjXcFo4/K8iZuyH/vyFaWfFToMm80b9576P5ZEHRIohE7Y1GshHEJowPaTQEZ3ZPR2KalZ8FpSD5OoklxxJXoo7c7tIEg8eMeaGDQR41RNLWUK3EEGvF2Gn5q5mIGBzazFr65y2V9+U2eyZrvF3nZSMmXu+pgSEd0orl/WIkAkWdTZn7+0DKZfAP6HLWSarPmI+X6+3ndfd109VpvAPGCCT84fa8l/cfvWyf4lNBp1Cebn8KICPra0XR6ceAsF9sWngbzFwtVxB5ZvMKleSpbbQaOclpgdfBG4XVIxrsFSdBRmVGeRut+Lw641tjDSOmuBMrIODAfhqw5qyiS+tuDf7x5Xbg1bjZYmuQV0KmClKLpxoRDThwJLRO1FkIwbt+G6I9mHmYttppjq3ryj7x0MHtXgcrCK44Iqi3jVzN8B9FkF7+YhodfZvftnzHvXXwUxe1imh+UULYGqXyiQUUT0g9ecHz9dS8P/wDp+Er5ygIAAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>daily</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=ebeb733761d303107f44de777df04087^sys_idNOT INb3eb733761d303107f44de777df040de,bfeb733761d303107f44de777df040de,f1f0408c61e303107f44de777df040eb"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
+        <action_type_parent display_value="Look Up Records">d1c56ec50b30030085c083eb37673a50</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>43400a1587003300663ca1bb36cb0b4b</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Overdue Reminder Flow">ebeb733761d303107f44de777df04087</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:34:17</sys_created_on>
+        <sys_id>b3eb733761d303107f44de777df040de</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:34:17</sys_updated_on>
+        <ui_id>9ef0c0f9-4c29-487c-a6fd-1fcec0fc486e</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VX227iMBD9FZRnhJJCabdvq6JKK/Uilaov3a7lxA5Ya5ysL1CK+PcdxzZEkHZBSqVW+4LkudhnZs5xzNMqYiS6iM7zQRzj5PT8LI77/TgeDvsZTtK0P8zSOB2kUTcSeEYhUuOUU1jOMTd2bZDShlChkYQfzMFFmCo5Xj76iLHzd+6DP5syTiA6unh67kYllrCzpjK6WO24DoXGcUo5hD54bDtQ9bLcLFHlc7brelrn1jkKSSyUuBvRF00FoYAhx1zRbjTDgmBdyOXGIikmd4JvDVMmNOwY2eAXxV7h3PPYxuUUqsqo822WyLfKmfMR1nispcm0kT40mxYso8r1g9AcG64v6zYXcFdqVgiX4sp22QU3M3Hr2hFtNgiTAYtRAIKWtlCL3JeRj6fF4j6gvGKi6ol38iKDMYYV1lqy1GiLZxVRTmeWCzNclkxMUCmLOauSAcusN+Gw6OW8WMChik1ED2cWeA/6intXYB9V5kcsma3iBraBZADEODAEuRGqwsiqlXOUcaMqh8RCub2idTdSS3XJsVLbyqHl6I+xuF0ffMXINc2mZJKV+jtsMae+uHX3IHWcxlvKZYUgzKJQOxLB2qifBtIJro74ZRAx0HqsaWXOnHO1GmHGlyjpSSNsmtRVDNJsRtfrfXG1unebwqy6EoR5WW9LU6u8RPds100beIkmrUkU6vhKIoXDP59Gj1eda8E/pJedvUuy0y2fVAF8dr2saW9fMUfz/AAIged3lpmddPkWKk/znFFOmr5EV9ax8yU6+T+/RJ+S5ACIIDc9JjgT1bMCgH4U++P3r9hvOzyr6LXlfmXDKtvXAO7oovN6tBIOgBOUMIazOw8OTwPEcN9XlNm964PRC6DfmgD6J+0IYLUpc9PIhp6Hl6SdZoh/tfF4Nx4oWEtI1k0CO+rM5NgzT9b7Au4fpeA62Zxn9AbnWn5yvqHI7kdeAVNI9echp1+0YGRC9fb0EEUKvcD8d5PfMw6FQVXlfcDzdfCubIfJVqKgFPgbp2B49fdrAs+j/Tsk6TrzcVfIAVhCO27wC/xnDGAaEfprBJROJ9Vs6vfIj43Vk3zQ4oPx035Jw7AaNRhm9iX+9bUnhOe/fONvTecQAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=b3eb733761d303107f44de777df040de"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Overdue Reminder Flow">ebeb733761d303107f44de777df04087</flow>
+        <generation_source/>
+        <order>3</order>
+        <parent_ui_id>3854126c-7894-436e-bc67-1e40e59f20d4</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:34:17</sys_created_on>
+        <sys_id>bfeb733761d303107f44de777df040de</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:34:17</sys_updated_on>
+        <ui_id>ad6a28a5-0f90-4926-a34d-b7dddfc0315a</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVy27aQBT9FTRrQH5BgF0UhFQpTSSo2KSRNZ65DiONH50HCUX8e6/tMSBIUyJlg+rd3Mfcc47vsZ+2RHAyIRFwzx/7Qxb6YRh4XjCK/GQYJn7AQwrgky7JaQZYqYAViuN5TaWtAtttOBpEfjBkvZvROOpF4RB6CRve9HyIPBiM08DjUV8YyHY77ONCl5Julq4dI2wlJFeQk8nTc5eUVOEkA4pMtiepS6FKmoDE0nmL9RS72ZTVmRfMZpCbWLTBe9c5dZnOtylmsKmC43tdAm8Gcg4IJKVSQ5dkNOfUFGpDJkZZDCig/DGXm33FSuSmIZrRNy1+4+TIq+pSQGbMibA/xk6gJpxOqaELvJkZq/Z6FYKBbjThkFIrzd1xrCl4LI0o8qbF0ES23YW0Wf7QKEL2Fxy9D6sRBJQVzwp5QytdrIrXeQtyJvJaEkdRFozK/Ykao0RiTQVnS0BCrXFGy1LkL3GpirWomxFK1n+ReOinsnjFmVq85H3KKtx9VJX2Zxif1uElVaIi8R2vweZdl+iNvpNU6wMV1DD+ZSskDTFHIa5VqCWI602ompkSpbnFUWtwwHddZ4Zk8NGGsfFhoY7uPBjCxtrYei5KZRDN2c4vmnxn3uY/54AL8LUO+FG/9/fxOhOcxe6PezsPTcJZYPBlFhhdkwUcjav3wL823ws+/LYebVK97Ppk66mx+qf1vJAXa1Dcwvnq/63scw64AGfrgJkAyfU7wNv1hwzxGYgbIicWcMnO0iX3f4Iv84E/9Ornitzw3/wQnv8Af9qMUR8JAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=bfeb733761d303107f44de777df040de"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Overdue Reminder Flow">ebeb733761d303107f44de777df04087</flow>
+        <generation_source/>
+        <order>4</order>
+        <parent_ui_id>3854126c-7894-436e-bc67-1e40e59f20d4</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:56:16</sys_created_on>
+        <sys_id>f1f0408c61e303107f44de777df040eb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:56:16</sys_updated_on>
+        <ui_id>ce957b17-e287-4b28-b447-fe3e6d98eb08</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2YW2/bNhTHvwqhZ0eRb7KdtyxGsAJJO9RBh6EpDIqibC6UqJFUXC/wd9+hSEu+pK4de1iC5cnQ4eVc+P/x4q9PHou9C68T94MwSjq4F7Rb7SDotwaDqD1Ign5vEDRJ7DW8DKcUekpKhDTfj5gXxvD01O53O81WSM56/UHnrNMO6VlEwt5Zk3YC2h0krSDu+EzTdLGAcTFTOcfzL244WMiU8VjSzLv4+q3h5ViCJ02ld/G00bRvqBxHlEPXOywnVKPPy5A3U9Dz3HzHghQpzfSYLY03boKha0EfhtACg0xUQcOj3zXNYgrhJJgr2vBSnMVYCzmvLJLi+FPGa8OUZRqmvFRKEIY1VUhPKaIpZhzNmJ4ijGxgvmfm+67Y3xBcu2WmSijUgJhYWUZYDBF5K+axKyk0f6ibkyHWeKRlQXQhq0oLRqiy1Yxpgguur1ZttsOnXDOR2SEaR3w5WvAizT7aInrVBCsrWSgIhuamNiZZcA6JJ6OpmH1eBnvNsrKKripcEMyrr2REsSTTa0a5WeqsSCPo2/Cw1pJFhTZhgig49Kr9jMtQjS/oSTktlzLFec6yyTiX4pGVDiH81J9w+PATLmYwXrFJ5mNicvVh9bB/DfZhaf6CJTOJ38I0MHjR8NRcXXGsVJ0+1H/8V2Git8VYD8eMHpeCM4OJZLm+BFeP1CW7aDj0moNdeo47tW5X5qzxK8ZKF6VfKK+GaLYIG9l2wMC1H8bbHvHVvBmtPB+vY23LdrM6Fn20DY605oGkWb050O6ALm03AMsV0i68Cq5+sA7XD6B6HTBViOxN0zo1/w4ZIBI1tvJ2uZXOX0DMzzgJwjCKwqjba9c6HJAk7kVJiHukXetuBrurTLF8GJe76woszW063L5xGBN7xLJkAnZkDvyh35dB7YrTQRIJAVtctkkIRHp+XVa3IqR11FlkpYm0QLCYfA4nUBWSMdbnk55ijZhCClbLR3cCMZfVyogGmosCpYXS0E1Dyxp8a4da5/Vy5+TgrMNntfImwDw9gN3dBwGuhY2nYy1edkX0q/PML6W3WKBtZo+e7zDa90i8OgHFdhUc1ArWPJtsMD1aGh3P7d082wNuC+eVAy14vWi9FXJM4JylrBSEZf70MMU7NUWDNRkRsgLTCZ5QezhfCvrqajuSQwTdedkB9a7oN6fo5s53OQ3XdBSdWtJ7eF9K+pcNTUcHi7r7Lur/iai7u2VF1oSkiuhPSvSKsK9wmhcKXSpFl+9v9OmRyrig8JnaEm6Jf89RB15ifp7JEpBRlcdzuR0CSvh+nfnPOTk9FHinlJLW+u4q4vkKEfdFELRJjkzMZ5pl85RQKYSOoDAPZWN8793bbnRIsUTu76uGHXme26b77KCZ/hCFRMRyhUuu7L9l5lGbiRkSFi//KCe/waNdUZgZFJiVr2fjhMbOI4b3s4DnNvzmQikGS3Scv7spzh7Mq9vVJpLWvrZ/3OIMT0pdrfva3nac7/1Lf5LSnrp0PyoNOj+sOIftrnsgUV0/LBBbhLh9dapTvrGr/np3e1Pvqb0jLx9ht9sO33fVo28f+SxuxVLkucvtxDeQb/8A8fNC+JsbAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=f1f0408c61e303107f44de777df040eb"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=ebeb733761d303107f44de777df04087"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=ebeb733761d303107f44de777df04087^sys_idNOT INabeb733761d303107f44de777df040dc"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">c9ebbff361d303107f44de777df040da</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Overdue Reminder Flow">ebeb733761d303107f44de777df04087</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="For Each">098e1dc5c3e232002841b63b12d3ae33</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:34:17</sys_created_on>
+        <sys_id>abeb733761d303107f44de777df040dc</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:56:17</sys_updated_on>
+        <ui_id>3854126c-7894-436e-bc67-1e40e59f20d4</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/51TXW/iMBD8L34OURJQDnirWlWq1F4lWvXlVKHFXoN1jp3zBzQX8d9vTUJa9fFeCDvenZ2ZOD2zMbQx+Fd7473aG7b+9Z4xZRJG/3tmoEG2Zipg41nGjqBjqvt+hbLghVzNFryin+UPPoNailkpORLOF8sa8w1y64Q/n2lUKN9q6N7+n4EflBYOR5EtONIW0LF1/+1ICVpQroRclcWKz6t6XhVFtVyUu3q+KysxBxQ1EWrYoabWh9HdN7Oha1PpBgkj8DjObCaUHklEVWQMPwIagbRegvaYsQaMgGBdx9bBRQIcgng2ups6DsoEomOp98Orv7SxLIrUKJEMcRwOp3I75jjA8g4CvBA1D9GNrfxgFUc/RCFQQtTh9is2NDy3QVkzjATY6eu01bExP4ck2ERwfW2ERE8isE1Gk/TRh3w52NPmqvJemUso46G2HPRUQQhO7WJIenqGGhsi2jbQtsrst62zR3UZJi1NvtdU5FLbEy1NVzQHnoTnlCvk94TfXeA3cCq5eCIaGj5nzHf+VoP3n14oxO2fmJQMzkYP2yGGNMKdasMNLTjiKPf8nm79wD1lypUnCa8Je7h+K+mgoxuk+FfoZN3vJP4TO/8D/k8ALHUDAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=ebeb733761d303107f44de777df04087"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=ebeb733761d303107f44de777df04087"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_ebeb733761d303107f44de777df04087"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_ebeb733761d303107f44de777df04087"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>127833b3619303107f44de777df04091</sys_id>
+        <latest_snapshot>ebeb733761d303107f44de777df04087</latest_snapshot>
+        <compiler_build>glide-australia-02-11-2026__patch3-hotfix1-06-18-2026_06-19-2026_0938.zip</compiler_build>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=127833b3619303107f44de777df04091^sys_idNOT INe0fbb33761d303107f44de777df04064"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.RunAlways</binding_strategy>
+        <plan>{"@class":"com.snc.process_flow.engine.serialization.plan_data.ChunkingPlanData","chunk_data":{"table":"sys_flow_trigger_plan","id":"e0fbb33761d303107f44de777df04064","name":"plan","plan_signature":null},"plan_data":"CHUNKING_PLAN"}</plan>
+        <plan_id>127833b3619303107f44de777df04091</plan_id>
+        <snapshot>3374941860e303107f44966a2305d4c3</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:34:20</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>e0fbb33761d303107f44de777df04064</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 12:34:20</sys_updated_on>
+        <trigger display_value="">dcfbb33761d303107f44de777df04016</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=127833b3619303107f44de777df04091"/>
+</record_update>

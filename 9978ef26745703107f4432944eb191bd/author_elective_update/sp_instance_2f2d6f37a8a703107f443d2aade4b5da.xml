@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="DELETE">
+        <active>true</active>
+        <advanced_placeholder_dimensions>false</advanced_placeholder_dimensions>
+        <async_load>false</async_load>
+        <async_load_device_type>desktop,tablet,mobile</async_load_device_type>
+        <async_load_trigger>viewport</async_load_trigger>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <placeholder_dimensions>{&#13;	"mobile": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	},&#13;	"desktop": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	},&#13;	"tablet": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	}&#13;}</placeholder_dimensions>
+        <placeholder_dimensions_script><![CDATA[function evaluateConfig(options) { return {	"mobile": {		"height": "250px",		"width": "100%"	},	"desktop": {		"height": "250px",		"width": "100%"	},	"tablet": {		"height": "250px",		"width": "100%"	}}; }]]></placeholder_dimensions_script>
+        <placeholder_template>&lt;!-- 
+	AngularJS template with configurable options.
+	Use the `options` object to control dynamic behavior.
+	Example: Display an element when max row count is 10:
+	&lt;div ng-if="options.maxRowCount === 10"&gt;&lt;/div&gt;
+	The `skeleton-container` class is used for loading placeholders.
+--&gt;
+	&lt;div class="skeleton-container"&gt;
+	&lt;!-- Header Skeleton --&gt;
+	&lt;div class="skeleton-box skeleton-header"&gt;&lt;/div&gt;
+	&lt;!-- Body Skeleton --&gt;
+	&lt;div class="skeleton-box skeleton-line"&gt;&lt;/div&gt;
+	&lt;div class="skeleton-box skeleton-line small"&gt;&lt;/div&gt;
+	&lt;div class="skeleton-box skeleton-line medium"&gt;&lt;/div&gt;
+&lt;/div&gt;</placeholder_template>
+        <preserve_placeholder_size>false</preserve_placeholder_size>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">29b79793142703107f447c04997f5a12</sp_column>
+        <sp_widget display_value="CampusOps Card">8a99131b142703107f447c04997f5af2</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-02 21:45:32</sys_created_on>
+        <sys_id>2f2d6f37a8a703107f443d2aade4b5da</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>My Profile</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_instance_2f2d6f37a8a703107f443d2aade4b5da</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-02 22:43:23</sys_updated_on>
+        <title>My Profile</title>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"icon": {
+		"value": "]]>👤<![CDATA[",
+		"displayValue": "]]>👤<![CDATA["
+	},
+	"title": {
+		"value": "My Profile",
+		"displayValue": "My Profile"
+	},
+	"description": {
+		"value": "View your borrowing history and account details.",
+		"displayValue": "View your borrowing history and account details."
+	},
+	"button_label": {
+		"value": "View Profile",
+		"displayValue": "View Profile"
+	},
+	"link": {
+		"value": "/sp?id=my_profile",
+		"displayValue": "/sp?id=my_profile"
+	}
+}]]></widget_parameters>
+    </sp_instance>
+    <sys_translated_text action="DELETE" query="documentkey=2f2d6f37a8a703107f443d2aade4b5da"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CampusOps">9978ef26745703107f4432944eb191bd</application>
+        <file_path/>
+        <instance_id>0ad18dc7c38fcf94a03197af050131d3</instance_id>
+        <instance_name>ltm-hck-2876-0037</instance_name>
+        <name>sp_instance_2f2d6f37a8a703107f443d2aade4b5da</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_instance"&gt;&lt;sp_instance action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;advanced_placeholder_dimensions&gt;false&lt;/advanced_placeholder_dimensions&gt;&lt;async_load&gt;false&lt;/async_load&gt;&lt;async_load_device_type&gt;desktop,tablet,mobile&lt;/async_load_device_type&gt;&lt;async_load_trigger&gt;viewport&lt;/async_load_trigger&gt;&lt;class_name/&gt;&lt;color&gt;default&lt;/color&gt;&lt;css/&gt;&lt;glyph/&gt;&lt;id/&gt;&lt;order&gt;1&lt;/order&gt;&lt;placeholder_dimensions&gt;{&amp;#13;	"mobile": {&amp;#13;		"height": "250px",&amp;#13;		"width": "100%"&amp;#13;	},&amp;#13;	"desktop": {&amp;#13;		"height": "250px",&amp;#13;		"width": "100%"&amp;#13;	},&amp;#13;	"tablet": {&amp;#13;		"height": "250px",&amp;#13;		"width": "100%"&amp;#13;	}&amp;#13;}&lt;/placeholder_dimensions&gt;&lt;placeholder_dimensions_script&gt;&lt;![CDATA[function evaluateConfig(options) { return {	"mobile": {		"height": "250px",		"width": "100%"	},	"desktop": {		"height": "250px",		"width": "100%"	},	"tablet": {		"height": "250px",		"width": "100%"	}}; }]]&gt;&lt;/placeholder_dimensions_script&gt;&lt;placeholder_template&gt;&amp;lt;!-- 
+	AngularJS template with configurable options.
+	Use the `options` object to control dynamic behavior.
+	Example: Display an element when max row count is 10:
+	&amp;lt;div ng-if="options.maxRowCount === 10"&amp;gt;&amp;lt;/div&amp;gt;
+	The `skeleton-container` class is used for loading placeholders.
+--&amp;gt;
+	&amp;lt;div class="skeleton-container"&amp;gt;
+	&amp;lt;!-- Header Skeleton --&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-header"&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;!-- Body Skeleton --&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-line"&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-line small"&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-line medium"&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/placeholder_template&gt;&lt;preserve_placeholder_size&gt;false&lt;/preserve_placeholder_size&gt;&lt;roles/&gt;&lt;short_description/&gt;&lt;size&gt;md&lt;/size&gt;&lt;sp_column display_value="1"&gt;29b79793142703107f447c04997f5a12&lt;/sp_column&gt;&lt;sp_widget display_value="CampusOps Card"&gt;8a99131b142703107f447c04997f5af2&lt;/sp_widget&gt;&lt;sys_class_name&gt;sp_instance&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-10-02 21:45:32&lt;/sys_created_on&gt;&lt;sys_id&gt;2f2d6f37a8a703107f443d2aade4b5da&lt;/sys_id&gt;&lt;sys_mod_count&gt;6&lt;/sys_mod_count&gt;&lt;sys_name&gt;My Profile&lt;/sys_name&gt;&lt;sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd"&gt;9978ef26745703107f4432944eb191bd&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="CampusOps"&gt;9978ef26745703107f4432944eb191bd&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_instance_2f2d6f37a8a703107f443d2aade4b5da&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-10-02 22:43:23&lt;/sys_updated_on&gt;&lt;title&gt;My Profile&lt;/title&gt;&lt;url/&gt;&lt;widget_parameters&gt;&lt;![CDATA[{
+	"icon": {
+		"value": "]]&gt;👤&lt;![CDATA[",
+		"displayValue": "]]&gt;👤&lt;![CDATA["
+	},
+	"title": {
+		"value": "My Profile",
+		"displayValue": "My Profile"
+	},
+	"description": {
+		"value": "View your borrowing history and account details.",
+		"displayValue": "View your borrowing history and account details."
+	},
+	"button_label": {
+		"value": "View Profile",
+		"displayValue": "View Profile"
+	},
+	"link": {
+		"value": "/sp?id=my_profile",
+		"displayValue": "/sp?id=my_profile"
+	}
+}]]&gt;&lt;/widget_parameters&gt;&lt;/sp_instance&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=2f2d6f37a8a703107f443d2aade4b5da"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>47280324</payload_hash>
+        <record_name>My Profile</record_name>
+        <reverted_from/>
+        <source>f5785b0dc9a703107f449dae971dec2d</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-02 22:43:23</sys_created_on>
+        <sys_id>076a3fffa8e703107f443d2aade4b555</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0fec9595a0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-02 22:43:23</sys_updated_on>
+        <type>Instance</type>
+        <update_guid>0b6a3fff85e70310223b50b179c4a454</update_guid>
+        <update_guid_history>0b6a3fff85e70310223b50b179c4a454:47280324,51bd23b757a7031087c11b044a5c294e:-1112887581,f39d6f7731a7031021eec2ea27199610:-1159818858,f39deb7745a703101cab9f8f22271ebf:1974980533,038d2b7771a70310d7a9b0e3850398d3:834400041,223d637708a703103f593776e3d15a16:809379757,732def3758a70310dba614c587a423a9:1470766816</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="My Profile">687f777ba82b03107f443d2aade4b56f</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-02 23:05:20</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance">sp_instance</sys_db_object>
+        <sys_id>2a521d655cf94996ad39d8e8290020a1</sys_id>
+        <sys_metadata>2f2d6f37a8a703107f443d2aade4b5da</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>My Profile</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_scope_delete display_value="">9bc7a4e05c8b4c4d862c4fb4630d5629</sys_scope_delete>
+        <sys_update_name>sp_instance_2f2d6f37a8a703107f443d2aade4b5da</sys_update_name>
+        <sys_update_version display_value="sp_instance_2f2d6f37a8a703107f443d2aade4b5da">076a3fffa8e703107f443d2aade4b555</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-02 23:05:20</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_screen_type">
+    <sys_ux_screen_type action="INSERT_OR_UPDATE">
+        <description/>
+        <name>Asset Details</name>
+        <sys_class_name>sys_ux_screen_type</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-29 15:49:13</sys_created_on>
+        <sys_id>0fdeba76cd2b03107f44f32f596da5b2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Asset Details</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_ux_screen_type_0fdeba76cd2b03107f44f32f596da5b2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-29 15:49:13</sys_updated_on>
+    </sys_ux_screen_type>
+    <sys_translated_text action="delete_multiple" query="documentkey=0fdeba76cd2b03107f44f32f596da5b2"/>
+</record_update>

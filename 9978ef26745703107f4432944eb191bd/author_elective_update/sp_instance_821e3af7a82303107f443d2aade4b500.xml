@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="DELETE">
+        <active>true</active>
+        <advanced_placeholder_dimensions>false</advanced_placeholder_dimensions>
+        <async_load>false</async_load>
+        <async_load_device_type>desktop,tablet,mobile</async_load_device_type>
+        <async_load_trigger>viewport</async_load_trigger>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>2</order>
+        <placeholder_dimensions>{&#13;	"mobile": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	},&#13;	"desktop": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	},&#13;	"tablet": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	}&#13;}</placeholder_dimensions>
+        <placeholder_dimensions_script><![CDATA[function evaluateConfig(options) { return {	"mobile": {		"height": "250px",		"width": "100%"	},	"desktop": {		"height": "250px",		"width": "100%"	},	"tablet": {		"height": "250px",		"width": "100%"	}}; }]]></placeholder_dimensions_script>
+        <placeholder_template>&lt;!-- 
+	AngularJS template with configurable options.
+	Use the `options` object to control dynamic behavior.
+	Example: Display an element when max row count is 10:
+	&lt;div ng-if="options.maxRowCount === 10"&gt;&lt;/div&gt;
+	The `skeleton-container` class is used for loading placeholders.
+--&gt;
+	&lt;div class="skeleton-container"&gt;
+	&lt;!-- Header Skeleton --&gt;
+	&lt;div class="skeleton-box skeleton-header"&gt;&lt;/div&gt;
+	&lt;!-- Body Skeleton --&gt;
+	&lt;div class="skeleton-box skeleton-line"&gt;&lt;/div&gt;
+	&lt;div class="skeleton-box skeleton-line small"&gt;&lt;/div&gt;
+	&lt;div class="skeleton-box skeleton-line medium"&gt;&lt;/div&gt;
+&lt;/div&gt;</placeholder_template>
+        <preserve_placeholder_size>false</preserve_placeholder_size>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">6152c023142f03107f447c04997f5a6c</sp_column>
+        <sp_widget display_value="link-button">abc50de6d702120023c84f80de61036a</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-02 18:19:48</sys_created_on>
+        <sys_id>821e3af7a82303107f443d2aade4b500</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_instance_821e3af7a82303107f443d2aade4b500</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-03 11:43:21</sys_updated_on>
+        <title/>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"href": {
+		"value": "/sp?id=sc_cat_item&sys_id=94697bc7541303107f4433035850b6c5",
+		"displayValue": "/sp?id=sc_cat_item&sys_id=94697bc7541303107f4433035850b6c5"
+	},
+	"button_text": {
+		"value": "Rent This Asset",
+		"displayValue": "Rent This Asset"
+	}
+}]]></widget_parameters>
+    </sp_instance>
+    <sys_translated_text action="DELETE" query="documentkey=821e3af7a82303107f443d2aade4b500"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CampusOps">9978ef26745703107f4432944eb191bd</application>
+        <file_path/>
+        <instance_id>0ad18dc7c38fcf94a03197af050131d3</instance_id>
+        <instance_name>ltm-hck-2876-0037</instance_name>
+        <name>sp_instance_821e3af7a82303107f443d2aade4b500</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_instance"&gt;&lt;sp_instance action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;advanced_placeholder_dimensions&gt;false&lt;/advanced_placeholder_dimensions&gt;&lt;async_load&gt;false&lt;/async_load&gt;&lt;async_load_device_type&gt;desktop,tablet,mobile&lt;/async_load_device_type&gt;&lt;async_load_trigger&gt;viewport&lt;/async_load_trigger&gt;&lt;class_name/&gt;&lt;color&gt;default&lt;/color&gt;&lt;css/&gt;&lt;glyph/&gt;&lt;id/&gt;&lt;order&gt;2&lt;/order&gt;&lt;placeholder_dimensions&gt;{&amp;#13;	"mobile": {&amp;#13;		"height": "250px",&amp;#13;		"width": "100%"&amp;#13;	},&amp;#13;	"desktop": {&amp;#13;		"height": "250px",&amp;#13;		"width": "100%"&amp;#13;	},&amp;#13;	"tablet": {&amp;#13;		"height": "250px",&amp;#13;		"width": "100%"&amp;#13;	}&amp;#13;}&lt;/placeholder_dimensions&gt;&lt;placeholder_dimensions_script&gt;&lt;![CDATA[function evaluateConfig(options) { return {	"mobile": {		"height": "250px",		"width": "100%"	},	"desktop": {		"height": "250px",		"width": "100%"	},	"tablet": {		"height": "250px",		"width": "100%"	}}; }]]&gt;&lt;/placeholder_dimensions_script&gt;&lt;placeholder_template&gt;&amp;lt;!-- 
+	AngularJS template with configurable options.
+	Use the `options` object to control dynamic behavior.
+	Example: Display an element when max row count is 10:
+	&amp;lt;div ng-if="options.maxRowCount === 10"&amp;gt;&amp;lt;/div&amp;gt;
+	The `skeleton-container` class is used for loading placeholders.
+--&amp;gt;
+	&amp;lt;div class="skeleton-container"&amp;gt;
+	&amp;lt;!-- Header Skeleton --&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-header"&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;!-- Body Skeleton --&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-line"&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-line small"&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-line medium"&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/placeholder_template&gt;&lt;preserve_placeholder_size&gt;false&lt;/preserve_placeholder_size&gt;&lt;roles/&gt;&lt;short_description/&gt;&lt;size&gt;md&lt;/size&gt;&lt;sp_column display_value="1"&gt;6152c023142f03107f447c04997f5a6c&lt;/sp_column&gt;&lt;sp_widget display_value="link-button"&gt;abc50de6d702120023c84f80de61036a&lt;/sp_widget&gt;&lt;sys_class_name&gt;sp_instance&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-10-02 18:19:48&lt;/sys_created_on&gt;&lt;sys_id&gt;821e3af7a82303107f443d2aade4b500&lt;/sys_id&gt;&lt;sys_mod_count&gt;3&lt;/sys_mod_count&gt;&lt;sys_name/&gt;&lt;sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd"&gt;9978ef26745703107f4432944eb191bd&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="CampusOps"&gt;9978ef26745703107f4432944eb191bd&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_instance_821e3af7a82303107f443d2aade4b500&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-10-03 11:43:21&lt;/sys_updated_on&gt;&lt;title/&gt;&lt;url/&gt;&lt;widget_parameters&gt;&lt;![CDATA[{
+	"href": {
+		"value": "/sp?id=sc_cat_item&amp;sys_id=94697bc7541303107f4433035850b6c5",
+		"displayValue": "/sp?id=sc_cat_item&amp;sys_id=94697bc7541303107f4433035850b6c5"
+	},
+	"button_text": {
+		"value": "Rent This Asset",
+		"displayValue": "Rent This Asset"
+	}
+}]]&gt;&lt;/widget_parameters&gt;&lt;/sp_instance&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=821e3af7a82303107f443d2aade4b500"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1678581612</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>e37a6e73292503107f44f3a98c18249a</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-03 11:43:21</sys_created_on>
+        <sys_id>10fc2280807b03107f448844f23e9ee5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a101936d680000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-03 11:43:21</sys_updated_on>
+        <type>Instance</type>
+        <update_guid>d0fc2280e97b0310f1a96f21f0bb63e4</update_guid>
+        <update_guid_history>d0fc2280e97b0310f1a96f21f0bb63e4:-1678581612,daf9e60c2f3b03102dfcc1eb2c194c72:-226965835,712d0fb7d7a30310b7de0bd43ef01714:-1678581612,c21e3ef7cc230310019605df048059eb:709978240</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">654daa80807b03107f448844f23e9e79</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-03 11:44:47</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance">sp_instance</sys_db_object>
+        <sys_id>a0d648d872cb4661a75b7676c1005399</sys_id>
+        <sys_metadata>821e3af7a82303107f443d2aade4b500</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_scope_delete display_value="">9bc7a4e05c8b4c4d862c4fb4630d5629</sys_scope_delete>
+        <sys_update_name>sp_instance_821e3af7a82303107f443d2aade4b500</sys_update_name>
+        <sys_update_version display_value="sp_instance_821e3af7a82303107f443d2aade4b500">10fc2280807b03107f448844f23e9ee5</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-03 11:44:47</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

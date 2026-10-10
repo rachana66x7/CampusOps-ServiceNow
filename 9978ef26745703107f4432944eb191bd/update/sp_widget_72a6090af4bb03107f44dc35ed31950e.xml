@@ -1,0 +1,1355 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, $window) {
+    var c = this;
+
+    c.activeFilter = "all";
+    c.workingId = null;
+    c.feedback = c.data.feedback || "";
+    c.feedbackType = c.data.feedbackType || "success";
+
+    // Pagination
+    c.pageSize = 6;
+    c.currentPage = 1;
+
+    c.filters = [
+        { label: "All", value: "all" },
+        { label: "Active", value: "active" },
+        { label: "Due soon", value: "due" },
+        { label: "Returned", value: "returned" }
+    ];
+
+    c.setFilter = function(value) {
+        c.activeFilter = value;
+        c.currentPage = 1;
+    };
+
+    c.visibleRentals = function() {
+        var rentals = c.data.rentals || [];
+
+        return rentals.filter(function(rental) {
+            if (c.activeFilter === "all") return true;
+
+            if (c.activeFilter === "active") {
+                return rental.statusClass === "active" ||
+                    rental.statusClass === "due" ||
+                    rental.statusClass === "overdue";
+            }
+
+            if (c.activeFilter === "due") {
+                return rental.statusClass === "due" ||
+                    rental.statusClass === "overdue";
+            }
+
+            if (c.activeFilter === "returned") {
+                return rental.statusClass === "returned";
+            }
+
+            return true;
+        });
+    };
+
+    c.countFor = function(filter) {
+        var previous = c.activeFilter;
+        c.activeFilter = filter;
+        var count = c.visibleRentals().length;
+        c.activeFilter = previous;
+        return count;
+    };
+
+    c.totalPages = function() {
+        return Math.max(
+            1,
+            Math.ceil(c.visibleRentals().length / c.pageSize)
+        );
+    };
+
+    c.pageRentals = function() {
+        var rentals = c.visibleRentals();
+        var start = (c.currentPage - 1) * c.pageSize;
+
+        return rentals.slice(start, start + c.pageSize);
+    };
+
+    c.startRecord = function() {
+        return c.visibleRentals().length
+            ? (c.currentPage - 1) * c.pageSize + 1
+            : 0;
+    };
+
+    c.endRecord = function() {
+        return Math.min(
+            c.currentPage * c.pageSize,
+            c.visibleRentals().length
+        );
+    };
+
+    c.previousPage = function() {
+        if (c.currentPage > 1) c.currentPage--;
+    };
+
+    c.nextPage = function() {
+        if (c.currentPage < c.totalPages()) c.currentPage++;
+    };
+
+    c.confirmAction = function(rental, action) {
+        if (c.workingId) return;
+
+        var message = action === "return"
+            ? "Submit the return for " + rental.assetName + "?"
+            : "Submit a renewal request for " + rental.assetName + "?";
+
+        if (!$window.confirm(message)) return;
+
+        c.workingId = rental.id;
+        c.feedback = "";
+
+        c.server.get({
+            action: action,
+            rentalId: rental.id
+        }).then(function(response) {
+            c.data = response.data;
+            c.feedback = response.data.feedback || "Your request has been processed.";
+            c.feedbackType = response.data.feedbackType || "success";
+
+            // Keep the current page valid after the data refresh.
+            if (c.currentPage > c.totalPages()) {
+                c.currentPage = c.totalPages();
+            }
+        }, function() {
+            c.feedback = "We couldn't process your request. Please try again.";
+            c.feedbackType = "error";
+        }).finally(function() {
+            c.workingId = null;
+        });
+    };
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* =========================================&#13;
+   CAMPUSOPS — MY RENTALS&#13;
+========================================= */&#13;
+&#13;
+.co-rentals-app {&#13;
+  --cr-ink:#34264f;&#13;
+  --cr-muted:#887d99;&#13;
+  --cr-purple:#8062c9;&#13;
+  --cr-border:#e9e1f3;&#13;
+  width:100%;&#13;
+  color:var(--cr-ink);&#13;
+  font-family:Inter,"Segoe UI",Arial,sans-serif;&#13;
+  font-size:13px;&#13;
+  line-height:1.55;&#13;
+}&#13;
+&#13;
+.co-rentals-app * { box-sizing:border-box; }&#13;
+.co-rentals-app a { text-decoration:none; }&#13;
+.co-rentals-app button { font:inherit; }&#13;
+.co-rentals-app a:focus-visible,&#13;
+.co-rentals-app button:focus-visible {&#13;
+  outline:2px solid #8062c9;&#13;
+  outline-offset:3px;&#13;
+}&#13;
+&#13;
+/* LAYOUT */&#13;
+&#13;
+.co-rentals-app .cr-layout {&#13;
+  display:grid;&#13;
+  grid-template-columns:218px minmax(0,1fr);&#13;
+  align-items:stretch;&#13;
+  gap:25px;&#13;
+  width:100%;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-sidebar {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  min-width:0;&#13;
+  min-height:690px;&#13;
+  padding:20px 13px;&#13;
+  border:1px solid #e9e0f5;&#13;
+  border-radius:19px;&#13;
+  background:linear-gradient(180deg,#f8f4ff,#f3effb);&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-brand {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:10px;&#13;
+  padding:4px 7px 24px;&#13;
+  color:#382b54;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-brand-mark {&#13;
+  display:grid;&#13;
+  place-items:center;&#13;
+  flex-shrink:0;&#13;
+  width:37px;&#13;
+  height:37px;&#13;
+  border-radius:11px;&#13;
+  background:#8062c9;&#13;
+  color:#fff;&#13;
+  font-size:19px;&#13;
+  font-weight:800;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-brand b {&#13;
+  display:block;&#13;
+  font-size:14px;&#13;
+  line-height:1.2;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-brand small {&#13;
+  display:block;&#13;
+  margin-top:4px;&#13;
+  color:#8b7e9e;&#13;
+  font-size:9px;&#13;
+  font-weight:500;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-nav-label {&#13;
+  padding:9px 10px;&#13;
+  color:#a092b6;&#13;
+  font-size:9px;&#13;
+  font-weight:800;&#13;
+  letter-spacing:1.1px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-nav-spaced { margin-top:18px; }&#13;
+&#13;
+.co-rentals-app .cr-nav {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:11px;&#13;
+  margin:2px 0;&#13;
+  padding:11px 10px;&#13;
+  border-radius:10px;&#13;
+  color:#6e6382;&#13;
+  font-size:11px;&#13;
+  font-weight:600;&#13;
+  transition:background .18s,color .18s;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-nav &gt; span {&#13;
+  display:grid;&#13;
+  place-items:center;&#13;
+  width:21px;&#13;
+  flex-shrink:0;&#13;
+  color:#8d79b5;&#13;
+  font-size:16px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-nav:hover {&#13;
+  background:rgba(255,255,255,.8);&#13;
+  color:#513a83;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-nav-active {&#13;
+  background:#e8defa;&#13;
+  color:#6245a0;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-nav-active &gt; span { color:#7354b4; }&#13;
+&#13;
+.co-rentals-app .cr-sidebar-bottom {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  gap:4px;&#13;
+  margin-top:auto;&#13;
+  padding:18px 8px 3px;&#13;
+  border-top:1px solid #e4dbef;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-sidebar-bottom span {&#13;
+  color:#59446f;&#13;
+  font-size:10px;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-sidebar-bottom small {&#13;
+  color:#9386a5;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+/* PAGE HEADER */&#13;
+&#13;
+.co-rentals-app .cr-main { min-width:0; }&#13;
+&#13;
+.co-rentals-app .cr-header {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:14px;&#13;
+  margin:4px 0 23px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-eyebrow {&#13;
+  color:#927bb7;&#13;
+  font-size:9px;&#13;
+  font-weight:800;&#13;
+  letter-spacing:1.2px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-header h1 {&#13;
+  margin:9px 0 5px;&#13;
+  color:#34264f;&#13;
+  font-size:clamp(25px,2.6vw,33px);&#13;
+  font-weight:800;&#13;
+  letter-spacing:-.8px;&#13;
+  line-height:1.25;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-header p {&#13;
+  margin:0;&#13;
+  color:#897d99;&#13;
+  font-size:11px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-browse-link {&#13;
+  flex-shrink:0;&#13;
+  padding:9px 12px;&#13;
+  border:1px solid #e8def4;&#13;
+  border-radius:10px;&#13;
+  background:rgba(255,255,255,.8);&#13;
+  color:#7356ad;&#13;
+  font-size:10px;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-browse-link:hover { background:#fff; }&#13;
+&#13;
+/* ACTION FEEDBACK */&#13;
+&#13;
+.co-rentals-app .cr-feedback {&#13;
+  margin-bottom:17px;&#13;
+  padding:12px 14px;&#13;
+  border:1px solid #ccebd8;&#13;
+  border-radius:11px;&#13;
+  background:#f0faf4;&#13;
+  color:#397b58;&#13;
+  font-size:11px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-feedback-error {&#13;
+  border-color:#f0d1d9;&#13;
+  background:#fff5f7;&#13;
+  color:#ae4964;&#13;
+}&#13;
+&#13;
+/* OVERVIEW */&#13;
+&#13;
+.co-rentals-app .cr-overview {&#13;
+  margin-bottom:23px;&#13;
+  padding:18px;&#13;
+  border:1px solid var(--cr-border);&#13;
+  border-radius:15px;&#13;
+  background:rgba(255,255,255,.84);&#13;
+  box-shadow:0 5px 18px rgba(79,60,118,.035);&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-overview-heading h2,&#13;
+.co-rentals-app .cr-collection-heading h2 {&#13;
+  margin:0;&#13;
+  color:#403254;&#13;
+  font-size:15px;&#13;
+  font-weight:800;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-overview-heading p,&#13;
+.co-rentals-app .cr-collection-heading p {&#13;
+  margin:4px 0 0;&#13;
+  color:#8c809b;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-stats {&#13;
+  display:grid;&#13;
+  grid-template-columns:repeat(3,minmax(0,1fr));&#13;
+  margin-top:17px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-stat {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  gap:5px;&#13;
+  padding:4px 13px;&#13;
+  border-left:1px solid #eee7f6;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-stat:first-child {&#13;
+  padding-left:0;&#13;
+  border-left:0;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-stat span {&#13;
+  color:#887b98;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-stat strong {&#13;
+  color:#403052;&#13;
+  font-size:23px;&#13;
+  font-weight:800;&#13;
+  line-height:1.2;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-stat .cr-alert-number { color:#b95170; }&#13;
+&#13;
+/* COLLECTION */&#13;
+&#13;
+.co-rentals-app .cr-collection { margin-bottom:23px; }&#13;
+&#13;
+.co-rentals-app .cr-collection-heading { margin-bottom:13px; }&#13;
+&#13;
+.co-rentals-app .cr-filters {&#13;
+  display:flex;&#13;
+  flex-wrap:wrap;&#13;
+  gap:7px;&#13;
+  margin-bottom:15px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-filters button {&#13;
+  display:inline-flex;&#13;
+  align-items:center;&#13;
+  gap:7px;&#13;
+  padding:7px 10px;&#13;
+  border:1px solid #e9e1f3;&#13;
+  border-radius:9px;&#13;
+  background:#fff;&#13;
+  color:#776a8b;&#13;
+  cursor:pointer;&#13;
+  font-size:10px;&#13;
+  transition:background .15s,border-color .15s;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-filters button span {&#13;
+  color:#9a8eaa;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-filters button:hover {&#13;
+  border-color:#cfc0eb;&#13;
+  background:#faf7ff;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-filters button.cr-filter-active {&#13;
+  border-color:#8062c9;&#13;
+  background:#8062c9;&#13;
+  color:#fff;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-filters button.cr-filter-active span { color:#eee5ff; }&#13;
+&#13;
+/* RENTAL CARDS */&#13;
+&#13;
+.co-rentals-app .cr-rental-grid {&#13;
+  display:grid;&#13;
+  grid-template-columns:repeat(2,minmax(0,1fr));&#13;
+  gap:12px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-rental-card {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  min-width:0;&#13;
+  padding:15px;&#13;
+  border:1px solid #e7def4;&#13;
+  border-radius:14px;&#13;
+  background:rgba(255,255,255,.87);&#13;
+  box-shadow:0 4px 13px rgba(79,60,118,.025);&#13;
+  transition:transform .18s,border-color .18s,box-shadow .18s;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-rental-card:hover {&#13;
+  transform:translateY(-2px);&#13;
+  border-color:#d4c4ee;&#13;
+  box-shadow:0 8px 20px rgba(79,60,118,.07);&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-card-top {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:8px;&#13;
+  margin-bottom:12px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-resource-mark {&#13;
+  display:grid;&#13;
+  place-items:center;&#13;
+  width:33px;&#13;
+  height:33px;&#13;
+  flex-shrink:0;&#13;
+  border-radius:10px;&#13;
+  background:#eee7fc;&#13;
+  color:#7859b7;&#13;
+  font-size:17px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-resource-book { background:#eee7fc;color:#7859b7; }&#13;
+.co-rentals-app .cr-resource-laptop { background:#e9f2ff;color:#547eaf; }&#13;
+.co-rentals-app .cr-resource-kit { background:#fff0e3;color:#bd8248; }&#13;
+.co-rentals-app .cr-resource-other { background:#e8f7f1;color:#519b82; }&#13;
+&#13;
+.co-rentals-app .cr-status {&#13;
+  display:inline-block;&#13;
+  padding:4px 8px;&#13;
+  border-radius:20px;&#13;
+  font-size:9px;&#13;
+  font-weight:750;&#13;
+  white-space:nowrap;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-status-active { background:#eaf7ef;color:#4c956f; }&#13;
+.co-rentals-app .cr-status-due { background:#fff3dc;color:#a8762d; }&#13;
+.co-rentals-app .cr-status-overdue { background:#fce8ed;color:#b34e6b; }&#13;
+.co-rentals-app .cr-status-returned { background:#f0e9ff;color:#8060b8; }&#13;
+&#13;
+.co-rentals-app .cr-resource-type {&#13;
+  margin-bottom:3px;&#13;
+  color:#9588a6;&#13;
+  font-size:9px;&#13;
+  text-transform:uppercase;&#13;
+  letter-spacing:.5px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-rental-card h3 {&#13;
+  margin:0;&#13;
+  color:#44345d;&#13;
+  font-size:12px;&#13;
+  font-weight:800;&#13;
+  overflow-wrap:anywhere;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-location {&#13;
+  margin-top:4px;&#13;
+  color:#9386a4;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+/* DUE DATE */&#13;
+&#13;
+.co-rentals-app .cr-deadline {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  gap:4px;&#13;
+  margin-top:13px;&#13;
+  padding:10px 11px;&#13;
+  border:1px solid #e4d9f6;&#13;
+  border-radius:10px;&#13;
+  background:#f8f4ff;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-deadline-label {&#13;
+  color:#8977aa;&#13;
+  font-size:8px;&#13;
+  font-weight:800;&#13;
+  letter-spacing:.65px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-deadline strong {&#13;
+  color:#55416f;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-deadline-soon {&#13;
+  border-color:#f3dfb7;&#13;
+  background:#fff9ed;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-deadline-soon .cr-deadline-label,&#13;
+.co-rentals-app .cr-deadline-soon strong { color:#a8762d; }&#13;
+&#13;
+.co-rentals-app .cr-deadline-overdue {&#13;
+  border-color:#f1d1da;&#13;
+  background:#fff5f7;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-deadline-overdue .cr-deadline-label,&#13;
+.co-rentals-app .cr-deadline-overdue strong { color:#b34e6b; }&#13;
+&#13;
+.co-rentals-app .cr-deadline-returned {&#13;
+  border-color:#ccebd8;&#13;
+  background:#f0faf4;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-deadline-returned .cr-deadline-label,&#13;
+.co-rentals-app .cr-deadline-returned strong { color:#478766; }&#13;
+&#13;
+/* DETAILS */&#13;
+&#13;
+.co-rentals-app .cr-record-details {&#13;
+  display:grid;&#13;
+  grid-template-columns:1fr 1fr;&#13;
+  gap:10px;&#13;
+  margin-top:12px;&#13;
+  padding-bottom:12px;&#13;
+  border-bottom:1px solid #f0ebf6;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-record-details div {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  gap:3px;&#13;
+  min-width:0;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-record-details small {&#13;
+  color:#9589a5;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-record-details strong {&#13;
+  color:#665776;&#13;
+  font-size:9px;&#13;
+  overflow-wrap:anywhere;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-renewal-note {&#13;
+  margin-top:10px;&#13;
+  padding:9px;&#13;
+  border-radius:8px;&#13;
+  background:#f4efff;&#13;
+  color:#7054a5;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-card-actions {&#13;
+  display:grid;&#13;
+  grid-template-columns:1fr 1fr;&#13;
+  gap:7px;&#13;
+  margin-top:auto;&#13;
+  padding-top:12px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-card-actions button {&#13;
+  min-width:0;&#13;
+  min-height:32px;&#13;
+  padding:7px 8px;&#13;
+  border:1px solid #8062c9;&#13;
+  border-radius:8px;&#13;
+  cursor:pointer;&#13;
+  font-size:9px;&#13;
+  font-weight:750;&#13;
+  transition:background .15s,opacity .15s;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-return-button {&#13;
+  background:#8062c9;&#13;
+  color:#fff;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-return-button:hover { background:#6f50b5; }&#13;
+&#13;
+.co-rentals-app .cr-renew-button {&#13;
+  background:#fff;&#13;
+  color:#7455b3;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-renew-button:hover { background:#f7f2ff; }&#13;
+&#13;
+.co-rentals-app .cr-card-actions button:disabled {&#13;
+  opacity:.55;&#13;
+  cursor:not-allowed;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-returned-note {&#13;
+  margin-top:auto;&#13;
+  padding-top:13px;&#13;
+  color:#478766;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+/* LOADING AND EMPTY STATES */&#13;
+&#13;
+.co-rentals-app .cr-loading,&#13;
+.co-rentals-app .cr-empty {&#13;
+  padding:26px 15px;&#13;
+  border:1px dashed #e4d8f1;&#13;
+  border-radius:13px;&#13;
+  background:#fcfaff;&#13;
+  text-align:center;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-loading {&#13;
+  color:#796b8d;&#13;
+  font-size:11px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-empty h3 {&#13;
+  margin:0;&#13;
+  color:#49385f;&#13;
+  font-size:13px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-empty p {&#13;
+  margin:6px 0 12px;&#13;
+  color:#887b98;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-empty a,&#13;
+.co-rentals-app .cr-empty button {&#13;
+  display:inline-block;&#13;
+  padding:8px 11px;&#13;
+  border:1px solid #dfd2f2;&#13;
+  border-radius:8px;&#13;
+  background:#fff;&#13;
+  color:#7959b8;&#13;
+  font-size:10px;&#13;
+  font-weight:750;&#13;
+  cursor:pointer;&#13;
+}&#13;
+&#13;
+/* HELP */&#13;
+&#13;
+.co-rentals-app .cr-help {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:12px;&#13;
+  padding:15px;&#13;
+  border:1px solid #e8e0f1;&#13;
+  border-radius:13px;&#13;
+  background:#faf7ff;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-help strong {&#13;
+  color:#49385f;&#13;
+  font-size:11px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-help p {&#13;
+  margin:4px 0 0;&#13;
+  color:#887b98;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-help &gt; a {&#13;
+  flex-shrink:0;&#13;
+  color:#7959b8;&#13;
+  font-size:10px;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+/* FOOTER */&#13;
+&#13;
+.co-rentals-app .cr-footer {&#13;
+  margin-top:26px;&#13;
+  padding:17px 2px 5px;&#13;
+  border-top:1px solid #e9e2f1;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-footer-top {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:10px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-footer-top strong {&#13;
+  color:#55416f;&#13;
+  font-size:11px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-footer-top span {&#13;
+  color:#988ca8;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-footer-links {&#13;
+  display:flex;&#13;
+  flex-wrap:wrap;&#13;
+  gap:16px;&#13;
+  margin-top:12px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-footer-links a {&#13;
+  color:#796a8d;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-footer-links a:hover { color:#6748a8; }&#13;
+&#13;
+.co-rentals-app .cr-footer-copy {&#13;
+  margin-top:12px;&#13;
+  color:#a399b1;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+/* RESPONSIVE */&#13;
+&#13;
+@media(max-width:900px) {&#13;
+  .co-rentals-app .cr-layout {&#13;
+    grid-template-columns:175px minmax(0,1fr);&#13;
+    gap:16px;&#13;
+  }&#13;
+&#13;
+  .co-rentals-app .cr-sidebar { padding:15px 9px; }&#13;
+  .co-rentals-app .cr-nav { gap:8px;padding:10px 8px; }&#13;
+}&#13;
+&#13;
+@media(max-width:680px) {&#13;
+  .co-rentals-app .cr-layout { grid-template-columns:1fr;gap:18px; }&#13;
+&#13;
+  .co-rentals-app .cr-sidebar {&#13;
+    display:grid;&#13;
+    grid-template-columns:repeat(2,minmax(0,1fr));&#13;
+    align-content:start;&#13;
+    gap:3px;&#13;
+    min-height:0;&#13;
+    padding:12px;&#13;
+  }&#13;
+&#13;
+  .co-rentals-app .cr-brand {&#13;
+    grid-column:1/-1;&#13;
+    padding-bottom:12px;&#13;
+  }&#13;
+&#13;
+  .co-rentals-app .cr-nav-label,&#13;
+  .co-rentals-app .cr-sidebar-bottom { display:none; }&#13;
+&#13;
+  .co-rentals-app .cr-nav { margin:0; }&#13;
+&#13;
+  .co-rentals-app .cr-header h1 { font-size:25px; }&#13;
+  .co-rentals-app .cr-browse-link { display:none; }&#13;
+&#13;
+  .co-rentals-app .cr-rental-grid { grid-template-columns:1fr; }&#13;
+  .co-rentals-app .cr-help { align-items:flex-start;flex-direction:column; }&#13;
+  .co-rentals-app .cr-footer-top { align-items:flex-start;flex-direction:column; }&#13;
+}&#13;
+&#13;
+@media(max-width:400px) {&#13;
+  .co-rentals-app .cr-stats { grid-template-columns:1fr;gap:9px; }&#13;
+&#13;
+  .co-rentals-app .cr-stat {&#13;
+    flex-direction:row;&#13;
+    justify-content:space-between;&#13;
+    align-items:center;&#13;
+    padding:7px 0;&#13;
+    border-left:0;&#13;
+    border-bottom:1px solid #eee7f6;&#13;
+  }&#13;
+&#13;
+  .co-rentals-app .cr-stat:last-child { border-bottom:0; }&#13;
+}&#13;
+&#13;
+&#13;
+/* RENTAL PAGINATION */&#13;
+&#13;
+.co-rentals-app .cr-pagination {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  flex-wrap:wrap;&#13;
+  gap:12px;&#13;
+  margin-top:16px;&#13;
+  padding:12px 0;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-page-info {&#13;
+  color:#887b98;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-page-controls {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:8px;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-page-controls button {&#13;
+  padding:8px 11px;&#13;
+  border:1px solid #e5dcf2;&#13;
+  border-radius:8px;&#13;
+  background:#fff;&#13;
+  color:#7255ad;&#13;
+  font-size:10px;&#13;
+  font-weight:700;&#13;
+  cursor:pointer;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-page-controls button:hover:not(:disabled) {&#13;
+  background:#f5efff;&#13;
+  border-color:#cfc0eb;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-page-controls button:disabled {&#13;
+  opacity:.4;&#13;
+  cursor:not-allowed;&#13;
+}&#13;
+&#13;
+.co-rentals-app .cr-page-number {&#13;
+  min-width:42px;&#13;
+  color:#665575;&#13;
+  font-size:10px;&#13;
+  text-align:center;&#13;
+}&#13;
+&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>campusops_borrowing_shelf</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CampusOps Borrowing Shelf</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[
+(function() {
+    data.loading = true;
+    data.rentals = [];
+    data.activeCount = 0;
+    data.attentionCount = 0;
+    data.feedback = "";
+    data.feedbackType = "success";
+
+    var userId = gs.getUserID();
+
+    // Handle an action requested by the widget.
+    if (input && input.action && input.rentalId) {
+        var target = new GlideRecord("u_student_rental");
+        target.addQuery("sys_id", input.rentalId);
+        target.addQuery("u_student", userId);
+        target.addQuery("u_status", "active");
+        target.setLimit(1);
+        target.query();
+
+        if (!target.next()) {
+            data.feedback = "This active rental could not be found for your account. Refresh the page and try again.";
+            data.feedbackType = "error";
+        } else if (input.action === "return") {
+            target.setValue("u_status", "returned");
+            target.update();
+
+            data.feedback = "Return submitted successfully. Your return workflow has been triggered.";
+            data.feedbackType = "success";
+
+        } else if (input.action === "renew") {
+            if (target.getValue("u_renewal_requested") == "true") {
+                data.feedback = "A renewal request is already pending for this rental.";
+                data.feedbackType = "error";
+            } else {
+                target.setValue("u_renewal_requested", true);
+                target.update();
+
+                data.feedback = "Renewal request submitted. Your renewal workflow has been triggered.";
+                data.feedbackType = "success";
+            }
+        }
+    }
+
+    var nowMs = new GlideDateTime().getNumericValue();
+    var DAY_MS = 86400000;
+
+    function formatDate(value) {
+        if (!value) return "";
+
+        var parts = value.substring(0, 10).split("-");
+        if (parts.length !== 3) return value;
+
+        var months = [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+
+        var month = parseInt(parts[1], 10) - 1;
+        var day = parseInt(parts[2], 10);
+
+        if (month < 0 || month > 11) return value;
+        return months[month] + " " + day + ", " + parts[0];
+    }
+
+    function classifyAsset(type) {
+        type = (type || "").toLowerCase();
+
+        if (type.indexOf("textbook") > -1 ||
+            type.indexOf("book") > -1) return "book";
+
+        if (type.indexOf("laptop") > -1 ||
+            type.indexOf("computer") > -1) return "laptop";
+
+        if (type.indexOf("kit") > -1 ||
+            type.indexOf("equipment") > -1) return "kit";
+
+        return "other";
+    }
+
+    var gr = new GlideRecord("u_student_rental");
+    gr.addQuery("u_student", userId);
+    gr.orderByDesc("u_rental_date");
+    gr.query();
+
+    while (gr.next()) {
+        var statusValue = (gr.getValue("u_status") || "").toLowerCase();
+        var isActive = statusValue === "active";
+        var isReturned = statusValue === "returned";
+
+        var dueValue = gr.getValue("u_due_date");
+        var dueMs = null;
+        var daysLeft = null;
+
+        if (dueValue) {
+            dueMs = new GlideDateTime(dueValue).getNumericValue();
+            daysLeft = Math.ceil((dueMs - nowMs) / DAY_MS);
+        }
+
+        var statusLabel = gr.getDisplayValue("u_status") || "Unknown";
+        var statusClass = "active";
+        var dueClass = "normal";
+        var dueLabel = isReturned ? "RETURN STATUS" : "RETURN DEADLINE";
+
+        if (isReturned) {
+            statusClass = "returned";
+            dueClass = "returned";
+            dueLabel = "RETURNED";
+        } else if (isActive && dueMs !== null && dueMs < nowMs) {
+            statusClass = "overdue";
+            dueClass = "overdue";
+            statusLabel = "Overdue";
+            dueLabel = "PAST DUE";
+        } else if (isActive && daysLeft !== null && daysLeft <= 2) {
+            statusClass = "due";
+            dueClass = "soon";
+            statusLabel = "Due Soon";
+            dueLabel = daysLeft === 0 ? "DUE TODAY" : "DUE SOON";
+        }
+
+        var assetName = gr.getDisplayValue("u_asset") || "Campus Resource";
+        var assetType = "";
+        var location = "";
+
+        var asset = gr.u_asset.getRefRecord();
+        if (asset && asset.isValidRecord()) {
+            assetType = asset.getDisplayValue("u_asset_type") || "";
+            location = asset.getDisplayValue("u_location") || "";
+        }
+
+        var risk = (gr.getDisplayValue("u_return_risk") || "").toLowerCase();
+        var renewalRequested = gr.getValue("u_renewal_requested") == "true";
+
+        data.rentals.push({
+            id: gr.getUniqueValue(),
+            number: gr.getDisplayValue("u_number"),
+            assetName: assetName,
+            assetType: assetType,
+            location: location,
+            art: classifyAsset(assetType),
+            statusLabel: statusLabel,
+            statusClass: statusClass,
+			isOverdue: statusClass === "overdue",
+			isDueSoon: statusClass === "due",
+            dueLabel: dueLabel,
+            dueDate: formatDate(dueValue),
+            dueClass: dueClass,
+            returnDate: formatDate(gr.getValue("u_return_date")),
+            risk: risk,
+            renewalRequested: renewalRequested
+        });
+
+        if (isActive) {
+            data.activeCount++;
+            if (dueMs !== null && daysLeft !== null && daysLeft <= 2) {
+                data.attentionCount++;
+            }
+        }
+    }
+
+    data.loading = false;
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 09:26:46</sys_created_on>
+        <sys_id>72a6090af4bb03107f44dc35ed31950e</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>CampusOps Borrowing Shelf</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_widget_72a6090af4bb03107f44dc35ed31950e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 21:13:09</sys_updated_on>
+        <template><![CDATA[
+<div class="co-rentals-app">
+  <div class="cr-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="cr-sidebar">
+      <a class="cr-brand" href="/sp?id=campusops_home">
+        <span class="cr-brand-mark">C</span>
+        <span><b>CampusOps</b><small>Campus resources</small></span>
+      </a>
+
+      <div class="cr-nav-label">WORKSPACE</div>
+      <a class="cr-nav" href="/sp?id=campusops_home"><span>⌂</span>Home</a>
+      <a class="cr-nav" href="/sp?id=browse_assets"><span>⌕</span>Browse assets</a>
+      <a class="cr-nav cr-nav-active" href="/sp?id=my_rentals"><span>▤</span>My rentals</a>
+      <a class="cr-nav" href="/sp?id=renew_asset"><span>↻</span>Renew an item</a>
+      <a class="cr-nav" href="/sp?id=return_asset"><span>↩</span>Return an item</a>
+
+      <div class="cr-nav-label cr-nav-spaced">YOUR ACCOUNT</div>
+      <a class="cr-nav" href="/sp?id=my_profile"><span>○</span>My profile</a>
+      <a class="cr-nav" href="/sp?id=quick_scan"><span>⌕</span>Quick scan</a>
+      <a class="cr-nav" href="/sp?id=report_issue"><span>!</span>Report an issue</a>
+
+      <div class="cr-sidebar-bottom">
+        <span>CampusOps</span>
+        <small>Campus resources, made easier.</small>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="cr-main">
+
+      <header class="cr-header">
+        <div>
+          <div class="cr-eyebrow">CAMPUSOPS / MY RENTALS</div>
+          <h1>My rentals</h1>
+          <p>Keep track of what you've borrowed and when it's due.</p>
+        </div>
+        <a class="cr-browse-link" href="/sp?id=browse_assets">Browse assets →</a>
+      </header>
+
+      <!-- ACTION FEEDBACK -->
+      <div class="cr-feedback"
+           ng-if="c.feedback"
+           ng-class="{'cr-feedback-error': c.feedbackType === 'error'}"
+           role="status">
+        {{c.feedback}}
+      </div>
+
+      <!-- SUMMARY -->
+      <section class="cr-overview">
+        <div class="cr-overview-heading">
+          <div>
+            <h2>Your borrowing overview</h2>
+            <p>A quick summary of your items.</p>
+          </div>
+        </div>
+
+        <div class="cr-stats">
+          <div class="cr-stat">
+            <span>All records</span>
+            <strong>{{c.data.rentals.length}}</strong>
+          </div>
+          <div class="cr-stat">
+            <span>Currently borrowed</span>
+            <strong>{{c.data.activeCount}}</strong>
+          </div>
+          <div class="cr-stat">
+            <span>Need attention</span>
+            <strong ng-class="{'cr-alert-number': c.data.attentionCount > 0}">
+              {{c.data.attentionCount}}
+            </strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- RENTAL COLLECTION -->
+      <section class="cr-collection">
+        <div class="cr-collection-heading">
+          <h2>Your items</h2>
+          <p>Choose an item to return or request an extension.</p>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="cr-filters" role="group" aria-label="Filter rentals">
+          <button type="button"
+                  ng-repeat="filter in c.filters"
+                  ng-class="{'cr-filter-active': c.activeFilter === filter.value}"
+                  ng-click="c.setFilter(filter.value)">
+            {{filter.label}}
+            <span>{{c.countFor(filter.value)}}</span>
+          </button>
+        </div>
+
+        <div class="cr-loading" ng-if="c.data.loading">
+          Loading your rentals…
+        </div>
+
+        <!-- SIX CARDS PER PAGE -->
+        <div class="cr-rental-grid"
+             ng-if="!c.data.loading && c.visibleRentals().length">
+
+          <article class="cr-rental-card"
+                   ng-repeat="rental in c.pageRentals() track by rental.id">
+
+            <div class="cr-card-top">
+              <div class="cr-resource-mark"
+                   ng-class="'cr-resource-' + rental.art">
+                <span ng-if="rental.art === 'book'">▤</span>
+                <span ng-if="rental.art === 'laptop'">▣</span>
+                <span ng-if="rental.art === 'kit'">＋</span>
+                <span ng-if="rental.art === 'other'">□</span>
+              </div>
+
+              <span class="cr-status"
+                    ng-class="'cr-status-' + rental.statusClass">
+                {{rental.statusLabel}}
+              </span>
+            </div>
+
+            <div class="cr-resource-type">
+              {{rental.assetType || 'Campus resource'}}
+            </div>
+
+            <h3>{{rental.assetName}}</h3>
+
+            <div class="cr-location" ng-if="rental.location">
+              {{rental.location}}
+            </div>
+
+            <div class="cr-deadline"
+                 ng-class="'cr-deadline-' + rental.dueClass">
+              <span class="cr-deadline-label">{{rental.dueLabel}}</span>
+              <strong>
+                {{rental.statusClass === 'returned'
+                    ? (rental.returnDate || 'Return recorded')
+                    : (rental.dueDate || 'Date not set')}}
+              </strong>
+            </div>
+
+            <div class="cr-record-details">
+              <div>
+                <small>Rental reference</small>
+                <strong>{{rental.number || '—'}}</strong>
+              </div>
+              <div>
+                <small>Return risk</small>
+                <strong>{{rental.risk || 'Not assessed'}}</strong>
+              </div>
+            </div>
+
+            <div class="cr-renewal-note" ng-if="rental.renewalRequested">
+              A renewal request has been submitted for this item.
+            </div>
+
+            <div class="cr-card-actions"
+                 ng-if="rental.statusClass !== 'returned'">
+
+              <button type="button"
+                      class="cr-return-button"
+                      ng-click="c.confirmAction(rental, 'return')"
+                      ng-disabled="c.workingId">
+                <span ng-if="c.workingId !== rental.id">Return item</span>
+                <span ng-if="c.workingId === rental.id">Processing…</span>
+              </button>
+
+              <button type="button"
+                      class="cr-renew-button"
+                      ng-click="c.confirmAction(rental, 'renew')"
+                      ng-disabled="c.workingId || rental.renewalRequested">
+                {{rental.renewalRequested ? 'Renewal requested' : 'Request renewal'}}
+              </button>
+            </div>
+
+            <div class="cr-returned-note"
+                 ng-if="rental.statusClass === 'returned'">
+              This item has been returned.
+            </div>
+
+          </article>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="cr-pagination"
+             ng-if="!c.data.loading && c.visibleRentals().length > c.pageSize">
+
+          <span class="cr-page-info">
+            Showing {{c.startRecord()}}–{{c.endRecord()}}
+            of {{c.visibleRentals().length}} rentals
+          </span>
+
+          <div class="cr-page-controls">
+            <button type="button"
+                    ng-click="c.previousPage()"
+                    ng-disabled="c.currentPage === 1">
+              ← Previous
+            </button>
+
+            <span class="cr-page-number">
+              {{c.currentPage}} / {{c.totalPages()}}
+            </span>
+
+            <button type="button"
+                    ng-click="c.nextPage()"
+                    ng-disabled="c.currentPage >= c.totalPages()">
+              Next →
+            </button>
+          </div>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div class="cr-empty"
+             ng-if="!c.data.loading && !c.visibleRentals().length">
+          <h3>
+            {{c.activeFilter === 'all'
+                ? 'No rentals to show'
+                : 'No items in this category'}}
+          </h3>
+          <p>
+            {{c.activeFilter === 'all'
+                ? 'Browse campus resources when you need a book or equipment.'
+                : 'Try another filter to view your borrowing records.'}}
+          </p>
+          <a ng-if="c.activeFilter === 'all'"
+             href="/sp?id=browse_assets">Browse available assets →</a>
+          <button ng-if="c.activeFilter !== 'all'"
+                  type="button"
+                  ng-click="c.setFilter('all')">Show all rentals</button>
+        </div>
+      </section>
+
+      <!-- HELP -->
+      <section class="cr-help">
+        <div>
+          <strong>Need help with a rental?</strong>
+          <p>Report a damaged item or let us know if something isn't right.</p>
+        </div>
+        <a href="/sp?id=report_issue">Report an issue →</a>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="cr-footer">
+        <div class="cr-footer-top">
+          <strong>CampusOps</strong>
+          <span>Campus resources, made easier.</span>
+        </div>
+        <div class="cr-footer-links">
+          <a href="/sp?id=report_issue">Help &amp; queries</a>
+          <a href="/sp?id=report_issue">Feedback</a>
+          <a href="/sp?id=my_profile">My account</a>
+        </div>
+        <div class="cr-footer-copy">
+          Campus Asset &amp; Textbook Lifecycle Management
+        </div>
+      </footer>
+
+    </main>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>72a6090af4bb03107f44dc35ed31950e</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 09:26:30</sys_created_on>
+        <sys_id>1e27c54af4bb03107f44dc35ed3195e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 09:26:30</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

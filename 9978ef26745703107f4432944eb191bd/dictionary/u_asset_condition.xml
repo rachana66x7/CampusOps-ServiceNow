@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="b23a7f2a74d703107f4432944eb1919f" label="Asset Condition" max_length="40" name="u_asset_condition" type="collection">
+        <element choice="1" label="Condition" mandatory="true" max_length="40" name="u_condition" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Critical" sequence="500" value="critical"/>
+                <element inactive_on_update="false" label="Good" sequence="200" value="good"/>
+                <element inactive_on_update="false" label="Fair" sequence="300" value="fair"/>
+                <element inactive_on_update="false" label="Excellent" sequence="100" value="excellent"/>
+                <element inactive_on_update="false" label="Damaged" sequence="400" value="damaged"/>
+            </choice>
+        </element>
+        <element label="Asset" mandatory="true" max_length="32" name="u_asset" reference="u_campus_asset" type="reference"/>
+        <element label="Repair Required" max_length="40" name="u_repair_required" type="boolean"/>
+        <element label="Rental" max_length="32" name="u_rental" reference="u_student_rental" type="reference"/>
+        <element display="true" label="Condition ID" max_length="40" name="u_condition_id" type="string"/>
+        <element label="Damage Description" max_length="1000" name="u_damage_description" type="string"/>
+        <element label="Inspected By" mandatory="true" max_length="32" name="u_inspected_by" reference="sys_user" type="reference"/>
+        <element label="Inspection Date" mandatory="true" max_length="40" name="u_inspection_date" type="glide_date_time"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="u_number" type="string"/>
+        <element label="Photo" max_length="40" name="u_photo" type="user_image"/>
+        <index name="index">
+            <element name="u_rental"/>
+        </index>
+        <index name="index2">
+            <element name="u_asset"/>
+        </index>
+        <index name="index3">
+            <element name="u_inspected_by"/>
+        </index>
+    </element>
+</database>

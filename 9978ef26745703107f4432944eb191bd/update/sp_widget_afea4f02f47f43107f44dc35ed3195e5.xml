@@ -1,0 +1,1197 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+  var c = this;
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>&#13;
+/* =========================================&#13;
+   CAMPUSOPS — CLEAN STUDENT PORTAL&#13;
+========================================= */&#13;
+&#13;
+.co-home {&#13;
+  --ink:#30264d;&#13;
+  --muted:#807795;&#13;
+  --purple:#8062c9;&#13;
+  --line:#ece5f5;&#13;
+  width:100%;&#13;
+  color:var(--ink);&#13;
+  font-family:Inter,"Segoe UI",Arial,sans-serif;&#13;
+  font-size:13px;&#13;
+  line-height:1.55;&#13;
+}&#13;
+&#13;
+.co-home * { box-sizing:border-box; }&#13;
+.co-home a { text-decoration:none; }&#13;
+.co-home a:focus-visible {&#13;
+  outline:2px solid #8b6bd0;&#13;
+  outline-offset:3px;&#13;
+}&#13;
+&#13;
+/* APP LAYOUT */&#13;
+&#13;
+.co-home .co-app-layout {&#13;
+  display:grid;&#13;
+  grid-template-columns:218px minmax(0,1fr);&#13;
+  align-items:stretch;&#13;
+  gap:25px;&#13;
+  width:100%;&#13;
+}&#13;
+&#13;
+/* LEFT SIDEBAR */&#13;
+&#13;
+.co-home .co-sidebar {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  min-width:0;&#13;
+  min-height:690px;&#13;
+  padding:20px 13px;&#13;
+  border:1px solid #e9e0f5;&#13;
+  border-radius:19px;&#13;
+  background:linear-gradient(180deg,#f8f4ff 0%,#f3effb 100%);&#13;
+}&#13;
+&#13;
+.co-home .co-brand {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:10px;&#13;
+  padding:4px 7px 24px;&#13;
+  color:#382b54;&#13;
+}&#13;
+&#13;
+.co-home .co-brand-mark {&#13;
+  display:grid;&#13;
+  place-items:center;&#13;
+  flex-shrink:0;&#13;
+  width:37px;&#13;
+  height:37px;&#13;
+  border-radius:12px;&#13;
+  background:#8062c9;&#13;
+  color:white;&#13;
+  font-size:19px;&#13;
+  font-weight:800;&#13;
+}&#13;
+&#13;
+.co-home .co-brand &gt; span:last-child {&#13;
+  font-size:15px;&#13;
+  font-weight:800;&#13;
+  line-height:1.2;&#13;
+}&#13;
+&#13;
+.co-home .co-brand small {&#13;
+  display:block;&#13;
+  margin-top:4px;&#13;
+  color:#8b7e9e;&#13;
+  font-size:9px;&#13;
+  font-weight:500;&#13;
+}&#13;
+&#13;
+.co-home .co-nav-label {&#13;
+  padding:9px 10px;&#13;
+  color:#a092b6;&#13;
+  font-size:9px;&#13;
+  font-weight:800;&#13;
+  letter-spacing:1.15px;&#13;
+}&#13;
+&#13;
+.co-home .co-nav-spaced { margin-top:18px; }&#13;
+&#13;
+.co-home .co-nav-item {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:11px;&#13;
+  margin:2px 0;&#13;
+  padding:11px 10px;&#13;
+  border-radius:10px;&#13;
+  color:#6e6382;&#13;
+  font-size:11px;&#13;
+  font-weight:600;&#13;
+  transition:background .18s,color .18s,transform .18s;&#13;
+}&#13;
+&#13;
+.co-home .co-nav-item &gt; span {&#13;
+  display:grid;&#13;
+  place-items:center;&#13;
+  width:21px;&#13;
+  flex-shrink:0;&#13;
+  color:#8d79b5;&#13;
+  font-size:16px;&#13;
+  line-height:1;&#13;
+}&#13;
+&#13;
+.co-home .co-nav-item:hover {&#13;
+  background:rgba(255,255,255,.8);&#13;
+  color:#513a83;&#13;
+  transform:translateX(2px);&#13;
+}&#13;
+&#13;
+.co-home .co-nav-active {&#13;
+  background:#e8defa;&#13;
+  color:#6245a0;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+.co-home .co-nav-active &gt; span { color:#7354b4; }&#13;
+&#13;
+.co-home .co-sidebar-bottom {&#13;
+  margin-top:auto;&#13;
+  padding-top:22px;&#13;
+}&#13;
+&#13;
+.co-home .co-sidebar-user {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:10px;&#13;
+  padding:12px 8px 2px;&#13;
+  border-top:1px solid #e4dbef;&#13;
+}&#13;
+&#13;
+.co-home .co-avatar {&#13;
+  display:grid;&#13;
+  place-items:center;&#13;
+  flex-shrink:0;&#13;
+  width:33px;&#13;
+  height:33px;&#13;
+  border-radius:50%;&#13;
+  background:#e5daf8;&#13;
+  color:#6549a1;&#13;
+  font-weight:800;&#13;
+}&#13;
+&#13;
+.co-home .co-user-copy {&#13;
+  min-width:0;&#13;
+}&#13;
+&#13;
+.co-home .co-user-copy strong,&#13;
+.co-home .co-user-copy small {&#13;
+  display:block;&#13;
+  overflow-wrap:anywhere;&#13;
+}&#13;
+&#13;
+.co-home .co-user-copy strong {&#13;
+  color:#49385f;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-home .co-user-copy small {&#13;
+  margin-top:3px;&#13;
+  color:#9386a5;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+/* MAIN CONTENT */&#13;
+&#13;
+.co-home .co-main {&#13;
+  min-width:0;&#13;
+}&#13;
+&#13;
+.co-home .co-page-header {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:14px;&#13;
+  margin:4px 0 24px;&#13;
+}&#13;
+&#13;
+.co-home .co-breadcrumb {&#13;
+  color:#927bb7;&#13;
+  font-size:9px;&#13;
+  font-weight:800;&#13;
+  letter-spacing:1.25px;&#13;
+}&#13;
+&#13;
+.co-home .co-page-header h1 {&#13;
+  margin:9px 0 5px;&#13;
+  color:#34264f;&#13;
+  font-size:clamp(23px,2.5vw,32px);&#13;
+  font-weight:800;&#13;
+  letter-spacing:-.9px;&#13;
+  line-height:1.25;&#13;
+}&#13;
+&#13;
+.co-home .co-page-header p {&#13;
+  margin:0;&#13;
+  color:#897d99;&#13;
+  font-size:11px;&#13;
+}&#13;
+&#13;
+.co-home .co-header-profile {&#13;
+  display:inline-flex;&#13;
+  align-items:center;&#13;
+  gap:9px;&#13;
+  flex-shrink:0;&#13;
+  padding:9px 12px;&#13;
+  border:1px solid #e8def4;&#13;
+  border-radius:10px;&#13;
+  background:rgba(255,255,255,.75);&#13;
+  color:#7356ad;&#13;
+  font-size:10px;&#13;
+  font-weight:700;&#13;
+}&#13;
+&#13;
+.co-home .co-header-profile:hover { background:white; }&#13;
+&#13;
+/* RETURN NOTICE */&#13;
+&#13;
+.co-home .co-notice {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:13px;&#13;
+  margin-bottom:22px;&#13;
+  padding:16px;&#13;
+  border:1px solid #eadff9;&#13;
+  border-radius:14px;&#13;
+  background:linear-gradient(120deg,#f6f0ff,#fcf8ff);&#13;
+}&#13;
+&#13;
+.co-home .co-notice-overdue {&#13;
+  border-color:#f0d5de;&#13;
+  background:linear-gradient(120deg,#fff5f6,#fffafb);&#13;
+}&#13;
+&#13;
+.co-home .co-notice-mark {&#13;
+  display:grid;&#13;
+  place-items:center;&#13;
+  flex-shrink:0;&#13;
+  width:34px;&#13;
+  height:34px;&#13;
+  border-radius:10px;&#13;
+  background:#e8defa;&#13;
+  color:#7152b3;&#13;
+  font-size:16px;&#13;
+  font-weight:800;&#13;
+}&#13;
+&#13;
+.co-home .co-notice-overdue .co-notice-mark {&#13;
+  background:#fbe3e9;&#13;
+  color:#b34e6b;&#13;
+}&#13;
+&#13;
+.co-home .co-notice-copy { flex:1; min-width:0; }&#13;
+&#13;
+.co-home .co-notice-copy strong {&#13;
+  display:block;&#13;
+  color:#433359;&#13;
+  font-size:12px;&#13;
+}&#13;
+&#13;
+.co-home .co-notice-copy p {&#13;
+  margin:4px 0 0;&#13;
+  color:#81748f;&#13;
+  font-size:10px;&#13;
+  line-height:1.6;&#13;
+}&#13;
+&#13;
+.co-home .co-notice-detail {&#13;
+  margin-top:6px;&#13;
+  color:#7356ad;&#13;
+  font-size:10px;&#13;
+  font-weight:700;&#13;
+}&#13;
+&#13;
+.co-home .co-notice-link {&#13;
+  flex-shrink:0;&#13;
+  color:#7656b4;&#13;
+  font-size:10px;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+/* BORROWING SUMMARY */&#13;
+&#13;
+.co-home .co-summary {&#13;
+  margin-bottom:23px;&#13;
+  padding:18px;&#13;
+  border:1px solid #ece5f5;&#13;
+  border-radius:15px;&#13;
+  background:rgba(255,255,255,.82);&#13;
+  box-shadow:0 5px 18px rgba(79,60,118,.035);&#13;
+}&#13;
+&#13;
+.co-home .co-summary-heading,&#13;
+.co-home .co-section-heading {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:12px;&#13;
+  margin-bottom:14px;&#13;
+}&#13;
+&#13;
+.co-home .co-summary-heading h2,&#13;
+.co-home .co-section-heading h2 {&#13;
+  margin:0;&#13;
+  color:#403254;&#13;
+  font-size:15px;&#13;
+  font-weight:800;&#13;
+  letter-spacing:-.25px;&#13;
+}&#13;
+&#13;
+.co-home .co-summary-heading p,&#13;
+.co-home .co-section-heading p {&#13;
+  margin:4px 0 0;&#13;
+  color:#8c809b;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-home .co-summary-heading &gt; a,&#13;
+.co-home .co-section-heading &gt; a {&#13;
+  flex-shrink:0;&#13;
+  color:#7b5cba;&#13;
+  font-size:10px;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+.co-home .co-summary-grid {&#13;
+  display:grid;&#13;
+  grid-template-columns:repeat(3,minmax(0,1fr));&#13;
+}&#13;
+&#13;
+.co-home .co-stat {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  gap:5px;&#13;
+  padding:4px 12px;&#13;
+  border-left:1px solid #eee7f6;&#13;
+}&#13;
+&#13;
+.co-home .co-stat:first-child {&#13;
+  padding-left:0;&#13;
+  border-left:0;&#13;
+}&#13;
+&#13;
+.co-home .co-stat:last-child { padding-right:0; }&#13;
+&#13;
+.co-home .co-stat span {&#13;
+  color:#887b98;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-home .co-stat strong {&#13;
+  color:#403052;&#13;
+  font-size:24px;&#13;
+  font-weight:800;&#13;
+  line-height:1.2;&#13;
+}&#13;
+&#13;
+.co-home .co-stat .co-number-alert { color:#b95170; }&#13;
+&#13;
+/* MAIN ACTIONS */&#13;
+&#13;
+.co-home .co-actions {&#13;
+  display:grid;&#13;
+  grid-template-columns:repeat(2,minmax(0,1fr));&#13;
+  gap:11px;&#13;
+  margin-bottom:25px;&#13;
+}&#13;
+&#13;
+.co-home .co-action-primary,&#13;
+.co-home .co-action-secondary {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:11px;&#13;
+  min-width:0;&#13;
+  padding:15px 13px;&#13;
+  border:1px solid #e4d8f5;&#13;
+  border-radius:13px;&#13;
+  background:#f7f2ff;&#13;
+  transition:transform .2s,box-shadow .2s;&#13;
+}&#13;
+&#13;
+.co-home .co-action-secondary {&#13;
+  background:#f7f8ff;&#13;
+  border-color:#e0e0f6;&#13;
+}&#13;
+&#13;
+.co-home .co-action-primary:hover,&#13;
+.co-home .co-action-secondary:hover {&#13;
+  transform:translateY(-2px);&#13;
+  box-shadow:0 7px 18px rgba(79,60,118,.07);&#13;
+}&#13;
+&#13;
+.co-home .co-action-symbol {&#13;
+  display:grid;&#13;
+  place-items:center;&#13;
+  flex-shrink:0;&#13;
+  width:32px;&#13;
+  height:32px;&#13;
+  border-radius:9px;&#13;
+  background:rgba(255,255,255,.85);&#13;
+  color:#7859b7;&#13;
+  font-size:17px;&#13;
+}&#13;
+&#13;
+.co-home .co-action-primary &gt; span:nth-child(2),&#13;
+.co-home .co-action-secondary &gt; span:nth-child(2) {&#13;
+  flex:1;&#13;
+  min-width:0;&#13;
+}&#13;
+&#13;
+.co-home .co-actions strong,&#13;
+.co-home .co-actions small { display:block; }&#13;
+&#13;
+.co-home .co-actions strong {&#13;
+  color:#49385f;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-home .co-actions small {&#13;
+  margin-top:4px;&#13;
+  color:#887b98;&#13;
+  font-size:9px;&#13;
+  line-height:1.5;&#13;
+}&#13;
+&#13;
+.co-home .co-action-arrow {&#13;
+  flex-shrink:0;&#13;
+  color:#8b70bf;&#13;
+  font-size:16px;&#13;
+}&#13;
+&#13;
+/* CURRENT RENTALS */&#13;
+&#13;
+.co-home .co-rentals {&#13;
+  margin-bottom:22px;&#13;
+}&#13;
+&#13;
+.co-home .co-rental-list {&#13;
+  overflow:hidden;&#13;
+  border:1px solid #ece5f5;&#13;
+  border-radius:13px;&#13;
+  background:rgba(255,255,255,.84);&#13;
+}&#13;
+&#13;
+.co-home .co-rental-row {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:11px;&#13;
+  min-width:0;&#13;
+  padding:13px 12px;&#13;
+  border-bottom:1px solid #f0ebf6;&#13;
+  transition:background .15s;&#13;
+}&#13;
+&#13;
+.co-home .co-rental-row:last-child { border-bottom:0; }&#13;
+.co-home .co-rental-row:hover { background:#fcfaff; }&#13;
+&#13;
+.co-home .co-rental-icon {&#13;
+  display:grid;&#13;
+  place-items:center;&#13;
+  flex-shrink:0;&#13;
+  width:32px;&#13;
+  height:32px;&#13;
+  border-radius:9px;&#13;
+  background:#f0e9fc;&#13;
+  color:#7859b7;&#13;
+  font-size:15px;&#13;
+}&#13;
+&#13;
+.co-home .co-rental-info {&#13;
+  flex:1;&#13;
+  min-width:0;&#13;
+}&#13;
+&#13;
+.co-home .co-rental-info strong,&#13;
+.co-home .co-rental-info small {&#13;
+  display:block;&#13;
+  overflow-wrap:anywhere;&#13;
+}&#13;
+&#13;
+.co-home .co-rental-info strong {&#13;
+  color:#49385f;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-home .co-rental-info small {&#13;
+  margin-top:3px;&#13;
+  color:#a095b0;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+.co-home .co-rental-due {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  gap:3px;&#13;
+  flex-shrink:0;&#13;
+}&#13;
+&#13;
+.co-home .co-rental-due small {&#13;
+  color:#9589a4;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+.co-home .co-rental-due strong {&#13;
+  color:#625575;&#13;
+  font-size:9px;&#13;
+  font-weight:700;&#13;
+}&#13;
+&#13;
+.co-home .co-rental-due .co-text-overdue { color:#b95170; }&#13;
+.co-home .co-rental-due .co-text-soon { color:#b27a2b; }&#13;
+&#13;
+.co-home .co-status {&#13;
+  flex-shrink:0;&#13;
+  padding:4px 8px;&#13;
+  border-radius:20px;&#13;
+  font-size:9px;&#13;
+  font-weight:750;&#13;
+  white-space:nowrap;&#13;
+}&#13;
+&#13;
+.co-home .co-status-active { background:#eaf7ef;color:#4c956f; }&#13;
+.co-home .co-status-soon { background:#fff4de;color:#a8762d; }&#13;
+.co-home .co-status-overdue { background:#fce8ed;color:#b34e6b; }&#13;
+&#13;
+/* EMPTY STATE */&#13;
+&#13;
+.co-home .co-empty {&#13;
+  padding:24px 15px;&#13;
+  border:1px dashed #e4d8f1;&#13;
+  border-radius:13px;&#13;
+  background:#fcfaff;&#13;
+  text-align:center;&#13;
+}&#13;
+&#13;
+.co-home .co-empty strong {&#13;
+  color:#49385f;&#13;
+  font-size:12px;&#13;
+}&#13;
+&#13;
+.co-home .co-empty p {&#13;
+  margin:6px 0 11px;&#13;
+  color:#887b98;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-home .co-empty a {&#13;
+  color:#7959b8;&#13;
+  font-size:10px;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+/* HELP */&#13;
+&#13;
+.co-home .co-help {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:12px;&#13;
+  padding:15px 16px;&#13;
+  border:1px solid #e8e0f1;&#13;
+  border-radius:13px;&#13;
+  background:#faf7ff;&#13;
+}&#13;
+&#13;
+.co-home .co-help strong {&#13;
+  color:#49385f;&#13;
+  font-size:11px;&#13;
+}&#13;
+&#13;
+.co-home .co-help p {&#13;
+  margin:4px 0 0;&#13;
+  color:#887b98;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-home .co-help &gt; a {&#13;
+  flex-shrink:0;&#13;
+  color:#7959b8;&#13;
+  font-size:10px;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+/* FOOTER */&#13;
+&#13;
+.co-home .co-footer {&#13;
+  margin-top:28px;&#13;
+  padding:18px 2px 5px;&#13;
+  border-top:1px solid #e9e2f1;&#13;
+}&#13;
+&#13;
+.co-home .co-footer-main {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:10px;&#13;
+}&#13;
+&#13;
+.co-home .co-footer-main strong {&#13;
+  color:#55416f;&#13;
+  font-size:11px;&#13;
+}&#13;
+&#13;
+.co-home .co-footer-main span {&#13;
+  color:#988ca8;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+.co-home .co-footer-links {&#13;
+  display:flex;&#13;
+  flex-wrap:wrap;&#13;
+  gap:16px;&#13;
+  margin-top:13px;&#13;
+}&#13;
+&#13;
+.co-home .co-footer-links a {&#13;
+  color:#796a8d;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-home .co-footer-links a:hover { color:#6748a8; }&#13;
+&#13;
+.co-home .co-footer-copy {&#13;
+  margin-top:13px;&#13;
+  color:#a399b1;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+/* RESPONSIVE */&#13;
+&#13;
+@media(max-width:850px) {&#13;
+  .co-home .co-app-layout {&#13;
+    grid-template-columns:175px minmax(0,1fr);&#13;
+    gap:16px;&#13;
+  }&#13;
+&#13;
+  .co-home .co-sidebar { padding:15px 9px; }&#13;
+  .co-home .co-nav-item { gap:8px;padding:10px 8px; }&#13;
+  .co-home .co-header-profile { display:none; }&#13;
+}&#13;
+&#13;
+@media(max-width:620px) {&#13;
+  .co-home .co-app-layout { grid-template-columns:1fr;gap:18px; }&#13;
+&#13;
+  .co-home .co-sidebar {&#13;
+    min-height:0;&#13;
+    padding:12px;&#13;
+    border-radius:14px;&#13;
+  }&#13;
+&#13;
+  .co-home .co-brand { padding-bottom:12px; }&#13;
+&#13;
+  .co-home .co-sidebar .co-nav-label,&#13;
+  .co-home .co-sidebar-bottom { display:none; }&#13;
+&#13;
+  .co-home .co-sidebar {&#13;
+    display:grid;&#13;
+    grid-template-columns:repeat(2,minmax(0,1fr));&#13;
+    align-content:start;&#13;
+    gap:3px;&#13;
+  }&#13;
+&#13;
+  .co-home .co-brand { grid-column:1/-1; }&#13;
+&#13;
+  .co-home .co-nav-item {&#13;
+    margin:0;&#13;
+    padding:9px;&#13;
+    font-size:10px;&#13;
+  }&#13;
+&#13;
+  .co-home .co-page-header h1 { font-size:25px; }&#13;
+  .co-home .co-notice { flex-wrap:wrap; }&#13;
+  .co-home .co-notice-link { margin-left:47px; }&#13;
+  .co-home .co-actions { grid-template-columns:1fr; }&#13;
+  .co-home .co-summary { padding:14px; }&#13;
+  .co-home .co-stat { padding:4px 8px; }&#13;
+  .co-home .co-stat span { font-size:9px; }&#13;
+  .co-home .co-stat strong { font-size:21px; }&#13;
+&#13;
+  .co-home .co-rental-row { flex-wrap:wrap; }&#13;
+  .co-home .co-rental-info { min-width:calc(100% - 55px); }&#13;
+  .co-home .co-rental-due { margin-left:43px; }&#13;
+  .co-home .co-help { align-items:flex-start;flex-direction:column; }&#13;
+  .co-home .co-footer-main { align-items:flex-start;flex-direction:column; }&#13;
+}&#13;
+&#13;
+@media(max-width:380px) {&#13;
+  .co-home .co-page-header h1 { font-size:22px; }&#13;
+  .co-home .co-summary-grid { grid-template-columns:1fr;gap:9px; }&#13;
+  .co-home .co-stat {&#13;
+    flex-direction:row;&#13;
+    justify-content:space-between;&#13;
+    align-items:center;&#13;
+    padding:7px 0;&#13;
+    border-left:0;&#13;
+    border-bottom:1px solid #eee7f6;&#13;
+  }&#13;
+  .co-home .co-stat:last-child { border-bottom:0; }&#13;
+  .co-home .co-stat strong { font-size:18px; }&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>campusops_student_home</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CampusOps Student Home</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[
+(function() {
+  var userId = gs.getUserID();
+  var nowMs = new GlideDateTime().getNumericValue();
+  var DAY_MS = 86400000;
+
+  data.studentName = gs.getUserDisplayName() || "there";
+  data.activeCount = 0;
+  data.dueSoonCount = 0;
+  data.overdueCount = 0;
+  data.returnedCount = 0;
+  data.nextRental = null;
+  data.rentals = [];
+  data.requests = [];
+  data.locations = [];
+  data.recommendations = [];
+
+  function fmt(value) {
+    if (!value) return "";
+    try {
+      return new GlideDateTime(value).getLocalDate().getByFormat("dd MMM yyyy");
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function daysUntil(value) {
+    if (!value) return null;
+    return Math.ceil(
+      (new GlideDateTime(value).getNumericValue() - nowMs) / DAY_MS
+    );
+  }
+
+  // Active rentals for the signed-in student.
+  var rental = new GlideRecord("u_student_rental");
+  rental.addQuery("u_student", userId);
+  rental.addQuery("u_status", "active");
+  rental.orderBy("u_due_date");
+  rental.query();
+
+  while (rental.next()) {
+    data.activeCount++;
+
+    var dueValue = rental.getValue("u_due_date");
+    var daysLeft = daysUntil(dueValue);
+    var isOverdue = dueValue &&
+      new GlideDateTime(dueValue).getNumericValue() < nowMs;
+    var isDueSoon = !isOverdue && daysLeft !== null &&
+      daysLeft >= 0 && daysLeft <= 2;
+
+    if (isOverdue) {
+      data.overdueCount++;
+    } else if (isDueSoon) {
+      data.dueSoonCount++;
+    }
+
+    var assetName = rental.getDisplayValue("u_asset") || "Campus resource";
+    var rentalDate = rental.getValue("u_rental_date");
+
+    var entry = {
+      id: rental.getUniqueValue(),
+      number: rental.getDisplayValue("u_number"),
+      assetName: assetName,
+      rentalDate: fmt(rentalDate),
+      dueDate: fmt(dueValue),
+      isOverdue: !!isOverdue,
+      isDueSoon: !!isDueSoon,
+      statusLabel: isOverdue ? "Overdue" :
+        (isDueSoon ? "Due soon" : "Active"),
+      riskLabel: rental.getDisplayValue("u_return_risk") || "Not assessed",
+      dueMs: dueValue
+        ? new GlideDateTime(dueValue).getNumericValue()
+        : 9999999999999
+    };
+
+    data.rentals.push(entry);
+
+    if (data.nextRental === null ||
+        entry.dueMs < data.nextRental.dueMs) {
+      data.nextRental = {
+        assetName: entry.assetName,
+        dueDate: entry.dueDate,
+        dueMs: entry.dueMs
+      };
+    }
+  }
+
+  // Returned rental count.
+  var returned = new GlideAggregate("u_student_rental");
+  returned.addQuery("u_student", userId);
+  returned.addQuery("u_status", "returned");
+  returned.addAggregate("COUNT");
+  returned.query();
+
+  if (returned.next()) {
+    data.returnedCount =
+      parseInt(returned.getAggregate("COUNT"), 10) || 0;
+  }
+
+  // Hero message based on live rental data.
+  if (data.overdueCount > 0) {
+    data.messageLabel = "NEEDS YOUR ATTENTION";
+    data.messageTitle = data.overdueCount === 1
+      ? "Let's get your overdue return sorted."
+      : "Let's get those overdue returns sorted.";
+    data.messageBody =
+      "Check your borrowing shelf for overdue resources and arrange their return.";
+    data.messageTone = "danger";
+    data.messageIcon = "!";
+  } else if (data.dueSoonCount > 0) {
+    data.messageLabel = "A LITTLE HEADS-UP";
+    data.messageTitle = "Something is due soon.";
+    data.messageBody = data.nextRental
+      ? data.nextRental.assetName + " is coming up for return. Check its due date and available options."
+      : "Check your borrowing shelf for upcoming return dates.";
+    data.messageTone = "warn";
+    data.messageIcon = "◷";
+  } else if (data.activeCount > 0) {
+    data.messageLabel = "YOUR BORROWING UPDATE";
+    data.messageTitle = "You're all set for now.";
+    data.messageBody =
+      "Keep enjoying your campus resources. Your active rentals and due dates are ready to review.";
+    data.messageTone = "calm";
+    data.messageIcon = "✓";
+  } else {
+    data.messageLabel = "READY FOR YOUR NEXT DISCOVERY?";
+    data.messageTitle = "Your borrowing shelf is clear.";
+    data.messageBody =
+      "Looking for a textbook, laptop, or lab kit? Explore resources available across campus.";
+    data.messageTone = "calm";
+    data.messageIcon = "✦";
+  }
+
+  // Requests belonging to the signed-in student.
+  var request = new GlideRecord("sc_req_item");
+  request.addQuery("requested_for", userId);
+  request.orderByDesc("sys_created_on");
+  request.setLimit(5);
+  request.query();
+
+  while (request.next()) {
+    data.requests.push({
+      id: request.getUniqueValue(),
+      number: request.getDisplayValue("number"),
+      item: request.getDisplayValue("cat_item") || "Catalog item",
+      state: request.getDisplayValue("state") || "Submitted",
+      created: fmt(request.getValue("sys_created_on"))
+    });
+  }
+
+  // Available assets and location summaries.
+  var asset = new GlideRecord("u_campus_asset");
+  asset.addQuery("u_status", "available");
+  asset.orderBy("u_asset_name");
+  asset.query();
+
+  var locationMap = {};
+  var locationOrder = [];
+  var assetLimit = 0;
+
+  while (asset.next()) {
+    var assetNameValue =
+      asset.getDisplayValue("u_asset_name") || "Campus resource";
+    var assetTypeValue = asset.getDisplayValue("u_asset_type") || "";
+    var locationValue = asset.getDisplayValue("u_location") || "Other locations";
+
+    if (!locationMap[locationValue]) {
+      locationMap[locationValue] = {
+        name: locationValue,
+        count: 0,
+        icon: "]]>📍<![CDATA["
+      };
+      locationOrder.push(locationValue);
+    }
+    locationMap[locationValue].count++;
+
+    if (data.recommendations.length < 6) {
+      var typeLower = assetTypeValue.toLowerCase();
+      var icon = "]]>📦<![CDATA[";
+
+      if (typeLower.indexOf("book") > -1 ||
+          typeLower.indexOf("text") > -1) {
+        icon = "]]>📚<![CDATA[";
+      } else if (typeLower.indexOf("laptop") > -1 ||
+                 typeLower.indexOf("computer") > -1) {
+        icon = "]]>💻<![CDATA[";
+      } else if (typeLower.indexOf("lab") > -1 ||
+                 typeLower.indexOf("equipment") > -1) {
+        icon = "]]>🧪<![CDATA[";
+      }
+
+      data.recommendations.push({
+        id: asset.getUniqueValue(),
+        name: assetNameValue,
+        type: assetTypeValue,
+        location: locationValue,
+        icon: icon
+      });
+    }
+
+    assetLimit++;
+  }
+
+  for (var i = 0; i < locationOrder.length && i < 8; i++) {
+    data.locations.push(locationMap[locationOrder[i]]);
+  }
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 19:04:55</sys_created_on>
+        <sys_id>afea4f02f47f43107f44dc35ed3195e5</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>CampusOps Student Home</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_widget_afea4f02f47f43107f44dc35ed3195e5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-10 00:08:11</sys_updated_on>
+        <template><![CDATA[<div class="co-home">
+
+  <div class="co-app-layout">
+
+    <!-- LEFT NAVIGATION -->
+    <aside class="co-sidebar">
+      <a class="co-brand" href="?id=student_home">
+        <span class="co-brand-mark">C</span>
+        <span>CampusOps<small>Campus resources</small></span>
+      </a>
+
+      <div class="co-nav-label">WORKSPACE</div>
+
+      <a class="co-nav-item co-nav-active" href="?id=student_home">
+        <span>⌂</span> Home
+      </a>
+      <a class="co-nav-item" href="/sp?id=browse_assets">
+        <span>▤</span> Browse assets
+      </a>
+      <a class="co-nav-item" href="/sp?id=my_rentals">
+        <span>▣</span> My rentals
+      </a>
+      <a class="co-nav-item" href="/sp?id=renew_asset">
+        <span>↻</span> Renew an item
+      </a>
+      <a class="co-nav-item" href="/sp?id=return_asset">
+        <span>↩</span> Return an item
+      </a>
+
+      <div class="co-nav-label co-nav-spaced">YOUR ACCOUNT</div>
+
+      <a class="co-nav-item" href="/sp?id=my_profile">
+        <span>○</span> My profile
+      </a>
+      <a class="co-nav-item" href="/sp?id=quick_scan">
+        <span>⌕</span> Quick scan
+      </a>
+      <a class="co-nav-item" href="/sp?id=report_issue">
+        <span>!</span> Report an issue
+      </a>
+
+      <div class="co-sidebar-bottom">
+        <div class="co-sidebar-user">
+          <div class="co-avatar">{{data.studentName.charAt(0)}}</div>
+          <div class="co-user-copy">
+            <strong>{{data.studentName}}</strong>
+            <small>Campus member</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="co-main">
+
+      <header class="co-page-header">
+        <div>
+          <div class="co-breadcrumb">CAMPUSOPS / HOME</div>
+          <h1>Welcome back, {{data.studentName}}.</h1>
+          <p>Here's a quick look at your campus resources.</p>
+        </div>
+        <a class="co-header-profile" href="/sp?id=my_profile">
+          My profile <span>↗</span>
+        </a>
+      </header>
+
+      <!-- ONLY SHOW A REMINDER WHEN NEEDED -->
+      <section class="co-notice"
+        ng-if="data.overdueCount > 0 || data.dueSoonCount > 0"
+        ng-class="{'co-notice-overdue': data.overdueCount > 0}">
+
+        <div class="co-notice-mark">
+          {{data.overdueCount > 0 ? '!' : '↻'}}
+        </div>
+
+        <div class="co-notice-copy">
+          <strong>
+            {{data.overdueCount > 0
+              ? 'You have an overdue item'
+              : 'An item is due soon'}}
+          </strong>
+
+          <p>
+            {{data.overdueCount > 0
+              ? 'Please arrange the return of your overdue resource.'
+              : 'Check your due date and see whether renewal is available.'}}
+          </p>
+
+          <div class="co-notice-detail" ng-if="data.nextRental">
+            {{data.nextRental.assetName}}
+            <span ng-if="data.nextRental.dueDate">
+              · Due {{data.nextRental.dueDate}}
+            </span>
+          </div>
+        </div>
+
+        <a href="/sp?id=my_rentals" class="co-notice-link">
+          View rentals →
+        </a>
+      </section>
+
+      <!-- SIMPLE SUMMARY -->
+      <section class="co-summary">
+        <div class="co-summary-heading">
+          <div>
+            <h2>Your borrowing</h2>
+            <p>A quick overview of your current items.</p>
+          </div>
+          <a href="/sp?id=my_rentals">View all →</a>
+        </div>
+
+        <div class="co-summary-grid">
+          <div class="co-stat">
+            <span>Active rentals</span>
+            <strong>{{data.activeCount}}</strong>
+          </div>
+          <div class="co-stat">
+            <span>Overdue</span>
+            <strong ng-class="{'co-number-alert': data.overdueCount > 0}">
+              {{data.overdueCount}}
+            </strong>
+          </div>
+          <div class="co-stat">
+            <span>Items returned</span>
+            <strong>{{data.returnedCount}}</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- TWO MAIN ACTIONS -->
+      <section class="co-actions">
+        <a class="co-action-primary" href="/sp?id=browse_assets">
+          <span class="co-action-symbol">⌕</span>
+          <span>
+            <strong>Browse campus assets</strong>
+            <small>Find books, laptops and lab equipment.</small>
+          </span>
+          <span class="co-action-arrow">→</span>
+        </a>
+
+        <a class="co-action-secondary" href="/sp?id=my_rentals">
+          <span class="co-action-symbol">▤</span>
+          <span>
+            <strong>View my rentals</strong>
+            <small>Check due dates and manage borrowed items.</small>
+          </span>
+          <span class="co-action-arrow">→</span>
+        </a>
+      </section>
+
+      <!-- COMPACT LIVE RENTAL LIST -->
+      <section class="co-rentals">
+        <div class="co-section-heading">
+          <div>
+            <h2>Currently borrowed</h2>
+            <p>Your active rentals and their return dates.</p>
+          </div>
+          <a href="/sp?id=my_rentals">Manage rentals →</a>
+        </div>
+
+        <div class="co-rental-list" ng-if="data.rentals.length > 0">
+          <div class="co-rental-row"
+            ng-repeat="rental in data.rentals track by rental.id">
+
+            <div class="co-rental-icon">▤</div>
+
+            <div class="co-rental-info">
+              <strong>{{rental.assetName}}</strong>
+              <small>{{rental.number}}</small>
+            </div>
+
+            <div class="co-rental-due">
+              <small>Due date</small>
+              <strong ng-class="{
+                'co-text-overdue': rental.isOverdue,
+                'co-text-soon': rental.isDueSoon
+              }">
+                {{rental.dueDate || 'Not set'}}
+              </strong>
+            </div>
+
+            <span class="co-status"
+              ng-class="{
+                'co-status-overdue': rental.isOverdue,
+                'co-status-soon': rental.isDueSoon,
+                'co-status-active': !rental.isOverdue && !rental.isDueSoon
+              }">
+              {{rental.statusLabel}}
+            </span>
+          </div>
+        </div>
+
+        <div class="co-empty" ng-if="data.rentals.length === 0">
+          <strong>You haven't borrowed anything yet.</strong>
+          <p>Browse the campus collection to find what you need.</p>
+          <a href="/sp?id=browse_assets">Browse available assets →</a>
+        </div>
+      </section>
+
+      <!-- HELP -->
+      <section class="co-help">
+        <div>
+          <strong>Need a hand?</strong>
+          <p>Found a damaged item or having trouble with a rental?</p>
+        </div>
+        <a href="/sp?id=report_issue">Report a problem →</a>
+      </section>
+
+      <!-- SIMPLE FOOTER -->
+      <footer class="co-footer">
+        <div class="co-footer-main">
+          <strong>CampusOps</strong>
+          <span>Campus resources, made easier.</span>
+        </div>
+        <div class="co-footer-links">
+          <a href="/sp?id=report_issue">Help & queries</a>
+          <a href="/sp?id=report_issue">Feedback</a>
+          <a href="/sp?id=my_profile">My account</a>
+        </div>
+        <div class="co-footer-copy">
+          CampusOps · Campus Asset & Textbook Lifecycle Management
+        </div>
+      </footer>
+
+    </main>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>afea4f02f47f43107f44dc35ed3195e5</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 19:04:53</sys_created_on>
+        <sys_id>268b0f42f47f43107f44dc35ed31951a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 19:04:53</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_now_assist_deployment_config_attributes">
+    <sys_now_assist_deployment_config_attributes action="INSERT_OR_UPDATE">
+        <deployment_config display_value="Campus Asset AI Assistant">7fc842bc4da703107f44aa992ac326ee</deployment_config>
+        <name>ai_chat_header</name>
+        <sys_class_name>sys_now_assist_deployment_config_attributes</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 06:45:21</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>29d806bc4da703107f44aa992ac3263f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ai_chat_header</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_now_assist_deployment_config_attributes_29d806bc4da703107f44aa992ac3263f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 06:45:21</sys_updated_on>
+        <value>Now Assist</value>
+    </sys_now_assist_deployment_config_attributes>
+</record_update>

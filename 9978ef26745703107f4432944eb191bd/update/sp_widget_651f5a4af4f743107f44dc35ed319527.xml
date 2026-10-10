@@ -1,0 +1,1648 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+  var c = this;
+
+  c.initials = function(name) {
+    if (!name) return "S";
+
+    var parts = name.trim().split(/\s+/);
+    var result = parts[0].charAt(0);
+
+    if (parts.length > 1) {
+      result += parts[parts.length - 1].charAt(0);
+    }
+
+    return result.toUpperCase();
+  };
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* =========================================&#13;
+   CAMPUSOPS STUDENT PROFILE&#13;
+   Lavender theme + compact scrollable history&#13;
+   ========================================= */&#13;
+&#13;
+.co-profile {&#13;
+  --cp-ink: #34264f;&#13;
+  --cp-muted: #857992;&#13;
+  --cp-purple: #8062c9;&#13;
+  --cp-border: #e8dff3;&#13;
+  width: 100%;&#13;
+  color: var(--cp-ink);&#13;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;&#13;
+  font-size: 12px;&#13;
+  line-height: 1.55;&#13;
+}&#13;
+&#13;
+.co-profile * {&#13;
+  box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.co-profile a {&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+.co-profile a:focus-visible {&#13;
+  outline: 2px solid #8062c9;&#13;
+  outline-offset: 3px;&#13;
+}&#13;
+&#13;
+/* APP LAYOUT */&#13;
+&#13;
+.co-profile .cp-layout {&#13;
+  display: grid;&#13;
+  grid-template-columns: 218px minmax(0, 1fr);&#13;
+  align-items: stretch;&#13;
+  gap: 25px;&#13;
+  width: 100%;&#13;
+}&#13;
+&#13;
+.co-profile .cp-sidebar {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  min-width: 0;&#13;
+  min-height: 690px;&#13;
+  padding: 20px 13px;&#13;
+  border: 1px solid #e9e0f5;&#13;
+  border-radius: 19px;&#13;
+  background: linear-gradient(180deg, #f8f4ff, #f3effb);&#13;
+}&#13;
+&#13;
+.co-profile .cp-brand {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 10px;&#13;
+  padding: 4px 7px 24px;&#13;
+  color: #382b54;&#13;
+}&#13;
+&#13;
+.co-profile .cp-brand-mark {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  width: 37px;&#13;
+  height: 37px;&#13;
+  flex-shrink: 0;&#13;
+  border-radius: 11px;&#13;
+  background: #8062c9;&#13;
+  color: white;&#13;
+  font-size: 19px;&#13;
+  font-weight: 800;&#13;
+}&#13;
+&#13;
+.co-profile .cp-brand b {&#13;
+  display: block;&#13;
+  font-size: 14px;&#13;
+  line-height: 1.3;&#13;
+}&#13;
+&#13;
+.co-profile .cp-brand small {&#13;
+  display: block;&#13;
+  margin-top: 4px;&#13;
+  color: #8b7e9e;&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-nav-label {&#13;
+  padding: 9px 10px;&#13;
+  color: #a092b6;&#13;
+  font-size: 9px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 1.1px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-nav-gap {&#13;
+  margin-top: 18px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-nav {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 11px;&#13;
+  margin: 2px 0;&#13;
+  padding: 11px 10px;&#13;
+  border-radius: 10px;&#13;
+  color: #6e6382;&#13;
+  font-size: 11px;&#13;
+  font-weight: 600;&#13;
+  transition: background .18s, color .18s;&#13;
+}&#13;
+&#13;
+.co-profile .cp-nav &gt; span {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  width: 21px;&#13;
+  flex-shrink: 0;&#13;
+  color: #8d79b5;&#13;
+  font-size: 16px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-nav:hover {&#13;
+  background: rgba(255,255,255,.8);&#13;
+  color: #513a83;&#13;
+}&#13;
+&#13;
+.co-profile .cp-nav-active {&#13;
+  background: #e8defa;&#13;
+  color: #6245a0;&#13;
+  font-weight: 750;&#13;
+}&#13;
+&#13;
+.co-profile .cp-sidebar-bottom {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  gap: 4px;&#13;
+  margin-top: auto;&#13;
+  padding: 18px 8px 3px;&#13;
+  border-top: 1px solid #e4dbef;&#13;
+}&#13;
+&#13;
+.co-profile .cp-sidebar-bottom b {&#13;
+  color: #59446f;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-sidebar-bottom small {&#13;
+  color: #9386a5;&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+/* MAIN CONTENT */&#13;
+&#13;
+.co-profile .cp-main {&#13;
+  min-width: 0;&#13;
+}&#13;
+&#13;
+.co-profile .cp-breadcrumb {&#13;
+  display: flex;&#13;
+  gap: 9px;&#13;
+  margin: 5px 0 20px;&#13;
+  color: #a092b0;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-breadcrumb a {&#13;
+  color: #8062c9;&#13;
+}&#13;
+&#13;
+/* PROFILE HEADER */&#13;
+&#13;
+.co-profile .cp-hero {&#13;
+  position: relative;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: space-between;&#13;
+  gap: 22px;&#13;
+  overflow: hidden;&#13;
+  padding: 26px;&#13;
+  border: 1px solid rgba(255,255,255,.9);&#13;
+  border-radius: 20px;&#13;
+  background:&#13;
+    radial-gradient(ellipse at 94% 0%, rgba(255,255,255,.85), transparent 38%),&#13;
+    radial-gradient(ellipse at 0% 100%, rgba(218,201,255,.4), transparent 45%),&#13;
+    linear-gradient(125deg, #f6f0ff, #eee5ff 52%, #fcecff);&#13;
+  box-shadow: 0 12px 30px rgba(79,60,118,.06);&#13;
+}&#13;
+&#13;
+.co-profile .cp-hero-copy {&#13;
+  min-width: 0;&#13;
+  max-width: 650px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-eyebrow {&#13;
+  color: #927bb7;&#13;
+  font-size: 9px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 1.1px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-hero h1 {&#13;
+  margin: 7px 0 8px;&#13;
+  color: #34264f;&#13;
+  font-size: clamp(25px, 3vw, 35px);&#13;
+  font-weight: 800;&#13;
+  letter-spacing: -.8px;&#13;
+  line-height: 1.2;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-profile .cp-hero-copy &gt; p {&#13;
+  max-width: 470px;&#13;
+  margin: 0;&#13;
+  color: #82758f;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-user-email {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 10px;&#13;
+  margin-top: 19px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-avatar {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  width: 35px;&#13;
+  height: 35px;&#13;
+  flex-shrink: 0;&#13;
+  border: 1px solid white;&#13;
+  border-radius: 50%;&#13;
+  background: rgba(255,255,255,.8);&#13;
+  color: #7254ad;&#13;
+  font-size: 11px;&#13;
+  font-weight: 800;&#13;
+}&#13;
+&#13;
+.co-profile .cp-user-email b {&#13;
+  display: block;&#13;
+  color: #56436e;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-user-email small {&#13;
+  display: block;&#13;
+  margin-top: 2px;&#13;
+  color: #9386a5;&#13;
+  font-size: 9px;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-profile .cp-hero-score {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  align-items: center;&#13;
+  gap: 9px;&#13;
+  flex-shrink: 0;&#13;
+  padding: 0 14px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-score-ring {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  width: 98px;&#13;
+  height: 98px;&#13;
+  border-radius: 50%;&#13;
+  box-shadow: 0 5px 15px rgba(89,66,132,.08);&#13;
+}&#13;
+&#13;
+.co-profile .cp-score-inner {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  width: 78%;&#13;
+  height: 78%;&#13;
+  border: 1px solid rgba(255,255,255,.95);&#13;
+  border-radius: 50%;&#13;
+  background: #fff;&#13;
+}&#13;
+&#13;
+.co-profile .cp-score-inner strong {&#13;
+  color: #49365f;&#13;
+  font-size: 25px;&#13;
+  font-weight: 800;&#13;
+  line-height: 1.2;&#13;
+}&#13;
+&#13;
+.co-profile .cp-score-inner span {&#13;
+  margin-top: 3px;&#13;
+  color: #9586a8;&#13;
+  font-size: 7px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: .5px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-score-caption {&#13;
+  color: #927bb7;&#13;
+  font-size: 8px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: .8px;&#13;
+  text-align: center;&#13;
+}&#13;
+&#13;
+/* ATTENTION BANNER */&#13;
+&#13;
+.co-profile .cp-attention {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 12px;&#13;
+  margin-top: 15px;&#13;
+  padding: 14px 16px;&#13;
+  border: 1px solid #f3d7a2;&#13;
+  border-radius: 12px;&#13;
+  background: #fff9ee;&#13;
+}&#13;
+&#13;
+.co-profile .cp-attention-mark {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  width: 30px;&#13;
+  height: 30px;&#13;
+  flex-shrink: 0;&#13;
+  border-radius: 9px;&#13;
+  background: #ffedcf;&#13;
+  color: #a96d20;&#13;
+  font-size: 14px;&#13;
+  font-weight: 800;&#13;
+}&#13;
+&#13;
+.co-profile .cp-attention-copy {&#13;
+  min-width: 0;&#13;
+  flex: 1;&#13;
+}&#13;
+&#13;
+.co-profile .cp-attention-copy b {&#13;
+  color: #745329;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-attention-copy p {&#13;
+  margin: 3px 0 0;&#13;
+  color: #927954;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-attention &gt; a {&#13;
+  flex-shrink: 0;&#13;
+  color: #986b29;&#13;
+  font-size: 10px;&#13;
+  font-weight: 750;&#13;
+}&#13;
+&#13;
+/* SECTION HEADINGS */&#13;
+&#13;
+.co-profile .cp-section-heading {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: space-between;&#13;
+  gap: 14px;&#13;
+  margin: 25px 0 13px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-section-heading h2 {&#13;
+  margin: 5px 0 0;&#13;
+  color: #38294f;&#13;
+  font-size: 19px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: -.3px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-section-heading p {&#13;
+  margin: 4px 0 0;&#13;
+  color: #8b7e99;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-risk-pill {&#13;
+  flex-shrink: 0;&#13;
+  padding: 5px 9px;&#13;
+  border-radius: 20px;&#13;
+  background: #eaf7ef;&#13;
+  color: #4c956f;&#13;
+  font-size: 8px;&#13;
+  font-weight: 800;&#13;
+}&#13;
+&#13;
+.co-profile .cp-risk-medium {&#13;
+  background: #fff2d9;&#13;
+  color: #a66d25;&#13;
+}&#13;
+&#13;
+.co-profile .cp-risk-high {&#13;
+  background: #ffeaed;&#13;
+  color: #bc5267;&#13;
+}&#13;
+&#13;
+/* RELIABILITY SUMMARY */&#13;
+&#13;
+.co-profile .cp-summary-grid {&#13;
+  display: grid;&#13;
+  grid-template-columns: minmax(0, 1.45fr) minmax(190px, 1fr);&#13;
+  gap: 13px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-reliability-card {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 17px;&#13;
+  min-width: 0;&#13;
+  padding: 19px;&#13;
+  border: 1px solid #e7ddf4;&#13;
+  border-radius: 15px;&#13;
+  background: linear-gradient(135deg, #fff, #faf6ff);&#13;
+  box-shadow: 0 4px 14px rgba(79,60,118,.025);&#13;
+}&#13;
+&#13;
+.co-profile .cp-score-ring-large {&#13;
+  width: 91px;&#13;
+  height: 91px;&#13;
+  flex-shrink: 0;&#13;
+}&#13;
+&#13;
+.co-profile .cp-score-ring-large .cp-score-inner strong {&#13;
+  font-size: 23px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-reliability-copy {&#13;
+  min-width: 0;&#13;
+  flex: 1;&#13;
+}&#13;
+&#13;
+.co-profile .cp-reliability-copy h3 {&#13;
+  margin: 5px 0;&#13;
+  color: #49365f;&#13;
+  font-size: 13px;&#13;
+  font-weight: 800;&#13;
+}&#13;
+&#13;
+.co-profile .cp-reliability-copy p {&#13;
+  margin: 0;&#13;
+  color: #877a94;&#13;
+  font-size: 10px;&#13;
+  line-height: 1.7;&#13;
+}&#13;
+&#13;
+.co-profile .cp-progress-track {&#13;
+  overflow: hidden;&#13;
+  height: 5px;&#13;
+  margin-top: 13px;&#13;
+  border-radius: 10px;&#13;
+  background: #eae3f4;&#13;
+}&#13;
+&#13;
+.co-profile .cp-progress-track span {&#13;
+  display: block;&#13;
+  height: 100%;&#13;
+  border-radius: inherit;&#13;
+  background: #8062c9;&#13;
+  transition: width .3s ease;&#13;
+}&#13;
+&#13;
+.co-profile .cp-reliability-copy &gt; small {&#13;
+  display: block;&#13;
+  margin-top: 5px;&#13;
+  color: #9b8ead;&#13;
+  font-size: 9px;&#13;
+  text-align: right;&#13;
+}&#13;
+&#13;
+.co-profile .cp-stat-stack {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  gap: 8px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-stat-card {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 10px;&#13;
+  min-width: 0;&#13;
+  flex: 1;&#13;
+  padding: 11px;&#13;
+  border: 1px solid #e8dff3;&#13;
+  border-radius: 12px;&#13;
+  background: rgba(255,255,255,.85);&#13;
+}&#13;
+&#13;
+.co-profile .cp-stat-mark {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  width: 31px;&#13;
+  height: 31px;&#13;
+  flex-shrink: 0;&#13;
+  border-radius: 9px;&#13;
+  background: #efe7ff;&#13;
+  color: #8062c9;&#13;
+  font-size: 13px;&#13;
+  font-weight: 800;&#13;
+}&#13;
+&#13;
+.co-profile .cp-stat-green {&#13;
+  background: #e7f6ed;&#13;
+  color: #4b9a71;&#13;
+}&#13;
+&#13;
+.co-profile .cp-stat-orange {&#13;
+  background: #fff0df;&#13;
+  color: #bd8142;&#13;
+}&#13;
+&#13;
+.co-profile .cp-stat-card &gt; div {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  min-width: 0;&#13;
+}&#13;
+&#13;
+.co-profile .cp-stat-card small {&#13;
+  color: #9586a8;&#13;
+  font-size: 8px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: .4px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-stat-card strong {&#13;
+  margin: 1px 0;&#13;
+  color: #443254;&#13;
+  font-size: 17px;&#13;
+  font-weight: 800;&#13;
+  line-height: 1.3;&#13;
+}&#13;
+&#13;
+.co-profile .cp-stat-card &gt; div &gt; span {&#13;
+  color: #978ba3;&#13;
+  font-size: 8px;&#13;
+}&#13;
+&#13;
+/* BORROWING HISTORY SECTION */&#13;
+&#13;
+.co-profile .cp-history {&#13;
+  margin-top: 28px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-history .cp-section-heading {&#13;
+  margin-top: 0;&#13;
+}&#13;
+&#13;
+.co-profile .cp-outline-link {&#13;
+  flex-shrink: 0;&#13;
+  padding: 8px 11px;&#13;
+  border: 1px solid #dfd2f2;&#13;
+  border-radius: 9px;&#13;
+  background: #fff;&#13;
+  color: #7959b8;&#13;
+  font-size: 9px;&#13;
+  font-weight: 750;&#13;
+  transition: background .15s;&#13;
+}&#13;
+&#13;
+.co-profile .cp-outline-link:hover {&#13;
+  background: #f5efff;&#13;
+}&#13;
+&#13;
+/* FIXED-HEIGHT INTERNAL SCROLL AREA */&#13;
+&#13;
+.co-profile .cp-timeline {&#13;
+  position: relative;&#13;
+  max-height: 430px;&#13;
+  overflow-y: auto;&#13;
+  overflow-x: hidden;&#13;
+  padding: 10px 12px 8px 22px;&#13;
+  border: 1px solid #e7ddf4;&#13;
+  border-radius: 14px;&#13;
+  background: rgba(255,255,255,.58);&#13;
+  scrollbar-width: thin;&#13;
+  scrollbar-color: #c7b5e8 #f5f0fb;&#13;
+  overscroll-behavior: contain;&#13;
+}&#13;
+&#13;
+/* Timeline line stays inside the scroll panel */&#13;
+&#13;
+.co-profile .cp-timeline:before {&#13;
+  position: absolute;&#13;
+  top: 10px;&#13;
+  bottom: 10px;&#13;
+  left: 6px;&#13;
+  width: 2px;&#13;
+  background: linear-gradient(#b39be8, #e8dff5);&#13;
+  content: "";&#13;
+}&#13;
+&#13;
+/* RENTAL ENTRIES */&#13;
+&#13;
+.co-profile .cp-timeline-entry {&#13;
+  position: relative;&#13;
+  margin-bottom: 9px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline-entry:last-child {&#13;
+  margin-bottom: 0;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline-marker {&#13;
+  position: absolute;&#13;
+  top: 18px;&#13;
+  left: -21px;&#13;
+  z-index: 1;&#13;
+  width: 12px;&#13;
+  height: 12px;&#13;
+  border: 3px solid #f5f0ff;&#13;
+  border-radius: 50%;&#13;
+  background: #8c6bd0;&#13;
+  box-shadow: 0 0 0 1px #c9b8eb;&#13;
+}&#13;
+&#13;
+.co-profile .cp-entry-returned .cp-timeline-marker {&#13;
+  background: #59a980;&#13;
+  box-shadow: 0 0 0 1px #b7e3c9;&#13;
+}&#13;
+&#13;
+.co-profile .cp-entry-overdue .cp-timeline-marker {&#13;
+  background: #d86b7d;&#13;
+  box-shadow: 0 0 0 1px #f1c0c8;&#13;
+}&#13;
+&#13;
+.co-profile .cp-entry-due .cp-timeline-marker {&#13;
+  background: #d69a45;&#13;
+  box-shadow: 0 0 0 1px #f1d4a6;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline-card {&#13;
+  padding: 12px 14px;&#13;
+  border: 1px solid #e7ddf4;&#13;
+  border-radius: 12px;&#13;
+  background: rgba(255,255,255,.95);&#13;
+  transition: border-color .18s, box-shadow .18s;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline-card:hover {&#13;
+  border-color: #cdb9ed;&#13;
+  box-shadow: 0 4px 12px rgba(79,60,118,.07);&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-top {&#13;
+  display: flex;&#13;
+  align-items: flex-start;&#13;
+  justify-content: space-between;&#13;
+  gap: 12px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-type {&#13;
+  color: #9a8aaf;&#13;
+  font-size: 8px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: .7px;&#13;
+  text-transform: uppercase;&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-top h3 {&#13;
+  margin: 4px 0 2px;&#13;
+  color: #49365f;&#13;
+  font-size: 12px;&#13;
+  font-weight: 800;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-top p {&#13;
+  margin: 0;&#13;
+  color: #9a8ca8;&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-status-pill {&#13;
+  flex-shrink: 0;&#13;
+  padding: 5px 8px;&#13;
+  border-radius: 20px;&#13;
+  background: #eaf7ef;&#13;
+  color: #4b956e;&#13;
+  font-size: 8px;&#13;
+  font-weight: 800;&#13;
+}&#13;
+&#13;
+.co-profile .cp-status-overdue {&#13;
+  background: #ffeaed;&#13;
+  color: #ba5368;&#13;
+}&#13;
+&#13;
+.co-profile .cp-status-due {&#13;
+  background: #fff2dc;&#13;
+  color: #a86c24;&#13;
+}&#13;
+&#13;
+.co-profile .cp-status-returned {&#13;
+  background: #f0eaff;&#13;
+  color: #7959b8;&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-details {&#13;
+  display: grid;&#13;
+  grid-template-columns: repeat(4, minmax(0, 1fr));&#13;
+  gap: 12px;&#13;
+  margin-top: 11px;&#13;
+  padding: 10px 0;&#13;
+  border-top: 1px solid #f0eaf7;&#13;
+  border-bottom: 1px solid #f0eaf7;&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-details &gt; div {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  gap: 4px;&#13;
+  min-width: 0;&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-details span {&#13;
+  color: #9a8aaf;&#13;
+  font-size: 8px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: .3px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-details strong {&#13;
+  color: #5b496e;&#13;
+  font-size: 9px;&#13;
+  font-weight: 650;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-note {&#13;
+  margin-top: 9px;&#13;
+  color: #b85c6d;&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-note-returned {&#13;
+  color: #4b956e;&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-bottom {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: space-between;&#13;
+  gap: 12px;&#13;
+  margin-top: 9px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-bottom &gt; span {&#13;
+  color: #9a8ca8;&#13;
+  font-size: 8px;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-bottom a {&#13;
+  flex-shrink: 0;&#13;
+  color: #7959b8;&#13;
+  font-size: 9px;&#13;
+  font-weight: 750;&#13;
+}&#13;
+&#13;
+/* SCROLLBAR */&#13;
+&#13;
+.co-profile .cp-timeline::-webkit-scrollbar {&#13;
+  width: 7px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline::-webkit-scrollbar-track {&#13;
+  background: #f5f0fb;&#13;
+  border-radius: 10px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline::-webkit-scrollbar-thumb {&#13;
+  background: #c7b5e8;&#13;
+  border: 2px solid #f5f0fb;&#13;
+  border-radius: 10px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline::-webkit-scrollbar-thumb:hover {&#13;
+  background: #a58ad8;&#13;
+}&#13;
+&#13;
+/* EMPTY HISTORY */&#13;
+&#13;
+.co-profile .cp-empty {&#13;
+  padding: 28px 20px;&#13;
+  border: 1px solid #e7ddf4;&#13;
+  border-radius: 14px;&#13;
+  background: #fff;&#13;
+  text-align: center;&#13;
+}&#13;
+&#13;
+.co-profile .cp-empty h3 {&#13;
+  margin: 0;&#13;
+  color: #49365f;&#13;
+  font-size: 14px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-empty p {&#13;
+  margin: 8px 0 15px;&#13;
+  color: #897d99;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-empty a {&#13;
+  display: inline-block;&#13;
+  padding: 9px 13px;&#13;
+  border-radius: 9px;&#13;
+  background: #8062c9;&#13;
+  color: white;&#13;
+  font-size: 10px;&#13;
+  font-weight: 750;&#13;
+}&#13;
+&#13;
+/* FOOTER */&#13;
+&#13;
+.co-profile .cp-footer {&#13;
+  margin-top: 28px;&#13;
+  padding: 17px 2px 5px;&#13;
+  border-top: 1px solid #e9e2f1;&#13;
+}&#13;
+&#13;
+.co-profile .cp-footer-top {&#13;
+  display: flex;&#13;
+  align-items: flex-start;&#13;
+  justify-content: space-between;&#13;
+  gap: 12px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-footer-top b {&#13;
+  color: #55416f;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-footer-top p {&#13;
+  margin: 4px 0 0;&#13;
+  color: #988ca8;&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-footer-top &gt; a {&#13;
+  color: #7959b8;&#13;
+  font-size: 10px;&#13;
+  font-weight: 750;&#13;
+}&#13;
+&#13;
+.co-profile .cp-footer-links {&#13;
+  display: flex;&#13;
+  flex-wrap: wrap;&#13;
+  gap: 16px;&#13;
+  margin-top: 13px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-footer-links a {&#13;
+  color: #796a8d;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-footer-links a:hover {&#13;
+  color: #6748a8;&#13;
+}&#13;
+&#13;
+.co-profile .cp-footer-copy {&#13;
+  margin-top: 12px;&#13;
+  color: #a399b1;&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+/* RESPONSIVE TABLET */&#13;
+&#13;
+@media (max-width: 1000px) {&#13;
+  .co-profile .cp-layout {&#13;
+    grid-template-columns: 185px minmax(0, 1fr);&#13;
+    gap: 16px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-sidebar {&#13;
+    padding: 15px 9px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-summary-grid {&#13;
+    grid-template-columns: 1fr;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-stat-stack {&#13;
+    display: grid;&#13;
+    grid-template-columns: repeat(3, minmax(0, 1fr));&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-stat-card {&#13;
+    align-items: flex-start;&#13;
+  }&#13;
+}&#13;
+&#13;
+/* RESPONSIVE MOBILE */&#13;
+&#13;
+@media (max-width: 680px) {&#13;
+  .co-profile .cp-layout {&#13;
+    grid-template-columns: 1fr;&#13;
+    gap: 18px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-sidebar {&#13;
+    display: grid;&#13;
+    grid-template-columns: repeat(2, minmax(0, 1fr));&#13;
+    align-content: start;&#13;
+    gap: 3px;&#13;
+    min-height: 0;&#13;
+    padding: 12px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-brand {&#13;
+    grid-column: 1 / -1;&#13;
+    padding-bottom: 12px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-nav-label,&#13;
+  .co-profile .cp-sidebar-bottom {&#13;
+    display: none;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-nav {&#13;
+    margin: 0;&#13;
+    padding: 10px 8px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-hero {&#13;
+    align-items: flex-start;&#13;
+    flex-direction: column;&#13;
+    padding: 20px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-hero-score {&#13;
+    align-self: center;&#13;
+    padding-top: 8px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-attention {&#13;
+    align-items: flex-start;&#13;
+    flex-wrap: wrap;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-attention &gt; a {&#13;
+    margin-left: 42px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-section-heading h2 {&#13;
+    font-size: 17px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-reliability-card {&#13;
+    align-items: flex-start;&#13;
+    flex-direction: column;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-stat-stack {&#13;
+    grid-template-columns: 1fr;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-rental-details {&#13;
+    grid-template-columns: repeat(2, minmax(0, 1fr));&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-timeline {&#13;
+    max-height: 360px;&#13;
+    padding-right: 8px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-footer-top {&#13;
+    flex-direction: column;&#13;
+  }&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+/* CLEANER BORROWING TIMELINE */&#13;
+&#13;
+.co-profile .cp-timeline {&#13;
+  position: relative;&#13;
+  max-height: 540px;&#13;
+  overflow-y: auto;&#13;
+  overflow-x: hidden;&#13;
+&#13;
+  /* Remove the cramped outer panel */&#13;
+  padding: 6px 10px 6px 22px;&#13;
+  border: none;&#13;
+  border-radius: 0;&#13;
+  background: transparent;&#13;
+  box-shadow: none;&#13;
+&#13;
+  /* Slim scrollbar on the right */&#13;
+  scrollbar-width: thin;&#13;
+  scrollbar-color: #c7b5e8 transparent;&#13;
+  overscroll-behavior: contain;&#13;
+}&#13;
+&#13;
+/* Keep the timeline line and markers */&#13;
+.co-profile .cp-timeline:before {&#13;
+  position: absolute;&#13;
+  top: 8px;&#13;
+  bottom: 8px;&#13;
+  left: 6px;&#13;
+  width: 2px;&#13;
+  background: linear-gradient(#b39be8, #e8dff5);&#13;
+  content: "";&#13;
+}&#13;
+&#13;
+/* More compact cards */&#13;
+.co-profile .cp-timeline-entry {&#13;
+  position: relative;&#13;
+  margin-bottom: 8px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline-entry:last-child {&#13;
+  margin-bottom: 0;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline-card {&#13;
+  padding: 10px 12px;&#13;
+  border: 1px solid #e7ddf4;&#13;
+  border-radius: 10px;&#13;
+  background: rgba(255, 255, 255, .82);&#13;
+  box-shadow: none;&#13;
+  transition: border-color .18s, background .18s;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline-card:hover {&#13;
+  transform: none;&#13;
+  border-color: #cdb9ed;&#13;
+  background: #fff;&#13;
+  box-shadow: none;&#13;
+}&#13;
+&#13;
+/* Reduce space inside each rental card */&#13;
+.co-profile .cp-rental-details {&#13;
+  gap: 8px;&#13;
+  margin-top: 8px;&#13;
+  padding: 8px 0;&#13;
+}&#13;
+&#13;
+.co-profile .cp-rental-bottom {&#13;
+  margin-top: 7px;&#13;
+}&#13;
+&#13;
+/* Hide scrollbar track; retain right-side thumb */&#13;
+.co-profile .cp-timeline::-webkit-scrollbar {&#13;
+  width: 6px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline::-webkit-scrollbar-track {&#13;
+  background: transparent;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline::-webkit-scrollbar-thumb {&#13;
+  background: #c7b5e8;&#13;
+  border-radius: 10px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-timeline::-webkit-scrollbar-thumb:hover {&#13;
+  background: #a58ad8;&#13;
+}&#13;
+&#13;
+/* Mobile layout */&#13;
+@media (max-width: 680px) {&#13;
+  .co-profile .cp-timeline {&#13;
+    max-height: 420px;&#13;
+    padding-right: 6px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-timeline-card {&#13;
+    padding: 10px;&#13;
+  }&#13;
+&#13;
+  .co-profile .cp-rental-details {&#13;
+    grid-template-columns: repeat(2, minmax(0, 1fr));&#13;
+  }&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+/* CAMPUSOPS PROFILE — TYPOGRAPHY CONSISTENCY */&#13;
+&#13;
+.co-profile {&#13;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;&#13;
+  font-size: 13px;&#13;
+  line-height: 1.5;&#13;
+  -webkit-font-smoothing: antialiased;&#13;
+}&#13;
+&#13;
+/* Consistent body text */&#13;
+.co-profile p,&#13;
+.co-profile small,&#13;
+.co-profile .cp-nav,&#13;
+.co-profile .cp-breadcrumb,&#13;
+.co-profile .cp-rental-details strong,&#13;
+.co-profile .cp-footer-links a {&#13;
+  font-family: inherit;&#13;
+}&#13;
+&#13;
+/* Match navigation typography */&#13;
+.co-profile .cp-nav {&#13;
+  font-size: 12px;&#13;
+  font-weight: 500;&#13;
+  line-height: 1.5;&#13;
+  letter-spacing: 0;&#13;
+}&#13;
+&#13;
+.co-profile .cp-nav-active {&#13;
+  font-weight: 650;&#13;
+}&#13;
+&#13;
+/* Match the CampusOps brand */&#13;
+.co-profile .cp-brand b {&#13;
+  font-size: 15px;&#13;
+  font-weight: 700;&#13;
+  letter-spacing: -0.2px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-brand small {&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+/* Match page headings */&#13;
+.co-profile .cp-hero h1 {&#13;
+  font-size: clamp(26px, 2.5vw, 34px);&#13;
+  font-weight: 750;&#13;
+  letter-spacing: -0.7px;&#13;
+  line-height: 1.2;&#13;
+}&#13;
+&#13;
+.co-profile .cp-section-heading h2 {&#13;
+  font-size: 20px;&#13;
+  font-weight: 750;&#13;
+  letter-spacing: -0.35px;&#13;
+}&#13;
+&#13;
+/* Keep card headings consistent */&#13;
+.co-profile .cp-rental-top h3,&#13;
+.co-profile .cp-reliability-copy h3 {&#13;
+  font-size: 13px;&#13;
+  font-weight: 700;&#13;
+  letter-spacing: -0.1px;&#13;
+}&#13;
+&#13;
+/* Improve readability of supporting text */&#13;
+.co-profile .cp-hero-copy &gt; p,&#13;
+.co-profile .cp-attention-copy p,&#13;
+.co-profile .cp-reliability-copy p,&#13;
+.co-profile .cp-section-heading p {&#13;
+  font-size: 11px;&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+/* Consistent breadcrumb and footer text */&#13;
+.co-profile .cp-breadcrumb {&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-profile .cp-footer-links a,&#13;
+.co-profile .cp-footer-top &gt; a {&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Personal borrowing profile, reliability analytics, and rental activity</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>campusops-student-profile</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CampusOps Student Profile</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[
+(function() {
+  data.user = {
+    name: gs.getUserDisplayName(),
+    email: gs.getUser().getEmail()
+  };
+
+  data.rentals = [];
+  data.dueSoon = [];
+  data.stats = {
+    total: 0,
+    active: 0,
+    returned: 0,
+    overdue: 0
+  };
+
+  data.score = 100;
+  data.riskLabel = "LOW";
+  data.riskClass = "low";
+  data.scoreMessage = "A promising start";
+  data.scoreExplanation =
+    "Keep returning resources on time to build a strong borrowing record.";
+
+  var userId = gs.getUserID();
+  var now = new GlideDateTime().getNumericValue();
+  var totalScore = 0;
+  var scoredRentals = 0;
+
+  var rental = new GlideRecord("u_student_rental");
+  rental.addQuery("u_student", userId);
+  rental.orderByDesc("u_rental_date");
+  rental.query();
+
+  function fmt(value) {
+    if (!value) return "";
+
+    var date = new GlideDateTime(value);
+    return date.getLocalDate().getByFormat("dd MMM yyyy");
+  }
+
+  while (rental.next()) {
+    data.stats.total++;
+
+    var status = (rental.getValue("u_status") || "").toLowerCase();
+    var dueValue = rental.getValue("u_due_date");
+    var returnValue = rental.getValue("u_return_date");
+    var overdue = false;
+
+    if (status === "returned") {
+      data.stats.returned++;
+    } else if (status === "active") {
+      data.stats.active++;
+
+      if (dueValue &&
+          new GlideDateTime(dueValue).getNumericValue() < now) {
+        overdue = true;
+        data.stats.overdue++;
+      }
+    }
+
+    // Include every rental that has a valid reliability score.
+    var scoreValue = rental.getValue("u_reliability_score");
+
+    if (scoreValue !== null && scoreValue !== "") {
+      var parsedScore = parseInt(scoreValue, 10);
+
+      if (!isNaN(parsedScore)) {
+        totalScore += Math.max(0, Math.min(100, parsedScore));
+        scoredRentals++;
+      }
+    }
+
+    var risk = (rental.getValue("u_return_risk") || "").toLowerCase();
+    var riskLabel = risk
+      ? risk.charAt(0).toUpperCase() + risk.substring(1)
+      : "Not assessed";
+
+    var daysLeft = null;
+
+    if (dueValue) {
+      daysLeft = Math.ceil(
+        (new GlideDateTime(dueValue).getNumericValue() - now) /
+        86400000
+      );
+    }
+
+    var statusClass = status === "returned"
+      ? "returned"
+      : (overdue ? "overdue" : "active");
+
+    var statusLabel = overdue
+      ? "Overdue"
+      : (status === "returned"
+          ? "Returned"
+          : (status === "active" && daysLeft !== null && daysLeft <= 2
+              ? "Due Soon"
+              : "Active"));
+
+    var assetName = rental.getDisplayValue("u_asset") || "Campus resource";
+    var assetType = "";
+    var location = "";
+
+    var asset = rental.u_asset.getRefRecord();
+
+    if (asset && asset.isValidRecord()) {
+      assetType = asset.getDisplayValue("u_asset_type") || "";
+      location = asset.getDisplayValue("u_location") || "";
+    }
+
+    var entry = {
+      id: rental.getUniqueValue(),
+      assetName: assetName,
+      assetType: assetType,
+      location: location,
+      rentalDate: fmt(rental.getValue("u_rental_date")),
+      dueDate: fmt(dueValue),
+      returnDate: fmt(returnValue),
+      statusClass: statusClass,
+      statusLabel: statusLabel,
+      riskLabel: riskLabel,
+      message: overdue
+        ? "This item is overdue."
+        : "Its return date is approaching."
+    };
+
+    data.rentals.push(entry);
+
+    if (status === "active" && dueValue && daysLeft <= 2) {
+      data.dueSoon.push(entry);
+    }
+  }
+
+  // Calculate the average across all scored rental records.
+  if (scoredRentals > 0) {
+    data.score = Math.round(totalScore / scoredRentals);
+  }
+
+  // Derive the overall risk from the average score.
+  if (data.score < 40) {
+    data.riskLabel = "HIGH";
+    data.riskClass = "high";
+    data.scoreMessage = "Let's rebuild your record";
+    data.scoreExplanation =
+      "Prioritise overdue returns and keep your next due dates in sight.";
+  } else if (data.score < 70) {
+    data.riskLabel = "MEDIUM";
+    data.riskClass = "medium";
+    data.scoreMessage = "You're making progress";
+    data.scoreExplanation =
+      "A little more consistency with return dates will strengthen your score.";
+  } else {
+    data.riskLabel = "LOW";
+    data.riskClass = "low";
+    data.scoreMessage = "A reliable resource keeper";
+    data.scoreExplanation =
+      "Great work. Keep looking after borrowed resources and returning them on time.";
+  }
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 16:04:50</sys_created_on>
+        <sys_id>651f5a4af4f743107f44dc35ed319527</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>CampusOps Student Profile</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_widget_651f5a4af4f743107f44dc35ed319527</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 22:04:23</sys_updated_on>
+        <template><![CDATA[
+<div class="co-profile">
+  <div class="cp-layout">
+
+    <!-- LEFT NAVIGATION -->
+    <aside class="cp-sidebar">
+      <a class="cp-brand" href="/sp?id=campusops_home">
+        <span class="cp-brand-mark">C</span>
+        <span>
+          <b>CampusOps</b>
+          <small>Campus resources</small>
+        </span>
+      </a>
+
+      <div class="cp-nav-label">WORKSPACE</div>
+      <a class="cp-nav" href="/sp?id=campusops_home"><span>⌂</span>Home</a>
+      <a class="cp-nav" href="/sp?id=browse_assets"><span>⌕</span>Browse assets</a>
+      <a class="cp-nav" href="/sp?id=my_rentals"><span>▤</span>My rentals</a>
+      <a class="cp-nav" href="/sp?id=renew_asset"><span>↻</span>Renew an item</a>
+      <a class="cp-nav" href="/sp?id=return_asset"><span>↩</span>Return an item</a>
+
+      <div class="cp-nav-label cp-nav-gap">YOUR ACCOUNT</div>
+      <a class="cp-nav cp-nav-active" href="/sp?id=my_profile"><span>○</span>My profile</a>
+      <a class="cp-nav" href="/sp?id=quick_scan"><span>⌕</span>Quick scan</a>
+      <a class="cp-nav" href="/sp?id=report_issue"><span>!</span>Report an issue</a>
+
+      <div class="cp-sidebar-bottom">
+        <b>CampusOps</b>
+        <small>Campus resources, made easier.</small>
+      </div>
+    </aside>
+
+    <!-- MAIN PROFILE -->
+    <main class="cp-main">
+
+      <div class="cp-breadcrumb">
+        <a href="/sp?id=campusops_home">Home</a>
+        <span>/</span>
+        <span>My profile</span>
+      </div>
+
+      <!-- PROFILE HEADER -->
+      <section class="cp-hero">
+        <div class="cp-hero-copy">
+          <div class="cp-eyebrow">YOUR CAMPUSOPS PROFILE</div>
+          <h1>{{data.user.name || 'Student'}}</h1>
+          <p>
+            Your borrowing history, return habits, and campus resource record,
+            all in one place.
+          </p>
+
+          <div class="cp-user-email" ng-if="data.user.email">
+            <span class="cp-avatar">{{c.initials(data.user.name)}}</span>
+            <span>
+              <b>{{data.user.name}}</b>
+              <small>{{data.user.email}}</small>
+            </span>
+          </div>
+        </div>
+
+        <div class="cp-hero-score">
+          <div class="cp-score-ring"
+               ng-style="{'background': 'conic-gradient(#8062c9 ' + data.score + '%, #e7def4 0)'}">
+            <div class="cp-score-inner">
+              <strong>{{data.score}}</strong>
+              <span>OUT OF 100</span>
+            </div>
+          </div>
+          <div class="cp-score-caption">BORROWING RELIABILITY</div>
+        </div>
+      </section>
+
+      <!-- ATTENTION MESSAGE -->
+      <section class="cp-attention"
+               ng-if="data.stats.overdue > 0 || data.dueSoon.length > 0">
+        <div class="cp-attention-mark">!</div>
+        <div class="cp-attention-copy">
+          <b>
+            {{data.stats.overdue > 0
+              ? 'A return needs your attention'
+              : 'A return is coming up'}}
+          </b>
+          <p ng-if="data.stats.overdue > 0">
+            You have {{data.stats.overdue}}
+            overdue {{data.stats.overdue === 1 ? 'item' : 'items'}}.
+            Visit My Rentals to check the details.
+          </p>
+          <p ng-if="data.stats.overdue === 0">
+            Check your upcoming due dates and plan your returns.
+          </p>
+        </div>
+        <a href="/sp?id=my_rentals">View rentals →</a>
+      </section>
+
+      <!-- RELIABILITY -->
+      <div class="cp-section-heading">
+        <div>
+          <div class="cp-eyebrow">YOUR BORROWING RECORD</div>
+          <h2>Reliability, at a glance</h2>
+        </div>
+        <span class="cp-risk-pill"
+              ng-class="'cp-risk-' + data.riskClass">
+          {{data.riskLabel}} RISK
+        </span>
+      </div>
+
+      <section class="cp-summary-grid">
+
+        <article class="cp-reliability-card">
+          <div class="cp-score-ring cp-score-ring-large"
+               ng-style="{'background': 'conic-gradient(#8062c9 ' + data.score + '%, #e7def4 0)'}">
+            <div class="cp-score-inner">
+              <strong>{{data.score}}</strong>
+              <span>RELIABILITY</span>
+            </div>
+          </div>
+
+          <div class="cp-reliability-copy">
+            <div class="cp-eyebrow">YOUR CURRENT SCORE</div>
+            <h3>{{data.scoreMessage}}</h3>
+            <p>{{data.scoreExplanation}}</p>
+            <div class="cp-progress-track">
+              <span ng-style="{'width': data.score + '%'}"></span>
+            </div>
+            <small>{{data.score}} out of 100</small>
+          </div>
+        </article>
+
+        <div class="cp-stat-stack">
+          <article class="cp-stat-card">
+            <span class="cp-stat-mark">▤</span>
+            <div>
+              <small>TOTAL RENTALS</small>
+              <strong>{{data.stats.total}}</strong>
+              <span>Across your borrowing history</span>
+            </div>
+          </article>
+
+          <article class="cp-stat-card">
+            <span class="cp-stat-mark cp-stat-green">✓</span>
+            <div>
+              <small>RETURNED</small>
+              <strong>{{data.stats.returned}}</strong>
+              <span>Items marked as returned</span>
+            </div>
+          </article>
+
+          <article class="cp-stat-card">
+            <span class="cp-stat-mark cp-stat-orange">!</span>
+            <div>
+              <small>OVERDUE</small>
+              <strong>{{data.stats.overdue}}</strong>
+              <span>Active items past their due date</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- BORROWING TIMELINE -->
+      <section class="cp-history">
+        <div class="cp-section-heading">
+          <div>
+            <div class="cp-eyebrow">YOUR HISTORY</div>
+            <h2>Borrowing timeline</h2>
+            <p>Resources you've borrowed and how each rental stands.</p>
+          </div>
+          <a class="cp-outline-link" href="/sp?id=my_rentals">
+            Manage rentals →
+          </a>
+        </div>
+
+        <div class="cp-empty" ng-if="!data.rentals || !data.rentals.length">
+          <h3>Your borrowing history starts here</h3>
+          <p>Browse campus resources when you need something for class.</p>
+          <a href="/sp?id=browse_assets">Browse resources →</a>
+        </div>
+
+        <div class="cp-timeline"
+             ng-if="data.rentals && data.rentals.length">
+
+          <article class="cp-timeline-entry"
+                   ng-repeat="rental in data.rentals track by rental.id"
+                   ng-class="'cp-entry-' + rental.statusClass">
+
+            <span class="cp-timeline-marker"></span>
+
+            <div class="cp-timeline-card">
+              <div class="cp-rental-top">
+                <div>
+                  <div class="cp-rental-type">
+                    {{rental.assetType || 'CAMPUS RESOURCE'}}
+                  </div>
+                  <h3>{{rental.assetName}}</h3>
+                  <p ng-if="rental.location">{{rental.location}}</p>
+                </div>
+
+                <span class="cp-status-pill"
+                      ng-class="'cp-status-' + rental.statusClass">
+                  {{rental.statusLabel}}
+                </span>
+              </div>
+
+              <div class="cp-rental-details">
+                <div>
+                  <span>RENTAL DATE</span>
+                  <strong>{{rental.rentalDate || 'Not recorded'}}</strong>
+                </div>
+                <div>
+                  <span>DUE DATE</span>
+                  <strong>{{rental.dueDate || 'Not recorded'}}</strong>
+                </div>
+                <div>
+                  <span>RETURNED ON</span>
+                  <strong>{{rental.returnDate || '—'}}</strong>
+                </div>
+                <div>
+                  <span>RETURN RISK</span>
+                  <strong>{{rental.riskLabel || 'Not assessed'}}</strong>
+                </div>
+              </div>
+
+              <div class="cp-rental-note"
+                   ng-if="rental.statusClass === 'overdue'">
+                This item is past its due date. Please arrange its return.
+              </div>
+
+              <div class="cp-rental-note cp-note-returned"
+                   ng-if="rental.statusClass === 'returned'">
+                This item has been returned.
+              </div>
+
+              <div class="cp-rental-bottom">
+                <span>Rental reference: {{rental.id}}</span>
+                <a href="/sp?id=my_rentals">View rental →</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="cp-footer">
+        <div class="cp-footer-top">
+          <div>
+            <b>CampusOps</b>
+            <p>Campus resources, made easier.</p>
+          </div>
+          <a href="/sp?id=browse_assets">Explore resources →</a>
+        </div>
+
+        <div class="cp-footer-links">
+          <a href="/sp?id=report_issue">Help &amp; queries</a>
+          <a href="/sp?id=report_issue">Feedback</a>
+          <a href="/sp?id=my_rentals">My rentals</a>
+        </div>
+
+        <div class="cp-footer-copy">
+          Campus Asset &amp; Textbook Lifecycle Management
+        </div>
+      </footer>
+
+    </main>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>651f5a4af4f743107f44dc35ed319527</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 16:04:48</sys_created_on>
+        <sys_id>7052e2cef4f743107f44dc35ed3195dc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 16:04:48</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

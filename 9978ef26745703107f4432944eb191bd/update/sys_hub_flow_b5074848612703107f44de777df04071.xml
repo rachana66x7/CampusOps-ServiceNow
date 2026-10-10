@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,timeFromCreateToActivate=1124000,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Detects unauthorized RFID scans of campus assets and creates a security alert.</description>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source/>
+        <internal_name>campus_rfid_security_flow</internal_name>
+        <label_cache>[{"name":"Created_1.run_start_date_time","label":"Trigger - Record Created➛Run Start Date/Time","type":"glide_date_time","base_type":"glide_date_time","usedInstances":{"cfc4b1e0-7621-45b4-89fe-3c34f5e18db8":["u_created_date"]},"attributes":{"test_input_hidden":"true"}},{"name":"Created_1.current.u_asset","label":"Trigger - Record Created➛RFID Scan Events Record➛Asset","reference":"u_campus_asset","reference_display":"Campus Asset","type":"reference","base_type":"reference","parent_table_name":"u_rfid_scan_events","column_name":"u_asset","usedInstances":{"cfc4b1e0-7621-45b4-89fe-3c34f5e18db8":["u_asset"]}},{"name":"Created_1.current.u_number","label":"Trigger - Record Created➛RFID Scan Events Record➛Number","reference":"","reference_display":"Number","type":"string","base_type":"string","parent_table_name":"u_rfid_scan_events","column_name":"u_number","usedInstances":{"cfc4b1e0-7621-45b4-89fe-3c34f5e18db8":["u_alert_id"]}},{"name":"Created_1.current.u_authorized","label":"Trigger - Record Created➛RFID Scan Events Record➛Authorized","reference":"","reference_display":"Authorized","type":"boolean","base_type":"boolean","parent_table_name":"u_rfid_scan_events","column_name":"u_authorized","usedInstances":{"c3865bba-f306-4466-a017-68359979e34e":["condition"]}},{"name":"Created_1.current","label":"Trigger - Record Created➛RFID Scan Events Record","reference":"u_rfid_scan_events","reference_display":"RFID Scan Events","type":"reference","base_type":"reference","usedInstances":{"cfc4b1e0-7621-45b4-89fe-3c34f5e18db8":["u_rfid_event"]},"attributes":{}}]</label_cache>
+        <master_snapshot>cc5b0c40616703107f44de777df0407e</master_snapshot>
+        <master_snapshot_digest/>
+        <name>Campus RFID Security Flow</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>d05b0c40616703107f44de777df040ad</remote_trigger_id>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:22:45</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>b5074848612703107f44de777df04071</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>Campus RFID Security Flow</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_hub_flow_b5074848612703107f44de777df04071</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:30</sys_updated_on>
+        <type>flow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record>2c5b0c40616703107f44de777df040cb</version_record>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=b5074848612703107f44de777df04071"/>
+    <sys_variable_value action="delete_multiple" query="document_key=b5074848612703107f44de777df04071"/>
+    <sys_flow_record_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition table="u_rfid_scan_events">^EQ<item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <name/>
+        <on_delete>false</on_delete>
+        <on_insert>true</on_insert>
+        <on_update>false</on_update>
+        <published_version/>
+        <run_flow_in>background</run_flow_in>
+        <run_on_extended>false</run_on_extended>
+        <run_when_setting>both</run_when_setting>
+        <run_when_user_list/>
+        <run_when_user_setting>any</run_when_user_setting>
+        <sys_class_name>sys_flow_record_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:41:30</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d05b0c40616703107f44de777df040ad</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:30</sys_updated_on>
+        <table>u_rfid_scan_events</table>
+        <trigger_definition/>
+    </sys_flow_record_trigger>
+    <sys_trigger_runner_mapping action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <data>{"run_flow_in":"background","run_when_user_list":[],"run_when_setting":"both","run_when_user_setting":"any","run_on_extended":"false"}</data>
+        <identifier>b5074848612703107f44de777df04071</identifier>
+        <identifier_type>flow</identifier_type>
+        <runner>FDTriggerRunner</runner>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:41:30</sys_created_on>
+        <sys_id>d85b0c40616703107f44de777df040ae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:30</sys_updated_on>
+        <trigger display_value="">d05b0c40616703107f44de777df040ad</trigger>
+    </sys_trigger_runner_mapping>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=b5074848612703107f44de777df04071^sys_idNOT INd85b0c40616703107f44de777df040ae"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=b5074848612703107f44de777df04071"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=b5074848612703107f44de777df04071^sys_idNOT IN75074848612703107f44de777df04072"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>b5074848612703107f44de777df04071</id>
+        <name>Campus RFID Security Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:22:45</sys_created_on>
+        <sys_id>75074848612703107f44de777df04072</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:22:45</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=75074848612703107f44de777df04072"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=b5074848612703107f44de777df04071^sys_idNOT INa5278c48612703107f44de777df04093,c9278c48612703107f44de777df04036"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Campus RFID Security Flow">b5074848612703107f44de777df04071</model>
+        <model_id>b5074848612703107f44de777df04071</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_b5074848612703107f44de777df04071</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:23:18</sys_created_on>
+        <sys_id>a5278c48612703107f44de777df04093</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:19</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=a5278c48612703107f44de777df04093"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Campus RFID Security Flow">b5074848612703107f44de777df04071</model>
+        <model_id>b5074848612703107f44de777df04071</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_b5074848612703107f44de777df04071</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:23:16</sys_created_on>
+        <sys_id>c9278c48612703107f44de777df04036</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:19</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=c9278c48612703107f44de777df04036"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=b5074848612703107f44de777df04071"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=b5074848612703107f44de777df04071"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=b5074848612703107f44de777df04071^sys_idNOT IN38274844612703107f44de777df040af"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Campus RFID Security Flow">b5074848612703107f44de777df04071</flow>
+        <generation_source/>
+        <name>Created</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:23:15</sys_created_on>
+        <sys_id>38274844612703107f44de777df040af</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:29</sys_updated_on>
+        <trigger_definition display_value="Created">798916a0c31322002841b63b12d3ae7c</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/9VYXW/iOBT9K1GediVGygeU0rdZoNpKs1MtMLsPVTdyYhusNQ6TOOmwo/73vc4HhHxQaNIZ+lIptrHPPT733Os+fNc5cgnXb/QFcjnRezoTkgQC8cV2Q2BYqmFHoLWaWyOBkfSDrX4jg4j0dBr46wVZbziSsJgiHsKgH2AS6DdmT48Rj8h8G95h2Al+n2yT7aln0/AdOQFl2Ak9JBwSEyFDmMQshG23f2VrZrd3E20OK7RpvsJbMY4DIvSbh8eevkEB7C7Vyd9LU0wd71EPjSxieLZpW5ZhWNd9072yXdPCNiKGARuWqSjBlTWM7GMl3yQRmOAdDRWyAoLwveDb3YoVcJ0Ss0bfQvYf7H5tqHWUAHaPpHO7TyejJB32Vj7zyP1GMl+kIynOdNLn0Vp8TvErMglFEZc5mTAShbAf2SjICkSGiM5X/tMsP/CWiSS6bJL7HuK7LyRlwNxIklARThkH6p2Um9CPggT9bDq+n02cvz8uxr9PZ85sOl/M7saL6UR/TuJyvkZqxxRhhsVJw3neKeCWEY4TlSTacOA2e3roBWwjP3qSxbnwnnt7MY99gVnCTEXQXj4VHgo6Z+CYog2jUdNe4cRc1/9M/6wKOR08T7tXVwhhghq069KCdouR10CTNSQUozum4mzkFBn3DeMnCTnzpdfqeO1jwif77XSYXC5B2UxsosR1nhC4jyN9B2HsFHhUSwHTS8JOY3t+UcFBJOAHzu4+qjpOaNvx94mFAPcBMnFOvkYp6R/AlmhOVXICLKefshNmkdB8uEf4o3lRAExJLbc6erdGy4xg2JATTxY0Qb+Exa8/WBgysSwE0YQhYagCYXc6SE3LA06hhC2xPHaZ4tUriUvcllL97Dw3TUpdQi1jqLLcNGyXmsbQGCCKbcPwrEKeV8E0opQlwbxJvp+X7WEiVX6CEssUZ+CNYq6cJKP4UIM5CUoimamMu4FmdgTNUtBK5mif5Y47WabDk1JHdSS0jrsDhGMEv8CnmuSJ/ki5/wTG3N4bXeT9uwz8SOCyO6kjNCa0/Qrtl4zOX9/OJ6kfkON4DldckkPuLyWXNRLbDrzRpqY7In1igCXa4IbuYDRyPWRROrwaEssseeMeRi22d+GJL4gvrlNvkz/WCieu09sZztgCYMUlzwbY3h8zYda6Yzr3PnzwaUWEA1ADhyunq9jhkjNM8rlus71ydLzP77YZT69H3sAcDr0hvHgg42mfuMjsWwM0Gl7Z14NSxlegHIMpa5j5Ie+gcBsmQBrc4Es6dVmP+7eUbUikVOWodQ0X0PQmW6D0zELhVLekJR7jB9pnX3y426/T5gTqYfI2fqNifgoode3aD0Xl+nJVaS4AyW8wfoBEtawNnF3c66ykqPgw1tavM9K/HoyoXe9HdFTnR3swzTAvvhc5MX/ixkysa0pO1X9cm0aNXcQrJFySSbG9ONL/dEWK2Tkp1tuRYrfuufJcbHySvgbsO6p3SRPSYdFTEIjj06KXT3wNJjQ4U2NUy/6DSbDmbjW5IsAwh14bztcUmLYmfqTGVJHt9P1TcaW9faX0wbCWtWaXV9VKuun2bU3wEA0GdkOnPSq/resAvYD34mvc2TkT16Xg0UJ33r7lPWtLXUGyh4o4sYh1GnV9JWsXdW0teynq9lXq2H8GalBcaP15/B8X7+5H3x8AAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_create</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=b5074848612703107f44de777df04071^sys_idNOT IN3de8044c612703107f44de777df040fb"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus RFID Security Flow">b5074848612703107f44de777df04071</flow>
+        <generation_source/>
+        <order>2</order>
+        <parent_ui_id>c3865bba-f306-4466-a017-68359979e34e</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:30:57</sys_created_on>
+        <sys_id>3de8044c612703107f44de777df040fb</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:44:36</sys_updated_on>
+        <ui_id>cfc4b1e0-7621-45b4-89fe-3c34f5e18db8</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VTW/bMAz9K4XOhmE3XdDmVrTIaWuBZeilawXZomMBsuxJVNosyH8fZSlp1zb7AHYpsNxEPlLv0U/M7YYpyWZsWkLx4ayc1pNyMjkuiuPTk7KaTqryWE4EwAnLmBEdEBJFpYGPh4ythPYh6LmD2luFay40WHSUk8oNWqxvEmSRAEfnO0DdKi0tGDa7vcvYICz1RLBstnmR+lOGWlSgCfolUDzAGNfDm7GPz2uPrmKitzLwKTIGjwhGAhFphHaQsU4YKbC3azZD6ylgQchro9d7RKsMUkMWsI9OfadrT4uAa4CU1RBz+yNP84rh5lKgWFDnGr1N0LrtVQ0uzkRCI7zGi+exCLgeUPUmlowyU3WvfWeu4kjYvsHu81DEOyIBQ9AZmCcZzaLtHz7vWM6VGUeSkrqvhd6fBKJVlcfAZ8NAQ0eNeCeGQZklH2y/UmMxcenypaZD3uj+gS51amlyUQfiOY1V5HOKX47hG2FVUPGJ2lDxNmNu7S60cO5JCw2Rf/OBSVSWNPA4hlBSWzXgOV2wgkR3m+2sL6E4O2issnoy0uh295PtR7dzJb/6opjIzeaCbIAgeZmT22limHtufFeB3W7vCe4c4K+wI2CE1ilL44DXFdYb7lDQ3SHPUXUwVtlGSQ4ranbwlkhk5B2MH3HeCI9tb8mmVP+o8D486RWEFxsRrVq2IYgCvYshAw+v3/n/mfz9avu9A3erba5AS/eGJXd7DTr6GKQ+WvTFbkvJo5uUTPut/Ff7rZwW4+8dbbko7t0vuWf/ZwfW3d0POirqpOsHAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=3de8044c612703107f44de777df040fb"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=b5074848612703107f44de777df04071"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=b5074848612703107f44de777df04071^sys_idNOT IN39974488612703107f44de777df04079"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">bd4bc840616703107f44de777df04073</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus RFID Security Flow">b5074848612703107f44de777df04071</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>1</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:25:13</sys_created_on>
+        <sys_id>39974488612703107f44de777df04079</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:29</sys_updated_on>
+        <ui_id>c3865bba-f306-4466-a017-68359979e34e</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Uy27bMBD8lUJnQdAjNhrfghQBCrQN0AS5tAGxIlc2UYpU+bDjGv73LvWwjcRBH+ixN3GWuzszHGiXmOC74N29uXJOLnWy+PKYJlJHjL53iYYWk0XCjRbSS6NZD6TJGlSIBfoU0nUKtg9HhK+kEhbHaR1Y6vFok8XuWclvO2QKalTUeOet1Etql4JOTQ5NcckLXpXzqszz8u1FUc+ruihFBQgV3Zsarydybz70SPoq67iPcDdtMlZEWkWeJvjkUQuk1Q0oh2nSghbgjd0eEIsgbrU6Aiup/aC4hScnf9DscjaLFxskjXy043Bko1WTS0ZyvO0iwQHxUKvJQqNCqz8NOqLJ2EBQ/sTk4GgedpF0ZDFSau5WZvN5WngjdS9wLCrDQR1O4MmGOnh08WFQYUuDWAtdR+awzpq17JuJS5stFR2yRpkNLY1JyYBH4hl5BNkN4e96+AGsjCo+0hhqHmjW4CRnfaponLckYd/bwr6HSGgQOEphgxt0wXErO39Fe9Y4st6nLyN5ksbd7poeyaNgRcaDJQ98FhgEvzKWnkfs919Dnlein/Uyun/a/i9yfgmzZlbks/M5v5ify/mZhL8e7vIX4Y7P8ZvZzvP8f7hPwy0dG0I6ahuC8bfZfoxBHja4ITcCuXRE5D5i76e/cixsKQCSn0IbY79FCUds/xP4yGhy3wUAAA==</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=b5074848612703107f44de777df04071"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=b5074848612703107f44de777df04071"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_b5074848612703107f44de777df04071</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:23:17</sys_created_on>
+        <sys_id>e1278c48612703107f44de777df0408d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:23:17</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_b5074848612703107f44de777df04071</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:23:18</sys_created_on>
+        <sys_id>ed278c48612703107f44de777df040b2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:23:18</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_b5074848612703107f44de777df04071"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_b5074848612703107f44de777df04071"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Detects unauthorized RFID scans of campus assets and creates a security alert.</description>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>campus_rfid_security_flow</internal_name>
+        <label_cache>[{"name":"Created_1.run_start_date_time","label":"Trigger - Record Created➛Run Start Date/Time","type":"glide_date_time","base_type":"glide_date_time","usedInstances":{"cfc4b1e0-7621-45b4-89fe-3c34f5e18db8":["u_created_date"]},"attributes":{"test_input_hidden":"true"}},{"name":"Created_1.current.u_asset","label":"Trigger - Record Created➛RFID Scan Events Record➛Asset","reference":"u_campus_asset","reference_display":"Campus Asset","type":"reference","base_type":"reference","parent_table_name":"u_rfid_scan_events","column_name":"u_asset","usedInstances":{"cfc4b1e0-7621-45b4-89fe-3c34f5e18db8":["u_asset"]}},{"name":"Created_1.current.u_number","label":"Trigger - Record Created➛RFID Scan Events Record➛Number","reference":"","reference_display":"Number","type":"string","base_type":"string","parent_table_name":"u_rfid_scan_events","column_name":"u_number","usedInstances":{"cfc4b1e0-7621-45b4-89fe-3c34f5e18db8":["u_alert_id"]}},{"name":"Created_1.current.u_authorized","label":"Trigger - Record Created➛RFID Scan Events Record➛Authorized","reference":"","reference_display":"Authorized","type":"boolean","base_type":"boolean","parent_table_name":"u_rfid_scan_events","column_name":"u_authorized","usedInstances":{"c3865bba-f306-4466-a017-68359979e34e":["condition"]}},{"name":"Created_1.current","label":"Trigger - Record Created➛RFID Scan Events Record","reference":"u_rfid_scan_events","reference_display":"RFID Scan Events","type":"reference","base_type":"reference","usedInstances":{"cfc4b1e0-7621-45b4-89fe-3c34f5e18db8":["u_rfid_event"]},"attributes":{}}]</label_cache>
+        <master>true</master>
+        <name>Campus RFID Security Flow</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="Campus RFID Security Flow">b5074848612703107f44de777df04071</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:41:29</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>cc5b0c40616703107f44de777df0407e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:29</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=cc5b0c40616703107f44de777df0407e"/>
+    <sys_variable_value action="delete_multiple" query="document_key=cc5b0c40616703107f44de777df0407e"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=cc5b0c40616703107f44de777df0407e"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=cc5b0c40616703107f44de777df0407e^sys_idNOT IN4c5b0c40616703107f44de777df0407f"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>cc5b0c40616703107f44de777df0407e</id>
+        <name>Campus RFID Security Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:41:29</sys_created_on>
+        <sys_id>4c5b0c40616703107f44de777df0407f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:29</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=4c5b0c40616703107f44de777df0407f"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=cc5b0c40616703107f44de777df0407e^sys_idNOT IN0c5b0c40616703107f44de777df04091,8c5b0c40616703107f44de777df04080"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Campus RFID Security Flow">cc5b0c40616703107f44de777df0407e</model>
+        <model_id>cc5b0c40616703107f44de777df0407e</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_cc5b0c40616703107f44de777df0407e</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:41:29</sys_created_on>
+        <sys_id>0c5b0c40616703107f44de777df04091</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:29</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=0c5b0c40616703107f44de777df04091"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Campus RFID Security Flow">cc5b0c40616703107f44de777df0407e</model>
+        <model_id>cc5b0c40616703107f44de777df0407e</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_cc5b0c40616703107f44de777df0407e</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:41:29</sys_created_on>
+        <sys_id>8c5b0c40616703107f44de777df04080</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:29</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=8c5b0c40616703107f44de777df04080"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=cc5b0c40616703107f44de777df0407e"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=cc5b0c40616703107f44de777df0407e"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=cc5b0c40616703107f44de777df0407e^sys_idNOT IN5c5b0c40616703107f44de777df040a4"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Campus RFID Security Flow">cc5b0c40616703107f44de777df0407e</flow>
+        <generation_source/>
+        <name>Created</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:41:30</sys_created_on>
+        <sys_id>5c5b0c40616703107f44de777df040a4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:30</sys_updated_on>
+        <trigger_definition display_value="Created">798916a0c31322002841b63b12d3ae7c</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/9VYXW/iOBT9K1GediVGygeU0rdZoNpKs1MtMLsPVTdyYhusNQ6TOOmwo/73vc4HhHxQaNIZ+lIptrHPPT733Os+fNc5cgnXb/QFcjnRezoTkgQC8cV2Q2BYqmFHoLWaWyOBkfSDrX4jg4j0dBr46wVZbziSsJgiHsKgH2AS6DdmT48Rj8h8G95h2Al+n2yT7aln0/AdOQFl2Ak9JBwSEyFDmMQshG23f2VrZrd3E20OK7RpvsJbMY4DIvSbh8eevkEB7C7Vyd9LU0wd71EPjSxieLZpW5ZhWNd9072yXdPCNiKGARuWqSjBlTWM7GMl3yQRmOAdDRWyAoLwveDb3YoVcJ0Ss0bfQvYf7H5tqHWUAHaPpHO7TyejJB32Vj7zyP1GMl+kIynOdNLn0Vp8TvErMglFEZc5mTAShbAf2SjICkSGiM5X/tMsP/CWiSS6bJL7HuK7LyRlwNxIklARThkH6p2Um9CPggT9bDq+n02cvz8uxr9PZ85sOl/M7saL6UR/TuJyvkZqxxRhhsVJw3neKeCWEY4TlSTacOA2e3roBWwjP3qSxbnwnnt7MY99gVnCTEXQXj4VHgo6Z+CYog2jUdNe4cRc1/9M/6wKOR08T7tXVwhhghq069KCdouR10CTNSQUozum4mzkFBn3DeMnCTnzpdfqeO1jwif77XSYXC5B2UxsosR1nhC4jyN9B2HsFHhUSwHTS8JOY3t+UcFBJOAHzu4+qjpOaNvx94mFAPcBMnFOvkYp6R/AlmhOVXICLKefshNmkdB8uEf4o3lRAExJLbc6erdGy4xg2JATTxY0Qb+Exa8/WBgysSwE0YQhYagCYXc6SE3LA06hhC2xPHaZ4tUriUvcllL97Dw3TUpdQi1jqLLcNGyXmsbQGCCKbcPwrEKeV8E0opQlwbxJvp+X7WEiVX6CEssUZ+CNYq6cJKP4UIM5CUoimamMu4FmdgTNUtBK5mif5Y47WabDk1JHdSS0jrsDhGMEv8CnmuSJ/ki5/wTG3N4bXeT9uwz8SOCyO6kjNCa0/Qrtl4zOX9/OJ6kfkON4DldckkPuLyWXNRLbDrzRpqY7In1igCXa4IbuYDRyPWRROrwaEssseeMeRi22d+GJL4gvrlNvkz/WCieu09sZztgCYMUlzwbY3h8zYda6Yzr3PnzwaUWEA1ADhyunq9jhkjNM8rlus71ydLzP77YZT69H3sAcDr0hvHgg42mfuMjsWwM0Gl7Z14NSxlegHIMpa5j5Ie+gcBsmQBrc4Es6dVmP+7eUbUikVOWodQ0X0PQmW6D0zELhVLekJR7jB9pnX3y426/T5gTqYfI2fqNifgoode3aD0Xl+nJVaS4AyW8wfoBEtawNnF3c66ykqPgw1tavM9K/HoyoXe9HdFTnR3swzTAvvhc5MX/ixkysa0pO1X9cm0aNXcQrJFySSbG9ONL/dEWK2Tkp1tuRYrfuufJcbHySvgbsO6p3SRPSYdFTEIjj06KXT3wNJjQ4U2NUy/6DSbDmbjW5IsAwh14bztcUmLYmfqTGVJHt9P1TcaW9faX0wbCWtWaXV9VKuun2bU3wEA0GdkOnPSq/resAvYD34mvc2TkT16Xg0UJ33r7lPWtLXUGyh4o4sYh1GnV9JWsXdW0teynq9lXq2H8GalBcaP15/B8X7+5H3x8AAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_create</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=cc5b0c40616703107f44de777df0407e^sys_idNOT IN585b0c40616703107f44de777df040a3"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus RFID Security Flow">cc5b0c40616703107f44de777df0407e</flow>
+        <generation_source/>
+        <order>2</order>
+        <parent_ui_id>c3865bba-f306-4466-a017-68359979e34e</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:41:29</sys_created_on>
+        <sys_id>585b0c40616703107f44de777df040a3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:29</sys_updated_on>
+        <ui_id>cfc4b1e0-7621-45b4-89fe-3c34f5e18db8</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VTW/bMAz9K4XOhmE3XdDmVrTIaWuBZeilawXZomMBsuxJVNosyH8fZSlp1zb7AHYpsNxEPlLv0U/M7YYpyWZsWkLx4ayc1pNyMjkuiuPTk7KaTqryWE4EwAnLmBEdEBJFpYGPh4ythPYh6LmD2luFay40WHSUk8oNWqxvEmSRAEfnO0DdKi0tGDa7vcvYICz1RLBstnmR+lOGWlSgCfolUDzAGNfDm7GPz2uPrmKitzLwKTIGjwhGAhFphHaQsU4YKbC3azZD6ylgQchro9d7RKsMUkMWsI9OfadrT4uAa4CU1RBz+yNP84rh5lKgWFDnGr1N0LrtVQ0uzkRCI7zGi+exCLgeUPUmlowyU3WvfWeu4kjYvsHu81DEOyIBQ9AZmCcZzaLtHz7vWM6VGUeSkrqvhd6fBKJVlcfAZ8NAQ0eNeCeGQZklH2y/UmMxcenypaZD3uj+gS51amlyUQfiOY1V5HOKX47hG2FVUPGJ2lDxNmNu7S60cO5JCw2Rf/OBSVSWNPA4hlBSWzXgOV2wgkR3m+2sL6E4O2issnoy0uh295PtR7dzJb/6opjIzeaCbIAgeZmT22limHtufFeB3W7vCe4c4K+wI2CE1ilL44DXFdYb7lDQ3SHPUXUwVtlGSQ4ranbwlkhk5B2MH3HeCI9tb8mmVP+o8D486RWEFxsRrVq2IYgCvYshAw+v3/n/mfz9avu9A3erba5AS/eGJXd7DTr6GKQ+WvTFbkvJo5uUTPut/Ff7rZwW4+8dbbko7t0vuWf/ZwfW3d0POirqpOsHAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=585b0c40616703107f44de777df040a3"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=cc5b0c40616703107f44de777df0407e"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=cc5b0c40616703107f44de777df0407e^sys_idNOT INd05b0c40616703107f44de777df040a2"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">bd4bc840616703107f44de777df04073</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus RFID Security Flow">cc5b0c40616703107f44de777df0407e</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>1</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:41:29</sys_created_on>
+        <sys_id>d05b0c40616703107f44de777df040a2</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:29</sys_updated_on>
+        <ui_id>c3865bba-f306-4466-a017-68359979e34e</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXWvbMBT9K0PPxvijCWveSkph0K2wlr5sxVxLciMmS54+kmYm/31XluOENmML2+PerCPdq3OO7sE90d513tkHfWWteFZk8eUpIUIFDL97oqDlZEGoVkw4oVU1AAlZg/RhAz+ZsJ2E7eMBoSshmeFjtw4M1jhuyKJ/tSUYFjQZNPklzWlZzMsiy4r3F3k9L+u8YCVwKLGhhJpLPLrc03h3OyDJL/m5bRdw64xQz+P6duxyvwe1YYFVniWEvziuGEc+DUjLE9KCYuC02U6I4cDulDwAK6FcFNzCixU/8MJiNgsHG44S6ejGtKxGpyLcXIMDpOKp82YyTgvKbTSH8Qa8dMtjLB6464LUWOKglvtqLX2rPkVHyNTg6GG8RRK8C0oD9VFHc7/Sm897ljdCDa6Mm1JTkNMKHHpXexf49IRL3mKjqoWuQ0erzui1GIqRS5s+S1ykjdQbvDRMVwo0EE/RWEhvEL8e4EcwIqj4iG2wONKswQpaDZOI7dAmTnYJsVu7lGDtQSS6W333gWKUPIqroj+hhBrRuSu8ec1HHbvk7WAfzXTfL/GtHWdVnlJv0BWX+gq8W2mDr8x2u68+y0o29HobgHPLz0vLJcyaWZ7NTqflYn4qLSdycmZEit9EJLzPHyYky7L/EfnriAhbxcEetcVh+ncJeQpxiHdOXlNhkdpDwD7s/xBhY4vDJegxtNHmWxB1wHY/AREMsMNrBgAA</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=cc5b0c40616703107f44de777df0407e"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=cc5b0c40616703107f44de777df0407e"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_cc5b0c40616703107f44de777df0407e</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:41:29</sys_created_on>
+        <sys_id>445b0c40616703107f44de777df0408d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:29</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_cc5b0c40616703107f44de777df0407e</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:41:29</sys_created_on>
+        <sys_id>cc5b0c40616703107f44de777df04097</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:29</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_cc5b0c40616703107f44de777df0407e"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_cc5b0c40616703107f44de777df0407e"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>b5074848612703107f44de777df04071</sys_id>
+        <latest_snapshot>cc5b0c40616703107f44de777df0407e</latest_snapshot>
+        <compiler_build>glide-australia-02-11-2026__patch3-hotfix1-06-18-2026_06-19-2026_0938.zip</compiler_build>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=b5074848612703107f44de777df04071^sys_idNOT IN9c5b0c40616703107f44de777df040af"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.OncePerRecord</binding_strategy>
+        <plan>{"@class":"com.snc.process_flow.engine.serialization.plan_data.ChunkingPlanData","chunk_data":{"table":"sys_flow_trigger_plan","id":"9c5b0c40616703107f44de777df040af","name":"plan","plan_signature":null},"plan_data":"CHUNKING_PLAN"}</plan>
+        <plan_id>b5074848612703107f44de777df04071</plan_id>
+        <snapshot>bd0c80c0616703107f44de777df04098</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 13:41:30</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>9c5b0c40616703107f44de777df040af</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:41:30</sys_updated_on>
+        <trigger display_value="">d05b0c40616703107f44de777df040ad</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=b5074848612703107f44de777df04071"/>
+</record_update>

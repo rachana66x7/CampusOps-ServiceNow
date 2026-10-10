@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="9aacf3ae74d703107f4432944eb1910a" label="Asset Maintenance" max_length="40" name="u_asset_maintenance" type="collection">
+        <element choice="1" label="Status" mandatory="true" max_length="40" name="u_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Open" sequence="100" value="open"/>
+                <element inactive_on_update="false" label="Cancelled" sequence="500" value="cancelled"/>
+                <element inactive_on_update="false" label="Completed" sequence="400" value="completed"/>
+                <element inactive_on_update="false" label="Assigned" sequence="200" value="assigned"/>
+                <element inactive_on_update="false" label="In Progress" sequence="300" value="in_progress"/>
+            </choice>
+        </element>
+        <element label="Completion Date" max_length="40" name="u_completion_date" type="glide_date_time"/>
+        <element label="Asset" mandatory="true" max_length="32" name="u_asset" reference="u_campus_asset" type="reference"/>
+        <element label="Remarks" max_length="255" name="u_remarks" type="string"/>
+        <element display="true" label="Maintenance ID" max_length="40" name="u_maintenance_id" type="string"/>
+        <element label="Repair Cost" max_length="40" name="u_repair_cost" type="decimal"/>
+        <element choice="1" label="Priority" mandatory="true" max_length="40" name="u_priority" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Critical" sequence="400" value="critical"/>
+                <element inactive_on_update="false" label="Low" sequence="100" value="low"/>
+                <element inactive_on_update="false" label="Medium" sequence="200" value="medium"/>
+                <element inactive_on_update="false" label="High" sequence="300" value="high"/>
+            </choice>
+        </element>
+        <element label="Issue" mandatory="true" max_length="255" name="u_issue" type="string"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="u_number" type="string"/>
+        <element label="Reported Date" mandatory="true" max_length="40" name="u_reported_date" type="glide_date_time"/>
+        <element label="Assigned To" max_length="32" name="u_assigned_to" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="u_asset"/>
+        </index>
+        <index name="index2">
+            <element name="u_assigned_to"/>
+        </index>
+    </element>
+</database>

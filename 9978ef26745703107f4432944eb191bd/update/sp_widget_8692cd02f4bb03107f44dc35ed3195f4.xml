@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+    var c = this;
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>&#13;
+.co-launchpad {&#13;
+  position: relative;&#13;
+  isolation: isolate;&#13;
+  display: grid;&#13;
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr);&#13;
+  align-items: center;&#13;
+  gap: 16px;&#13;
+  box-sizing: border-box;&#13;
+  width: 100%;&#13;
+  min-height: 445px;&#13;
+  padding: 42px 40px 32px;&#13;
+  overflow: hidden;&#13;
+  border: 1px solid rgba(255,255,255,.88);&#13;
+  border-radius: 28px;&#13;
+  background:&#13;
+    radial-gradient(ellipse at 85% 8%, rgba(255,255,255,.96), transparent 36%),&#13;
+    radial-gradient(ellipse at 62% 90%, rgba(216,196,255,.48), transparent 38%),&#13;
+    linear-gradient(120deg, #f0e8ff 0%, #e7dbff 48%, #fcecff 100%);&#13;
+  box-shadow: 0 18px 48px rgba(91,65,125,.10);&#13;
+  color: #302344;&#13;
+  font-family: Inter, "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;&#13;
+  -webkit-font-smoothing: antialiased;&#13;
+}&#13;
+&#13;
+.co-launchpad *,&#13;
+.co-launchpad *::before,&#13;
+.co-launchpad *::after {&#13;
+  box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.co-launch-content {&#13;
+  position: relative;&#13;
+  z-index: 2;&#13;
+  min-width: 0;&#13;
+  max-width: 650px;&#13;
+}&#13;
+&#13;
+.co-orb {&#13;
+  position: absolute;&#13;
+  z-index: -1;&#13;
+  border-radius: 50%;&#13;
+  pointer-events: none;&#13;
+}&#13;
+&#13;
+.co-orb-one {&#13;
+  width: 320px;&#13;
+  height: 320px;&#13;
+  top: -200px;&#13;
+  right: 8%;&#13;
+  background: rgba(255,255,255,.42);&#13;
+}&#13;
+&#13;
+.co-orb-two {&#13;
+  width: 240px;&#13;
+  height: 240px;&#13;
+  bottom: -180px;&#13;
+  left: 30%;&#13;
+  background: rgba(202,177,255,.30);&#13;
+}&#13;
+&#13;
+.co-eyebrow {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 9px;&#13;
+  margin: 0 0 23px;&#13;
+  color: #80689e;&#13;
+  font-size: 9px;&#13;
+  font-weight: 750;&#13;
+  letter-spacing: 2px;&#13;
+}&#13;
+&#13;
+.co-live-dot {&#13;
+  width: 8px;&#13;
+  height: 8px;&#13;
+  flex: 0 0 8px;&#13;
+  border-radius: 50%;&#13;
+  background: #7bbda1;&#13;
+  box-shadow: 0 0 0 4px rgba(123,189,161,.16);&#13;
+}&#13;
+&#13;
+.co-welcome h1 {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  flex-wrap: wrap;&#13;
+  gap: 8px;&#13;
+  margin: 0;&#13;
+  color: #302344;&#13;
+  font-size: clamp(29px, 3vw, 40px);&#13;
+  font-weight: 720;&#13;
+  letter-spacing: -1.45px;&#13;
+  line-height: 1.17;&#13;
+}&#13;
+&#13;
+.co-welcome-sparkle {&#13;
+  width: 25px;&#13;
+  height: 25px;&#13;
+  flex: 0 0 25px;&#13;
+  color: #9671d1;&#13;
+  filter: drop-shadow(0 3px 6px rgba(124,83,183,.22));&#13;
+}&#13;
+&#13;
+.co-welcome p {&#13;
+  margin: 11px 0 23px;&#13;
+  color: #77658d;&#13;
+  font-size: 13px;&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+.co-message-card {&#13;
+  display: flex;&#13;
+  align-items: flex-start;&#13;
+  gap: 13px;&#13;
+  width: 100%;&#13;
+  max-width: 570px;&#13;
+  padding: 17px;&#13;
+  border: 1px solid rgba(255,255,255,.88);&#13;
+  border-radius: 18px;&#13;
+  background: rgba(255,255,255,.43);&#13;
+  box-shadow: 0 8px 26px rgba(79,51,113,.055);&#13;
+  backdrop-filter: blur(18px);&#13;
+  -webkit-backdrop-filter: blur(18px);&#13;
+}&#13;
+&#13;
+.co-message-icon {&#13;
+  display: flex;&#13;
+  flex: 0 0 40px;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  width: 40px;&#13;
+  height: 40px;&#13;
+  border: 1px solid rgba(255,255,255,.9);&#13;
+  border-radius: 13px;&#13;
+  background: rgba(255,255,255,.67);&#13;
+  color: #805ab6;&#13;
+  font-size: 21px;&#13;
+}&#13;
+&#13;
+.co-message-copy {&#13;
+  flex: 1;&#13;
+  min-width: 0;&#13;
+}&#13;
+&#13;
+.co-message-label {&#13;
+  margin: 1px 0 7px;&#13;
+  color: #856ca5;&#13;
+  font-size: 9px;&#13;
+  font-weight: 750;&#13;
+  letter-spacing: 1.35px;&#13;
+}&#13;
+&#13;
+.co-message-copy h2 {&#13;
+  margin: 0 0 6px;&#13;
+  color: #352549;&#13;
+  font-size: 16px;&#13;
+  font-weight: 700;&#13;
+  line-height: 1.4;&#13;
+}&#13;
+&#13;
+.co-message-copy p {&#13;
+  margin: 0;&#13;
+  color: #756486;&#13;
+  font-size: 12px;&#13;
+  line-height: 1.7;&#13;
+}&#13;
+&#13;
+.co-due-detail {&#13;
+  display: flex;&#13;
+  flex-wrap: wrap;&#13;
+  align-items: center;&#13;
+  gap: 7px;&#13;
+  margin-top: 12px;&#13;
+  color: #624584;&#13;
+  font-size: 10px;&#13;
+  font-weight: 650;&#13;
+  line-height: 1.5;&#13;
+}&#13;
+&#13;
+.co-due-separator {&#13;
+  color: #a693bd;&#13;
+}&#13;
+&#13;
+.co-actions {&#13;
+  display: flex;&#13;
+  flex-wrap: wrap;&#13;
+  gap: 10px;&#13;
+  margin-top: 18px;&#13;
+}&#13;
+&#13;
+.co-glass-btn {&#13;
+  display: inline-flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  gap: 16px;&#13;
+  min-height: 43px;&#13;
+  padding: 11px 15px;&#13;
+  border: 1px solid rgba(255,255,255,.92);&#13;
+  border-radius: 13px;&#13;
+  background: rgba(255,255,255,.34);&#13;
+  box-shadow: 0 5px 18px rgba(67,43,95,.055);&#13;
+  color: #4d3869 !important;&#13;
+  font-size: 11px;&#13;
+  font-weight: 700;&#13;
+  text-decoration: none !important;&#13;
+  backdrop-filter: blur(18px);&#13;
+  -webkit-backdrop-filter: blur(18px);&#13;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;&#13;
+}&#13;
+&#13;
+.co-glass-btn:hover,&#13;
+.co-glass-btn:focus {&#13;
+  transform: translateY(-2px);&#13;
+  background: rgba(255,255,255,.72);&#13;
+  box-shadow: 0 9px 23px rgba(67,43,95,.12);&#13;
+  text-decoration: none !important;&#13;
+}&#13;
+&#13;
+.co-glass-primary {&#13;
+  border-color: rgba(255,255,255,.7);&#13;
+  background: rgba(121,85,177,.82);&#13;
+  color: #fff !important;&#13;
+}&#13;
+&#13;
+.co-glass-primary:hover,&#13;
+.co-glass-primary:focus {&#13;
+  background: #7653ad;&#13;
+  color: #fff !important;&#13;
+}&#13;
+&#13;
+.co-btn-arrow {&#13;
+  font-size: 15px;&#13;
+  line-height: 1;&#13;
+}&#13;
+&#13;
+.co-stats {&#13;
+  display: flex;&#13;
+  flex-wrap: wrap;&#13;
+  align-items: center;&#13;
+  gap: 19px;&#13;
+  margin-top: 24px;&#13;
+}&#13;
+&#13;
+.co-stat {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  gap: 4px;&#13;
+}&#13;
+&#13;
+.co-stat-number {&#13;
+  color: #39294e;&#13;
+  font-size: 21px;&#13;
+  font-weight: 750;&#13;
+  line-height: 1.2;&#13;
+  font-variant-numeric: tabular-nums;&#13;
+}&#13;
+&#13;
+.co-stat-label {&#13;
+  color: #806e95;&#13;
+  font-size: 10px;&#13;
+  line-height: 1.5;&#13;
+}&#13;
+&#13;
+.co-stat-divider {&#13;
+  width: 1px;&#13;
+  height: 29px;&#13;
+  background: rgba(119,91,151,.20);&#13;
+}&#13;
+&#13;
+/* Right-side illustration */&#13;
+&#13;
+.co-artwork {&#13;
+  position: relative;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  justify-self: stretch;&#13;
+  width: 100%;&#13;
+  min-width: 0;&#13;
+  height: 330px;&#13;
+}&#13;
+&#13;
+.co-art-glow {&#13;
+  position: absolute;&#13;
+  width: 225px;&#13;
+  height: 225px;&#13;
+  border-radius: 50%;&#13;
+  background: radial-gradient(circle, rgba(255,255,255,.84), rgba(232,216,255,.25) 57%, transparent 73%);&#13;
+}&#13;
+&#13;
+.co-art-ring {&#13;
+  position: absolute;&#13;
+  border: 1px solid rgba(139,106,188,.19);&#13;
+  border-radius: 50%;&#13;
+}&#13;
+&#13;
+.co-art-ring-outer {&#13;
+  width: 265px;&#13;
+  height: 265px;&#13;
+  box-shadow: 0 0 0 17px rgba(255,255,255,.09);&#13;
+}&#13;
+&#13;
+.co-art-ring-inner {&#13;
+  width: 195px;&#13;
+  height: 195px;&#13;
+  border-color: rgba(139,106,188,.26);&#13;
+  box-shadow: 0 0 0 12px rgba(255,255,255,.10);&#13;
+}&#13;
+&#13;
+.co-resource-orb {&#13;
+  position: relative;&#13;
+  z-index: 2;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  width: 145px;&#13;
+  height: 145px;&#13;
+  border: 1px solid rgba(255,255,255,.95);&#13;
+  border-radius: 42px;&#13;
+  background: rgba(255,255,255,.38);&#13;
+  box-shadow: 0 20px 48px rgba(92,66,135,.12);&#13;
+  backdrop-filter: blur(20px);&#13;
+  -webkit-backdrop-filter: blur(20px);&#13;
+  transform: rotate(-4deg);&#13;
+}&#13;
+&#13;
+.co-resource-core {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  width: 112px;&#13;
+  height: 112px;&#13;
+  border: 1px solid rgba(255,255,255,.9);&#13;
+  border-radius: 33px;&#13;
+  background: linear-gradient(145deg, rgba(255,255,255,.86), rgba(246,235,255,.80));&#13;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.95);&#13;
+}&#13;
+&#13;
+.co-resource-svg {&#13;
+  width: 83px;&#13;
+  height: 83px;&#13;
+  filter: drop-shadow(0 5px 7px rgba(92,66,135,.10));&#13;
+}&#13;
+&#13;
+.co-float-card {&#13;
+  position: absolute;&#13;
+  z-index: 4;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 10px;&#13;
+  padding: 12px 13px;&#13;
+  border: 1px solid rgba(255,255,255,.9);&#13;
+  border-radius: 15px;&#13;
+  background: rgba(255,255,255,.63);&#13;
+  box-shadow: 0 12px 30px rgba(79,51,113,.09);&#13;
+  backdrop-filter: blur(20px);&#13;
+  -webkit-backdrop-filter: blur(20px);&#13;
+}&#13;
+&#13;
+.co-float-book {&#13;
+  top: 30px;&#13;
+  left: -3px;&#13;
+  min-width: 190px;&#13;
+}&#13;
+&#13;
+.co-book-icon {&#13;
+  position: relative;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  width: 31px;&#13;
+  height: 32px;&#13;
+}&#13;
+&#13;
+.co-book-icon span {&#13;
+  position: absolute;&#13;
+  width: 13px;&#13;
+  height: 23px;&#13;
+  border-radius: 3px 3px 2px 2px;&#13;
+  box-shadow: 1px 2px 2px rgba(70,45,95,.10);&#13;
+}&#13;
+&#13;
+.co-book-green {&#13;
+  left: 1px;&#13;
+  top: 4px;&#13;
+  background: #a9d9a2;&#13;
+  transform: rotate(-7deg);&#13;
+}&#13;
+&#13;
+.co-book-lilac {&#13;
+  left: 9px;&#13;
+  top: 2px;&#13;
+  background: #b9a0eb;&#13;
+}&#13;
+&#13;
+.co-book-pink {&#13;
+  left: 17px;&#13;
+  top: 7px;&#13;
+  background: #efaed5;&#13;
+  transform: rotate(6deg);&#13;
+}&#13;
+&#13;
+.co-float-copy {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  gap: 4px;&#13;
+  min-width: 0;&#13;
+}&#13;
+&#13;
+.co-float-title {&#13;
+  color: #5c4679;&#13;
+  font-size: 9px;&#13;
+  font-weight: 750;&#13;
+  letter-spacing: .8px;&#13;
+  white-space: nowrap;&#13;
+}&#13;
+&#13;
+.co-float-subtitle {&#13;
+  color: #8b7a9e;&#13;
+  font-size: 10px;&#13;
+  white-space: nowrap;&#13;
+}&#13;
+&#13;
+.co-float-dot {&#13;
+  width: 7px;&#13;
+  height: 7px;&#13;
+  flex: 0 0 7px;&#13;
+  margin-left: auto;&#13;
+  border-radius: 50%;&#13;
+  background: #7bbda1;&#13;
+  box-shadow: 0 0 0 3px rgba(123,189,161,.14);&#13;
+}&#13;
+&#13;
+.co-float-status {&#13;
+  right: -2px;&#13;
+  bottom: 43px;&#13;
+  min-width: 200px;&#13;
+}&#13;
+&#13;
+.co-status-icon {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  width: 30px;&#13;
+  height: 30px;&#13;
+  flex: 0 0 30px;&#13;
+  border: 1px solid rgba(255,255,255,.9);&#13;
+  border-radius: 10px;&#13;
+  background: #e1f6e9;&#13;
+  color: #408866;&#13;
+  font-size: 16px;&#13;
+  font-weight: 750;&#13;
+}&#13;
+&#13;
+.co-art-sparkle {&#13;
+  position: absolute;&#13;
+  z-index: 3;&#13;
+  color: #9874d1;&#13;
+  text-shadow: 0 3px 12px rgba(130,90,184,.15);&#13;
+}&#13;
+&#13;
+.co-art-sparkle-one {&#13;
+  top: 40px;&#13;
+  right: 35px;&#13;
+  font-size: 25px;&#13;
+}&#13;
+&#13;
+.co-art-sparkle-two {&#13;
+  left: 27px;&#13;
+  bottom: 80px;&#13;
+  color: #d89bc9;&#13;
+  font-size: 29px;&#13;
+}&#13;
+&#13;
+.co-art-sparkle-three {&#13;
+  right: 25px;&#13;
+  top: 132px;&#13;
+  color: #a88bd5;&#13;
+  font-size: 16px;&#13;
+}&#13;
+&#13;
+.co-art-caption {&#13;
+  position: absolute;&#13;
+  bottom: 4px;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  gap: 8px;&#13;
+  color: #8c77a7;&#13;
+  font-size: 8px;&#13;
+  font-weight: 750;&#13;
+  letter-spacing: 2px;&#13;
+  white-space: nowrap;&#13;
+}&#13;
+&#13;
+.co-caption-line {&#13;
+  width: 20px;&#13;
+  height: 1px;&#13;
+  background: rgba(140,119,167,.45);&#13;
+}&#13;
+&#13;
+@media (max-width: 1050px) {&#13;
+  .co-launchpad {&#13;
+    grid-template-columns: minmax(0, 1.15fr) minmax(215px, .85fr);&#13;
+    padding: 34px 28px 28px;&#13;
+  }&#13;
+&#13;
+  .co-artwork {&#13;
+    transform: scale(.9);&#13;
+  }&#13;
+&#13;
+  .co-float-book {&#13;
+    left: -12px;&#13;
+  }&#13;
+&#13;
+  .co-float-status {&#13;
+    right: -12px;&#13;
+  }&#13;
+}&#13;
+&#13;
+@media (max-width: 760px) {&#13;
+  .co-launchpad {&#13;
+    grid-template-columns: minmax(0, 1fr);&#13;
+    padding: 30px 22px;&#13;
+  }&#13;
+&#13;
+  .co-launch-content {&#13;
+    max-width: none;&#13;
+  }&#13;
+&#13;
+  .co-artwork {&#13;
+    height: 250px;&#13;
+    max-width: 390px;&#13;
+    justify-self: center;&#13;
+    margin-top: 8px;&#13;
+    transform: scale(.88);&#13;
+  }&#13;
+&#13;
+  .co-float-book {&#13;
+    left: 0;&#13;
+  }&#13;
+&#13;
+  .co-float-status {&#13;
+    right: 0;&#13;
+    bottom: 28px;&#13;
+  }&#13;
+}&#13;
+&#13;
+@media (max-width: 480px) {&#13;
+  .co-launchpad {&#13;
+    padding: 25px 17px;&#13;
+    border-radius: 21px;&#13;
+  }&#13;
+&#13;
+  .co-eyebrow {&#13;
+    font-size: 8px;&#13;
+    letter-spacing: 1.4px;&#13;
+  }&#13;
+&#13;
+  .co-welcome h1 {&#13;
+    font-size: 29px;&#13;
+    letter-spacing: -1px;&#13;
+  }&#13;
+&#13;
+  .co-welcome-sparkle {&#13;
+    width: 21px;&#13;
+    height: 21px;&#13;
+  }&#13;
+&#13;
+  .co-message-card {&#13;
+    padding: 13px;&#13;
+    gap: 10px;&#13;
+  }&#13;
+&#13;
+  .co-message-icon {&#13;
+    width: 35px;&#13;
+    height: 35px;&#13;
+    flex-basis: 35px;&#13;
+  }&#13;
+&#13;
+  .co-message-copy h2 {&#13;
+    font-size: 15px;&#13;
+  }&#13;
+&#13;
+  .co-message-copy p {&#13;
+    font-size: 11px;&#13;
+  }&#13;
+&#13;
+  .co-actions {&#13;
+    flex-direction: column;&#13;
+  }&#13;
+&#13;
+  .co-glass-btn {&#13;
+    justify-content: space-between;&#13;
+    width: 100%;&#13;
+  }&#13;
+&#13;
+  .co-stats {&#13;
+    gap: 12px;&#13;
+  }&#13;
+&#13;
+  .co-stat-number {&#13;
+    font-size: 19px;&#13;
+  }&#13;
+&#13;
+  .co-stat-label {&#13;
+    font-size: 9px;&#13;
+  }&#13;
+&#13;
+  .co-artwork {&#13;
+    width: 100%;&#13;
+    transform: scale(.78);&#13;
+    margin: -8px 0;&#13;
+  }&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Personalized student welcome and rental overview</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>campusops_launchpad_hero</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CampusOps Launchpad Hero</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[
+(function() {
+    data.studentName = gs.getUserDisplayName() || "there";
+    data.activeCount = 0;
+    data.dueSoonCount = 0;
+    data.overdueCount = 0;
+    data.returnedCount = 0;
+    data.nextRental = null;
+
+    var now = new GlideDateTime();
+    var nowMs = now.getNumericValue();
+    var DAY_MS = 86400000;
+    var nearestRental = null;
+    var nearestDueMs = null;
+
+    var rentals = new GlideRecord("u_student_rental");
+    rentals.addQuery("u_student", gs.getUserID());
+    rentals.addQuery("u_status", "active");
+    rentals.orderBy("u_due_date");
+    rentals.query();
+
+    while (rentals.next()) {
+        data.activeCount++;
+
+        var dueValue = rentals.getValue("u_due_date");
+        if (!dueValue) {
+            continue;
+        }
+
+        var dueDate = new GlideDateTime(dueValue);
+        var dueMs = dueDate.getNumericValue();
+        var daysLeft = Math.ceil((dueMs - nowMs) / DAY_MS);
+
+        if (daysLeft < 0) {
+            data.overdueCount++;
+        } else if (daysLeft <= 2) {
+            data.dueSoonCount++;
+        }
+
+        if (nearestRental === null || dueMs < nearestDueMs) {
+            nearestRental = {
+                assetName: rentals.getDisplayValue("u_asset"),
+                number: rentals.getDisplayValue("u_number"),
+                dueDate: ""
+            };
+
+            // Format the due date as a friendly display string.
+            var dateOnly = dueValue.substring(0, 10);
+            var parts = dateOnly.split("-");
+            var monthNames = [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ];
+
+            if (parts.length === 3) {
+                var monthIndex = parseInt(parts[1], 10) - 1;
+                var dayNumber = parseInt(parts[2], 10);
+
+                if (monthIndex >= 0 && monthIndex < 12) {
+                    nearestRental.dueDate =
+                        "Due " + monthNames[monthIndex] + " " + dayNumber;
+                }
+            }
+
+            nearestDueMs = dueMs;
+        }
+    }
+
+    data.nextRental = nearestRental;
+
+    var returned = new GlideAggregate("u_student_rental");
+    returned.addQuery("u_student", gs.getUserID());
+    returned.addQuery("u_status", "returned");
+    returned.addAggregate("COUNT");
+    returned.query();
+
+    if (returned.next()) {
+        data.returnedCount =
+            parseInt(returned.getAggregate("COUNT"), 10) || 0;
+    }
+
+    if (data.overdueCount > 0) {
+        data.messageLabel = "NEEDS YOUR ATTENTION";
+        data.messageTitle = "Let's get an overdue return sorted.";
+        data.messageBody =
+            "One or more rentals are overdue. Check your borrowing shelf for the affected item and return options.";
+
+    } else if (data.dueSoonCount > 0) {
+        data.messageLabel = "A LITTLE HEADS-UP";
+        data.messageTitle = "Something is due soon.";
+        data.messageBody = nearestRental
+            ? nearestRental.assetName +
+              " is due soon. Check the due date and see whether renewal is available."
+            : "You have an upcoming return. Check your borrowing shelf.";
+
+    } else if (data.activeCount > 0) {
+        data.messageLabel = "YOUR BORROWING UPDATE";
+        data.messageTitle = "You're all set for now.";
+        data.messageBody =
+            "Keep enjoying your campus resources. Your current rentals are listed below, so you can check their due dates anytime.";
+
+    } else {
+        data.messageLabel = "READY FOR YOUR NEXT DISCOVERY?";
+        data.messageTitle = "Nothing to return today.";
+        data.messageBody =
+            "Looking for a textbook, laptop, or lab kit for your next class? Explore the resources available across campus.";
+    }
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 09:08:57</sys_created_on>
+        <sys_id>8692cd02f4bb03107f44dc35ed3195f4</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CampusOps Launchpad Hero</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_widget_8692cd02f4bb03107f44dc35ed3195f4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 09:20:15</sys_updated_on>
+        <template><![CDATA[
+<div class="co-launchpad">
+  <div class="co-orb co-orb-one"></div>
+  <div class="co-orb co-orb-two"></div>
+
+  <div class="co-launch-content">
+    <div class="co-eyebrow">
+      <span class="co-live-dot"></span>
+      YOUR CAMPUS RESOURCE STUDIO
+    </div>
+
+    <div class="co-welcome">
+      <h1>
+        Hey, {{data.studentName}}!
+        <svg class="co-welcome-sparkle" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M20 2 L24 15 L38 20 L24 24 L20 38 L16 24 L2 20 L16 15 Z" fill="currentColor"/>
+        </svg>
+      </h1>
+      <p>Hope you're having a great day.</p>
+    </div>
+
+    <div class="co-message-card">
+      <div class="co-message-icon">
+        <span ng-if="data.overdueCount > 0">↗</span>
+        <span ng-if="data.overdueCount === 0 && data.dueSoonCount > 0">◷</span>
+        <span ng-if="data.overdueCount === 0 && data.dueSoonCount === 0 && data.activeCount === 0">✧</span>
+        <span ng-if="data.overdueCount === 0 && data.dueSoonCount === 0 && data.activeCount > 0">♡</span>
+      </div>
+
+      <div class="co-message-copy">
+        <div class="co-message-label">{{data.messageLabel}}</div>
+        <h2>{{data.messageTitle}}</h2>
+        <p>{{data.messageBody}}</p>
+
+        <div class="co-due-detail" ng-if="data.nextRental">
+          <span>{{data.nextRental.assetName}}</span>
+          <span class="co-due-separator">·</span>
+          <span>{{data.nextRental.dueDate}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="co-actions">
+      <a class="co-glass-btn co-glass-primary" href="?id=my_rentals">
+        <span>My borrowing shelf</span>
+        <span class="co-btn-arrow">↗</span>
+      </a>
+
+      <a class="co-glass-btn" href="?id=browse_assets">
+        <span>Explore resources</span>
+        <span class="co-btn-arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="co-stats">
+      <div class="co-stat">
+        <span class="co-stat-number">{{data.activeCount}}</span>
+        <span class="co-stat-label">Active rentals</span>
+      </div>
+      <div class="co-stat-divider"></div>
+      <div class="co-stat">
+        <span class="co-stat-number">{{data.dueSoonCount}}</span>
+        <span class="co-stat-label">Due soon</span>
+      </div>
+      <div class="co-stat-divider"></div>
+      <div class="co-stat">
+        <span class="co-stat-number">{{data.returnedCount}}</span>
+        <span class="co-stat-label">Items returned</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative resource illustration -->
+  <div class="co-artwork" aria-hidden="true">
+    <div class="co-art-glow"></div>
+    <div class="co-art-ring co-art-ring-outer"></div>
+    <div class="co-art-ring co-art-ring-inner"></div>
+
+    <div class="co-art-sparkle co-art-sparkle-one">✦</div>
+    <div class="co-art-sparkle co-art-sparkle-two">✧</div>
+    <div class="co-art-sparkle co-art-sparkle-three">✳</div>
+
+    <div class="co-float-card co-float-book">
+      <div class="co-book-icon">
+        <span class="co-book-green"></span>
+        <span class="co-book-lilac"></span>
+        <span class="co-book-pink"></span>
+      </div>
+      <div class="co-float-copy">
+        <span class="co-float-title">YOUR LIBRARY</span>
+        <span class="co-float-subtitle">Ideas start here</span>
+      </div>
+      <span class="co-float-dot"></span>
+    </div>
+
+    <div class="co-resource-orb">
+      <div class="co-resource-core">
+        <svg viewBox="0 0 100 100" class="co-resource-svg">
+          <path d="M17 26 Q33 18 49 28 L49 72 Q33 63 17 72 Z" fill="#B7A0EC"/>
+          <path d="M51 28 Q67 18 83 26 L83 72 Q67 63 51 72 Z" fill="#EAA9D2"/>
+          <path d="M50 29 L50 74" stroke="#8B6CC0" stroke-width="3" stroke-linecap="round"/>
+          <path d="M24 35 L41 39 M24 44 L41 48 M59 39 L76 35 M59 48 L76 44" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity=".85"/>
+          <path d="M24 79 L76 79" stroke="#9A83C8" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="co-float-card co-float-status">
+      <div class="co-status-icon">✓</div>
+      <div class="co-float-copy">
+        <span class="co-float-title">CAMPUS RESOURCES</span>
+        <span class="co-float-subtitle">All in one place</span>
+      </div>
+    </div>
+
+    <div class="co-art-caption">
+      <span class="co-caption-line"></span>
+      BORROW <span>·</span> USE <span>·</span> RETURN
+      <span class="co-caption-line"></span>
+    </div>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>8692cd02f4bb03107f44dc35ed3195f4</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 09:08:27</sys_created_on>
+        <sys_id>7103c942f4bb03107f44dc35ed31955e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 09:08:27</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

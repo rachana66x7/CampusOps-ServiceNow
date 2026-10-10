@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_search_sort_option">
+    <sys_search_sort_option action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <ais_field_name>sort_by_date</ais_field_name>
+        <ascending>false</ascending>
+        <gui_label>Most recent</gui_label>
+        <search_context_config display_value="Campus Asset AI Assistant">a4d8c2bc4da703107f44aa992ac32609</search_context_config>
+        <sys_class_name>sys_search_sort_option</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 06:45:24</sys_created_on>
+        <sys_id>56d806bc4da703107f44aa992ac326d7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Most recent</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_search_sort_option_56d806bc4da703107f44aa992ac326d7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 06:45:24</sys_updated_on>
+    </sys_search_sort_option>
+</record_update>

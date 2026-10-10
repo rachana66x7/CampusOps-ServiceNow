@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_row">
+    <sp_row action="DELETE">
+        <aria_label/>
+        <class_name/>
+        <order>1</order>
+        <semantic_tag/>
+        <sp_column/>
+        <sp_container display_value="CampusOps Home - Container 1">38bf4f5314e303107f447c04997f5a6f</sp_container>
+        <sys_class_name>sp_row</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 06:20:21</sys_created_on>
+        <sys_id>61df439314e303107f447c04997f5a17</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_row_61df439314e303107f447c04997f5a17</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:20:21</sys_updated_on>
+    </sp_row>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CampusOps">9978ef26745703107f4432944eb191bd</application>
+        <file_path/>
+        <instance_id>0ad18dc7c38fcf94a03197af050131d3</instance_id>
+        <instance_name>ltm-hck-2876-0037</instance_name>
+        <name>sp_row_61df439314e303107f447c04997f5a17</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_row"><sp_row action="INSERT_OR_UPDATE"><aria_label/><class_name/><order>1</order><semantic_tag/><sp_column/><sp_container display_value="CampusOps Home - Container 1">38bf4f5314e303107f447c04997f5a6f</sp_container><sys_class_name>sp_row</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-10-01 06:20:21</sys_created_on><sys_id>61df439314e303107f447c04997f5a17</sys_id><sys_mod_count>0</sys_mod_count><sys_name>1</sys_name><sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package><sys_policy/><sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope><sys_update_name>sp_row_61df439314e303107f447c04997f5a17</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-10-01 06:20:21</sys_updated_on></sp_row></record_update>]]></payload>
+        <payload_hash>1143349931</payload_hash>
+        <record_name>1</record_name>
+        <reverted_from/>
+        <source>f5785b0dc9a703107f449dae971dec2d</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 06:20:21</sys_created_on>
+        <sys_id>25dfc79314e303107f447c04997f5a52</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0f61f00430000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:20:21</sys_updated_on>
+        <type>Row</type>
+        <update_guid>25df4393fae303100818b7edb3d9b019</update_guid>
+        <update_guid_history>25df4393fae303100818b7edb3d9b019:1143349931</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="1">2affcf9314e303107f447c04997f5a97</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 06:20:58</sys_created_on>
+        <sys_db_object display_value="" name="sp_row">sp_row</sys_db_object>
+        <sys_id>05479965169e4132a050d0e9026a7439</sys_id>
+        <sys_metadata>61df439314e303107f447c04997f5a17</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_scope_delete display_value="">9bc7a4e05c8b4c4d862c4fb4630d5629</sys_scope_delete>
+        <sys_update_name>sp_row_61df439314e303107f447c04997f5a17</sys_update_name>
+        <sys_update_version display_value="sp_row_61df439314e303107f447c04997f5a17">25dfc79314e303107f447c04997f5a52</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:20:58</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

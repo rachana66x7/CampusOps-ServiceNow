@@ -1,0 +1,959 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,timeFromCreateToActivate=1113629000,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Extends active campus asset rentals by updating the return date while keeping the rental and asset status active.</description>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source/>
+        <internal_name>campus_asset_renewal_flow</internal_name>
+        <label_cache>[{"name":"Updated_1.current","label":"Trigger - Record Updated➛Student Rental Record","reference":"u_student_rental","reference_display":"Student Rental","type":"reference","base_type":"reference","usedInstances":{"f469c6a6-73ac-46cd-87a5-6474dc78fe40":["record"]},"attributes":{}},{"name":"Updated_1.current.u_renewal_count","label":"Trigger - Record Updated➛Student Rental Record➛Renewal Count","reference":"","reference_display":"Renewal Count","type":"integer","base_type":"integer","parent_table_name":"u_student_rental","column_name":"u_renewal_count","usedInstances":{"f469c6a6-73ac-46cd-87a5-6474dc78fe40":["u_renewal_count"]}}]</label_cache>
+        <master_snapshot>78b48dd3549b03107f4433035850b62c</master_snapshot>
+        <master_snapshot_digest/>
+        <name>Campus Asset Renewal Flow</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>2d751b5f14e303107f447c04997f5afc</remote_trigger_id>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:24:25</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d34df413545b03107f4433035850b642</sys_id>
+        <sys_mod_count>22</sys_mod_count>
+        <sys_name>Campus Asset Renewal Flow</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_hub_flow_d34df413545b03107f4433035850b642</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:44:56</sys_updated_on>
+        <type>flow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record>ea755b5f14e303107f447c04997f5ab2</version_record>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=d34df413545b03107f4433035850b642"/>
+    <sys_variable_value action="delete_multiple" query="document_key=d34df413545b03107f4433035850b642"/>
+    <sys_flow_record_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition table="u_student_rental">u_status=active^u_renewal_requested=true<item display_value="Active" endquery="false" field="u_status" goto="false" newquery="false" operator="=" or="false" value="active"/>
+            <item endquery="false" field="u_renewal_requested" goto="false" newquery="false" operator="=" or="false" value="true"/>
+        </condition>
+        <name/>
+        <on_delete>false</on_delete>
+        <on_insert>false</on_insert>
+        <on_update>true</on_update>
+        <published_version/>
+        <run_flow_in>background</run_flow_in>
+        <run_on_extended>false</run_on_extended>
+        <run_when_setting>both</run_when_setting>
+        <run_when_user_list/>
+        <run_when_user_setting>any</run_when_user_setting>
+        <sys_class_name>sys_flow_record_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 06:44:56</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2d751b5f14e303107f447c04997f5afc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:44:56</sys_updated_on>
+        <table>u_student_rental</table>
+        <trigger_definition/>
+    </sys_flow_record_trigger>
+    <sys_trigger_runner_mapping action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <data>{"run_flow_in":"background","run_when_user_list":[],"run_when_setting":"both","run_when_user_setting":"any","run_on_extended":"false"}</data>
+        <identifier>d34df413545b03107f4433035850b642</identifier>
+        <identifier_type>flow</identifier_type>
+        <runner>FDTriggerRunner</runner>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 06:44:56</sys_created_on>
+        <sys_id>e1751b5f14e303107f447c04997f5afe</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:44:56</sys_updated_on>
+        <trigger display_value="">2d751b5f14e303107f447c04997f5afc</trigger>
+    </sys_trigger_runner_mapping>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=d34df413545b03107f4433035850b642^sys_idNOT INe1751b5f14e303107f447c04997f5afe"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=d34df413545b03107f4433035850b642"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=d34df413545b03107f4433035850b642^sys_idNOT IN174df413545b03107f4433035850b643"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>d34df413545b03107f4433035850b642</id>
+        <name>Campus Asset Renewal Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:24:25</sys_created_on>
+        <sys_id>174df413545b03107f4433035850b643</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 09:24:25</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=174df413545b03107f4433035850b643"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=d34df413545b03107f4433035850b642^sys_idNOT IN586df813545b03107f4433035850b6ca,946db49f541b03107f4433035850b618,9c6df813545b03107f4433035850b6bf"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDCollection,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+        <model display_value="Campus Asset Renewal Flow">d34df413545b03107f4433035850b642</model>
+        <model_id>d34df413545b03107f4433035850b642</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_d34df413545b03107f4433035850b642</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:24:46</sys_created_on>
+        <sys_id>586df813545b03107f4433035850b6ca</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 09:24:46</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=586df813545b03107f4433035850b6ca"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Campus Asset Renewal Flow">d34df413545b03107f4433035850b642</model>
+        <model_id>d34df413545b03107f4433035850b642</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_d34df413545b03107f4433035850b642</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:24:46</sys_created_on>
+        <sys_id>946db49f541b03107f4433035850b618</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 09:34:55</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=946db49f541b03107f4433035850b618"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Campus Asset Renewal Flow">d34df413545b03107f4433035850b642</model>
+        <model_id>d34df413545b03107f4433035850b642</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_d34df413545b03107f4433035850b642</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:24:46</sys_created_on>
+        <sys_id>9c6df813545b03107f4433035850b6bf</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 09:34:55</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=9c6df813545b03107f4433035850b6bf"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=d34df413545b03107f4433035850b642"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=d34df413545b03107f4433035850b642"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=d34df413545b03107f4433035850b642^sys_idNOT INcc6db49f541b03107f4433035850b610"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Campus Asset Renewal Flow">d34df413545b03107f4433035850b642</flow>
+        <generation_source/>
+        <name>Updated</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:24:45</sys_created_on>
+        <sys_id>cc6db49f541b03107f4433035850b610</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:44:50</sys_updated_on>
+        <trigger_definition display_value="Updated">bb695e60c31322002841b63b12d3aea5</trigger_definition>
+        <trigger_inputs>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</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_update</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=d34df413545b03107f4433035850b642^sys_idNOT INf0d1cd9b545b03107f4433035850b6fa"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Renewal Flow">d34df413545b03107f4433035850b642</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:44:11</sys_created_on>
+        <sys_id>f0d1cd9b545b03107f4433035850b6fa</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-02 21:01:43</sys_updated_on>
+        <ui_id>f469c6a6-73ac-46cd-87a5-6474dc78fe40</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VV2U4iQRT9FVLPpNMNapS3icRkEkcTnfHF0c7trgtWUr1YC8gQ/n1uLQ0EjEvGFzK8QN2tzjl9D32/ZIKzETtCnmZn2Uk5zIbDQZoOTo+y4mRYZAM+BMSM9VkNFVKlwrJRnM4zkNYFlstfLQeDPM+S0iqFtVmtKM+FbiUs7mIZRconITnl2ej+oc9aUDTRoGKj5U7qo5AkFCip9KbDtIvRLFp35k1pK8KViy54GTvHMdP7PqYMNTk4Wdpn+GKw5khAJiA19lkFNbFs1IKNjLIUUAj8upaLdcWTqE0gWsGLFn/o5qPU1U2QmJVRhPUxjwKF8GQMBm5pcmmsWuvViBJ10ITjBKw059uxUHDdGtHUocVAIbvuRtqqvgqKsPWAredhNYHA1vF0yAOtye1TM7/pQF6I2ksSKcqmBLk+gTFKFNY4OEuGEr3GFbStqKd5q5qZ8M0EpUqmkg7JRDZzulOLaZ1A6XAnpCokFxQf+/AdKOFI/KAx1LzqM73Q5xK03lAhDfNn65AEYpFC7lXwEuR+E1xzqURrvtFVM4zAV/249MXxWxtWnm0WamvmZvFtro3197qdJzR7O38b8r2bLv85B3wAX+eAn/65v443mmAvdrnd27sKiWiB4y+zwOkhWSDSOHgPvLf56eDN/9atTfLLrne2HozVv22aDjn48Y/WWQDnIOn7merpbRDy/trH8HvfH/8063Ne+gDjzksXAiXXr0jQGQkrImEwD5LsmCkme3cxuX6nfJmjspPUfw7IV//Lq6ULEujV6uEvgSb7Fl0JAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=f0d1cd9b545b03107f4433035850b6fa"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=d34df413545b03107f4433035850b642"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=d34df413545b03107f4433035850b642"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=d34df413545b03107f4433035850b642"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=d34df413545b03107f4433035850b642"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_d34df413545b03107f4433035850b642</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:24:46</sys_created_on>
+        <sys_id>1c6df813545b03107f4433035850b6ba</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 09:24:46</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>changed_fields</element>
+        <help/>
+        <hint/>
+        <label>Changed Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_d34df413545b03107f4433035850b642</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:24:46</sys_created_on>
+        <sys_id>1c6df813545b03107f4433035850b6d1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 09:24:46</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_d34df413545b03107f4433035850b642</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:24:46</sys_created_on>
+        <sys_id>d06df813545b03107f4433035850b6c6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 09:24:46</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_d34df413545b03107f4433035850b642"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_d34df413545b03107f4433035850b642"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Extends active campus asset rentals by updating the return date while keeping the rental and asset status active.</description>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>campus_asset_renewal_flow</internal_name>
+        <label_cache>[{"name":"Updated_1.current","label":"Trigger - Record Updated➛Student Rental Record","reference":"u_student_rental","reference_display":"Student Rental","type":"reference","base_type":"reference","usedInstances":{"f469c6a6-73ac-46cd-87a5-6474dc78fe40":["record"]},"attributes":{}},{"name":"Updated_1.current.u_renewal_count","label":"Trigger - Record Updated➛Student Rental Record➛Renewal Count","reference":"","reference_display":"Renewal Count","type":"integer","base_type":"integer","parent_table_name":"u_student_rental","column_name":"u_renewal_count","usedInstances":{"f469c6a6-73ac-46cd-87a5-6474dc78fe40":["u_renewal_count"]}}]</label_cache>
+        <master>true</master>
+        <name>Campus Asset Renewal Flow</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="Campus Asset Renewal Flow">d34df413545b03107f4433035850b642</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:56:45</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>78b48dd3549b03107f4433035850b62c</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:44:56</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=78b48dd3549b03107f4433035850b62c"/>
+    <sys_variable_value action="delete_multiple" query="document_key=78b48dd3549b03107f4433035850b62c"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=78b48dd3549b03107f4433035850b62c"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=78b48dd3549b03107f4433035850b62c^sys_idNOT INb0b48dd3549b03107f4433035850b63a"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>78b48dd3549b03107f4433035850b62c</id>
+        <name>Campus Asset Renewal Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:56:45</sys_created_on>
+        <sys_id>b0b48dd3549b03107f4433035850b63a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 09:56:45</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=b0b48dd3549b03107f4433035850b63a"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=78b48dd3549b03107f4433035850b62c^sys_idNOT IN09b48dd3549b03107f4433035850b68a,74b48dd3549b03107f4433035850b63b,7cb48dd3549b03107f4433035850b64d"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Campus Asset Renewal Flow">78b48dd3549b03107f4433035850b62c</model>
+        <model_id>78b48dd3549b03107f4433035850b62c</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_78b48dd3549b03107f4433035850b62c</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:56:46</sys_created_on>
+        <sys_id>09b48dd3549b03107f4433035850b68a</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:44:55</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=09b48dd3549b03107f4433035850b68a"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Campus Asset Renewal Flow">78b48dd3549b03107f4433035850b62c</model>
+        <model_id>78b48dd3549b03107f4433035850b62c</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_78b48dd3549b03107f4433035850b62c</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:56:45</sys_created_on>
+        <sys_id>74b48dd3549b03107f4433035850b63b</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:44:55</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=74b48dd3549b03107f4433035850b63b"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDCollection,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+        <model display_value="Campus Asset Renewal Flow">78b48dd3549b03107f4433035850b62c</model>
+        <model_id>78b48dd3549b03107f4433035850b62c</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_78b48dd3549b03107f4433035850b62c</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:56:46</sys_created_on>
+        <sys_id>7cb48dd3549b03107f4433035850b64d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 10:11:31</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=7cb48dd3549b03107f4433035850b64d"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=78b48dd3549b03107f4433035850b62c"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=78b48dd3549b03107f4433035850b62c"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=78b48dd3549b03107f4433035850b62c^sys_idNOT INcdb48dd3549b03107f4433035850b69b"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Campus Asset Renewal Flow">78b48dd3549b03107f4433035850b62c</flow>
+        <generation_source/>
+        <name>Updated</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:56:46</sys_created_on>
+        <sys_id>cdb48dd3549b03107f4433035850b69b</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:44:55</sys_updated_on>
+        <trigger_definition display_value="Updated">bb695e60c31322002841b63b12d3aea5</trigger_definition>
+        <trigger_inputs>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</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_update</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=78b48dd3549b03107f4433035850b62c^sys_idNOT INc9b48dd3549b03107f4433035850b69a"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Renewal Flow">78b48dd3549b03107f4433035850b62c</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:56:46</sys_created_on>
+        <sys_id>c9b48dd3549b03107f4433035850b69a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:44:56</sys_updated_on>
+        <ui_id>f469c6a6-73ac-46cd-87a5-6474dc78fe40</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VV2U4iQRT9FVLPpNMNapS3icRkEkcTnfHF0c7trgtWUr1YC8gQ/n1uLQ0EjEvGFzK8QN2tzjl9D32/ZIKzETtCnmZn2Uk5zIbDQZoOTo+y4mRYZAM+BMSM9VkNFVKlwrJRnM4zkNYFlstfLQeDPM+S0iqFtVmtKM+FbiUs7mIZRconITnl2ej+oc9aUDTRoGKj5U7qo5AkFCip9KbDtIvRLFp35k1pK8KViy54GTvHMdP7PqYMNTk4Wdpn+GKw5khAJiA19lkFNbFs1IKNjLIUUAj8upaLdcWTqE0gWsGLFn/o5qPU1U2QmJVRhPUxjwKF8GQMBm5pcmmsWuvViBJ10ITjBKw059uxUHDdGtHUocVAIbvuRtqqvgqKsPWAredhNYHA1vF0yAOtye1TM7/pQF6I2ksSKcqmBLk+gTFKFNY4OEuGEr3GFbStqKd5q5qZ8M0EpUqmkg7JRDZzulOLaZ1A6XAnpCokFxQf+/AdKOFI/KAx1LzqM73Q5xK03lAhDfNn65AEYpFC7lXwEuR+E1xzqURrvtFVM4zAV/249MXxWxtWnm0WamvmZvFtro3197qdJzR7O38b8r2bLv85B3wAX+eAn/65v443mmAvdrnd27sKiWiB4y+zwOkhWSDSOHgPvLf56eDN/9atTfLLrne2HozVv22aDjn48Y/WWQDnIOn7merpbRDy/trH8HvfH/8063Ne+gDjzksXAiXXr0jQGQkrImEwD5LsmCkme3cxuX6nfJmjspPUfw7IV//Lq6ULEujV6uEvgSb7Fl0JAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c9b48dd3549b03107f4433035850b69a"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=78b48dd3549b03107f4433035850b62c"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=78b48dd3549b03107f4433035850b62c"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=78b48dd3549b03107f4433035850b62c"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=78b48dd3549b03107f4433035850b62c"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>changed_fields</element>
+        <help/>
+        <hint/>
+        <label>Changed Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_78b48dd3549b03107f4433035850b62c</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:56:46</sys_created_on>
+        <sys_id>45b48dd3549b03107f4433035850b686</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 09:56:46</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_78b48dd3549b03107f4433035850b62c</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:56:46</sys_created_on>
+        <sys_id>89b48dd3549b03107f4433035850b690</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 09:56:46</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_78b48dd3549b03107f4433035850b62c</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:56:46</sys_created_on>
+        <sys_id>f4b48dd3549b03107f4433035850b649</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 09:56:46</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_78b48dd3549b03107f4433035850b62c"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_78b48dd3549b03107f4433035850b62c"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>d34df413545b03107f4433035850b642</sys_id>
+        <latest_snapshot>78b48dd3549b03107f4433035850b62c</latest_snapshot>
+        <compiler_build>glide-australia-02-11-2026__patch3-hotfix1-06-18-2026_06-19-2026_0938.zip</compiler_build>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=d34df413545b03107f4433035850b642^sys_idNOT INcdb48dd3549b03107f4433035850b6a4"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.OncePerUniqueChange</binding_strategy>
+        <plan>{"@class":"com.snc.process_flow.engine.serialization.plan_data.ChunkingPlanData","chunk_data":{"table":"sys_flow_trigger_plan","id":"cdb48dd3549b03107f4433035850b6a4","name":"plan","plan_signature":null},"plan_data":"CHUNKING_PLAN"}</plan>
+        <plan_id>d34df413545b03107f4433035850b642</plan_id>
+        <snapshot>792323b3a86703107f443d2aade4b570</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 09:56:46</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>cdb48dd3549b03107f4433035850b6a4</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:44:56</sys_updated_on>
+        <trigger display_value="">2d751b5f14e303107f447c04997f5afc</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=d34df413545b03107f4433035850b642"/>
+</record_update>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Student-friendly campus asset details</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>campusops_asset_details</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CampusOps Asset Details</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.found = false;
+
+    var sysId = $sp.getParameter('sys_id');
+
+    if (!sysId)
+        return;
+
+    var asset = new GlideRecord('u_campus_asset');
+
+    if (!asset.get(sysId))
+        return;
+
+    data.found = true;
+
+    data.asset = {
+        name: asset.getDisplayValue('u_asset_name'),
+        type: asset.getDisplayValue('u_asset_type'),
+        location: asset.getDisplayValue('u_location'),
+        status: asset.getDisplayValue('u_status'),
+        condition: asset.getDisplayValue('u_condition'),
+        maintenance: asset.getDisplayValue('u_maintenance_status'),
+        rentalPrice: asset.getDisplayValue('u_rental_price')
+    };
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-03 11:39:24</sys_created_on>
+        <sys_id>d31b2a8c803b03107f448844f23e9e8a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CampusOps Asset Details</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_widget_d31b2a8c803b03107f448844f23e9e8a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-03 11:41:27</sys_updated_on>
+        <template><![CDATA[<div ng-if="data.found"
+     style="padding:32px;border-radius:20px;background:linear-gradient(135deg,#faf7ff,#f0e8ff,#fceeff);border:1px solid #e7d9ff;box-shadow:0 8px 24px rgba(116,88,170,.12);">
+
+  <div style="display:flex;align-items:center;gap:20px;margin-bottom:28px;">
+    <div style="width:72px;height:72px;border-radius:20px;background:rgba(255,255,255,.8);display:flex;align-items:center;justify-content:center;font-size:36px;box-shadow:0 5px 14px rgba(120,90,170,.12);">
+      ]]>📚
+<![CDATA[    </div>
+
+    <div>
+      <div style="font-size:13px;color:#8a76a8;text-transform:uppercase;letter-spacing:1px;">
+        Campus Resource
+      </div>
+      <h1 style="margin:4px 0;color:#563b80;font-size:30px;">
+        {{data.asset.name}}
+      </h1>
+      <div style="color:#75658b;font-size:15px;">
+        {{data.asset.type}}
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+
+    <div style="padding:18px;background:#fff;border-radius:14px;border:1px solid #eadfff;">
+      <div style="font-size:12px;color:#927eaa;">]]>📍<![CDATA[ LOCATION</div>
+      <div style="margin-top:6px;font-weight:600;color:#4f4260;">
+        {{data.asset.location}}
+      </div>
+    </div>
+
+    <div style="padding:18px;background:#fff;border-radius:14px;border:1px solid #eadfff;">
+      <div style="font-size:12px;color:#927eaa;">● AVAILABILITY</div>
+      <div style="margin-top:6px;font-weight:600;color:#4f4260;">
+        {{data.asset.status}}
+      </div>
+    </div>
+
+    <div style="padding:18px;background:#fff;border-radius:14px;border:1px solid #eadfff;">
+      <div style="font-size:12px;color:#927eaa;">✨ CONDITION</div>
+      <div style="margin-top:6px;font-weight:600;color:#4f4260;">
+        {{data.asset.condition}}
+      </div>
+    </div>
+
+    <div style="padding:18px;background:#fff;border-radius:14px;border:1px solid #eadfff;">
+      <div style="font-size:12px;color:#927eaa;">]]>🛠<![CDATA[️ MAINTENANCE</div>
+      <div style="margin-top:6px;font-weight:600;color:#4f4260;">
+        {{data.asset.maintenance}}
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:26px;text-align:center;">
+    <a href="/sp?id=sc_cat_item&sys_id=94697bc7541303107f4433035850b6c5"
+       style="display:inline-block;padding:14px 30px;background:linear-gradient(135deg,#8b6fc7,#a88bdd);color:#fff;text-decoration:none;border-radius:11px;font-weight:600;box-shadow:0 6px 14px rgba(139,111,199,.25);">
+      ]]>📚<![CDATA[ Rent This Asset
+    </a>
+  </div>
+
+</div>
+
+<div ng-if="!data.found"
+     style="padding:40px;text-align:center;background:#faf7ff;border-radius:18px;color:#75658b;">
+  <div style="font-size:38px;">]]>🔎<![CDATA[</div>
+  <h3 style="color:#563b80;">Asset not found</h3>
+  <p>We couldn't find the campus resource you're looking for.</p>
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>d31b2a8c803b03107f448844f23e9e8a</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-03 11:39:23</sys_created_on>
+        <sys_id>160ca200807b03107f448844f23e9edf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-03 11:39:23</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

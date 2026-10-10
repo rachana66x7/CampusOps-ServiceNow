@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="8aefb366741b03107f4432944eb191cd" label="RFID Scan Events" max_length="40" name="u_rfid_scan_events" type="collection">
+        <element label="RFID Tag" mandatory="true" max_length="100" name="u_rfid_tag" type="string"/>
+        <element label="Gate" mandatory="true" max_length="100" name="u_gate" type="string"/>
+        <element choice="1" label="Rental Status" max_length="40" name="u_rental_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Active" sequence="100" value="active"/>
+                <element inactive_on_update="false" label="Unknown" sequence="300" value="unknown"/>
+                <element inactive_on_update="false" label="Not Active" sequence="200" value="not active"/>
+            </choice>
+        </element>
+        <element choice="1" label="Event Type" mandatory="true" max_length="40" name="u_event_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Exit" sequence="200" value="exit"/>
+                <element inactive_on_update="false" label="Entry" sequence="100" value="entry"/>
+            </choice>
+        </element>
+        <element label="Asset" max_length="32" name="u_asset" reference="u_campus_asset" type="reference"/>
+        <element label="Authorized" max_length="40" name="u_authorized" type="boolean"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="u_number" type="string"/>
+        <element display="true" label="Event ID" max_length="40" name="u_event_id" type="string"/>
+        <element label="Scan Time" mandatory="true" max_length="40" name="u_scan_time" type="glide_date_time"/>
+        <index name="index">
+            <element name="u_asset"/>
+        </index>
+    </element>
+</database>

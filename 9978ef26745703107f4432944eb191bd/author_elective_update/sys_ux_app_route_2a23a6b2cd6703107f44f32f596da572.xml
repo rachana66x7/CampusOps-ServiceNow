@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_app_route">
+    <sys_ux_app_route action="DELETE">
+        <app_config display_value="CampusOps Command Center">035201e2ac2703107f44b431d682a15e</app_config>
+        <description/>
+        <extension_point/>
+        <fields/>
+        <icon/>
+        <interoperable>false</interoperable>
+        <name>Asset Details</name>
+        <optional_parameters/>
+        <order>0</order>
+        <parent_macroponent display_value="Workspace App Shell">c276387cc331101080d6d3658940ddd2</parent_macroponent>
+        <parent_macroponent_composition_element_id/>
+        <route_type>asset-details</route_type>
+        <screen_type display_value="Asset Details">6e23a6b2cd6703107f44f32f596da56c</screen_type>
+        <sys_class_name>sys_ux_app_route</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-29 13:48:13</sys_created_on>
+        <sys_id>2a23a6b2cd6703107f44f32f596da572</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Asset Details</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_ux_app_route_2a23a6b2cd6703107f44f32f596da572</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-29 13:48:13</sys_updated_on>
+    </sys_ux_app_route>
+    <sys_translated_text action="DELETE" query="documentkey=2a23a6b2cd6703107f44f32f596da572"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CampusOps">9978ef26745703107f4432944eb191bd</application>
+        <file_path/>
+        <instance_id>0ad18dc7c38fcf94a03197af050131d3</instance_id>
+        <instance_name>ltm-hck-2876-0037</instance_name>
+        <name>sys_ux_app_route_2a23a6b2cd6703107f44f32f596da572</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_app_route"><sys_ux_app_route action="INSERT_OR_UPDATE"><app_config display_value="CampusOps Command Center">035201e2ac2703107f44b431d682a15e</app_config><description/><extension_point/><fields/><icon/><interoperable>false</interoperable><name>Asset Details</name><optional_parameters/><order>0</order><parent_macroponent display_value="Workspace App Shell">c276387cc331101080d6d3658940ddd2</parent_macroponent><parent_macroponent_composition_element_id/><route_type>asset-details</route_type><screen_type display_value="Asset Details">6e23a6b2cd6703107f44f32f596da56c</screen_type><sys_class_name>sys_ux_app_route</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-09-29 13:48:13</sys_created_on><sys_id>2a23a6b2cd6703107f44f32f596da572</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Asset Details</sys_name><sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package><sys_policy/><sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope><sys_update_name>sys_ux_app_route_2a23a6b2cd6703107f44f32f596da572</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-09-29 13:48:13</sys_updated_on></sys_ux_app_route><sys_translated_text action="delete_multiple" query="documentkey=2a23a6b2cd6703107f44f32f596da572"/></record_update>]]></payload>
+        <payload_hash>175388667</payload_hash>
+        <record_name>Asset Details</record_name>
+        <reverted_from/>
+        <source>f5785b0dc9a703107f449dae971dec2d</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-29 13:48:14</sys_created_on>
+        <sys_id>ea23a6b2cd6703107f44f32f596da576</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0ed6c51a40000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-29 13:48:14</sys_updated_on>
+        <type>UX App Route</type>
+        <update_guid>ea23a6b22867031039a73f24a6c88375</update_guid>
+        <update_guid_history>ea23a6b22867031039a73f24a6c88375:175388667</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-29 13:48:43</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_app_route">sys_ux_app_route</sys_db_object>
+        <sys_id>04a0664654d24e649ec0dc744c859889</sys_id>
+        <sys_metadata>2a23a6b2cd6703107f44f32f596da572</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Asset Details</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_scope_delete display_value="">9bc7a4e05c8b4c4d862c4fb4630d5629</sys_scope_delete>
+        <sys_update_name>sys_ux_app_route_2a23a6b2cd6703107f44f32f596da572</sys_update_name>
+        <sys_update_version display_value="sys_ux_app_route_2a23a6b2cd6703107f44f32f596da572">ea23a6b2cd6703107f44f32f596da576</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-29 13:48:43</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

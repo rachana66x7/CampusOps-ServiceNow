@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_macroponent">
+    <sys_ux_macroponent action="INSERT_OR_UPDATE">
+        <associated_types/>
+        <bundles>[]</bundles>
+        <category>page</category>
+        <component_dependencies/>
+        <composition>[
+    {
+        "definition": {
+            "id": "1f6e0643eca7a637e36bd7833549ec9e",
+            "type": "MACROPONENT"
+        },
+        "elementId": "heading_1",
+        "elementLabel": "Heading 1",
+        "eventMappings": [],
+        "isHidden": {
+            "type": "JSON_LITERAL",
+            "value": null
+        },
+        "preset": null,
+        "propertyValues": {
+            "align": {
+                "type": "JSON_LITERAL",
+                "value": "start"
+            },
+            "hasNoMargin": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "label": {
+                "type": "TRANSLATION_LITERAL",
+                "value": {
+                    "code": null,
+                    "comment": "",
+                    "message": "Scan Asset QR Code"
+                }
+            },
+            "level": {
+                "type": "JSON_LITERAL",
+                "value": "1"
+            },
+            "variant": {
+                "type": "JSON_LITERAL",
+                "value": "header-primary"
+            },
+            "wontWrap": {
+                "type": "JSON_LITERAL",
+                "value": false
+            }
+        },
+        "slot": null,
+        "styles": null
+    },
+    {
+        "definition": {
+            "id": "d667a5e769598b2e5c6e92ebe73394f6",
+            "type": "MACROPONENT"
+        },
+        "elementId": "textarea_1",
+        "elementLabel": "Textarea 1",
+        "eventMappings": [],
+        "isHidden": {
+            "type": "JSON_LITERAL",
+            "value": null
+        },
+        "preset": null,
+        "propertyValues": {
+            "autofocus": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "autoresize": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "autoresizeRowsLimit": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "color": {
+                "type": "JSON_LITERAL",
+                "value": "initial"
+            },
+            "cols": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "configAria": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "disableMaxHeight": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "disableMinHeight": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "disabled": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "enableCaretSlot": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "fieldLayout": {
+                "type": "JSON_LITERAL",
+                "value": {
+                    "layout": "vertical"
+                }
+            },
+            "helperContent": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "hideRequiredIndicator": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "invalid": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "label": {
+                "type": "TRANSLATION_LITERAL",
+                "value": {
+                    "code": null,
+                    "comment": "",
+                    "message": "Scan the QR code on the campus asset to view its details."
+                }
+            },
+            "landmark": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "manageInvalid": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "manageValue": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "maxlength": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "messages": {
+                "container": [],
+                "type": "LIST_CONTAINER"
+            },
+            "minlength": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "name": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "optional": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "placeholder": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "readonly": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "required": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "resize": {
+                "type": "JSON_LITERAL",
+                "value": "vertical"
+            },
+            "rows": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "showCounter": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "size": {
+                "type": "JSON_LITERAL",
+                "value": "md"
+            },
+            "value": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "wrapLabel": {
+                "type": "JSON_LITERAL",
+                "value": false
+            }
+        },
+        "slot": null,
+        "styles": null
+    },
+    {
+        "definition": {
+            "id": "d667a5e769598b2e5c6e92ebe73394f6",
+            "type": "MACROPONENT"
+        },
+        "elementId": "textarea_2",
+        "elementLabel": "Textarea 2",
+        "eventMappings": [],
+        "isHidden": {
+            "type": "JSON_LITERAL",
+            "value": null
+        },
+        "preset": null,
+        "propertyValues": {
+            "autofocus": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "autoresize": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "autoresizeRowsLimit": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "color": {
+                "type": "JSON_LITERAL",
+                "value": "initial"
+            },
+            "cols": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "configAria": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "disableMaxHeight": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "disableMinHeight": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "disabled": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "enableCaretSlot": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "fieldLayout": {
+                "type": "JSON_LITERAL",
+                "value": {
+                    "layout": "vertical"
+                }
+            },
+            "helperContent": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "hideRequiredIndicator": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "invalid": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "label": {
+                "type": "TRANSLATION_LITERAL",
+                "value": {
+                    "code": null,
+                    "comment": "",
+                    "message": "Scan / Enter Asset ID"
+                }
+            },
+            "landmark": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "manageInvalid": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "manageValue": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "maxlength": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "messages": {
+                "container": [],
+                "type": "LIST_CONTAINER"
+            },
+            "minlength": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "name": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "optional": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "placeholder": {
+                "type": "TRANSLATION_LITERAL",
+                "value": {
+                    "code": null,
+                    "comment": "",
+                    "message": "Example: AST-001"
+                }
+            },
+            "readonly": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "required": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "resize": {
+                "type": "JSON_LITERAL",
+                "value": "vertical"
+            },
+            "rows": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "showCounter": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "size": {
+                "type": "JSON_LITERAL",
+                "value": "md"
+            },
+            "value": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "wrapLabel": {
+                "type": "JSON_LITERAL",
+                "value": false
+            }
+        },
+        "slot": null,
+        "styles": null
+    },
+    {
+        "definition": {
+            "id": "d37ce8abca89d02905fed903c8e34d8e",
+            "type": "MACROPONENT"
+        },
+        "elementId": "button_1",
+        "elementLabel": "Button 1",
+        "eventMappings": [
+            {
+                "eventMappingId": "XiijjKHfggtDEeeddyeeddOkBpeehhBdfcclu",
+                "isConfiguration": false,
+                "offRowStorageId": null,
+                "sourceEventApiName": "sn_button.NOW_BUTTON#CLICKED",
+                "sourceEventCorrelationId": null,
+                "sourceEventDefinition": {
+                    "apiName": "sn_button.NOW_BUTTON#CLICKED",
+                    "id": null,
+                    "type": "UXEVENT"
+                },
+                "sourceEventSysId": null,
+                "targets": [
+                    {
+                        "broker": null,
+                        "clientScript": null,
+                        "clientTransformScript": "",
+                        "conditional": null,
+                        "declarativeAction": null,
+                        "event": {
+                            "apiName": "global.NAV_ITEM_SELECTED_RELAY_29cc345dc9e343107f449dae971dec39",
+                            "payload": {
+                                "container": {
+                                    "external": {
+                                        "type": "JSON_LITERAL",
+                                        "value": null
+                                    },
+                                    "fields": {
+                                        "container": {
+                                            "sysId": {
+                                                "type": "JSON_LITERAL",
+                                                "value": "809fc47a749b03107f4432944eb1911e"
+                                            },
+                                            "table": {
+                                                "type": "JSON_LITERAL",
+                                                "value": "u_campus_asset"
+                                            }
+                                        },
+                                        "type": "MAP_CONTAINER"
+                                    },
+                                    "multiInstField": {
+                                        "type": "JSON_LITERAL",
+                                        "value": null
+                                    },
+                                    "navigationOptions": {
+                                        "type": "JSON_LITERAL",
+                                        "value": null
+                                    },
+                                    "params": {
+                                        "type": "JSON_LITERAL",
+                                        "value": null
+                                    },
+                                    "passiveNavigation": {
+                                        "type": "JSON_LITERAL",
+                                        "value": null
+                                    },
+                                    "redirect": {
+                                        "type": "JSON_LITERAL",
+                                        "value": null
+                                    },
+                                    "route": {
+                                        "type": "JSON_LITERAL",
+                                        "value": "asset-details"
+                                    },
+                                    "targetRoute": {
+                                        "type": "JSON_LITERAL",
+                                        "value": null
+                                    },
+                                    "title": {
+                                        "type": "JSON_LITERAL",
+                                        "value": null
+                                    }
+                                },
+                                "type": "MAP_CONTAINER"
+                            },
+                            "sysId": "c1c8d5d9c9a743107f449dae971dec4a"
+                        },
+                        "operation": null,
+                        "targetId": "MggSkOvccrDUMujjssGiieceeddmcvR",
+                        "type": "EVENT"
+                    },
+                    {
+                        "clientScript": null,
+                        "clientTransformScript": null,
+                        "clientTransformScriptUxValue": null,
+                        "conditional": null,
+                        "declarativeAction": null,
+                        "event": null,
+                        "operation": null,
+                        "targetId": "DccxhGfmhCEjfjjoQLlKHkixqC",
+                        "type": "EVENT"
+                    }
+                ]
+            }
+        ],
+        "isHidden": {
+            "type": "JSON_LITERAL",
+            "value": null
+        },
+        "preset": null,
+        "propertyValues": {
+            "active": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "animatedIcon": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "configAria": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "disabled": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "icon": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "label": {
+                "type": "TRANSLATION_LITERAL",
+                "value": {
+                    "code": null,
+                    "comment": "",
+                    "message": "View Asset"
+                }
+            },
+            "landmark": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "size": {
+                "type": "JSON_LITERAL",
+                "value": "md"
+            },
+            "tooltipContent": {
+                "type": "TRANSLATION_LITERAL",
+                "value": {
+                    "code": null,
+                    "comment": "",
+                    "message": "Enter a label"
+                }
+            },
+            "variant": {
+                "type": "JSON_LITERAL",
+                "value": "secondary"
+            }
+        },
+        "slot": null,
+        "styles": null
+    }
+]</composition>
+        <da_relay_models/>
+        <data>[
+    {
+        "definition": {
+            "id": "b997a84053021010cbc2ddeeff7b1228",
+            "type": "COMPOSITE"
+        },
+        "elementId": "look_up_multiple_records_1",
+        "elementLabel": "Look up multiple records 1",
+        "eventMappings": [],
+        "inputValues": {
+            "encodedQuery": {
+                "transform": {
+                    "operands": {
+                        "container": [
+                            {
+                                "type": "JSON_LITERAL",
+                                "value": "u_asset_id="
+                            },
+                            {
+                                "binding": {
+                                    "address": [
+                                        "asset_id"
+                                    ]
+                                },
+                                "type": "STATE_BINDING"
+                            }
+                        ],
+                        "type": "LIST_CONTAINER"
+                    },
+                    "operator": "CONCAT"
+                },
+                "type": "CLIENT_TRANSFORM"
+            },
+            "limit": {
+                "type": "JSON_LITERAL",
+                "value": "1"
+            },
+            "offset": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "orderBy": {
+                "type": "JSON_LITERAL",
+                "value": null
+            },
+            "queryCategory": {
+                "type": "JSON_LITERAL",
+                "value": ""
+            },
+            "returnFieldMetadata": {
+                "type": "JSON_LITERAL",
+                "value": false
+            },
+            "returnFields": {
+                "type": "JSON_LITERAL",
+                "value": "u_asset_id,u_asset_name,u_status,u_location,u_condition"
+            },
+            "sortType": {
+                "type": "JSON_LITERAL",
+                "value": "asc"
+            },
+            "table": {
+                "type": "JSON_LITERAL",
+                "value": "u_campus_asset"
+            }
+        },
+        "readEvaluationMode": "EAGER"
+    }
+]</data>
+        <description/>
+        <disable_auto_reflow>false</disable_auto_reflow>
+        <dispatched_events>c1c8d5d9c9a743107f449dae971dec4a</dispatched_events>
+        <ext_controller_dep/>
+        <extends display_value="Page Template">19be392623033300f4b4c50947bf65ba</extends>
+        <extension_point/>
+        <form_factors>{
+    "custom_ff_1": {
+        "max-width": 640,
+        "reference": "macroponent"
+    }
+}</form_factors>
+        <handled_events/>
+        <interactions/>
+        <interfaces/>
+        <internal_event_mappings>{}</internal_event_mappings>
+        <keyboard_shortcuts>{}</keyboard_shortcuts>
+        <layout>{
+    "default": {
+        "children": null,
+        "items": [
+            {
+                "element_id": "heading_1"
+            },
+            {
+                "element_id": "textarea_1"
+            },
+            {
+                "element_id": "textarea_2"
+            },
+            {
+                "element_id": "button_1"
+            }
+        ],
+        "root": null,
+        "rules": null,
+        "styles": {
+            "flex-direction": "column"
+        },
+        "templateId": "5832fd4d53c31010e6bcddeeff7b12db",
+        "type": "flex"
+    },
+    "queries": [
+        {
+            "layout": {
+                "items": [],
+                "styles": {
+                    "flex-direction": "column",
+                    "height": "auto",
+                    "min-width": null
+                },
+                "type": "flex"
+            },
+            "queryId": "custom_ff_1"
+        }
+    ],
+    "version": "3.1.0"
+}</layout>
+        <macroponent_dependencies/>
+        <name>Default</name>
+        <output_prop_mapping/>
+        <props>[]</props>
+        <required_sys_props/>
+        <required_translations>[ {
+  "message" : "Enter a label",
+  "code" : "",
+  "comment" : ""
+}, {
+  "message" : "Example: AST-001",
+  "code" : "",
+  "comment" : ""
+}, {
+  "message" : "Scan / Enter Asset ID",
+  "code" : "",
+  "comment" : ""
+}, {
+  "message" : "Scan Asset QR Code",
+  "code" : "",
+  "comment" : ""
+}, {
+  "message" : "Scan the QR code on the campus asset to view its details.",
+  "code" : "",
+  "comment" : ""
+}, {
+  "message" : "View Asset",
+  "code" : "",
+  "comment" : ""
+} ]</required_translations>
+        <root_component/>
+        <root_component_config/>
+        <root_component_definition/>
+        <schema_version>1.0.0</schema_version>
+        <state_persistence_config/>
+        <state_properties>[
+    {
+        "description": null,
+        "fieldType": "string",
+        "initialValue": {
+            "type": "JSON_LITERAL",
+            "value": null
+        },
+        "label": "newClientStateParam1",
+        "name": "asset_id",
+        "shape": "",
+        "valueType": "string"
+    }
+]</state_properties>
+        <style_config>{}</style_config>
+        <sys_class_name>sys_ux_macroponent</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-24 14:29:59</sys_created_on>
+        <sys_id>29cc345dc9e343107f449dae971dec39</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Default</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_ux_macroponent_29cc345dc9e343107f449dae971dec39</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-24 17:26:21</sys_updated_on>
+    </sys_ux_macroponent>
+    <sys_translated_text action="delete_multiple" query="documentkey=29cc345dc9e343107f449dae971dec39"/>
+</record_update>

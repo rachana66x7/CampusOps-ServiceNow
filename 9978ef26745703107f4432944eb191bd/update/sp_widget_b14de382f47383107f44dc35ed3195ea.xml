@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+  var c = this;
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>&#13;
+/* CAMPUSOPS — ASSET DETAILS */&#13;
+&#13;
+.co-asset-detail {&#13;
+  --cad-ink: #34264f;&#13;
+  --cad-muted: #82758f;&#13;
+  --cad-purple: #8062c9;&#13;
+  --cad-border: #e7ddf4;&#13;
+  width: 100%;&#13;
+  color: var(--cad-ink);&#13;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;&#13;
+  font-size: 13px;&#13;
+  line-height: 1.55;&#13;
+}&#13;
+&#13;
+.co-asset-detail * {&#13;
+  box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.co-asset-detail a {&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+.co-asset-detail a:focus-visible {&#13;
+  outline: 2px solid #8062c9;&#13;
+  outline-offset: 3px;&#13;
+}&#13;
+&#13;
+/* MAIN LAYOUT */&#13;
+&#13;
+.co-asset-detail .cad-layout {&#13;
+  display: grid;&#13;
+  grid-template-columns: 218px minmax(0, 1fr);&#13;
+  gap: 25px;&#13;
+  width: 100%;&#13;
+  align-items: stretch;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-sidebar {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  min-width: 0;&#13;
+  min-height: 690px;&#13;
+  padding: 20px 13px;&#13;
+  border: 1px solid #e9e0f5;&#13;
+  border-radius: 19px;&#13;
+  background: linear-gradient(180deg, #f8f4ff, #f3effb);&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-brand {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 10px;&#13;
+  padding: 4px 7px 24px;&#13;
+  color: #382b54;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-brand-mark {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  width: 37px;&#13;
+  height: 37px;&#13;
+  flex-shrink: 0;&#13;
+  border-radius: 11px;&#13;
+  background: #8062c9;&#13;
+  color: #fff;&#13;
+  font-size: 19px;&#13;
+  font-weight: 800;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-brand b {&#13;
+  display: block;&#13;
+  font-size: 14px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-brand small {&#13;
+  display: block;&#13;
+  margin-top: 4px;&#13;
+  color: #8b7e9e;&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-nav-label {&#13;
+  padding: 9px 10px;&#13;
+  color: #a092b6;&#13;
+  font-size: 9px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 1.1px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-nav-spaced {&#13;
+  margin-top: 18px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-nav {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 11px;&#13;
+  margin: 2px 0;&#13;
+  padding: 11px 10px;&#13;
+  border-radius: 10px;&#13;
+  color: #6e6382;&#13;
+  font-size: 11px;&#13;
+  font-weight: 600;&#13;
+  transition: background .18s, color .18s;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-nav &gt; span {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  width: 21px;&#13;
+  flex-shrink: 0;&#13;
+  color: #8d79b5;&#13;
+  font-size: 16px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-nav:hover {&#13;
+  background: rgba(255,255,255,.8);&#13;
+  color: #513a83;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-nav-active {&#13;
+  background: #e8defa;&#13;
+  color: #6245a0;&#13;
+  font-weight: 750;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-sidebar-bottom {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  gap: 4px;&#13;
+  margin-top: auto;&#13;
+  padding: 18px 8px 3px;&#13;
+  border-top: 1px solid #e4dbef;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-sidebar-bottom b {&#13;
+  color: #59446f;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-sidebar-bottom small {&#13;
+  color: #9386a5;&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+/* PAGE HEADER */&#13;
+&#13;
+.co-asset-detail .cad-main {&#13;
+  min-width: 0;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-breadcrumb {&#13;
+  display: flex;&#13;
+  gap: 9px;&#13;
+  margin: 5px 0 22px;&#13;
+  color: #a092b0;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-breadcrumb a {&#13;
+  color: #8062c9;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-header {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: space-between;&#13;
+  gap: 15px;&#13;
+  margin-bottom: 20px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-eyebrow {&#13;
+  color: #927bb7;&#13;
+  font-size: 9px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 1.2px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-header h1 {&#13;
+  margin: 8px 0 5px;&#13;
+  color: #34264f;&#13;
+  font-size: clamp(25px, 2.6vw, 33px);&#13;
+  font-weight: 800;&#13;
+  letter-spacing: -.8px;&#13;
+  line-height: 1.25;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-header p {&#13;
+  margin: 0;&#13;
+  color: #897d99;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-availability {&#13;
+  display: inline-flex;&#13;
+  align-items: center;&#13;
+  gap: 6px;&#13;
+  flex-shrink: 0;&#13;
+  padding: 7px 10px;&#13;
+  border-radius: 20px;&#13;
+  background: #eaf7ef;&#13;
+  color: #4c956f;&#13;
+  font-size: 10px;&#13;
+  font-weight: 750;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-availability &gt; span {&#13;
+  width: 6px;&#13;
+  height: 6px;&#13;
+  border-radius: 50%;&#13;
+  background: #56a77b;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-availability.cad-unavailable {&#13;
+  background: #fff0f1;&#13;
+  color: #b65c6b;&#13;
+}&#13;
+&#13;
+/* ASSET CARD — MATCHING THE APP THEME */&#13;
+&#13;
+.co-asset-detail .cad-overview {&#13;
+  position: relative;&#13;
+  overflow: hidden;&#13;
+  padding: 25px;&#13;
+  border: 1px solid rgba(255,255,255,.9);&#13;
+  border-radius: 20px;&#13;
+  background:&#13;
+    radial-gradient(ellipse at 90% 0%, rgba(255,255,255,.82), transparent 38%),&#13;
+    radial-gradient(ellipse at 0% 100%, rgba(218,201,255,.42), transparent 45%),&#13;
+    linear-gradient(125deg, #f6f0ff 0%, #eee5ff 52%, #fcecff 100%);&#13;
+  box-shadow:&#13;
+    0 12px 30px rgba(79,60,118,.07),&#13;
+    inset 0 0 0 1px rgba(220,207,245,.3);&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-overview-top {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 15px;&#13;
+  margin-bottom: 24px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-resource-icon {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  width: 58px;&#13;
+  height: 58px;&#13;
+  flex-shrink: 0;&#13;
+  border: 1px solid rgba(255,255,255,.95);&#13;
+  border-radius: 16px;&#13;
+  background: rgba(255,255,255,.88);&#13;
+  box-shadow: 0 6px 15px rgba(91,67,139,.08);&#13;
+  color: #8062c9;&#13;
+  font-size: 23px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-icon-laptop {&#13;
+  background: #edf4ff;&#13;
+  color: #547eaf;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-icon-kit {&#13;
+  background: #fff1e5;&#13;
+  color: #bd8248;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-icon-other {&#13;
+  background: #eaf7f1;&#13;
+  color: #519b82;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-overview-top h2 {&#13;
+  margin: 5px 0 2px;&#13;
+  color: #49375f;&#13;
+  font-size: 18px;&#13;
+  font-weight: 800;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-overview-top p {&#13;
+  margin: 0;&#13;
+  color: #8b7d9e;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+/* INFORMATION PANELS */&#13;
+&#13;
+.co-asset-detail .cad-detail-grid {&#13;
+  display: grid;&#13;
+  grid-template-columns: repeat(2, minmax(0, 1fr));&#13;
+  gap: 12px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-detail-item {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  gap: 6px;&#13;
+  min-width: 0;&#13;
+  min-height: 82px;&#13;
+  padding: 15px 16px;&#13;
+  border: 1px solid rgba(255,255,255,.96);&#13;
+  border-radius: 13px;&#13;
+  background: rgba(255,255,255,.77);&#13;
+  box-shadow: 0 3px 10px rgba(79,60,118,.025);&#13;
+  transition: background .18s, transform .18s;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-detail-item:hover {&#13;
+  transform: translateY(-1px);&#13;
+  background: rgba(255,255,255,.95);&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-detail-item &gt; span {&#13;
+  color: #9586a8;&#13;
+  font-size: 9px;&#13;
+  font-weight: 750;&#13;
+  text-transform: uppercase;&#13;
+  letter-spacing: .6px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-detail-item strong {&#13;
+  color: #4c3a63;&#13;
+  font-size: 12px;&#13;
+  font-weight: 700;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+/* RENT BUTTON */&#13;
+&#13;
+.co-asset-detail .cad-rent-area {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  flex-wrap: wrap;&#13;
+  gap: 10px;&#13;
+  margin-top: 23px;&#13;
+  padding-top: 20px;&#13;
+  border-top: 1px solid rgba(221,208,240,.8);&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-rent-area p {&#13;
+  width: 100%;&#13;
+  margin: 0 0 3px;&#13;
+  color: #80728f;&#13;
+  font-size: 11px;&#13;
+  text-align: center;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-rent-button,&#13;
+.co-asset-detail .cad-back-button {&#13;
+  display: inline-flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  gap: 12px;&#13;
+  min-height: 42px;&#13;
+  padding: 11px 18px;&#13;
+  border: 1px solid #8062c9;&#13;
+  border-radius: 10px;&#13;
+  font-size: 11px;&#13;
+  font-weight: 750;&#13;
+  transition: background .16s, transform .16s, box-shadow .16s;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-rent-button {&#13;
+  background: #8062c9;&#13;
+  color: #fff;&#13;
+  box-shadow: 0 5px 12px rgba(128,98,201,.17);&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-rent-button:hover {&#13;
+  transform: translateY(-1px);&#13;
+  background: #6e50b3;&#13;
+  box-shadow: 0 7px 16px rgba(128,98,201,.23);&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-rent-button span {&#13;
+  font-size: 15px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-back-button {&#13;
+  border-color: #dfd3f0;&#13;
+  background: rgba(255,255,255,.78);&#13;
+  color: #7254ad;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-back-button:hover {&#13;
+  background: #fff;&#13;
+}&#13;
+&#13;
+/* HELP */&#13;
+&#13;
+.co-asset-detail .cad-help {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: space-between;&#13;
+  gap: 12px;&#13;
+  margin-top: 19px;&#13;
+  padding: 16px;&#13;
+  border: 1px solid #e8e0f1;&#13;
+  border-radius: 13px;&#13;
+  background: #faf7ff;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-help b {&#13;
+  color: #49385f;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-help p {&#13;
+  margin: 4px 0 0;&#13;
+  color: #887b98;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-help &gt; a {&#13;
+  flex-shrink: 0;&#13;
+  color: #7959b8;&#13;
+  font-size: 10px;&#13;
+  font-weight: 750;&#13;
+}&#13;
+&#13;
+/* ASSET NOT FOUND */&#13;
+&#13;
+.co-asset-detail .cad-not-found {&#13;
+  padding: 42px 20px;&#13;
+  border: 1px solid #e7def4;&#13;
+  border-radius: 17px;&#13;
+  background: #faf7ff;&#13;
+  text-align: center;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-not-found-mark {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  width: 42px;&#13;
+  height: 42px;&#13;
+  margin: 0 auto 14px;&#13;
+  border-radius: 13px;&#13;
+  background: #eee6fc;&#13;
+  color: #8062c9;&#13;
+  font-size: 20px;&#13;
+  font-weight: 800;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-not-found h2 {&#13;
+  margin: 0;&#13;
+  color: #49385f;&#13;
+  font-size: 19px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-not-found p {&#13;
+  margin: 8px 0 17px;&#13;
+  color: #887b98;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-not-found a {&#13;
+  display: inline-block;&#13;
+  padding: 10px 14px;&#13;
+  border-radius: 9px;&#13;
+  background: #8062c9;&#13;
+  color: #fff;&#13;
+  font-size: 10px;&#13;
+  font-weight: 750;&#13;
+}&#13;
+&#13;
+/* FOOTER */&#13;
+&#13;
+.co-asset-detail .cad-footer {&#13;
+  margin-top: 27px;&#13;
+  padding: 17px 2px 5px;&#13;
+  border-top: 1px solid #e9e2f1;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-footer-top {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: space-between;&#13;
+  gap: 10px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-footer-top b {&#13;
+  color: #55416f;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-footer-top span {&#13;
+  color: #988ca8;&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-footer-links {&#13;
+  display: flex;&#13;
+  flex-wrap: wrap;&#13;
+  gap: 16px;&#13;
+  margin-top: 12px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-footer-links a {&#13;
+  color: #796a8d;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-footer-links a:hover {&#13;
+  color: #6748a8;&#13;
+}&#13;
+&#13;
+.co-asset-detail .cad-footer-copy {&#13;
+  margin-top: 12px;&#13;
+  color: #a399b1;&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+/* RESPONSIVE */&#13;
+&#13;
+@media(max-width:900px) {&#13;
+  .co-asset-detail .cad-layout {&#13;
+    grid-template-columns: 175px minmax(0,1fr);&#13;
+    gap: 16px;&#13;
+  }&#13;
+&#13;
+  .co-asset-detail .cad-sidebar {&#13;
+    padding: 15px 9px;&#13;
+  }&#13;
+&#13;
+  .co-asset-detail .cad-nav {&#13;
+    gap: 8px;&#13;
+    padding: 10px 8px;&#13;
+  }&#13;
+}&#13;
+&#13;
+@media(max-width:680px) {&#13;
+  .co-asset-detail .cad-layout {&#13;
+    grid-template-columns: 1fr;&#13;
+    gap: 18px;&#13;
+  }&#13;
+&#13;
+  .co-asset-detail .cad-sidebar {&#13;
+    display: grid;&#13;
+    grid-template-columns: repeat(2,minmax(0,1fr));&#13;
+    align-content: start;&#13;
+    gap: 3px;&#13;
+    min-height: 0;&#13;
+    padding: 12px;&#13;
+  }&#13;
+&#13;
+  .co-asset-detail .cad-brand {&#13;
+    grid-column: 1/-1;&#13;
+    padding-bottom: 12px;&#13;
+  }&#13;
+&#13;
+  .co-asset-detail .cad-nav-label,&#13;
+  .co-asset-detail .cad-sidebar-bottom {&#13;
+    display: none;&#13;
+  }&#13;
+&#13;
+  .co-asset-detail .cad-nav {&#13;
+    margin: 0;&#13;
+  }&#13;
+&#13;
+  .co-asset-detail .cad-header {&#13;
+    align-items: flex-start;&#13;
+    flex-direction: column;&#13;
+  }&#13;
+&#13;
+  .co-asset-detail .cad-header h1 {&#13;
+    font-size: 25px;&#13;
+  }&#13;
+&#13;
+  .co-asset-detail .cad-detail-grid {&#13;
+    grid-template-columns: 1fr;&#13;
+  }&#13;
+&#13;
+  .co-asset-detail .cad-help {&#13;
+    align-items: flex-start;&#13;
+    flex-direction: column;&#13;
+  }&#13;
+&#13;
+  .co-asset-detail .cad-footer-top {&#13;
+    align-items: flex-start;&#13;
+    flex-direction: column;&#13;
+  }&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>campusops-asset-details</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CampusOps Asset Details</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[
+(function() {
+  data.found = false;
+  data.asset = {};
+  data.rentUrl = "/sp?id=sc_cat_item&sys_id=94697bc7541303107f4433035850b6c5";
+
+  function classifyAsset(type) {
+    type = (type || "").toLowerCase();
+
+    if (type.indexOf("textbook") > -1 ||
+        type.indexOf("book") > -1) {
+      return "book";
+    }
+
+    if (type.indexOf("laptop") > -1 ||
+        type.indexOf("computer") > -1) {
+      return "laptop";
+    }
+
+    if (type.indexOf("kit") > -1 ||
+        type.indexOf("equipment") > -1) {
+      return "kit";
+    }
+
+    return "other";
+  }
+
+  var assetId = $sp.getParameter("sys_id");
+
+  if (!assetId) {
+    return;
+  }
+
+  var asset = new GlideRecord("u_campus_asset");
+
+  if (!asset.get(assetId)) {
+    return;
+  }
+
+  var status = asset.getDisplayValue("u_status") || "Unknown";
+  var statusValue = (asset.getValue("u_status") || "").toLowerCase();
+
+  data.asset = {
+    id: asset.getUniqueValue(),
+    name: asset.getDisplayValue("u_asset_name") || "Campus resource",
+    assetId: asset.getDisplayValue("u_asset_id") || "",
+    type: asset.getDisplayValue("u_asset_type") || "",
+    location: asset.getDisplayValue("u_location") || "",
+    status: status,
+    isAvailable: statusValue === "available",
+    condition: asset.getDisplayValue("u_condition") || "",
+    maintenance: (
+asset.getDisplayValue("u_maintenance_status") || ""
+	).trim() || "No maintenance update",
+    art: classifyAsset(asset.getDisplayValue("u_asset_type"))
+  };
+
+  data.found = true;
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 21:33:24</sys_created_on>
+        <sys_id>b14de382f47383107f44dc35ed3195ea</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CampusOps Asset Details</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_widget_b14de382f47383107f44dc35ed3195ea</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 21:46:52</sys_updated_on>
+        <template><![CDATA[
+<div class="co-asset-detail">
+  <div class="cad-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="cad-sidebar">
+      <a class="cad-brand" href="/sp?id=campusops_home">
+        <span class="cad-brand-mark">C</span>
+        <span>
+          <b>CampusOps</b>
+          <small>Campus resources</small>
+        </span>
+      </a>
+
+      <div class="cad-nav-label">WORKSPACE</div>
+      <a class="cad-nav" href="/sp?id=campusops_home"><span>⌂</span>Home</a>
+      <a class="cad-nav cad-nav-active" href="/sp?id=browse_assets"><span>⌕</span>Browse assets</a>
+      <a class="cad-nav" href="/sp?id=my_rentals"><span>▤</span>My rentals</a>
+      <a class="cad-nav" href="/sp?id=renew_asset"><span>↻</span>Renew an item</a>
+      <a class="cad-nav" href="/sp?id=return_asset"><span>↩</span>Return an item</a>
+
+      <div class="cad-nav-label cad-nav-spaced">YOUR ACCOUNT</div>
+      <a class="cad-nav" href="/sp?id=my_profile"><span>○</span>My profile</a>
+      <a class="cad-nav" href="/sp?id=quick_scan"><span>⌕</span>Quick scan</a>
+      <a class="cad-nav" href="/sp?id=report_issue"><span>!</span>Report an issue</a>
+
+      <div class="cad-sidebar-bottom">
+        <b>CampusOps</b>
+        <small>Campus resources, made easier.</small>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="cad-main">
+
+      <div class="cad-breadcrumb">
+        <a href="/sp?id=browse_assets">Browse assets</a>
+        <span>/</span>
+        <span>Asset details</span>
+      </div>
+
+      <!-- ASSET FOUND -->
+      <div ng-if="c.data.found">
+
+        <header class="cad-header">
+          <div>
+            <div class="cad-eyebrow">CAMPUS RESOURCE</div>
+            <h1>{{c.data.asset.name}}</h1>
+            <p>{{c.data.asset.type || 'Campus resource'}}</p>
+          </div>
+
+          <span class="cad-availability"
+                ng-class="{'cad-unavailable': !c.data.asset.isAvailable}">
+            <span></span>
+            {{c.data.asset.status}}
+          </span>
+        </header>
+
+        <!-- ASSET OVERVIEW -->
+        <section class="cad-overview">
+
+          <div class="cad-overview-top">
+            <div class="cad-resource-icon"
+                 ng-class="'cad-icon-' + c.data.asset.art">
+              <span ng-if="c.data.asset.art === 'book'">▤</span>
+              <span ng-if="c.data.asset.art === 'laptop'">▣</span>
+              <span ng-if="c.data.asset.art === 'kit'">＋</span>
+              <span ng-if="c.data.asset.art === 'other'">□</span>
+            </div>
+
+            <div>
+              <div class="cad-eyebrow">ASSET INFORMATION</div>
+              <h2>{{c.data.asset.name}}</h2>
+              <p ng-if="c.data.asset.assetId">
+                Asset ID: {{c.data.asset.assetId}}
+              </p>
+            </div>
+          </div>
+
+          <div class="cad-detail-grid">
+
+            <div class="cad-detail-item">
+              <span>Location</span>
+              <strong>
+                {{c.data.asset.location || 'Not specified'}}
+              </strong>
+            </div>
+
+            <div class="cad-detail-item">
+              <span>Availability</span>
+              <strong>
+                {{c.data.asset.status || 'Unknown'}}
+              </strong>
+            </div>
+
+            <div class="cad-detail-item">
+              <span>Condition</span>
+              <strong>
+                {{c.data.asset.condition || 'Not recorded'}}
+              </strong>
+            </div>
+
+            <!-- EXPLICIT MAINTENANCE FALLBACK -->
+            <div class="cad-detail-item">
+              <span>Maintenance</span>
+
+              <strong ng-if="c.data.asset.maintenance">
+                {{c.data.asset.maintenance}}
+              </strong>
+
+              <strong ng-if="!c.data.asset.maintenance">
+                No maintenance update
+              </strong>
+            </div>
+
+          </div>
+
+          <!-- RENT ACTION -->
+          <div class="cad-rent-area">
+            <p ng-if="c.data.asset.isAvailable">
+              This resource is available to borrow.
+            </p>
+
+            <p ng-if="!c.data.asset.isAvailable">
+              This resource is not currently available to borrow.
+            </p>
+
+            <a class="cad-rent-button"
+               ng-if="c.data.asset.isAvailable"
+               ng-href="{{c.data.rentUrl}}">
+              Rent this asset <span>→</span>
+            </a>
+
+            <a class="cad-back-button"
+               href="/sp?id=browse_assets">
+              Back to catalogue
+            </a>
+          </div>
+
+        </section>
+
+        <!-- HELP -->
+        <section class="cad-help">
+          <div>
+            <b>Need help with this resource?</b>
+            <p>If you notice an issue with the asset, let us know.</p>
+          </div>
+          <a href="/sp?id=report_issue">Report an issue →</a>
+        </section>
+
+      </div>
+
+      <!-- ASSET NOT FOUND -->
+      <section class="cad-not-found" ng-if="!c.data.found">
+        <div class="cad-not-found-mark">?</div>
+        <h2>We couldn't find that asset</h2>
+        <p>
+          Open an item from the asset catalogue to see its details.
+        </p>
+        <a href="/sp?id=browse_assets">Browse available resources →</a>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="cad-footer">
+        <div class="cad-footer-top">
+          <b>CampusOps</b>
+          <span>Campus resources, made easier.</span>
+        </div>
+
+        <div class="cad-footer-links">
+          <a href="/sp?id=report_issue">Help &amp; queries</a>
+          <a href="/sp?id=report_issue">Feedback</a>
+          <a href="/sp?id=my_profile">My account</a>
+        </div>
+
+        <div class="cad-footer-copy">
+          Campus Asset &amp; Textbook Lifecycle Management
+        </div>
+      </footer>
+
+    </main>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>b14de382f47383107f44dc35ed3195ea</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 21:33:22</sys_created_on>
+        <sys_id>b98d2f82f47383107f44dc35ed3195d2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 21:33:22</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

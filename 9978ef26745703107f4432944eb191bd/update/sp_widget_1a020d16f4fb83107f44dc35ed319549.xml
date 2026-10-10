@@ -1,0 +1,965 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+  var c = this;
+
+  c.searchText = "";
+  c.selectedRental = "";
+  c.submitting = false;
+  c.message = "";
+  c.messageType = "success";
+  c.initial = ((c.data.studentName || "S").charAt(0)).toUpperCase();
+
+  c.filteredRentals = function() {
+    var term = (c.searchText || "").toLowerCase().trim();
+
+    return (c.data.rentals || []).filter(function(rental) {
+      return !term ||
+        (rental.assetName || "").toLowerCase().indexOf(term) > -1 ||
+        (rental.number || "").toLowerCase().indexOf(term) > -1 ||
+        (rental.type || "").toLowerCase().indexOf(term) > -1;
+    });
+  };
+
+  c.selectRental = function(id) {
+    c.selectedRental = c.selectedRental === id ? "" : id;
+    c.message = "";
+  };
+
+  c.returnItem = function() {
+    if (!c.selectedRental || c.submitting) return;
+
+    c.submitting = true;
+    c.message = "";
+
+    c.server.get({
+      action: "returnItem",
+      rentalId: c.selectedRental
+    }).then(function(response) {
+      var result = response.data || {};
+
+      // Refresh the displayed list from the server after the update.
+      c.data.rentals = result.rentals || [];
+      c.data.studentName = result.studentName || c.data.studentName;
+      c.initial = ((c.data.studentName || "S").charAt(0)).toUpperCase();
+
+      if (result.success) {
+        c.message = result.message || "The return has been recorded.";
+        c.messageType = "success";
+        c.selectedRental = "";
+      } else {
+        c.message = result.message || "The return could not be recorded.";
+        c.messageType = "error";
+      }
+    }, function() {
+      c.message = "A server error occurred. Please try again.";
+      c.messageType = "error";
+    }).finally(function() {
+      c.submitting = false;
+    });
+  };
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>&#13;
+.co-return-page {&#13;
+  --purple: #8062c7;&#13;
+  --purple-dark: #39285f;&#13;
+  --border: #e6dcf7;&#13;
+  --muted: #81749b;&#13;
+  font-family: inherit;&#13;
+  color: var(--purple-dark);&#13;
+  background: #f3f8f9;&#13;
+  min-height: 100vh;&#13;
+  padding: 14px 16px;&#13;
+  box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.co-return-page *,&#13;
+.co-return-page *::before,&#13;
+.co-return-page *::after {&#13;
+  box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.co-return-layout {&#13;
+  display: grid;&#13;
+  grid-template-columns: 220px minmax(0, 1fr);&#13;
+  gap: 24px;&#13;
+  max-width: 1440px;&#13;
+  margin: 0 auto;&#13;
+  align-items: stretch;&#13;
+}&#13;
+&#13;
+.co-return-sidebar {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  min-height: calc(100vh - 28px);&#13;
+  padding: 18px 10px 14px;&#13;
+  border: 1px solid var(--border);&#13;
+  border-radius: 16px;&#13;
+  background: linear-gradient(180deg, #f8f4ff, #f2edfc);&#13;
+}&#13;
+&#13;
+.co-return-brand {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 10px;&#13;
+  padding: 0 5px 28px;&#13;
+  color: var(--purple-dark);&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+.co-return-logo {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  flex-shrink: 0;&#13;
+  width: 36px;&#13;
+  height: 36px;&#13;
+  border-radius: 11px;&#13;
+  background: var(--purple);&#13;
+  color: white;&#13;
+  font-size: 17px;&#13;
+  font-weight: 700;&#13;
+}&#13;
+&#13;
+.co-return-brand strong,&#13;
+.co-return-brand small,&#13;
+.co-return-user strong,&#13;
+.co-return-user small {&#13;
+  display: block;&#13;
+}&#13;
+&#13;
+.co-return-brand strong { font-size: 13px; }&#13;
+.co-return-brand small,&#13;
+.co-return-user small {&#13;
+  margin-top: 3px;&#13;
+  color: var(--muted);&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-return-nav-label {&#13;
+  margin: 0 8px 10px;&#13;
+  color: #9485b2;&#13;
+  font-size: 9px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 1px;&#13;
+}&#13;
+&#13;
+.co-return-nav {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 10px;&#13;
+  min-height: 38px;&#13;
+  margin-bottom: 3px;&#13;
+  padding: 10px;&#13;
+  border-radius: 9px;&#13;
+  color: #5d4a80;&#13;
+  font-size: 12px;&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+.co-return-nav &gt; span {&#13;
+  width: 15px;&#13;
+  color: var(--purple);&#13;
+  text-align: center;&#13;
+  font-size: 14px;&#13;
+}&#13;
+&#13;
+.co-return-nav:hover,&#13;
+.co-return-active {&#13;
+  background: #e8defb;&#13;
+  color: #4c347e;&#13;
+}&#13;
+&#13;
+.co-return-account-label { margin-top: 25px; }&#13;
+&#13;
+.co-return-user {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 9px;&#13;
+  margin-top: auto;&#13;
+  padding: 14px 5px 0;&#13;
+  border-top: 1px solid #e2d8f2;&#13;
+}&#13;
+&#13;
+.co-return-avatar {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  flex-shrink: 0;&#13;
+  width: 32px;&#13;
+  height: 32px;&#13;
+  border-radius: 50%;&#13;
+  background: #e7dcfb;&#13;
+  color: #6547a5;&#13;
+  font-size: 12px;&#13;
+  font-weight: 700;&#13;
+}&#13;
+&#13;
+.co-return-user strong {&#13;
+  font-size: 11px;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-return-main {&#13;
+  min-width: 0;&#13;
+  padding-top: 5px;&#13;
+}&#13;
+&#13;
+.co-return-header {&#13;
+  display: flex;&#13;
+  align-items: flex-start;&#13;
+  justify-content: space-between;&#13;
+  gap: 18px;&#13;
+  margin-bottom: 22px;&#13;
+}&#13;
+&#13;
+.co-return-eyebrow {&#13;
+  margin-bottom: 8px;&#13;
+  color: var(--purple);&#13;
+  font-size: 9px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 1.2px;&#13;
+}&#13;
+&#13;
+.co-return-header h1 {&#13;
+  margin: 0 0 7px;&#13;
+  color: #30224e;&#13;
+  font-size: clamp(26px, 2.4vw, 32px);&#13;
+  line-height: 1.2;&#13;
+}&#13;
+&#13;
+.co-return-header p {&#13;
+  margin: 0;&#13;
+  color: var(--muted);&#13;
+  font-size: 12px;&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+.co-return-outline {&#13;
+  flex-shrink: 0;&#13;
+  padding: 10px 13px;&#13;
+  border: 1px solid var(--border);&#13;
+  border-radius: 9px;&#13;
+  background: white;&#13;
+  color: #6547a5;&#13;
+  font-size: 11px;&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+.co-return-intro {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 15px;&#13;
+  margin-bottom: 16px;&#13;
+  padding: 18px;&#13;
+  border: 1px solid var(--border);&#13;
+  border-radius: 13px;&#13;
+  background: white;&#13;
+}&#13;
+&#13;
+.co-return-intro-icon,&#13;
+.co-return-asset-icon {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  flex-shrink: 0;&#13;
+  width: 42px;&#13;
+  height: 42px;&#13;
+  border-radius: 11px;&#13;
+  background: #f0e8ff;&#13;
+  color: var(--purple);&#13;
+  font-size: 21px;&#13;
+}&#13;
+&#13;
+.co-return-intro h2 {&#13;
+  margin: 0 0 6px;&#13;
+  font-size: 16px;&#13;
+}&#13;
+&#13;
+.co-return-intro p {&#13;
+  margin: 0;&#13;
+  color: var(--muted);&#13;
+  font-size: 12px;&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+.co-return-notice {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  align-items: center;&#13;
+  gap: 12px;&#13;
+  margin-bottom: 16px;&#13;
+  padding: 12px 15px;&#13;
+  border: 1px solid var(--border);&#13;
+  border-radius: 10px;&#13;
+  background: #f7f3ff;&#13;
+  color: #543b82;&#13;
+  font-size: 12px;&#13;
+  line-height: 1.5;&#13;
+}&#13;
+&#13;
+.co-return-notice.success {&#13;
+  border-color: #c8e8d5;&#13;
+  background: #f0faf4;&#13;
+  color: #246a47;&#13;
+}&#13;
+&#13;
+.co-return-notice.error {&#13;
+  border-color: #f0c8d0;&#13;
+  background: #fff3f5;&#13;
+  color: #a12e48;&#13;
+}&#13;
+&#13;
+.co-return-notice button {&#13;
+  border: 0;&#13;
+  background: transparent;&#13;
+  color: inherit;&#13;
+  font-size: 19px;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+.co-return-summary {&#13;
+  display: grid;&#13;
+  grid-template-columns: repeat(2, minmax(0, 1fr));&#13;
+  margin-bottom: 25px;&#13;
+  padding: 16px 5px;&#13;
+  border: 1px solid var(--border);&#13;
+  border-radius: 12px;&#13;
+  background: white;&#13;
+}&#13;
+&#13;
+.co-return-summary &gt; div {&#13;
+  padding: 0 18px;&#13;
+  border-right: 1px solid #eee6f8;&#13;
+}&#13;
+&#13;
+.co-return-summary &gt; div:last-child { border-right: 0; }&#13;
+&#13;
+.co-return-summary span,&#13;
+.co-return-summary strong { display: block; }&#13;
+&#13;
+.co-return-summary span {&#13;
+  margin-bottom: 6px;&#13;
+  color: var(--muted);&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-return-summary strong {&#13;
+  font-size: 23px;&#13;
+}&#13;
+&#13;
+.co-return-content { margin-bottom: 22px; }&#13;
+&#13;
+.co-return-section-heading {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  align-items: center;&#13;
+  gap: 12px;&#13;
+  margin-bottom: 13px;&#13;
+}&#13;
+&#13;
+.co-return-section-heading h2 {&#13;
+  margin: 0 0 5px;&#13;
+  font-size: 19px;&#13;
+}&#13;
+&#13;
+.co-return-section-heading p {&#13;
+  margin: 0;&#13;
+  color: var(--muted);&#13;
+  font-size: 12px;&#13;
+}&#13;
+&#13;
+.co-return-count {&#13;
+  padding: 6px 9px;&#13;
+  border-radius: 7px;&#13;
+  background: #eee7fa;&#13;
+  color: #6947a7;&#13;
+  font-size: 10px;&#13;
+  white-space: nowrap;&#13;
+}&#13;
+&#13;
+.co-return-search {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 11px;&#13;
+  height: 44px;&#13;
+  margin-bottom: 14px;&#13;
+  padding: 0 14px;&#13;
+  border: 1px solid var(--border);&#13;
+  border-radius: 10px;&#13;
+  background: white;&#13;
+}&#13;
+&#13;
+.co-return-search &gt; span {&#13;
+  color: var(--purple);&#13;
+  font-size: 17px;&#13;
+}&#13;
+&#13;
+.co-return-search input {&#13;
+  width: 100%;&#13;
+  min-width: 0;&#13;
+  border: 0;&#13;
+  outline: 0;&#13;
+  background: transparent;&#13;
+  color: #382b54;&#13;
+  font-family: inherit;&#13;
+  font-size: 12px;&#13;
+}&#13;
+&#13;
+.co-return-search button {&#13;
+  border: 0;&#13;
+  background: transparent;&#13;
+  color: #6947a7;&#13;
+  font-size: 11px;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+.co-return-list {&#13;
+  display: grid;&#13;
+  grid-template-columns: repeat(2, minmax(0, 1fr));&#13;
+  gap: 14px;&#13;
+}&#13;
+&#13;
+.co-return-card {&#13;
+  min-width: 0;&#13;
+  padding: 16px;&#13;
+  border: 1px solid var(--border);&#13;
+  border-radius: 13px;&#13;
+  background: white;&#13;
+  transition: border-color .15s ease, box-shadow .15s ease;&#13;
+}&#13;
+&#13;
+.co-return-card:hover,&#13;
+.co-return-card.chosen {&#13;
+  border-color: #b9a3e6;&#13;
+  box-shadow: 0 4px 13px rgba(70, 48, 105, .05);&#13;
+}&#13;
+&#13;
+.co-return-card.chosen { background: #fcfaff; }&#13;
+&#13;
+.co-return-card-top {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  align-items: center;&#13;
+  gap: 10px;&#13;
+  margin-bottom: 13px;&#13;
+}&#13;
+&#13;
+.co-return-asset-icon {&#13;
+  width: 36px;&#13;
+  height: 36px;&#13;
+  font-size: 17px;&#13;
+}&#13;
+&#13;
+.co-return-status {&#13;
+  padding: 6px 9px;&#13;
+  border-radius: 20px;&#13;
+  font-size: 10px;&#13;
+  font-weight: 700;&#13;
+  white-space: nowrap;&#13;
+}&#13;
+&#13;
+.co-return-status.active { background: #e9f7ef; color: #26784e; }&#13;
+.co-return-status.due { background: #fff3df; color: #a76513; }&#13;
+.co-return-status.overdue { background: #fdebef; color: #b23a53; }&#13;
+&#13;
+.co-return-type {&#13;
+  margin-bottom: 5px;&#13;
+  color: #8b7ba7;&#13;
+  font-size: 10px;&#13;
+  letter-spacing: .4px;&#13;
+}&#13;
+&#13;
+.co-return-card h3 {&#13;
+  margin: 0 0 5px;&#13;
+  color: #35234f;&#13;
+  font-size: 15px;&#13;
+  line-height: 1.4;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-return-number {&#13;
+  margin: 0 0 13px;&#13;
+  color: var(--muted);&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-return-details {&#13;
+  display: grid;&#13;
+  grid-template-columns: repeat(2, minmax(0, 1fr));&#13;
+  gap: 10px;&#13;
+  padding: 13px 0;&#13;
+  margin-bottom: 13px;&#13;
+  border-top: 1px solid #eee7f8;&#13;
+  border-bottom: 1px solid #eee7f8;&#13;
+}&#13;
+&#13;
+.co-return-details span,&#13;
+.co-return-details strong { display: block; overflow-wrap: anywhere; }&#13;
+&#13;
+.co-return-details span {&#13;
+  margin-bottom: 6px;&#13;
+  color: var(--muted);&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-return-details strong {&#13;
+  color: #44315f;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-return-select {&#13;
+  width: 100%;&#13;
+  min-height: 40px;&#13;
+  padding: 10px 12px;&#13;
+  border: 1px solid #d8c9f1;&#13;
+  border-radius: 8px;&#13;
+  background: white;&#13;
+  color: #6947a7;&#13;
+  font-family: inherit;&#13;
+  font-size: 12px;&#13;
+  font-weight: 650;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+.co-return-card.chosen .co-return-select {&#13;
+  border-color: var(--purple);&#13;
+  background: #8062c7;&#13;
+  color: white;&#13;
+}&#13;
+&#13;
+.co-return-select:disabled { opacity: .6; cursor: not-allowed; }&#13;
+&#13;
+.co-return-empty {&#13;
+  padding: 32px 18px;&#13;
+  border: 1px dashed #d8c9f1;&#13;
+  border-radius: 13px;&#13;
+  background: white;&#13;
+  text-align: center;&#13;
+}&#13;
+&#13;
+.co-return-empty-icon {&#13;
+  margin-bottom: 10px;&#13;
+  color: #39845b;&#13;
+  font-size: 28px;&#13;
+}&#13;
+&#13;
+.co-return-empty strong { font-size: 15px; }&#13;
+&#13;
+.co-return-empty p {&#13;
+  margin: 8px 0 12px;&#13;
+  color: var(--muted);&#13;
+  font-size: 12px;&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+.co-return-empty a {&#13;
+  color: #6d4db4;&#13;
+  font-size: 12px;&#13;
+  font-weight: 650;&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+.co-return-confirm {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  align-items: center;&#13;
+  gap: 20px;&#13;
+  margin-bottom: 20px;&#13;
+  padding: 18px;&#13;
+  border: 1px solid #d8c9f1;&#13;
+  border-radius: 12px;&#13;
+  background: #faf7ff;&#13;
+}&#13;
+&#13;
+.co-return-confirm h2 {&#13;
+  margin: 0 0 6px;&#13;
+  font-size: 16px;&#13;
+}&#13;
+&#13;
+.co-return-confirm p {&#13;
+  max-width: 520px;&#13;
+  margin: 0;&#13;
+  color: var(--muted);&#13;
+  font-size: 12px;&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+.co-return-confirm-actions {&#13;
+  display: flex;&#13;
+  flex-shrink: 0;&#13;
+  gap: 9px;&#13;
+}&#13;
+&#13;
+.co-return-confirm-actions button {&#13;
+  min-height: 40px;&#13;
+  padding: 10px 13px;&#13;
+  border-radius: 8px;&#13;
+  font-family: inherit;&#13;
+  font-size: 11px;&#13;
+  font-weight: 650;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+.co-return-cancel {&#13;
+  border: 1px solid var(--border);&#13;
+  background: white;&#13;
+  color: #604687;&#13;
+}&#13;
+&#13;
+.co-return-submit {&#13;
+  border: 0;&#13;
+  background: var(--purple);&#13;
+  color: white;&#13;
+}&#13;
+&#13;
+.co-return-submit:hover:not(:disabled) { background: #6d4db4; }&#13;
+.co-return-confirm-actions button:disabled { opacity: .6; cursor: not-allowed; }&#13;
+&#13;
+.co-return-help {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  align-items: center;&#13;
+  gap: 16px;&#13;
+  margin-bottom: 20px;&#13;
+  padding: 16px 18px;&#13;
+  border: 1px solid var(--border);&#13;
+  border-radius: 12px;&#13;
+  background: #faf7ff;&#13;
+}&#13;
+&#13;
+.co-return-help strong { font-size: 13px; }&#13;
+&#13;
+.co-return-help p {&#13;
+  margin: 5px 0 0;&#13;
+  color: var(--muted);&#13;
+  font-size: 11px;&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+.co-return-help a,&#13;
+.co-return-footer a {&#13;
+  color: #6d4db4;&#13;
+  font-size: 11px;&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+.co-return-footer {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  flex-wrap: wrap;&#13;
+  gap: 12px;&#13;
+  padding: 15px 2px;&#13;
+  border-top: 1px solid #e5dcef;&#13;
+  color: var(--muted);&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-return-footer strong { color: #45345f; }&#13;
+.co-return-footer &gt; span:last-child { display: flex; gap: 16px; }&#13;
+&#13;
+@media (max-width: 900px) {&#13;
+  .co-return-layout {&#13;
+    grid-template-columns: 190px minmax(0, 1fr);&#13;
+    gap: 16px;&#13;
+  }&#13;
+&#13;
+  .co-return-list { grid-template-columns: 1fr; }&#13;
+&#13;
+  .co-return-confirm {&#13;
+    align-items: flex-start;&#13;
+    flex-direction: column;&#13;
+  }&#13;
+}&#13;
+&#13;
+@media (max-width: 650px) {&#13;
+  .co-return-page { padding: 10px; }&#13;
+  .co-return-layout { grid-template-columns: 1fr; }&#13;
+  .co-return-sidebar { min-height: auto; }&#13;
+  .co-return-user { margin-top: 16px; }&#13;
+  .co-return-header { flex-direction: column; }&#13;
+  .co-return-help { align-items: flex-start; flex-direction: column; }&#13;
+  .co-return-confirm-actions { width: 100%; flex-wrap: wrap; }&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>campusops_return_item</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CampusOps Return Item</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  var userId = gs.getUserID();
+  var nowMs = new GlideDateTime().getNumericValue();
+  var DAY_MS = 86400000;
+
+  data.studentName = gs.getUserDisplayName() || "Campus member";
+  data.rentals = [];
+  data.success = false;
+  data.message = "";
+
+  function formatDate(value) {
+    if (!value) return "";
+    try {
+      return new GlideDateTime(value).getLocalDate().getByFormat("dd MMM yyyy");
+    } catch (e) {
+      return "";
+    }
+  }
+
+  if (input && input.action === "returnItem") {
+    var rentalId = (input.rentalId || "").toString();
+    var record = new GlideRecord("u_student_rental");
+
+    if (!rentalId ||
+        !record.get(rentalId) ||
+        record.getValue("u_student") !== userId ||
+        (record.getValue("u_status") || "").toLowerCase() !== "active") {
+      data.success = false;
+      data.message = "This active rental could not be found for your account. Refresh the page and try again.";
+    } else {
+      record.setValue("u_status", "returned");
+      record.setValue("u_return_date", new GlideDateTime());
+
+      var updatedId = record.update();
+
+      if (updatedId) {
+        data.success = true;
+        data.message = "Return recorded successfully. Your rental has been marked as returned.";
+      } else {
+        data.success = false;
+        data.message = "The return could not be saved. Please try again or contact the campus desk.";
+      }
+    }
+  }
+
+  // Always return the latest active rentals for this signed-in student.
+  var rental = new GlideRecord("u_student_rental");
+  rental.addQuery("u_student", userId);
+  rental.addQuery("u_status", "active");
+  rental.orderBy("u_due_date");
+  rental.query();
+
+  while (rental.next()) {
+    var dueValue = rental.getValue("u_due_date");
+    var dueMs = dueValue
+      ? new GlideDateTime(dueValue).getNumericValue()
+      : null;
+
+    var isOverdue = dueMs !== null && dueMs < nowMs;
+    var daysLeft = dueMs === null
+      ? null
+      : Math.ceil((dueMs - nowMs) / DAY_MS);
+
+    var isDueSoon = !isOverdue &&
+      daysLeft !== null &&
+      daysLeft >= 0 &&
+      daysLeft <= 2;
+
+    var assetType = "";
+    var asset = rental.u_asset.getRefRecord();
+
+    if (asset && asset.isValidRecord()) {
+      assetType = asset.getDisplayValue("u_asset_type") || "";
+    }
+
+    data.rentals.push({
+      id: rental.getUniqueValue(),
+      number: rental.getDisplayValue("u_number"),
+      assetName: rental.getDisplayValue("u_asset") || "Campus resource",
+      type: assetType,
+      rentalDate: formatDate(rental.getValue("u_rental_date")),
+      dueDate: formatDate(dueValue),
+      isOverdue: isOverdue,
+      isDueSoon: isDueSoon
+    });
+  }
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-10 03:43:24</sys_created_on>
+        <sys_id>1a020d16f4fb83107f44dc35ed319549</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CampusOps Return Item</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_widget_1a020d16f4fb83107f44dc35ed319549</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-10 03:43:24</sys_updated_on>
+        <template><![CDATA[
+<div class="co-return-page">
+  <div class="co-return-layout">
+
+    <aside class="co-return-sidebar">
+      <a class="co-return-brand" href="/sp?id=student_home">
+        <span class="co-return-logo">C</span>
+        <span><strong>CampusOps</strong><small>Campus resources</small></span>
+      </a>
+
+      <div class="co-return-nav-label">WORKSPACE</div>
+      <a class="co-return-nav" href="/sp?id=student_home"><span>⌂</span>Home</a>
+      <a class="co-return-nav" href="/sp?id=browse_assets"><span>▤</span>Browse assets</a>
+      <a class="co-return-nav" href="/sp?id=my_rentals"><span>▣</span>My rentals</a>
+      <a class="co-return-nav" href="/sp?id=renew_asset"><span>↻</span>Renew an item</a>
+      <a class="co-return-nav co-return-active" href="/sp?id=return_asset"><span>↩</span>Return an item</a>
+
+      <div class="co-return-nav-label co-return-account-label">YOUR ACCOUNT</div>
+      <a class="co-return-nav" href="/sp?id=my_profile"><span>○</span>My profile</a>
+      <a class="co-return-nav" href="/sp?id=quick_scan"><span>⌕</span>Quick scan</a>
+      <a class="co-return-nav" href="/sp?id=report_issue"><span>!</span>Report an issue</a>
+
+      <div class="co-return-user">
+        <span class="co-return-avatar">{{c.initial}}</span>
+        <span><strong>{{data.studentName}}</strong><small>Campus member</small></span>
+      </div>
+    </aside>
+
+    <main class="co-return-main">
+      <header class="co-return-header">
+        <div>
+          <div class="co-return-eyebrow">CAMPUSOPS / BORROWING SERVICES</div>
+          <h1>Return an item</h1>
+          <p>Manage your active rentals and record items you've returned to campus.</p>
+        </div>
+        <a class="co-return-outline" href="/sp?id=my_rentals">My rentals ↗</a>
+      </header>
+
+      <section class="co-return-intro">
+        <div class="co-return-intro-icon">↩</div>
+        <div>
+          <h2>Ready to return something?</h2>
+          <p>Select the rental below and confirm its return. Your rental record will be updated.</p>
+        </div>
+      </section>
+
+      <div class="co-return-notice"
+           ng-if="c.message"
+           ng-class="{'success': c.messageType === 'success',
+                      'error': c.messageType === 'error'}"
+           role="status">
+        <span>{{c.message}}</span>
+        <button type="button" ng-click="c.message = ''" aria-label="Dismiss">×</button>
+      </div>
+
+      <section class="co-return-summary">
+        <div><span>Active rentals</span><strong>{{data.rentals.length}}</strong></div>
+        <div><span>Selected item</span><strong>{{c.selectedRental ? '1' : '0'}}</strong></div>
+      </section>
+
+      <section class="co-return-content">
+        <div class="co-return-section-heading">
+          <div>
+            <h2>Your active rentals</h2>
+            <p>Choose the item you want to return.</p>
+          </div>
+          <span class="co-return-count">{{data.rentals.length}} items</span>
+        </div>
+
+        <div class="co-return-search">
+          <span>⌕</span>
+          <input type="text"
+                 ng-model="c.searchText"
+                 placeholder="Search by item name or rental number..."
+                 aria-label="Search rentals">
+          <button type="button" ng-if="c.searchText" ng-click="c.searchText = ''">Clear</button>
+        </div>
+
+        <div class="co-return-list" ng-if="c.filteredRentals().length">
+          <article class="co-return-card"
+                   ng-repeat="rental in c.filteredRentals() track by rental.id"
+                   ng-class="{'chosen': c.selectedRental === rental.id}">
+            <div class="co-return-card-top">
+              <div class="co-return-asset-icon">▤</div>
+              <span class="co-return-status"
+                    ng-class="rental.isOverdue ? 'overdue' : (rental.isDueSoon ? 'due' : 'active')">
+                {{rental.isOverdue ? 'Overdue' : (rental.isDueSoon ? 'Due soon' : 'Active')}}
+              </span>
+            </div>
+
+            <div class="co-return-type">{{rental.type || 'CAMPUS RESOURCE'}}</div>
+            <h3>{{rental.assetName}}</h3>
+            <p class="co-return-number">{{rental.number}}</p>
+
+            <div class="co-return-details">
+              <div><span>Rental date</span><strong>{{rental.rentalDate || '—'}}</strong></div>
+              <div><span>Due date</span><strong>{{rental.dueDate || 'Not set'}}</strong></div>
+            </div>
+
+            <button type="button"
+                    class="co-return-select"
+                    ng-click="c.selectRental(rental.id)"
+                    ng-disabled="c.submitting">
+              {{c.selectedRental === rental.id ? 'Selected for return ✓' : 'Select this item'}}
+            </button>
+          </article>
+        </div>
+
+        <div class="co-return-empty"
+             ng-if="!c.filteredRentals().length && data.rentals.length">
+          <strong>No matching rentals</strong>
+          <p>Try a different search term.</p>
+        </div>
+
+        <div class="co-return-empty" ng-if="!data.rentals.length">
+          <div class="co-return-empty-icon">✓</div>
+          <strong>No active rentals</strong>
+          <p>You're all caught up. Any active campus rentals will appear here.</p>
+          <a href="/sp?id=browse_assets">Browse available assets →</a>
+        </div>
+      </section>
+
+      <section class="co-return-confirm" ng-if="c.selectedRental">
+        <div>
+          <h2>Confirm return</h2>
+          <p>Only confirm if you've handed the item back to the campus desk or the authorized return point.</p>
+        </div>
+        <div class="co-return-confirm-actions">
+          <button type="button" class="co-return-cancel"
+                  ng-click="c.selectedRental = ''"
+                  ng-disabled="c.submitting">Cancel</button>
+          <button type="button" class="co-return-submit"
+                  ng-click="c.returnItem()"
+                  ng-disabled="c.submitting">
+            {{c.submitting ? 'Processing…' : 'Confirm item returned'}}
+          </button>
+        </div>
+      </section>
+
+      <section class="co-return-help">
+        <div><strong>Need help with a return?</strong><p>If an item is lost or damaged, report the issue to the campus team.</p></div>
+        <a href="/sp?id=report_issue">Report an issue →</a>
+      </section>
+
+      <footer class="co-return-footer">
+        <span><strong>CampusOps</strong> · Campus resources, made easier.</span>
+        <span><a href="/sp?id=my_profile">My account</a><a href="/sp?id=browse_assets">Browse assets</a></span>
+      </footer>
+    </main>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>1a020d16f4fb83107f44dc35ed319549</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-10 03:43:23</sys_created_on>
+        <sys_id>b9328996f4fb83107f44dc35ed3195d6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-10 03:43:23</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

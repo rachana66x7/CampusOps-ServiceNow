@@ -1,0 +1,1069 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+  var c = this;
+
+  c.searchText = "";
+  c.activeFilter = "all";
+  c.pageSize = 6;
+  c.currentPage = 1;
+
+  c.filters = [
+    { label: "All resources", value: "all" },
+    { label: "Textbooks", value: "book" },
+    { label: "Laptops", value: "laptop" },
+    { label: "Lab kits", value: "kit" },
+    { label: "Other", value: "other" }
+  ];
+
+  c.resetPage = function() {
+    c.currentPage = 1;
+  };
+
+  c.clearSearch = function() {
+    c.searchText = "";
+    c.currentPage = 1;
+  };
+
+  c.setFilter = function(value) {
+    c.activeFilter = value;
+    c.currentPage = 1;
+  };
+
+  c.filteredAssets = function() {
+    var assets = c.data.assets || [];
+    var term = (c.searchText || "").toLowerCase().trim();
+
+    return assets.filter(function(asset) {
+      var matchesType =
+        c.activeFilter === "all" || asset.art === c.activeFilter;
+
+      var searchable = [
+        asset.name,
+        asset.assetId,
+        asset.type,
+        asset.location
+      ].join(" ").toLowerCase();
+
+      return matchesType && (!term || searchable.indexOf(term) !== -1);
+    });
+  };
+
+  c.countFor = function(filter) {
+    var previous = c.activeFilter;
+    c.activeFilter = filter;
+    var count = c.filteredAssets().length;
+    c.activeFilter = previous;
+    return count;
+  };
+
+  c.pageAssets = function() {
+    var assets = c.filteredAssets();
+    var start = (c.currentPage - 1) * c.pageSize;
+    return assets.slice(start, start + c.pageSize);
+  };
+
+  c.totalPages = function() {
+    return Math.max(1, Math.ceil(c.filteredAssets().length / c.pageSize));
+  };
+
+  c.startRecord = function() {
+    return c.filteredAssets().length
+      ? (c.currentPage - 1) * c.pageSize + 1
+      : 0;
+  };
+
+  c.endRecord = function() {
+    return Math.min(
+      c.currentPage * c.pageSize,
+      c.filteredAssets().length
+    );
+  };
+
+  c.previousPage = function() {
+    if (c.currentPage > 1) c.currentPage--;
+  };
+
+  c.nextPage = function() {
+    if (c.currentPage < c.totalPages()) c.currentPage++;
+  };
+
+  c.resetFilters = function() {
+    c.searchText = "";
+    c.activeFilter = "all";
+    c.currentPage = 1;
+  };
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>&#13;
+/* CAMPUSOPS ASSET CATALOGUE */&#13;
+&#13;
+.co-catalog {&#13;
+  --ca-ink:#34264f;&#13;
+  --ca-muted:#887d99;&#13;
+  --ca-purple:#8062c9;&#13;
+  --ca-border:#e9e1f3;&#13;
+  width:100%;&#13;
+  color:var(--ca-ink);&#13;
+  font-family:Inter,"Segoe UI",Arial,sans-serif;&#13;
+  font-size:13px;&#13;
+  line-height:1.55;&#13;
+}&#13;
+&#13;
+.co-catalog * { box-sizing:border-box; }&#13;
+.co-catalog a { text-decoration:none; }&#13;
+.co-catalog button,&#13;
+.co-catalog input { font:inherit; }&#13;
+.co-catalog a:focus-visible,&#13;
+.co-catalog button:focus-visible,&#13;
+.co-catalog input:focus-visible {&#13;
+  outline:2px solid #8062c9;&#13;
+  outline-offset:3px;&#13;
+}&#13;
+&#13;
+/* LAYOUT AND SIDEBAR */&#13;
+&#13;
+.co-catalog .ca-layout {&#13;
+  display:grid;&#13;
+  grid-template-columns:218px minmax(0,1fr);&#13;
+  align-items:stretch;&#13;
+  gap:25px;&#13;
+  width:100%;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-sidebar {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  min-width:0;&#13;
+  min-height:690px;&#13;
+  padding:20px 13px;&#13;
+  border:1px solid #e9e0f5;&#13;
+  border-radius:19px;&#13;
+  background:linear-gradient(180deg,#f8f4ff,#f3effb);&#13;
+}&#13;
+&#13;
+.co-catalog .ca-brand {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:10px;&#13;
+  padding:4px 7px 24px;&#13;
+  color:#382b54;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-brand-mark {&#13;
+  display:grid;&#13;
+  place-items:center;&#13;
+  width:37px;&#13;
+  height:37px;&#13;
+  flex-shrink:0;&#13;
+  border-radius:11px;&#13;
+  background:#8062c9;&#13;
+  color:white;&#13;
+  font-size:19px;&#13;
+  font-weight:800;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-brand b {&#13;
+  display:block;&#13;
+  font-size:14px;&#13;
+  line-height:1.2;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-brand small {&#13;
+  display:block;&#13;
+  margin-top:4px;&#13;
+  color:#8b7e9e;&#13;
+  font-size:9px;&#13;
+  font-weight:500;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-nav-label {&#13;
+  padding:9px 10px;&#13;
+  color:#a092b6;&#13;
+  font-size:9px;&#13;
+  font-weight:800;&#13;
+  letter-spacing:1.1px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-nav-spaced { margin-top:18px; }&#13;
+&#13;
+.co-catalog .ca-nav {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:11px;&#13;
+  margin:2px 0;&#13;
+  padding:11px 10px;&#13;
+  border-radius:10px;&#13;
+  color:#6e6382;&#13;
+  font-size:11px;&#13;
+  font-weight:600;&#13;
+  transition:background .18s,color .18s;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-nav &gt; span {&#13;
+  display:grid;&#13;
+  place-items:center;&#13;
+  width:21px;&#13;
+  flex-shrink:0;&#13;
+  color:#8d79b5;&#13;
+  font-size:16px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-nav:hover {&#13;
+  background:rgba(255,255,255,.8);&#13;
+  color:#513a83;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-nav-active {&#13;
+  background:#e8defa;&#13;
+  color:#6245a0;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-nav-active &gt; span { color:#7354b4; }&#13;
+&#13;
+.co-catalog .ca-sidebar-bottom {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  gap:4px;&#13;
+  margin-top:auto;&#13;
+  padding:18px 8px 3px;&#13;
+  border-top:1px solid #e4dbef;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-sidebar-bottom b {&#13;
+  color:#59446f;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-sidebar-bottom small {&#13;
+  color:#9386a5;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+/* HEADER */&#13;
+&#13;
+.co-catalog .ca-main { min-width:0; }&#13;
+&#13;
+.co-catalog .ca-header {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:14px;&#13;
+  margin:4px 0 23px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-eyebrow {&#13;
+  color:#927bb7;&#13;
+  font-size:9px;&#13;
+  font-weight:800;&#13;
+  letter-spacing:1.2px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-header h1 {&#13;
+  margin:9px 0 5px;&#13;
+  color:#34264f;&#13;
+  font-size:clamp(25px,2.6vw,33px);&#13;
+  font-weight:800;&#13;
+  letter-spacing:-.8px;&#13;
+  line-height:1.25;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-header p {&#13;
+  margin:0;&#13;
+  color:#897d99;&#13;
+  font-size:11px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-my-rentals {&#13;
+  flex-shrink:0;&#13;
+  padding:9px 12px;&#13;
+  border:1px solid #e8def4;&#13;
+  border-radius:10px;&#13;
+  background:white;&#13;
+  color:#7356ad;&#13;
+  font-size:10px;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+/* SEARCH */&#13;
+&#13;
+.co-catalog .ca-search-panel {&#13;
+  margin-bottom:24px;&#13;
+  padding:16px;&#13;
+  border:1px solid var(--ca-border);&#13;
+  border-radius:14px;&#13;
+  background:rgba(255,255,255,.84);&#13;
+}&#13;
+&#13;
+.co-catalog .ca-search-panel label {&#13;
+  display:block;&#13;
+  margin-bottom:9px;&#13;
+  color:#49385f;&#13;
+  font-size:11px;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-search-row {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:10px;&#13;
+  min-width:0;&#13;
+  padding:0 12px;&#13;
+  border:1px solid #e4d9f2;&#13;
+  border-radius:10px;&#13;
+  background:#fcfaff;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-search-row:focus-within {&#13;
+  border-color:#b6a1e1;&#13;
+  box-shadow:0 0 0 3px rgba(128,98,201,.08);&#13;
+}&#13;
+&#13;
+.co-catalog .ca-search-symbol {&#13;
+  color:#8062c9;&#13;
+  font-size:21px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-search-row input {&#13;
+  width:100%;&#13;
+  min-width:0;&#13;
+  height:42px;&#13;
+  padding:0;&#13;
+  border:0;&#13;
+  outline:none;&#13;
+  background:transparent;&#13;
+  color:#44345d;&#13;
+  font-size:11px;&#13;
+  box-shadow:none;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-search-row input:focus {&#13;
+  outline:none;&#13;
+  box-shadow:none;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-search-row input::placeholder {&#13;
+  color:#a297b2;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-search-row button {&#13;
+  padding:5px 8px;&#13;
+  border:0;&#13;
+  background:transparent;&#13;
+  color:#7959b8;&#13;
+  font-size:10px;&#13;
+  cursor:pointer;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-search-hint {&#13;
+  margin-top:9px;&#13;
+  color:#92869f;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+/* FILTERS AND SECTION HEADINGS */&#13;
+&#13;
+.co-catalog .ca-catalogue { margin-bottom:24px; }&#13;
+&#13;
+.co-catalog .ca-section-heading { margin-bottom:13px; }&#13;
+&#13;
+.co-catalog .ca-section-heading h2 {&#13;
+  margin:0;&#13;
+  color:#403254;&#13;
+  font-size:15px;&#13;
+  font-weight:800;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-section-heading p {&#13;
+  margin:4px 0 0;&#13;
+  color:#8c809b;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-filters {&#13;
+  display:flex;&#13;
+  flex-wrap:wrap;&#13;
+  gap:7px;&#13;
+  margin-bottom:15px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-filters button {&#13;
+  display:inline-flex;&#13;
+  align-items:center;&#13;
+  gap:7px;&#13;
+  padding:7px 10px;&#13;
+  border:1px solid #e9e1f3;&#13;
+  border-radius:9px;&#13;
+  background:white;&#13;
+  color:#776a8b;&#13;
+  font-size:10px;&#13;
+  cursor:pointer;&#13;
+  transition:background .15s,border-color .15s;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-filters button span {&#13;
+  color:#9a8eaa;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-filters button:hover {&#13;
+  border-color:#cfc0eb;&#13;
+  background:#faf7ff;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-filters button.ca-filter-active {&#13;
+  border-color:#8062c9;&#13;
+  background:#8062c9;&#13;
+  color:white;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-filters button.ca-filter-active span {&#13;
+  color:#eee5ff;&#13;
+}&#13;
+&#13;
+/* RESOURCE CARDS */&#13;
+&#13;
+.co-catalog .ca-grid {&#13;
+  display:grid;&#13;
+  grid-template-columns:repeat(2,minmax(0,1fr));&#13;
+  gap:12px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-card {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  min-width:0;&#13;
+  padding:15px;&#13;
+  border:1px solid #e7def4;&#13;
+  border-radius:14px;&#13;
+  background:rgba(255,255,255,.88);&#13;
+  box-shadow:0 4px 13px rgba(79,60,118,.025);&#13;
+  transition:transform .18s,border-color .18s,box-shadow .18s;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-card:hover {&#13;
+  transform:translateY(-2px);&#13;
+  border-color:#d4c4ee;&#13;
+  box-shadow:0 8px 20px rgba(79,60,118,.07);&#13;
+}&#13;
+&#13;
+.co-catalog .ca-card-top {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:8px;&#13;
+  margin-bottom:13px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-asset-symbol {&#13;
+  display:grid;&#13;
+  place-items:center;&#13;
+  width:36px;&#13;
+  height:36px;&#13;
+  flex-shrink:0;&#13;
+  border-radius:10px;&#13;
+  background:#eee7fc;&#13;
+  color:#7859b7;&#13;
+  font-size:18px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-symbol-book {&#13;
+  background:#eee7fc;&#13;
+  color:#7859b7;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-symbol-laptop {&#13;
+  background:#e9f2ff;&#13;
+  color:#547eaf;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-symbol-kit {&#13;
+  background:#fff0e3;&#13;
+  color:#bd8248;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-symbol-other {&#13;
+  background:#e8f7f1;&#13;
+  color:#519b82;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-available {&#13;
+  display:inline-flex;&#13;
+  align-items:center;&#13;
+  gap:5px;&#13;
+  padding:4px 8px;&#13;
+  border-radius:20px;&#13;
+  background:#eaf7ef;&#13;
+  color:#4c956f;&#13;
+  font-size:9px;&#13;
+  font-weight:750;&#13;
+  white-space:nowrap;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-available &gt; span {&#13;
+  width:5px;&#13;
+  height:5px;&#13;
+  border-radius:50%;&#13;
+  background:#56a77b;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-asset-type {&#13;
+  margin-bottom:3px;&#13;
+  color:#9588a6;&#13;
+  font-size:9px;&#13;
+  text-transform:uppercase;&#13;
+  letter-spacing:.5px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-card h3 {&#13;
+  margin:0;&#13;
+  color:#44345d;&#13;
+  font-size:13px;&#13;
+  font-weight:800;&#13;
+  overflow-wrap:anywhere;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-asset-id {&#13;
+  margin-top:5px;&#13;
+  color:#9a8eaa;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-location {&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  gap:3px;&#13;
+  margin-top:14px;&#13;
+  padding:10px 0;&#13;
+  border-top:1px solid #f0ebf6;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-location span {&#13;
+  color:#9589a5;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-location strong {&#13;
+  color:#665776;&#13;
+  font-size:10px;&#13;
+  font-weight:650;&#13;
+  overflow-wrap:anywhere;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-details-link {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:8px;&#13;
+  margin-top:auto;&#13;
+  padding:10px 11px;&#13;
+  border:1px solid #8062c9;&#13;
+  border-radius:8px;&#13;
+  background:#8062c9;&#13;
+  color:white;&#13;
+  font-size:10px;&#13;
+  font-weight:750;&#13;
+  transition:background .15s;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-details-link:hover {&#13;
+  background:#6f50b5;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-details-link span { font-size:15px; }&#13;
+&#13;
+/* PAGINATION */&#13;
+&#13;
+.co-catalog .ca-pagination {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  flex-wrap:wrap;&#13;
+  gap:12px;&#13;
+  margin-top:16px;&#13;
+  padding:12px 0;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-pagination &gt; span {&#13;
+  color:#887b98;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-pagination &gt; div {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  gap:8px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-pagination button {&#13;
+  padding:8px 11px;&#13;
+  border:1px solid #e5dcf2;&#13;
+  border-radius:8px;&#13;
+  background:white;&#13;
+  color:#7255ad;&#13;
+  font-size:10px;&#13;
+  font-weight:700;&#13;
+  cursor:pointer;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-pagination button:hover:not(:disabled) {&#13;
+  background:#f5efff;&#13;
+  border-color:#cfc0eb;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-pagination button:disabled {&#13;
+  opacity:.4;&#13;
+  cursor:not-allowed;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-pagination strong {&#13;
+  min-width:42px;&#13;
+  color:#665575;&#13;
+  font-size:10px;&#13;
+  text-align:center;&#13;
+}&#13;
+&#13;
+/* EMPTY AND LOADING STATES */&#13;
+&#13;
+.co-catalog .ca-loading,&#13;
+.co-catalog .ca-empty {&#13;
+  padding:27px 15px;&#13;
+  border:1px dashed #e4d8f1;&#13;
+  border-radius:13px;&#13;
+  background:#fcfaff;&#13;
+  text-align:center;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-loading {&#13;
+  color:#796b8d;&#13;
+  font-size:11px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-empty h3 {&#13;
+  margin:0;&#13;
+  color:#49385f;&#13;
+  font-size:13px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-empty p {&#13;
+  margin:6px 0 12px;&#13;
+  color:#887b98;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-empty button {&#13;
+  padding:8px 11px;&#13;
+  border:1px solid #dfd2f2;&#13;
+  border-radius:8px;&#13;
+  background:white;&#13;
+  color:#7959b8;&#13;
+  font-size:10px;&#13;
+  font-weight:750;&#13;
+  cursor:pointer;&#13;
+}&#13;
+&#13;
+/* HELP AND FOOTER */&#13;
+&#13;
+.co-catalog .ca-help {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:12px;&#13;
+  padding:15px;&#13;
+  border:1px solid #e8e0f1;&#13;
+  border-radius:13px;&#13;
+  background:#faf7ff;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-help b {&#13;
+  color:#49385f;&#13;
+  font-size:11px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-help p {&#13;
+  margin:4px 0 0;&#13;
+  color:#887b98;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-help &gt; a {&#13;
+  flex-shrink:0;&#13;
+  color:#7959b8;&#13;
+  font-size:10px;&#13;
+  font-weight:750;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-footer {&#13;
+  margin-top:26px;&#13;
+  padding:17px 2px 5px;&#13;
+  border-top:1px solid #e9e2f1;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-footer-top {&#13;
+  display:flex;&#13;
+  align-items:center;&#13;
+  justify-content:space-between;&#13;
+  gap:10px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-footer-top b {&#13;
+  color:#55416f;&#13;
+  font-size:11px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-footer-top span {&#13;
+  color:#988ca8;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-footer-links {&#13;
+  display:flex;&#13;
+  flex-wrap:wrap;&#13;
+  gap:16px;&#13;
+  margin-top:12px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-footer-links a {&#13;
+  color:#796a8d;&#13;
+  font-size:10px;&#13;
+}&#13;
+&#13;
+.co-catalog .ca-footer-links a:hover { color:#6748a8; }&#13;
+&#13;
+.co-catalog .ca-footer-copy {&#13;
+  margin-top:12px;&#13;
+  color:#a399b1;&#13;
+  font-size:9px;&#13;
+}&#13;
+&#13;
+/* RESPONSIVE */&#13;
+&#13;
+@media(max-width:900px) {&#13;
+  .co-catalog .ca-layout {&#13;
+    grid-template-columns:175px minmax(0,1fr);&#13;
+    gap:16px;&#13;
+  }&#13;
+&#13;
+  .co-catalog .ca-sidebar { padding:15px 9px; }&#13;
+  .co-catalog .ca-nav { gap:8px;padding:10px 8px; }&#13;
+}&#13;
+&#13;
+@media(max-width:680px) {&#13;
+  .co-catalog .ca-layout {&#13;
+    grid-template-columns:1fr;&#13;
+    gap:18px;&#13;
+  }&#13;
+&#13;
+  .co-catalog .ca-sidebar {&#13;
+    display:grid;&#13;
+    grid-template-columns:repeat(2,minmax(0,1fr));&#13;
+    align-content:start;&#13;
+    gap:3px;&#13;
+    min-height:0;&#13;
+    padding:12px;&#13;
+  }&#13;
+&#13;
+  .co-catalog .ca-brand {&#13;
+    grid-column:1/-1;&#13;
+    padding-bottom:12px;&#13;
+  }&#13;
+&#13;
+  .co-catalog .ca-nav-label,&#13;
+  .co-catalog .ca-sidebar-bottom { display:none; }&#13;
+&#13;
+  .co-catalog .ca-nav { margin:0; }&#13;
+  .co-catalog .ca-header h1 { font-size:25px; }&#13;
+  .co-catalog .ca-my-rentals { display:none; }&#13;
+  .co-catalog .ca-grid { grid-template-columns:1fr; }&#13;
+&#13;
+  .co-catalog .ca-help {&#13;
+    align-items:flex-start;&#13;
+    flex-direction:column;&#13;
+  }&#13;
+&#13;
+  .co-catalog .ca-footer-top {&#13;
+    align-items:flex-start;&#13;
+    flex-direction:column;&#13;
+  }&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>campusops-asset-catalogue</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CampusOps Asset Catalogue</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[
+(function() {
+  data.loading = true;
+  data.assets = [];
+
+  function classifyAsset(type) {
+    type = (type || "").toLowerCase();
+
+    if (type.indexOf("textbook") > -1 ||
+        type.indexOf("book") > -1) {
+      return "book";
+    }
+
+    if (type.indexOf("laptop") > -1 ||
+        type.indexOf("computer") > -1) {
+      return "laptop";
+    }
+
+    if (type.indexOf("kit") > -1 ||
+        type.indexOf("equipment") > -1) {
+      return "kit";
+    }
+
+    return "other";
+  }
+
+  var asset = new GlideRecord("u_campus_asset");
+  asset.addQuery("u_status", "available");
+  asset.orderBy("u_asset_name");
+  asset.query();
+
+  while (asset.next()) {
+    data.assets.push({
+      id: asset.getUniqueValue(),
+      name: asset.getDisplayValue("u_asset_name") || "Campus resource",
+      assetId: asset.getDisplayValue("u_asset_id") || "",
+      type: asset.getDisplayValue("u_asset_type") || "",
+      location: asset.getDisplayValue("u_location") || "",
+      status: asset.getDisplayValue("u_status") || "Available",
+      art: classifyAsset(asset.getDisplayValue("u_asset_type"))
+    });
+  }
+
+  data.loading = false;
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 21:18:49</sys_created_on>
+        <sys_id>cdd92bcaf43383107f44dc35ed319516</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CampusOps Asset Catalogue</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_widget_cdd92bcaf43383107f44dc35ed319516</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 21:28:40</sys_updated_on>
+        <template><![CDATA[<div class="co-catalog">
+  <div class="ca-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="ca-sidebar">
+      <a class="ca-brand" href="/sp?id=campusops_home">
+        <span class="ca-brand-mark">C</span>
+        <span><b>CampusOps</b><small>Campus resources</small></span>
+      </a>
+
+      <div class="ca-nav-label">WORKSPACE</div>
+      <a class="ca-nav" href="/sp?id=campusops_home"><span>⌂</span>Home</a>
+      <a class="ca-nav ca-nav-active" href="/sp?id=browse_assets"><span>⌕</span>Browse assets</a>
+      <a class="ca-nav" href="/sp?id=my_rentals"><span>▤</span>My rentals</a>
+      <a class="ca-nav" href="/sp?id=renew_asset"><span>↻</span>Renew an item</a>
+      <a class="ca-nav" href="/sp?id=return_asset"><span>↩</span>Return an item</a>
+
+      <div class="ca-nav-label ca-nav-spaced">YOUR ACCOUNT</div>
+      <a class="ca-nav" href="/sp?id=my_profile"><span>○</span>My profile</a>
+      <a class="ca-nav" href="/sp?id=quick_scan"><span>⌕</span>Quick scan</a>
+      <a class="ca-nav" href="/sp?id=report_issue"><span>!</span>Report an issue</a>
+
+      <div class="ca-sidebar-bottom">
+        <b>CampusOps</b>
+        <small>Campus resources, made easier.</small>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="ca-main">
+
+      <header class="ca-header">
+        <div>
+          <div class="ca-eyebrow">CAMPUSOPS / RESOURCE CATALOGUE</div>
+          <h1>Find what you need.</h1>
+          <p>Browse available books, laptops, lab kits and other campus resources.</p>
+        </div>
+        <a class="ca-my-rentals" href="/sp?id=my_rentals">My rentals →</a>
+      </header>
+
+      <!-- SEARCH -->
+      <section class="ca-search-panel">
+        <label for="ca-search">Search campus resources</label>
+        <div class="ca-search-row">
+          <span class="ca-search-symbol">⌕</span>
+          <input id="ca-search"
+                 type="search"
+                 ng-model="c.searchText"
+                 ng-change="c.resetPage()"
+                 placeholder="Search by name, asset ID, type or location…"
+                 autocomplete="off">
+          <button type="button"
+                  ng-if="c.searchText"
+                  ng-click="c.clearSearch()">
+            Clear
+          </button>
+        </div>
+        <div class="ca-search-hint">
+          {{c.filteredAssets().length}} available resource(s)
+        </div>
+      </section>
+
+      <!-- FILTERS -->
+      <section class="ca-catalogue">
+        <div class="ca-section-heading">
+          <div>
+            <h2>Available resources</h2>
+            <p>Choose a resource to view its details.</p>
+          </div>
+        </div>
+
+        <div class="ca-filters">
+          <button type="button"
+                  ng-repeat="filter in c.filters"
+                  ng-click="c.setFilter(filter.value)"
+                  ng-class="{'ca-filter-active': c.activeFilter === filter.value}">
+            {{filter.label}}
+            <span>{{c.countFor(filter.value)}}</span>
+          </button>
+        </div>
+
+        <div class="ca-loading" ng-if="c.data.loading">
+          Loading available resources…
+        </div>
+
+        <!-- ASSET CARDS -->
+        <div class="ca-grid"
+             ng-if="!c.data.loading && c.filteredAssets().length">
+
+          <article class="ca-card"
+                   ng-repeat="asset in c.pageAssets() track by asset.id">
+
+            <div class="ca-card-top">
+              <div class="ca-asset-symbol"
+                   ng-class="'ca-symbol-' + asset.art">
+                <span ng-if="asset.art === 'book'">▤</span>
+                <span ng-if="asset.art === 'laptop'">▣</span>
+                <span ng-if="asset.art === 'kit'">＋</span>
+                <span ng-if="asset.art === 'other'">□</span>
+              </div>
+              <span class="ca-available"><span></span>Available</span>
+            </div>
+
+            <div class="ca-asset-type">
+              {{asset.type || 'Campus resource'}}
+            </div>
+
+            <h3>{{asset.name}}</h3>
+
+            <div class="ca-asset-id">
+              Asset ID: {{asset.assetId || 'Not assigned'}}
+            </div>
+
+            <div class="ca-location" ng-if="asset.location">
+              <span>Location</span>
+              <strong>{{asset.location}}</strong>
+            </div>
+            <div class="ca-location" ng-if="!asset.location">
+              <span>Location</span>
+              <strong>Ask at the campus desk</strong>
+            </div>
+
+            <a class="ca-details-link"
+               ng-href="/sp?id=asset_details&sys_id={{asset.id}}">
+              View details <span>→</span>
+            </a>
+          </article>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="ca-pagination"
+             ng-if="!c.data.loading && c.filteredAssets().length > c.pageSize">
+          <span>
+            Showing {{c.startRecord()}}–{{c.endRecord()}}
+            of {{c.filteredAssets().length}} resources
+          </span>
+
+          <div>
+            <button type="button"
+                    ng-click="c.previousPage()"
+                    ng-disabled="c.currentPage === 1">
+              ← Previous
+            </button>
+            <strong>{{c.currentPage}} / {{c.totalPages()}}</strong>
+            <button type="button"
+                    ng-click="c.nextPage()"
+                    ng-disabled="c.currentPage >= c.totalPages()">
+              Next →
+            </button>
+          </div>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div class="ca-empty"
+             ng-if="!c.data.loading && !c.filteredAssets().length">
+          <h3>No matching resources found</h3>
+          <p>Try another search term or select a different resource type.</p>
+          <button type="button" ng-click="c.resetFilters()">Clear filters</button>
+        </div>
+      </section>
+
+      <!-- HELP -->
+      <section class="ca-help">
+        <div>
+          <b>Can't find what you're looking for?</b>
+          <p>Contact us or report an issue with a campus resource.</p>
+        </div>
+        <a href="/sp?id=report_issue">Get help →</a>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="ca-footer">
+        <div class="ca-footer-top">
+          <b>CampusOps</b>
+          <span>Campus resources, made easier.</span>
+        </div>
+        <div class="ca-footer-links">
+          <a href="/sp?id=report_issue">Help &amp; queries</a>
+          <a href="/sp?id=report_issue">Feedback</a>
+          <a href="/sp?id=my_profile">My account</a>
+        </div>
+        <div class="ca-footer-copy">
+          Campus Asset &amp; Textbook Lifecycle Management
+        </div>
+      </footer>
+
+    </main>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>cdd92bcaf43383107f44dc35ed319516</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 21:18:48</sys_created_on>
+        <sys_id>943a6f4af43383107f44dc35ed3195ab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 21:18:48</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

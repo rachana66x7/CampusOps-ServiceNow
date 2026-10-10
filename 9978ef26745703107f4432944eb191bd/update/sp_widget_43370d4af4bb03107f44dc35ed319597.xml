@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+    // The borrowing ledger header uses server-provided data.
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>&#13;
+.ledger-hero {&#13;
+  --ledger-ink: #34244e;&#13;
+  --ledger-muted: #79668f;&#13;
+  --ledger-purple: #8e6bc5;&#13;
+  position: relative;&#13;
+  isolation: isolate;&#13;
+  box-sizing: border-box;&#13;
+  width: 100%;&#13;
+  padding: 30px;&#13;
+  overflow: hidden;&#13;
+  border: 1px solid rgba(255,255,255,.92);&#13;
+  border-radius: 26px;&#13;
+  color: var(--ledger-ink);&#13;
+  background:&#13;
+    radial-gradient(ellipse at 90% 0%, rgba(255,255,255,.92), transparent 36%),&#13;
+    radial-gradient(ellipse at 4% 100%, rgba(203,181,255,.42), transparent 45%),&#13;
+    linear-gradient(125deg, #eee5ff 0%, #f5edff 56%, #fcecff 100%);&#13;
+  box-shadow: 0 16px 40px rgba(101,76,143,.09);&#13;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;&#13;
+}&#13;
+&#13;
+.ledger-hero,&#13;
+.ledger-hero * {&#13;
+  box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.ledger-topline {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 9px;&#13;
+  color: #8064aa;&#13;
+  font-size: 10px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 2px;&#13;
+}&#13;
+&#13;
+.ledger-status-dot {&#13;
+  width: 9px;&#13;
+  height: 9px;&#13;
+  flex: 0 0 9px;&#13;
+  border-radius: 50%;&#13;
+  background: #77c8a7;&#13;
+  box-shadow: 0 0 0 4px rgba(119,200,167,.17);&#13;
+}&#13;
+&#13;
+.ledger-topline-mark {&#13;
+  color: #9775d0;&#13;
+  font-size: 18px;&#13;
+}&#13;
+&#13;
+.ledger-main {&#13;
+  display: grid;&#13;
+  grid-template-columns: minmax(0, 1.3fr) minmax(220px, .7fr);&#13;
+  align-items: center;&#13;
+  gap: 20px;&#13;
+  padding: 25px 0 22px;&#13;
+}&#13;
+&#13;
+.ledger-copy {&#13;
+  min-width: 0;&#13;
+}&#13;
+&#13;
+.ledger-kicker {&#13;
+  margin-bottom: 9px;&#13;
+  color: #8c70b4;&#13;
+  font-size: 10px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 1.8px;&#13;
+}&#13;
+&#13;
+.ledger-copy h1 {&#13;
+  margin: 0;&#13;
+  color: var(--ledger-ink);&#13;
+  font-size: clamp(27px, 3vw, 39px);&#13;
+  font-weight: 800;&#13;
+  letter-spacing: -1.5px;&#13;
+  line-height: 1.12;&#13;
+}&#13;
+&#13;
+.ledger-copy h1 span {&#13;
+  color: #a27bd4;&#13;
+  font-size: .75em;&#13;
+}&#13;
+&#13;
+.ledger-description {&#13;
+  max-width: 510px;&#13;
+  margin: 13px 0 0;&#13;
+  color: var(--ledger-muted);&#13;
+  font-size: 14px;&#13;
+  line-height: 1.8;&#13;
+}&#13;
+&#13;
+.ledger-actions {&#13;
+  display: flex;&#13;
+  flex-wrap: wrap;&#13;
+  gap: 11px;&#13;
+  margin-top: 23px;&#13;
+}&#13;
+&#13;
+.ledger-button {&#13;
+  display: inline-flex;&#13;
+  min-height: 46px;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  gap: 20px;&#13;
+  padding: 0 17px;&#13;
+  border: 1px solid rgba(255,255,255,.9);&#13;
+  border-radius: 14px;&#13;
+  text-decoration: none !important;&#13;
+  font-size: 12px;&#13;
+  font-weight: 700;&#13;
+  transition: transform .2s ease, box-shadow .2s ease,&#13;
+              background .2s ease, border-color .2s ease;&#13;
+}&#13;
+&#13;
+.ledger-button:hover,&#13;
+.ledger-button:focus {&#13;
+  transform: translateY(-3px);&#13;
+  text-decoration: none !important;&#13;
+  outline: none;&#13;
+}&#13;
+&#13;
+.ledger-button-primary {&#13;
+  color: #fff !important;&#13;
+  background: linear-gradient(135deg, #9673c9, #805db7);&#13;
+  box-shadow: 0 8px 18px rgba(126,91,180,.2);&#13;
+}&#13;
+&#13;
+.ledger-button-primary:hover,&#13;
+.ledger-button-primary:focus {&#13;
+  color: #fff !important;&#13;
+  box-shadow: 0 12px 25px rgba(126,91,180,.34);&#13;
+}&#13;
+&#13;
+.ledger-button-glass {&#13;
+  color: #5e487e !important;&#13;
+  background: rgba(255,255,255,.43);&#13;
+}&#13;
+&#13;
+.ledger-button-glass:hover,&#13;
+.ledger-button-glass:focus {&#13;
+  color: #4d386c !important;&#13;
+  background: rgba(255,255,255,.82);&#13;
+  box-shadow: 0 8px 20px rgba(100,76,140,.1);&#13;
+}&#13;
+&#13;
+.ledger-arrow {&#13;
+  font-size: 16px;&#13;
+  transition: transform .2s ease;&#13;
+}&#13;
+&#13;
+.ledger-button:hover .ledger-arrow {&#13;
+  transform: translateX(3px);&#13;
+}&#13;
+&#13;
+.ledger-art {&#13;
+  position: relative;&#13;
+  display: flex;&#13;
+  min-height: 220px;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+}&#13;
+&#13;
+.ledger-art-orbit {&#13;
+  position: absolute;&#13;
+  aspect-ratio: 1;&#13;
+  border: 1px solid rgba(158,126,204,.25);&#13;
+  border-radius: 50%;&#13;
+}&#13;
+&#13;
+.ledger-orbit-one {&#13;
+  width: 205px;&#13;
+}&#13;
+&#13;
+.ledger-orbit-two {&#13;
+  width: 165px;&#13;
+}&#13;
+&#13;
+.ledger-orbit-three {&#13;
+  width: 125px;&#13;
+  border-color: rgba(158,126,204,.38);&#13;
+}&#13;
+&#13;
+.ledger-book-stack {&#13;
+  position: relative;&#13;
+  display: flex;&#13;
+  width: 112px;&#13;
+  height: 116px;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  border: 1px solid rgba(255,255,255,.95);&#13;
+  border-radius: 30px;&#13;
+  background: rgba(255,255,255,.68);&#13;
+  box-shadow: 0 18px 40px rgba(119,85,166,.13),&#13;
+              inset 0 0 0 8px rgba(255,255,255,.27);&#13;
+  transform: rotate(-4deg);&#13;
+  transition: transform .3s ease, box-shadow .3s ease;&#13;
+}&#13;
+&#13;
+.ledger-hero:hover .ledger-book-stack {&#13;
+  transform: rotate(0deg) translateY(-3px);&#13;
+  box-shadow: 0 23px 44px rgba(119,85,166,.19),&#13;
+              inset 0 0 0 8px rgba(255,255,255,.3);&#13;
+}&#13;
+&#13;
+.ledger-book {&#13;
+  position: absolute;&#13;
+  width: 34px;&#13;
+  height: 53px;&#13;
+  border-radius: 5px 7px 7px 5px;&#13;
+  box-shadow: 0 6px 12px rgba(65,43,97,.12);&#13;
+}&#13;
+&#13;
+.ledger-book-back {&#13;
+  width: 40px;&#13;
+  height: 59px;&#13;
+  background: #b7dfa9;&#13;
+  transform: translate(-12px, -3px) rotate(-7deg);&#13;
+}&#13;
+&#13;
+.ledger-book-left {&#13;
+  z-index: 1;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  color: #fff;&#13;
+  background: linear-gradient(145deg, #a88ae5, #8565c5);&#13;
+  transform: translate(-8px, 3px) rotate(-9deg);&#13;
+}&#13;
+&#13;
+.ledger-book-right {&#13;
+  z-index: 2;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  color: #fff;&#13;
+  background: linear-gradient(145deg, #f1b4dc, #dc8fc8);&#13;
+  transform: translate(19px, 3px) rotate(4deg);&#13;
+}&#13;
+&#13;
+.ledger-book span {&#13;
+  font-size: 22px;&#13;
+  font-weight: 800;&#13;
+}&#13;
+&#13;
+.ledger-book-sparkle {&#13;
+  position: absolute;&#13;
+  z-index: 3;&#13;
+  top: 21px;&#13;
+  right: 19px;&#13;
+  color: #a07bd2;&#13;
+  font-size: 17px;&#13;
+}&#13;
+&#13;
+.ledger-art-caption {&#13;
+  position: absolute;&#13;
+  bottom: 0;&#13;
+  color: #9279b0;&#13;
+  font-size: 9px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 2px;&#13;
+}&#13;
+&#13;
+.ledger-divider {&#13;
+  height: 1px;&#13;
+  background: linear-gradient(90deg, transparent, rgba(155,123,195,.3), transparent);&#13;
+}&#13;
+&#13;
+.ledger-bottom {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: space-between;&#13;
+  gap: 12px;&#13;
+  padding: 15px 0 20px;&#13;
+}&#13;
+&#13;
+.ledger-bottom-note,&#13;
+.ledger-bottom-date {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 9px;&#13;
+  color: #8a70ad;&#13;
+  font-size: 9px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 1.3px;&#13;
+}&#13;
+&#13;
+.ledger-note-star {&#13;
+  color: #a17ed4;&#13;
+  font-size: 19px;&#13;
+}&#13;
+&#13;
+.ledger-bottom-date {&#13;
+  font-weight: 500;&#13;
+  letter-spacing: 0;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.ledger-stats {&#13;
+  display: grid;&#13;
+  grid-template-columns: repeat(3, minmax(0, 1fr));&#13;
+  gap: 13px;&#13;
+}&#13;
+&#13;
+.ledger-stat {&#13;
+  position: relative;&#13;
+  display: flex;&#13;
+  min-width: 0;&#13;
+  align-items: center;&#13;
+  gap: 13px;&#13;
+  padding: 17px;&#13;
+  overflow: hidden;&#13;
+  border: 1px solid rgba(220,203,246,.8);&#13;
+  border-radius: 17px;&#13;
+  background: rgba(255,255,255,.68);&#13;
+  transition: transform .2s ease, box-shadow .2s ease,&#13;
+              background .2s ease;&#13;
+}&#13;
+&#13;
+.ledger-stat::after {&#13;
+  position: absolute;&#13;
+  right: -12px;&#13;
+  bottom: -27px;&#13;
+  width: 80px;&#13;
+  height: 80px;&#13;
+  border-radius: 50%;&#13;
+  background: rgba(196,171,240,.1);&#13;
+  content: "";&#13;
+  pointer-events: none;&#13;
+}&#13;
+&#13;
+.ledger-stat:hover {&#13;
+  transform: translateY(-3px);&#13;
+  background: rgba(255,255,255,.9);&#13;
+  box-shadow: 0 9px 22px rgba(109,79,153,.09);&#13;
+}&#13;
+&#13;
+.ledger-stat-icon {&#13;
+  display: flex;&#13;
+  width: 43px;&#13;
+  height: 43px;&#13;
+  flex: 0 0 43px;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  border-radius: 14px;&#13;
+  color: #815ac1;&#13;
+  background: #eadfff;&#13;
+  font-size: 22px;&#13;
+}&#13;
+&#13;
+.ledger-stat-lilac {&#13;
+  background: #e9e0ff;&#13;
+}&#13;
+&#13;
+.ledger-stat-peach {&#13;
+  color: #b66e31;&#13;
+  background: #ffead5;&#13;
+}&#13;
+&#13;
+.ledger-stat &gt; div:last-child {&#13;
+  display: flex;&#13;
+  min-width: 0;&#13;
+  flex-direction: column;&#13;
+}&#13;
+&#13;
+.ledger-stat-label {&#13;
+  color: #8b75a5;&#13;
+  font-size: 9px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 1.1px;&#13;
+}&#13;
+&#13;
+.ledger-stat strong {&#13;
+  margin-top: 3px;&#13;
+  color: #3c2a55;&#13;
+  font-size: 28px;&#13;
+  font-weight: 800;&#13;
+  line-height: 1.2;&#13;
+}&#13;
+&#13;
+.ledger-stat small {&#13;
+  margin-top: 3px;&#13;
+  color: #8b79a0;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+@media (max-width: 760px) {&#13;
+  .ledger-hero {&#13;
+    padding: 21px;&#13;
+    border-radius: 21px;&#13;
+  }&#13;
+&#13;
+  .ledger-main {&#13;
+    grid-template-columns: 1fr;&#13;
+    gap: 5px;&#13;
+    padding: 22px 0 16px;&#13;
+  }&#13;
+&#13;
+  .ledger-copy h1 {&#13;
+    font-size: 29px;&#13;
+  }&#13;
+&#13;
+  .ledger-art {&#13;
+    min-height: 170px;&#13;
+  }&#13;
+&#13;
+  .ledger-orbit-one {&#13;
+    width: 165px;&#13;
+  }&#13;
+&#13;
+  .ledger-orbit-two {&#13;
+    width: 135px;&#13;
+  }&#13;
+&#13;
+  .ledger-orbit-three {&#13;
+    width: 105px;&#13;
+  }&#13;
+&#13;
+  .ledger-stats {&#13;
+    grid-template-columns: 1fr;&#13;
+    gap: 9px;&#13;
+  }&#13;
+&#13;
+  .ledger-stat {&#13;
+    padding: 13px;&#13;
+  }&#13;
+&#13;
+  .ledger-bottom {&#13;
+    align-items: flex-start;&#13;
+  }&#13;
+&#13;
+  .ledger-bottom-note {&#13;
+    font-size: 8px;&#13;
+    letter-spacing: .8px;&#13;
+  }&#13;
+}&#13;
+&#13;
+@media (prefers-reduced-motion: reduce) {&#13;
+  .ledger-hero *,&#13;
+  .ledger-hero *::before,&#13;
+  .ledger-hero *::after {&#13;
+    transition: none !important;&#13;
+  }&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>campusops-my-rentals-hero</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CampusOps – My Rentals Hero</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[
+(function() {
+    data.totalCount = 0;
+    data.activeCount = 0;
+    data.attentionCount = 0;
+
+    var now = new GlideDateTime();
+    var nowMs = now.getNumericValue();
+    var dayMs = 86400000;
+
+    data.today = now.getLocalDate().getByFormat("dd MMM yyyy");
+
+    var rental = new GlideRecord("u_student_rental");
+    rental.addQuery("u_student", gs.getUserID());
+    rental.query();
+
+    while (rental.next()) {
+        data.totalCount++;
+
+        var status = (rental.getValue("u_status") || "").toLowerCase();
+
+        if (status === "active") {
+            data.activeCount++;
+
+            var dueValue = rental.getValue("u_due_date");
+
+            if (dueValue) {
+                var due = new GlideDateTime(dueValue);
+                var daysLeft = Math.ceil(
+                    (due.getNumericValue() - nowMs) / dayMs
+                );
+
+                if (daysLeft <= 2) {
+                    data.attentionCount++;
+                }
+            }
+        }
+    }
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 09:35:37</sys_created_on>
+        <sys_id>43370d4af4bb03107f44dc35ed319597</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CampusOps – My Rentals Hero</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_widget_43370d4af4bb03107f44dc35ed319597</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 10:00:19</sys_updated_on>
+        <template><![CDATA[
+<div class="ledger-hero">
+  <div class="ledger-topline">
+    <span class="ledger-status-dot"></span>
+    <span>CAMPUS RESOURCE LIBRARY</span>
+    <span class="ledger-topline-mark">✦</span>
+  </div>
+
+  <div class="ledger-main">
+    <div class="ledger-copy">
+      <div class="ledger-kicker">YOUR PERSONAL COLLECTION</div>
+      <h1>My Borrowing Ledger<span> ✦</span></h1>
+      <p class="ledger-description">
+        Your campus resources, organised around you.
+        Check what you have, what's due, and what you've returned.
+      </p>
+
+      <div class="ledger-actions">
+        <a class="ledger-button ledger-button-primary"
+           href="?id=browse_assets">
+          <span>Discover resources</span>
+          <span class="ledger-arrow">↗</span>
+        </a>
+        <a class="ledger-button ledger-button-glass"
+           href="?id=return_asset">
+          <span>Manage returns</span>
+          <span class="ledger-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="ledger-art" aria-hidden="true">
+      <div class="ledger-art-orbit ledger-orbit-one"></div>
+      <div class="ledger-art-orbit ledger-orbit-two"></div>
+      <div class="ledger-art-orbit ledger-orbit-three"></div>
+
+      <div class="ledger-book-stack">
+        <div class="ledger-book ledger-book-back"></div>
+        <div class="ledger-book ledger-book-left">
+          <span>≡</span>
+        </div>
+        <div class="ledger-book ledger-book-right">
+          <span>≡</span>
+        </div>
+        <div class="ledger-book-sparkle">✦</div>
+      </div>
+
+      <div class="ledger-art-caption">BORROW · USE · RETURN</div>
+    </div>
+  </div>
+
+  <div class="ledger-divider"></div>
+
+  <div class="ledger-bottom">
+    <div class="ledger-bottom-note">
+      <span class="ledger-note-star">✧</span>
+      <span>YOUR COLLECTION, AT A GLANCE</span>
+    </div>
+    <div class="ledger-bottom-date">
+      <span>◷</span>
+      <span>{{data.today}}</span>
+    </div>
+  </div>
+
+  <div class="ledger-stats">
+    <div class="ledger-stat">
+      <div class="ledger-stat-icon">▤</div>
+      <div>
+        <span class="ledger-stat-label">TOTAL RECORDS</span>
+        <strong>{{data.totalCount}}</strong>
+        <small>All borrowing activity</small>
+      </div>
+    </div>
+
+    <div class="ledger-stat">
+      <div class="ledger-stat-icon ledger-stat-lilac">◷</div>
+      <div>
+        <span class="ledger-stat-label">CURRENTLY OUT</span>
+        <strong>{{data.activeCount}}</strong>
+        <small>Resources with you</small>
+      </div>
+    </div>
+
+    <div class="ledger-stat">
+      <div class="ledger-stat-icon ledger-stat-peach">!</div>
+      <div>
+        <span class="ledger-stat-label">NEEDS ATTENTION</span>
+        <strong>{{data.attentionCount}}</strong>
+        <small>Due soon or overdue</small>
+      </div>
+    </div>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>43370d4af4bb03107f44dc35ed319597</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 09:35:36</sys_created_on>
+        <sys_id>a739c54ef4bb03107f44dc35ed319559</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 09:35:36</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

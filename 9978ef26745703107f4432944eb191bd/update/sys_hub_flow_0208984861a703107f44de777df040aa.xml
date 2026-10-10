@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,timeFromCreateToActivate=4347000,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Assesses the return risk of active campus asset rentals based on their due date and updates the Return Risk field.</description>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source/>
+        <internal_name>campus_asset_return_risk_assessment_flow</internal_name>
+        <label_cache>[{"name":"c0244ac8-03d0-4ee0-9ae5-f10a8c754d10.item","label":"2 - For Each➛Student Rental Record","reference":"u_student_rental","reference_display":"Student Rental","type":"reference","base_type":"reference","usedInstances":{"7686d160-4b1f-4697-bb4d-23de96837bd7":["record"],"7fbe553e-f6da-4e05-bbfe-535cd650f719":["record"],"b298c85c-1ffe-43a2-ae29-9904560dc9e5":["record"],"24c1c85a-0a45-405c-86e2-7c7532f6dbda":["record"]},"attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"Daily_1.run_start_date_time","label":"Trigger - Run Daily ➛Run Start Date/Time","type":"glide_date_time","base_type":"glide_date_time","usedInstances":{"44812c39-2b33-48ad-bd6e-1da30d7a894a":["condition"]},"attributes":{"test_input_hidden":"true"}},{"name":"c0244ac8-03d0-4ee0-9ae5-f10a8c754d10.item.u_due_date","label":"2 - For Each➛Student Rental Record➛Due date","reference":"","reference_display":"Due date","type":"glide_date_time","base_type":"glide_date_time","parent_table_name":"u_student_rental","column_name":"u_due_date","usedInstances":{"44812c39-2b33-48ad-bd6e-1da30d7a894a":["condition"],"2d4d6083-a59d-4b82-90b2-1c0b6ff4436c":["condition"]}},{"name":"52492214-3282-43a8-bdc4-4ee8db33613e.Records","label":"1 - Look Up Records➛Student Rental Records","reference":"u_student_rental","reference_display":"Student Rental","type":"records","base_type":"records","usedInstances":{"c0244ac8-03d0-4ee0-9ae5-f10a8c754d10":["items"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}}]</label_cache>
+        <master_snapshot>263b140061e703107f44de777df04008</master_snapshot>
+        <master_snapshot_digest/>
+        <name>Campus Asset Return Risk Assessment Flow</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>ea3b140061e703107f44de777df04066</remote_trigger_id>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:37:04</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>0208984861a703107f44de777df040aa</sys_id>
+        <sys_mod_count>43</sys_mod_count>
+        <sys_name>Campus Asset Return Risk Assessment Flow</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_hub_flow_0208984861a703107f44de777df040aa</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:49:33</sys_updated_on>
+        <type>flow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record>10a82088612b03107f44de777df04053</version_record>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=0208984861a703107f44de777df040aa"/>
+    <sys_variable_value action="delete_multiple" query="document_key=0208984861a703107f44de777df040aa"/>
+    <sys_flow_timer_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <day_of_month>1</day_of_month>
+        <day_of_week/>
+        <name/>
+        <published_version/>
+        <run_period/>
+        <run_start>2026-09-20 14:51:01</run_start>
+        <sys_class_name>sys_flow_timer_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:51:01</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ea3b140061e703107f44de777df04066</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 14:51:01</sys_updated_on>
+        <time>1970-01-01 09:00:00</time>
+        <timer_type>11</timer_type>
+        <trigger_definition display_value="Daily">89142dc0c32222002841b63b12d3ae8a</trigger_definition>
+    </sys_flow_timer_trigger>
+    <sys_flow_trigger_auto_script action="delete_multiple" query="name=Trigger:ea3b140061e703107f44de777df04066^sys_idNOT IN623b140061e703107f44de777df04067"/>
+    <sys_flow_trigger_auto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>false</advanced>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_run_end/>
+        <entered_run_start/>
+        <entered_time/>
+        <max_drift/>
+        <name>Trigger:ea3b140061e703107f44de777df04066</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <repeat_every/>
+        <run_as display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek/>
+        <run_daysofweek/>
+        <run_end/>
+        <run_month/>
+        <run_period/>
+        <run_start>2026-09-20 14:51:01</run_start>
+        <run_time>1970-01-01 09:00:00</run_time>
+        <run_type>daily</run_type>
+        <run_weekinmonth/>
+        <script><![CDATA[sn_flow_trigger.FlowTriggerAPI.fireTimerTrigger('ea3b140061e703107f44de777df04066');]]></script>
+        <sys_class_name>sys_flow_trigger_auto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:51:01</sys_created_on>
+        <sys_id>623b140061e703107f44de777df04067</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 14:51:01</sys_updated_on>
+        <time_zone/>
+        <trigger display_value="">ea3b140061e703107f44de777df04066</trigger>
+        <upgrade_safe>true</upgrade_safe>
+    </sys_flow_trigger_auto_script>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=0208984861a703107f44de777df040aa"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=0208984861a703107f44de777df040aa"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=0208984861a703107f44de777df040aa^sys_idNOT IN0608984861a703107f44de777df040ab"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>0208984861a703107f44de777df040aa</id>
+        <name>Campus Asset Return Risk Assessment Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:37:04</sys_created_on>
+        <sys_id>0608984861a703107f44de777df040ab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 14:37:04</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=0608984861a703107f44de777df040ab"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=0208984861a703107f44de777df040aa"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=0208984861a703107f44de777df040aa"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=0208984861a703107f44de777df040aa"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=0208984861a703107f44de777df040aa^sys_idNOT IN02785c8861a703107f44de777df04029"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">0208984861a703107f44de777df040aa</flow>
+        <generation_source/>
+        <name>Daily</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:38:58</sys_created_on>
+        <sys_id>02785c8861a703107f44de777df04029</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 14:50:59</sys_updated_on>
+        <trigger_definition display_value="Daily">89142dc0c32222002841b63b12d3ae8a</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/21STWvcMBD9K0XnjZF3k7bxrRAWemgDyZJLCGYsjXcFo4/K8iZuyH/vyFaWfFToMm80b9576P5ZEHRIohE7Y1GshHEJowPaTQEZ3ZPR2KalZ8FpSD5OoklxxJXoo7c7tIEg8eMeaGDQR41RNLWUK3EEGvF2Gn5q5mIGBzazFr65y2V9+U2eyZrvF3nZSMmXu+pgSEd0orl/WIkAkWdTZn7+0DKZfAP6HLWSarPmI+X6+3ndfd109VpvAPGCCT84fa8l/cfvWyf4lNBp1Cebn8KICPra0XR6ceAsF9sWngbzFwtVxB5ZvMKleSpbbQaOclpgdfBG4XVIxrsFSdBRmVGeRut+Lw641tjDSOmuBMrIODAfhqw5qyiS+tuDf7x5Xbg1bjZYmuQV0KmClKLpxoRDThwJLRO1FkIwbt+G6I9mHmYttppjq3ryj7x0MHtXgcrCK44Iqi3jVzN8B9FkF7+YhodfZvftnzHvXXwUxe1imh+UULYGqXyiQUUT0g9ecHz9dS8P/wDp+Er5ygIAAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>daily</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=0208984861a703107f44de777df040aa^sys_idNOT IN0cc81884616703107f44de777df040a9,6fea98cc61a703107f44de777df040ad,d86e148461e703107f44de777df0403a"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
+        <action_type_parent display_value="Look Up Records">d1c56ec50b30030085c083eb37673a50</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>43400a1587003300663ca1bb36cb0b4b</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">0208984861a703107f44de777df040aa</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:40:11</sys_created_on>
+        <sys_id>0cc81884616703107f44de777df040a9</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-21 09:00:08</sys_updated_on>
+        <ui_id>52492214-3282-43a8-bdc4-4ee8db33613e</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VXTWvjMBD9K0FnE+wmTbu9lZbCQj+gKb10ixnbciJWkb2SnDQN+e87sqTEJE43gRRa9mLQzEh6M/OeJL8sCMvIBTnP+2EI0en5WRj2emE4GPRSiJKkN0iTMOknJCACJhQjNSSc4nAKvDLjKla6yqjQscQPcHRlTJUc5s8uYmj9nUfvT8eMZxhNLl5eA1KCxJU1leRiseHaFxqHhHIMfXLYNqDqebkaxrXP2m6b0zr31lHIzEAJA0LfNBUZRQw5cEUDMgGRgS7kfGWRFLIHwdeGMRMaVyQm+E2xd9z3PDRxOcWsUmp9q2HsSmXN+TVoGGpZpbqSLjQdFyylytYjozlUXF81bTbgodSsEHaKTdvOLng1Efe2HGS1gO8MWiqFIGhpEjXIXRr5cFzMHj3KGybqmjgnL1Jsox+B1pIllTZ4FoRyOjFcmEBZMjGKS1lMWT0ZsUy6I46Dbs6LGW6q2Eh0ITXAu1hX6N6g/bo2P4NkJos7XAYnIyDGkSGxbaEqKlmXchqnvFK1Q4JQdi2yDIiaqysOSq0zx5LHfyqD29bBZRzbopkpqWSlvsQlptQltwz2UsdpuKZcWoiMGRRqQyKgK/WrwukZ2C22ZLIj6phiqZF6sVw1obbBd7LZst22LeBkEx1NNpjHdxIObv71dHO4EmwJ/iGH9OxDkp2u+aQKqWNby4Yetrl/MM/3gOB5/mCY2Unmu1A5mueM8qztdrgxjo3b4eT/vB2+JMkRUBbb7jHBmaivegT6WewPPz5if2zwrKbXmvu1DVS6rQHo6KLzfrAS9oDjlTDEvTtPFk8LRH/e15TZPOu90QmgdzQB9E6OI4DFKs1VIVtq7l93pps+/t3Ew2Y8UrAxIVq2CeygPaND9zxZbgu4d5CCm2SznusdnDvyM3CHIoPPPALGONXtF1v9xjOWjahe7+6jskLPgP9u8zvGxb5RdXqf8KTsfyjbQbSWKCoFf60UNq/5pozwebR9hkSBNR92hOyBxZfjDt7wP86DaUXojhFUOh3VvWmeIz9XVkfy/hEfjF/2JvXNatWg79m3+BM7nhBe/wKFSIfJexAAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=0cc81884616703107f44de777df040a9"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">0208984861a703107f44de777df040aa</flow>
+        <generation_source/>
+        <order>4</order>
+        <parent_ui_id>44812c39-2b33-48ad-bd6e-1da30d7a894a</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:49:43</sys_created_on>
+        <sys_id>6fea98cc61a703107f44de777df040ad</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-21 09:00:08</sys_updated_on>
+        <ui_id>7686d160-4b1f-4697-bb4d-23de96837bd7</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVXW/aMBT9K8jPgBwIHeVtKqo0qWulMvHSVdHFvgFrjpPZTluG+O+7SRxg0HWt1JdqefP9sM85vie+2zAl2YTFKHl0Hp2JYTQcDjgfjONocTZcRAM5BMSIdZmBDKnSositpPUD6LIKbDaCD+IYxLjHh5L3YkTeOwcc9dKIw1h8GsUy4n3lMdtuqU8qV2hYz0M7RcRKaWnRsMndfZcVYOkkj5ZNNkep10LVsEBNpbct1mPsfl1Ua5mLMkPjE9UGr0LnNGQ6X6aUoaYKTsS7DJ88GokEJAXtsMsyMBJ8btds4m1JAYsgb4xe7ypWyviGaAZPTv2ik2Ne1aVIzEQQYbdMgkBNOJ2ChxntLHxpd3rlSqBrNJGYQqn9xWGsKbgpvMpN0+JhodvuXJeZuW4UYbsNDu6jdAQCi4pnhbyhlc5W+eNtC/JSmVqSQFHnAvRuBd5btSh9BWfDUGOtcQZFocwyKWz+oOpmgpL1l5oW/VTnj3SmU0vTB1Hh7pOq0L+k+LQOz8GqisRX2oaat13m1u5Cg3N7KqRh8rOskDTEAoWkVqGWIKknoWoWVhX+Mx31gAH4thvMsBi9NGHifD9QB3vuDVEmzpf1uSSVJzQnMz9r8p3bNv82B7wCX+uAb/W9P483mOAkdnXY27luEsECo3ezwPgjWSDQ+PAe+Nfk88GL/9aDSaqH3f0x9RbpfkxilfvxveT0FqzUcnU6/H8vfJsLXoG1dcGlQi3dM+BbC2BGCD0mDZkjG4RkZx6Su9fg3bwQnfH6+0CO+G8ehfvfLuu0xCMJAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=6fea98cc61a703107f44de777df040ad"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">0208984861a703107f44de777df040aa</flow>
+        <generation_source/>
+        <order>7</order>
+        <parent_ui_id>2d4d6083-a59d-4b82-90b2-1c0b6ff4436c</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:04:47</sys_created_on>
+        <sys_id>d86e148461e703107f44de777df0403a</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-21 09:00:08</sys_updated_on>
+        <ui_id>24c1c85a-0a45-405c-86e2-7c7532f6dbda</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVXU/bMBT9K5Wf28ppU1b6NlFVmsRAgokXhqJb+wasOU7mD6Cr+t93kzht+RArEi9oefP9sM85vie+XjMl2YylKHlynByJcTIejzgfTdNkeTReJiM5BsSE9ZmBAqnSoiitpPU96FAH1mvBR2kKYjrgY8kHKSIfHANOBnnCYSq+TFKZ8KHyWGw21CeVqzSsrmI7RcSd0tKiYbPrmz6rwNJJHi2brZ+lDoWqYYmaSi86rM+x+1VVr2UpQoHGZ6oLnsbOecz0vs0pQ001nIT3GT56NBIJSA7aYZ8VYCT40q7YzNtAAYsgz41ebSvulPEt0QIenfpDJ6e8rsuRmIkownaZRYHacD4HD5e0s/DBbvUqlUDXaiIxh6D9yX6sLTivvCpN2+JhqbvuUofCnLWKsO0Ge/cRHIHAquZZI29p5Zd35cNFB3KhTCNJpKhLAXq7Au+tWgZfw1kz1NhoXEBVKXObVba8V00zQSmGt5oWw1yXD3SmU7dmCKLGPSRVYbig+LwJX4FVNYnvtA01b/rMrdyJBud2VEjD7HeokbTEIoWsUaGRIGsmoW4WVlX+Kx11jxH4ph/NsJy8NWHieDdQe3vuDBEy50NzLknlCc2Lmb9s872LLv8+BxyAr3PAj+beX8cbTfAidrrf2ztrE9ECkw+zwPQzWSDS+PQe+Nfk89Gb/9a9SWqG3T2Zeot0Pyazyv36GTi9BQVKFYqX4/9W6fuccADezgkLhVq6Vwh0NsCCMHrMWkLPrBCTvauY3L4IH+aH5Ig33ydyxX/zMNz8BQfkTIAnCQAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=d86e148461e703107f44de777df0403a"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=0208984861a703107f44de777df040aa"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=0208984861a703107f44de777df040aa^sys_idNOT INe32e1c4461e703107f44de777df0401b,241ed84461e703107f44de777df040a8,1ff8500c61a703107f44de777df04081,b2591c0c61a703107f44de777df040a2"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">d5bedc8461e703107f44de777df040d5</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">0208984861a703107f44de777df040aa</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <parent_ui_id>ab4dc205-50e1-40d7-a188-81e22746a012</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:03:55</sys_created_on>
+        <sys_id>e32e1c4461e703107f44de777df0401b</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:49:31</sys_updated_on>
+        <ui_id>2d4d6083-a59d-4b82-90b2-1c0b6ff4436c</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1UXWvbQBD8K0XPsjhJluv4LbQNBJq41CYQShCru5V99KRTdSc7rvF/754+bNM4tJQ89k03p92dGe1o7+nGVo01S31tjFyV3uzbk+/J0mH0vPdKKNCbeVyXQlqpy7QFfG8DqnEX9CikqRTsHk4IX0slauy7VVBTjcXam+1/u7K7ClMFGSoqXNhalisql4JOOYM8vOIhj6NJHDEWTcdhNomzMBIxIMT03lD4YSD37nOL+K+ydvMIN8MkXQtHK2S+h88WS4E0Ogdl0PcKKAVYXe+OSI0g5qU6AWtZ2k5xAc9G/qTeUZK4F3Mkjby343hMe6sGl7TkOK8cwQ6xkKnBQq2aorzvdDiTMYdG2TOTG0P9sHKkHYueUr5Y6+3XYeCNLFuB/aXSHNTxBJZsyBqLxn0YVFhQo7SAqiJz0qrWG9kWE5ciWCk6BLnSWxrqNiUA7ogH5BEEN4R/bOEHqKVTcUdtqLijmYGRPG23itrZmiQcWlvSH40j1AnspaSdG/SC4bWs7DXN2WDP+uC/XMmzbdzvOYvGY+DTEYsFG40R2egKMBnlIYMpf5+MRcgCabEImlQ05CBYPBxuF/fz5ae7L8vHl/v8Jj3fIhFXkORJyJLLiRhPLiXiQhZej0H0hxi4D/eXKWCM/Y/BeQykSbt17rW1w/85BU9u5bsJptsbgVwaIrJ02O3w/3YXO1oAyc+hra6/Owkn7PAL3KMTWgkGAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">59bedc8461e703107f44de777df040d3</block>
+        <comment/>
+        <connected_to>44812c39-2b33-48ad-bd6e-1da30d7a894a</connected_to>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">0208984861a703107f44de777df040aa</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="Else">1f781bf3c32232002841b63b12d3aee6</logic_definition>
+        <order>5</order>
+        <outputs_assigned/>
+        <parent_ui_id>c0244ac8-03d0-4ee0-9ae5-f10a8c754d10</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:03:26</sys_created_on>
+        <sys_id>241ed84461e703107f44de777df040a8</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:49:31</sys_updated_on>
+        <ui_id>ab4dc205-50e1-40d7-a188-81e22746a012</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/6tWyi8tKSgtKQ7JdywuzkzPU7KKjtVRyswDiUHYZYlFmYlJOalQbkpqcmZxZn5eCEjME0ldSmVeYm5mMrJQeX5RdlpOfjlCrBYAD1ouqHEAAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">483b900061e703107f44de777df0408a</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">0208984861a703107f44de777df040aa</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="For Each">098e1dc5c3e232002841b63b12d3ae33</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:41:14</sys_created_on>
+        <sys_id>1ff8500c61a703107f44de777df04081</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:49:30</sys_updated_on>
+        <ui_id>c0244ac8-03d0-4ee0-9ae5-f10a8c754d10</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/51SwW7bMAz9F50Tw5a9IMmtwFCgh7VAV/QyFAYt0YkwWdIkOaln+N9HxU5a9LiTzUfy8T2RI7N9dH0ML/YuBHUwbP/rbcWUSRj9j8xAh2zPVMQusBU7ge5TPI7feLXjvKjWJd/ydVXCdt1IUa0rxK1synJTlJg9o7BehmmiVqmC0zC8/j+DOCotPS4iHXjSFtGz/fglFQeHtYYGNQ1aGKhfSQqLnWx3Rb4TJd+UPM/5tiqaTdkUXJaAckN1186HxfSXN0jsFPobL32SCp6vGL5HNBJpUAs64Ip1YCRE6we2j74nwCPIJ6OHW8VRmUh0LNW+B/WXuIs8T4UtkiOBc/IW1stDzrA4WiXwyUVlzYxEaPTSI6zuO/M4y08rwBZ6Ha8rIKQPxIcuaU4qFkntz6M9P18H3itz8bcktRWgbxHE6FXTRwxpDaixI6K6A+eUOdTO25O6NJOWLjtoCrJW2zMNTeeWgUjCM3oiyO4J/36BX8Gr5OIH0VDzdHFf/+nT3NnHorieTVNBEF65eEd0J1zETW/pXmemMB+GRKECDXxJ2MP1ylNioCUr8Rk6W/87Sf3Apn8zQwq0LwMAAA==</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">8c3b900061e703107f44de777df0408c</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">0208984861a703107f44de777df040aa</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>3</order>
+        <outputs_assigned/>
+        <parent_ui_id>c0244ac8-03d0-4ee0-9ae5-f10a8c754d10</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:42:51</sys_created_on>
+        <sys_id>b2591c0c61a703107f44de777df040a2</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:49:30</sys_updated_on>
+        <ui_id>44812c39-2b33-48ad-bd6e-1da30d7a894a</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXWvbMBT9K8PPiZHtuEvyVlYKg22FtfRlK+JGuk7FZMmT5LaZyX/flT/S0A82xtjTXox1dD/OPb4Hd4ltQ9MGf2VPvVdbk6y/3MwSZSJG711ioMZknQhrpArKGt4Ds+QOdBsv6FUq32jYXT8i4lZp6XCs1oCjnIAuWXdPrsKuQa5hg5oSL4NTZkvpStKpYlBlK5GJIj8pcsby5SLbnBSbLJcFIBQUNyW+m8i9+dAjs1dZx36E+6mTdTLSytgswYeARiK1rkB7nCU1GAnBut0BcQjywuhH4FaZMExcw4NXP6h2XpYxsEKaUYxyHI58lGpSySqBF00kOCABNnqS0Oq2Np+GOaLIWEGrw5HIrad62ETSkcVIqbq8tfefp4bnyvQDjpfaCtCHEwSSYdMG9PHDoMaaCvEamobE4Y2zd6pPJi51utV0SCtt76lp3JQURCSekkaQnhN+1sPX4FSc4iOVoeSB5ga8ErzfKioXHI2w72Xh39tIaBhwHIUPalCAF0414ZT63OHIej97vpJH29h1guWLBYjlnBWSzReIbL4CLOdVxmAp3pYLmbFUBazTlsuWFISA+/3XlrFC9E/ZdWeg9I5nqWsN9wFc6KN4UDWFPl/4f9P0b3hqBWVVZqx82VOLk5c89YKbXjdS/gsjxU//mz5ijP030rGRlOeDIcbZ+uZ/7KObaJqhgx/2RqJQnohcRez99AeIFztaACWOoXvrvsURHrH9T9LxG91LBgAA</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=0208984861a703107f44de777df040aa"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=0208984861a703107f44de777df040aa"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_0208984861a703107f44de777df040aa"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_0208984861a703107f44de777df040aa"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Assesses the return risk of active campus asset rentals based on their due date and updates the Return Risk field.</description>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>campus_asset_return_risk_assessment_flow</internal_name>
+        <label_cache>[{"name":"c0244ac8-03d0-4ee0-9ae5-f10a8c754d10.item","label":"2 - For Each➛Student Rental Record","reference":"u_student_rental","reference_display":"Student Rental","type":"reference","base_type":"reference","usedInstances":{"7686d160-4b1f-4697-bb4d-23de96837bd7":["record"],"7fbe553e-f6da-4e05-bbfe-535cd650f719":["record"],"b298c85c-1ffe-43a2-ae29-9904560dc9e5":["record"],"24c1c85a-0a45-405c-86e2-7c7532f6dbda":["record"]},"attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"Daily_1.run_start_date_time","label":"Trigger - Run Daily ➛Run Start Date/Time","type":"glide_date_time","base_type":"glide_date_time","usedInstances":{"44812c39-2b33-48ad-bd6e-1da30d7a894a":["condition"]},"attributes":{"test_input_hidden":"true"}},{"name":"c0244ac8-03d0-4ee0-9ae5-f10a8c754d10.item.u_due_date","label":"2 - For Each➛Student Rental Record➛Due date","reference":"","reference_display":"Due date","type":"glide_date_time","base_type":"glide_date_time","parent_table_name":"u_student_rental","column_name":"u_due_date","usedInstances":{"44812c39-2b33-48ad-bd6e-1da30d7a894a":["condition"],"2d4d6083-a59d-4b82-90b2-1c0b6ff4436c":["condition"]}},{"name":"52492214-3282-43a8-bdc4-4ee8db33613e.Records","label":"1 - Look Up Records➛Student Rental Records","reference":"u_student_rental","reference_display":"Student Rental","type":"records","base_type":"records","usedInstances":{"c0244ac8-03d0-4ee0-9ae5-f10a8c754d10":["items"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}}]</label_cache>
+        <master>true</master>
+        <name>Campus Asset Return Risk Assessment Flow</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="Campus Asset Return Risk Assessment Flow">0208984861a703107f44de777df040aa</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:51:00</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>263b140061e703107f44de777df04008</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:49:32</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=263b140061e703107f44de777df04008"/>
+    <sys_variable_value action="delete_multiple" query="document_key=263b140061e703107f44de777df04008"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=263b140061e703107f44de777df04008"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=263b140061e703107f44de777df04008^sys_idNOT IN6a3b140061e703107f44de777df04009"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>263b140061e703107f44de777df04008</id>
+        <name>Campus Asset Return Risk Assessment Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:51:00</sys_created_on>
+        <sys_id>6a3b140061e703107f44de777df04009</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 14:51:00</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=6a3b140061e703107f44de777df04009"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=263b140061e703107f44de777df04008"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=263b140061e703107f44de777df04008"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=263b140061e703107f44de777df04008"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=263b140061e703107f44de777df04008^sys_idNOT IN663b140061e703107f44de777df04017"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">263b140061e703107f44de777df04008</flow>
+        <generation_source/>
+        <name>Daily</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:51:01</sys_created_on>
+        <sys_id>663b140061e703107f44de777df04017</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 14:51:01</sys_updated_on>
+        <trigger_definition display_value="Daily">89142dc0c32222002841b63b12d3ae8a</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/21STWvcMBD9K0XnjZF3k7bxrRAWemgDyZJLCGYsjXcFo4/K8iZuyH/vyFaWfFToMm80b9576P5ZEHRIohE7Y1GshHEJowPaTQEZ3ZPR2KalZ8FpSD5OoklxxJXoo7c7tIEg8eMeaGDQR41RNLWUK3EEGvF2Gn5q5mIGBzazFr65y2V9+U2eyZrvF3nZSMmXu+pgSEd0orl/WIkAkWdTZn7+0DKZfAP6HLWSarPmI+X6+3ndfd109VpvAPGCCT84fa8l/cfvWyf4lNBp1Cebn8KICPra0XR6ceAsF9sWngbzFwtVxB5ZvMKleSpbbQaOclpgdfBG4XVIxrsFSdBRmVGeRut+Lw641tjDSOmuBMrIODAfhqw5qyiS+tuDf7x5Xbg1bjZYmuQV0KmClKLpxoRDThwJLRO1FkIwbt+G6I9mHmYttppjq3ryj7x0MHtXgcrCK44Iqi3jVzN8B9FkF7+YhodfZvftnzHvXXwUxe1imh+UULYGqXyiQUUT0g9ecHz9dS8P/wDp+Er5ygIAAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>daily</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=263b140061e703107f44de777df04008^sys_idNOT INaa3b140061e703107f44de777df04015,a63b140061e703107f44de777df04016,febe10c461e703107f44de777df040e9"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
+        <action_type_parent display_value="Look Up Records">d1c56ec50b30030085c083eb37673a50</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>43400a1587003300663ca1bb36cb0b4b</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">263b140061e703107f44de777df04008</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:51:01</sys_created_on>
+        <sys_id>aa3b140061e703107f44de777df04015</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 14:51:01</sys_updated_on>
+        <ui_id>52492214-3282-43a8-bdc4-4ee8db33613e</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VXTWvjMBD9K0FnE+wmTbu9lZbCQj+gKb10ixnbciJWkb2SnDQN+e87sqTEJE43gRRa9mLQzEh6M/OeJL8sCMvIBTnP+2EI0en5WRj2emE4GPRSiJKkN0iTMOknJCACJhQjNSSc4nAKvDLjKla6yqjQscQPcHRlTJUc5s8uYmj9nUfvT8eMZxhNLl5eA1KCxJU1leRiseHaFxqHhHIMfXLYNqDqebkaxrXP2m6b0zr31lHIzEAJA0LfNBUZRQw5cEUDMgGRgS7kfGWRFLIHwdeGMRMaVyQm+E2xd9z3PDRxOcWsUmp9q2HsSmXN+TVoGGpZpbqSLjQdFyylytYjozlUXF81bTbgodSsEHaKTdvOLng1Efe2HGS1gO8MWiqFIGhpEjXIXRr5cFzMHj3KGybqmjgnL1Jsox+B1pIllTZ4FoRyOjFcmEBZMjGKS1lMWT0ZsUy6I46Dbs6LGW6q2Eh0ITXAu1hX6N6g/bo2P4NkJos7XAYnIyDGkSGxbaEqKlmXchqnvFK1Q4JQdi2yDIiaqysOSq0zx5LHfyqD29bBZRzbopkpqWSlvsQlptQltwz2UsdpuKZcWoiMGRRqQyKgK/WrwukZ2C22ZLIj6phiqZF6sVw1obbBd7LZst22LeBkEx1NNpjHdxIObv71dHO4EmwJ/iGH9OxDkp2u+aQKqWNby4Yetrl/MM/3gOB5/mCY2Unmu1A5mueM8qztdrgxjo3b4eT/vB2+JMkRUBbb7jHBmaivegT6WewPPz5if2zwrKbXmvu1DVS6rQHo6KLzfrAS9oDjlTDEvTtPFk8LRH/e15TZPOu90QmgdzQB9E6OI4DFKs1VIVtq7l93pps+/t3Ew2Y8UrAxIVq2CeygPaND9zxZbgu4d5CCm2SznusdnDvyM3CHIoPPPALGONXtF1v9xjOWjahe7+6jskLPgP9u8zvGxb5RdXqf8KTsfyjbQbSWKCoFf60UNq/5pozwebR9hkSBNR92hOyBxZfjDt7wP86DaUXojhFUOh3VvWmeIz9XVkfy/hEfjF/2JvXNatWg79m3+BM7nhBe/wKFSIfJexAAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=aa3b140061e703107f44de777df04015"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">263b140061e703107f44de777df04008</flow>
+        <generation_source/>
+        <order>4</order>
+        <parent_ui_id>44812c39-2b33-48ad-bd6e-1da30d7a894a</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:51:01</sys_created_on>
+        <sys_id>a63b140061e703107f44de777df04016</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 14:51:01</sys_updated_on>
+        <ui_id>7686d160-4b1f-4697-bb4d-23de96837bd7</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVXW/aMBT9K8jPgBwIHeVtKqo0qWulMvHSVdHFvgFrjpPZTluG+O+7SRxg0HWt1JdqefP9sM85vie+2zAl2YTFKHl0Hp2JYTQcDjgfjONocTZcRAM5BMSIdZmBDKnSositpPUD6LIKbDaCD+IYxLjHh5L3YkTeOwcc9dKIw1h8GsUy4n3lMdtuqU8qV2hYz0M7RcRKaWnRsMndfZcVYOkkj5ZNNkep10LVsEBNpbct1mPsfl1Ua5mLMkPjE9UGr0LnNGQ6X6aUoaYKTsS7DJ88GokEJAXtsMsyMBJ8btds4m1JAYsgb4xe7ypWyviGaAZPTv2ik2Ne1aVIzEQQYbdMgkBNOJ2ChxntLHxpd3rlSqBrNJGYQqn9xWGsKbgpvMpN0+JhodvuXJeZuW4UYbsNDu6jdAQCi4pnhbyhlc5W+eNtC/JSmVqSQFHnAvRuBd5btSh9BWfDUGOtcQZFocwyKWz+oOpmgpL1l5oW/VTnj3SmU0vTB1Hh7pOq0L+k+LQOz8GqisRX2oaat13m1u5Cg3N7KqRh8rOskDTEAoWkVqGWIKknoWoWVhX+Mx31gAH4thvMsBi9NGHifD9QB3vuDVEmzpf1uSSVJzQnMz9r8p3bNv82B7wCX+uAb/W9P483mOAkdnXY27luEsECo3ezwPgjWSDQ+PAe+Nfk88GL/9aDSaqH3f0x9RbpfkxilfvxveT0FqzUcnU6/H8vfJsLXoG1dcGlQi3dM+BbC2BGCD0mDZkjG4RkZx6Su9fg3bwQnfH6+0CO+G8ehfvfLuu0xCMJAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=a63b140061e703107f44de777df04016"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">263b140061e703107f44de777df04008</flow>
+        <generation_source/>
+        <order>7</order>
+        <parent_ui_id>2d4d6083-a59d-4b82-90b2-1c0b6ff4436c</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:06:19</sys_created_on>
+        <sys_id>febe10c461e703107f44de777df040e9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:06:19</sys_updated_on>
+        <ui_id>24c1c85a-0a45-405c-86e2-7c7532f6dbda</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVXU/bMBT9K5Wf28ppU1b6NlFVmsRAgokXhqJb+wasOU7mD6Cr+t93kzht+RArEi9oefP9sM85vie+XjMl2YylKHlynByJcTIejzgfTdNkeTReJiM5BsSE9ZmBAqnSoiitpPU96FAH1mvBR2kKYjrgY8kHKSIfHANOBnnCYSq+TFKZ8KHyWGw21CeVqzSsrmI7RcSd0tKiYbPrmz6rwNJJHi2brZ+lDoWqYYmaSi86rM+x+1VVr2UpQoHGZ6oLnsbOecz0vs0pQ001nIT3GT56NBIJSA7aYZ8VYCT40q7YzNtAAYsgz41ebSvulPEt0QIenfpDJ6e8rsuRmIkownaZRYHacD4HD5e0s/DBbvUqlUDXaiIxh6D9yX6sLTivvCpN2+JhqbvuUofCnLWKsO0Ge/cRHIHAquZZI29p5Zd35cNFB3KhTCNJpKhLAXq7Au+tWgZfw1kz1NhoXEBVKXObVba8V00zQSmGt5oWw1yXD3SmU7dmCKLGPSRVYbig+LwJX4FVNYnvtA01b/rMrdyJBud2VEjD7HeokbTEIoWsUaGRIGsmoW4WVlX+Kx11jxH4ph/NsJy8NWHieDdQe3vuDBEy50NzLknlCc2Lmb9s872LLv8+BxyAr3PAj+beX8cbTfAidrrf2ztrE9ECkw+zwPQzWSDS+PQe+Nfk89Gb/9a9SWqG3T2Zeot0Pyazyv36GTi9BQVKFYqX4/9W6fuccADezgkLhVq6Vwh0NsCCMHrMWkLPrBCTvauY3L4IH+aH5Ig33ydyxX/zMNz8BQfkTIAnCQAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=febe10c461e703107f44de777df040e9"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=263b140061e703107f44de777df04008"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=263b140061e703107f44de777df04008^sys_idNOT INaa3b140061e703107f44de777df04012,263b140061e703107f44de777df04014,babe10c461e703107f44de777df040ee,3ebe10c461e703107f44de777df040ef"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">483b900061e703107f44de777df0408a</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">263b140061e703107f44de777df04008</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="For Each">098e1dc5c3e232002841b63b12d3ae33</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:51:01</sys_created_on>
+        <sys_id>aa3b140061e703107f44de777df04012</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:49:32</sys_updated_on>
+        <ui_id>c0244ac8-03d0-4ee0-9ae5-f10a8c754d10</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/51TXW+jMBD8L34miK+LkrxVrSpVaq9SWvXlVKHFXhLrjM3ZJimH+O+3DoRWfbwn2PHu7MxgBmY633bevZob5+RBs92v94hJHTB6H5iGBtmOSY+NYxE7gepCPQw/smKbZWmxyrNNtipy2KwqwYtVgbgRVZ6v0xzjPXJjhRtHGhXStQr6t/9n4EephMVZZAuWtHm0bDd8O5KCFqRbUW/TZMvzbJ1nSZJtirRa51WaiRxQrIlQQYWKWh9md9/M+r4NpZ0kzMDjPLNfUHoEEVkSMfzwqAXS+hqUw4g1oAV4Y3u287YjwCKIZ636peMotSc6Fno/nPxLG9MkCY01kiGO0+FSlnOOE1zfgYcXoua+s3MrPxrJ0U1RCKyhU/72KzY1PLdeGj2NeKjUddqortE/pyTYQnD9bIR0jkRgG4wG6bOP+uVozvurynupL6HMh8pwUEsF3ltZdT7oGRgqbIiobKBtpT6UrTUneRkmLU18UFTEtTJnWhquaAw8CI8pV4jvCb+7wG9gZXDxRDQ0PEbM9e5WgXOfXijE8k8XlEzOZg/lFEMY4Va2/oYWnHCWO76HWz9xL5ly6UjCa8Aerv9KOOjpBkn+FTob+zuI/8TGf4U3KlB1AwAA</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">8c3b900061e703107f44de777df0408c</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">263b140061e703107f44de777df04008</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>3</order>
+        <outputs_assigned/>
+        <parent_ui_id>c0244ac8-03d0-4ee0-9ae5-f10a8c754d10</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:51:01</sys_created_on>
+        <sys_id>263b140061e703107f44de777df04014</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:49:32</sys_updated_on>
+        <ui_id>44812c39-2b33-48ad-bd6e-1da30d7a894a</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXWvbMBT9K0PPjpHtOEv6VloKg26FtfRlK+ZGkhsxWfL0kTQz+e+7sp0P1o6tbOxpLyE60r33nJN7SEdM8G3w7s6cOycfNTn79JAQqSOG3zuioRHkjDCjufTS6KoHErIGFeIFfuXStQq290eEraTiVozdWrBY44UlZ90PV5JjQU2hzhYsY0U+K3JK8/k0W86KZZbzAgQU2FDBUih8erGn8ea6R5Kf8vPbNuLOW6kfx/P12OV2DxrLI6uMJkQ8eaG5QD41KCcS0oDm4I3dHhArgN9odQRWUvtBcANPTn7DgXlZxoe1QIlsdONwrEanBri+BA9IJTAf7ME4I5lwgzlc1BCUvzjFhgc3bZQ6lHhYqn21UaHRHwZHyKHByQ8THJIQbVQaqY866tuV2Xzcs7ySundlvFSGgTqcwKN3y+Ajn44IJRpsVDXQtuho1Vqzln0xcmnSR4WHtFZmg0PjdqXAIvEUjYX0CvHLHr4HK6OK99gGiweaS3CSVf0mYju0SZBdQtzWXShw7igS3a2+hkhxkDyKqwZ/YgmzsvXnOHktRh275Plin+x01zGaT6fA5hNacDqZCkEnCxDlpM4ozNnbcsozmkovmjRUPKCn4MVu9zlQWrD+k3fdJUi1rbLUBl05D9b3ryovG3z6PDb/ZujrkrmAsi4zWr6czOnspWS+kMlXxjH/RRzjLvxmGiml/+P4x3GUrhpCNGrrh//FND7E6A0zD14z6ZDaXcTe7f+N4sUWl0uyU2hj7Jco6ojtvgOl+48i1wYAAA==</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">59bedc8461e703107f44de777df040d3</block>
+        <comment/>
+        <connected_to>44812c39-2b33-48ad-bd6e-1da30d7a894a</connected_to>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">263b140061e703107f44de777df04008</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="Else">1f781bf3c32232002841b63b12d3aee6</logic_definition>
+        <order>5</order>
+        <outputs_assigned/>
+        <parent_ui_id>c0244ac8-03d0-4ee0-9ae5-f10a8c754d10</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:06:19</sys_created_on>
+        <sys_id>babe10c461e703107f44de777df040ee</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:49:32</sys_updated_on>
+        <ui_id>ab4dc205-50e1-40d7-a188-81e22746a012</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/6tWyi8tKSgtKQ7JdywuzkzPU7KKjtVRyswDiUHYZYlFmYlJOalQbkpqcmZxZn5eCEjME0ldSmVeYm5mMrJQeX5RdlpOfjlCrBYAD1ouqHEAAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">d5bedc8461e703107f44de777df040d5</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Campus Asset Return Risk Assessment Flow">263b140061e703107f44de777df04008</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <parent_ui_id>ab4dc205-50e1-40d7-a188-81e22746a012</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:06:19</sys_created_on>
+        <sys_id>3ebe10c461e703107f44de777df040ef</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:49:32</sys_updated_on>
+        <ui_id>2d4d6083-a59d-4b82-90b2-1c0b6ff4436c</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXWvbMBT9K0PPjpG/siRvJV2h0DZjCYUyirmR5ERMtjxLTpqZ/Pdd2c4Ha8ZW1se9WUe6955zpIMbomtb1tYs9JUxclWQyddnj8jCYfjdkAJyQSaE6YJLK3WRtoBHNqBqt4GfXJpSwe7xhLC1VLwSfbcSKqyxoiKT5pctybEgo5AFYxawKBxGIaXhKA6Ww2gZhDwCARE2VLAUCo9ODzQ+3LWI91t+dlc63NhKFqt+fdd3mR9AXXHHKqAeES9WFFwgnwyUER7JoeBgdbU7IpUAPivUCVjLwnaCc3gx8gcODJPEHcwESmS9G8dl2jvVwdk1WEAqNbN1dTROSyZMZw4XGdTKTs+x7sCsdFK7EgtLdajWqs6Lh84RcmxwdjG1QRKidEod9V5HNl/r7ZcDyxtZtK70m0ozUMcVWPRuWVvHpyFCiRwbpTmUJTqalpXeyLYYueT+SuHCz5Te4lD3unxgjriPxoJ/g/h1Cz9CJZ2Ke2yDxR3NJRjJ0vYlYju0SZC9R8zOTBUYcxKJ7qbfa0exk9yLSzt/XAmrZGmvcPJG9Dr23uuHffamm4bRMI6BjQY04nQQC0EHYxDJIAsojNjHJOYB9aUVuV+nvEZPwYr9/nb+MFt8uv+8eHqdinfp+bZcjSHJkoAml3MVDy/l6kKi3him8A9hcjf5l1milP4P0z+HSZq0i0CvrR3+jll6dsHpZh69ZtIgtYXDbg//Erexw8cl2Tm01dU3J+qE7X8CZiF+3ZUGAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=263b140061e703107f44de777df04008"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=263b140061e703107f44de777df04008"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_263b140061e703107f44de777df04008"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_263b140061e703107f44de777df04008"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>0208984861a703107f44de777df040aa</sys_id>
+        <latest_snapshot>263b140061e703107f44de777df04008</latest_snapshot>
+        <compiler_build>glide-australia-02-11-2026__patch3-hotfix1-06-18-2026_06-19-2026_0938.zip</compiler_build>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=0208984861a703107f44de777df040aa^sys_idNOT IN2e3b140061e703107f44de777df04068"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.RunAlways</binding_strategy>
+        <plan>{"@class":"com.snc.process_flow.engine.serialization.plan_data.ChunkingPlanData","chunk_data":{"table":"sys_flow_trigger_plan","id":"2e3b140061e703107f44de777df04068","name":"plan","plan_signature":null},"plan_data":"CHUNKING_PLAN"}</plan>
+        <plan_id>0208984861a703107f44de777df040aa</plan_id>
+        <snapshot>f374941860e303107f44966a2305d4a7</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 14:51:01</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2e3b140061e703107f44de777df04068</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 14:51:01</sys_updated_on>
+        <trigger display_value="">ea3b140061e703107f44de777df04066</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=0208984861a703107f44de777df040aa"/>
+</record_update>

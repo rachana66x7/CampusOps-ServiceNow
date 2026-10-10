@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_now_assist_deployment_menu_item">
+    <sys_now_assist_deployment_menu_item action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <icon>c2576dc1ff14c7104b65ffffffffff5d</icon>
+        <label>Send Email to Customer Support</label>
+        <now_assist_deployment display_value="Campus Asset AI Assistant">3bc802bc4da703107f44aa992ac326d3</now_assist_deployment>
+        <order>2</order>
+        <sys_class_name>sys_now_assist_deployment_menu_item</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 06:45:24</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>52d806bc4da703107f44aa992ac326e5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_now_assist_deployment_menu_item_52d806bc4da703107f44aa992ac326e5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 06:45:24</sys_updated_on>
+        <type>email</type>
+        <value>support@example.com</value>
+    </sys_now_assist_deployment_menu_item>
+</record_update>

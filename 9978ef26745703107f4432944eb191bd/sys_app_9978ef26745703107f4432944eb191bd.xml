@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_app">
+    <sys_app action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <can_edit_in_studio>true</can_edit_in_studio>
+        <enforce_license>none</enforce_license>
+        <guided_setup_guid/>
+        <hide_on_ui>false</hide_on_ui>
+        <ide_created>SNS</ide_created>
+        <installed_as_dependency>false</installed_as_dependency>
+        <js_level>helsinki_es5</js_level>
+        <licensable>true</licensable>
+        <license/>
+        <license_category>none</license_category>
+        <license_definition/>
+        <license_model>none</license_model>
+        <logo>12782366745703107f4432944eb1912a</logo>
+        <menu/>
+        <name>CampusOps</name>
+        <package_json/>
+        <package_resolver_version>1.0.0</package_resolver_version>
+        <private>false</private>
+        <restrict_table_access>false</restrict_table_access>
+        <runtime_access_tracking>permissive</runtime_access_tracking>
+        <scope>global</scope>
+        <scoped_administration>false</scoped_administration>
+        <short_description>AI driven campus asset rental, return, tracking and inventory management platform</short_description>
+        <source>9978ef26745703107f4432944eb191bd</source>
+        <store_correlation_id/>
+        <store_url/>
+        <subscription_entitlement/>
+        <sys_class_name>sys_app</sys_class_name>
+        <sys_code/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-16 13:56:47</sys_created_on>
+        <sys_id>9978ef26745703107f4432944eb191bd</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-16 13:56:52</sys_updated_on>
+        <template/>
+        <trackable>true</trackable>
+        <uninstall_blocked>false</uninstall_blocked>
+        <user_role/>
+        <vendor/>
+        <vendor_prefix/>
+        <version>1.0.0</version>
+    </sys_app>
+    <sys_translated_text action="delete_multiple" query="documentkey=9978ef26745703107f4432944eb191bd"/>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <file_name>gemini-svg.svg</file_name>
+        <hash>b45d647e420445facc2cc9649b0dc9550f00fb07e76a08b4cd302fb59ae34188</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>1040</size_bytes>
+        <size_compressed>500</size_compressed>
+        <state/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-16 13:56:52</sys_created_on>
+        <sys_id>12782366745703107f4432944eb1912a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-16 13:56:52</sys_updated_on>
+        <table_name>sys_app</table_name>
+        <table_sys_id>9978ef26745703107f4432944eb191bd</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAA/w==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="gemini-svg.svg" sys_id="12782366745703107f4432944eb1912a">12782366745703107f4432944eb1912a</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-16 13:56:52</sys_created_on>
+        <sys_id>52782366745703107f4432944eb1912a</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>rVNRb5swEH7vr7h52lsoZwNNOoVKSbpIldptSqs+7I0ZD7wQjIxT0n8/2wW6tN32MoMFPu7uu++7Y94+FHDYVXWbktKY5mMYdl132kWnShchQ8TQehB4kKJbqkNKEBASytwm0MnclCmhiB8IlEIWpelPFycA83dBAJeZ3sJG7etc5LBoGrjiqoZlxreFdlYIAu+rBTdDPp97SOcP2iJT9/JDVlVK3uOaTtmChC50QPqyN0LDbSlFlUMIq2zX7Fv4qpWxqaUFVXtTyVoMiE1mSshTcsOSM5giXEfnCJQh3LMEYeVOUWx3hBDTBJxX7D7QGfMGyph3cE8Xce9ivxFXz9N6qrVWtSDQGq22wlZu00SfloMh6BmzeLS4En8qWafE63PMccGzXOwkhxulTaa/q0zncKeakZOqHgtLtbEJjG2pRZtQRyJOJnTmSUyYJUTPpu486klxeT6jL7DaVhi407ZVsi7gs8qFlXWzvrqEldKjjFxqXgngB49GgD+mJEK0PUtJ/Nyxnnf4zxiGY8zarz7mqF2Og23T7DdhewovhKXHwvKseVPXW1nUWWXpXSue+WHZWM7t61GhCMzOygKSxN3oL2e1Y0Le7vgfCsO/FvYMGSF7BUnBWf8r5Nz95xcnvwC0+6efEAQAAA==</data>
+        <length>656</length>
+        <position>1</position>
+        <sys_attachment display_value="gemini-svg.svg" sys_id="12782366745703107f4432944eb1912a">12782366745703107f4432944eb1912a</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-16 13:56:52</sys_created_on>
+        <sys_id>16782366745703107f4432944eb1912a</sys_id>
+    </sys_attachment_doc>
+</record_update>

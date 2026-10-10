@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cb_design_topic">
+    <sys_cb_design_topic action="INSERT_OR_UPDATE">
+        <compiled_topic display_value="_PRVW__6b21f35ac7b64140a5e9db71765f6161">8a38aecaf43b43107f44dc35ed31957e</compiled_topic>
+        <design_definition>{"type":"FlowTopic","triggers":[{"type":"Trigger","name":"ad384996cbc84ecb9f05a7608ba356fc","triggerType":"request","applicability":{"type":"Applicability","mode":"script","value":"true"},"id":"ad384996cbc84ecb9f05a7608ba356fc"}],"goals":[{"name":"primary","trigger_id":"ad384996cbc84ecb9f05a7608ba356fc","nodes":[{"type":"StartGoal","goal_id":"primary","greeting_msg":{"type":"String","mode":"string","value":""},"id":"04df4ff722c149ea91b244b9d0099bb9","name":"Start","expert_mode":false},{"type":"TerminateGoal","goal_id":"primary","confirmation_msg":{"type":"String","mode":"string","value":""},"id":"a259b2f04a294c468297fe2615e295b1","name":"End","expert_mode":false},{"type":"LibraryCall","library_topic_name":"AI Output","library_topic_id":"fc4c14b2431cc21006650464dbb8f2a9","library_topic_is_template":false,"parameter-mappings":[{"parameter-name":"definition","value":{"type":"String","mode":"script","value":"(function execute() {\n        var config = {\n            configuration: {\"description\":\"{{0}}\"}\n        };\n        return JSON.stringify(config);\n    })()"},"metadata":{"type":"String","list":false,"items":[],"use_items":false}},{"parameter-name":"inputs","metadata":{"type":"String","list":true,"items":[{"type":"String","mode":"string","value":"Tell the student that you can help them view their current campus asset rentals, including the asset name, rental ID, rental status, checkout date, and due date."}],"use_items":true}}],"return-value-mappings":[],"header_card_fields":[],"input_parameters_mode":"dynamic","output_parameters_mode":"dynamic","id":"ce7a500598174870a7294414712f53a4","name":"Welcome Message","goal_id":"primary","applicability":{"type":"Applicability","mode":"script","value":"true"},"expert_mode":false},{"type":"FDIHInvocation","name":"Get Student Rentals","kind":"action","mode":"sync","inputs":[{"supported_input_modes":[],"name":"student","type":"script","order":0,"required":true,"value":[{"type":"String","mode":"script","value":"(function execute() {\n    /* Return a quoted string.  For example:\n\n       if (vaInputs.first_name == 'Bill') {\n           return gs.getMessageLang(\"hi there {0}\", vaContext.getRequesterLang(), [vaInputs.first_name]);\n       } else {\n           return gs.getMessageLang(\"how are you {0}\", vaContext.getRequesterLang(), [vaInputs.last_name]);\n       }\n    */\n    return gs.getUserID();\n})()\n"}],"is_list_data_entry":false}],"outputs":[{"name":"student_rentals","order":0,"value":[],"is_list_data_entry":false,"topicVariableName":"student_rentals"}],"metadata":{"runAs":"system_user"},"id":"043a2f7d288244b78bea06147a41f9bf","goal_id":"primary","applicability":{"type":"Applicability","mode":"script","value":"true"},"expert_mode":false,"sys_id":"f6189db1603743107f44f411117ee338","scope":"9978ef26745703107f4432944eb191bd"},{"type":"LibraryCall","library_topic_name":"AI Output","library_topic_id":"fc4c14b2431cc21006650464dbb8f2a9","library_topic_is_template":false,"parameter-mappings":[{"parameter-name":"definition","value":{"type":"String","mode":"script","value":"(function execute() {\n        var config = {\n            configuration: {\"description\":\"{{0}}\"}\n        };\n        return JSON.stringify(config);\n    })()"},"metadata":{"type":"String","list":false,"items":[],"use_items":false}},{"parameter-name":"inputs","metadata":{"type":"String","list":true,"items":[{"type":"String","mode":"string","value":"Tell the student:\n\"Your rental information was retrieved successfully.\""}],"use_items":true}}],"return-value-mappings":[],"header_card_fields":[],"input_parameters_mode":"dynamic","output_parameters_mode":"dynamic","id":"e1212db8e15444998b9d45f3b415fd91","name":"Display Rentals","goal_id":"primary","applicability":{"type":"Applicability","mode":"script","value":"true"},"expert_mode":false}],"edges":[{"type":"Edge","source_node_id":"04df4ff722c149ea91b244b9d0099bb9","target_node_id":"ce7a500598174870a7294414712f53a4","id":"11d259f5ae0946838957170831d7d079"},{"type":"Edge","source_node_id":"ce7a500598174870a7294414712f53a4","target_node_id":"043a2f7d288244b78bea06147a41f9bf","id":"f1dd8cc29d744648bc8e02985300e4f2"},{"type":"Edge","source_node_id":"043a2f7d288244b78bea06147a41f9bf","target_node_id":"e1212db8e15444998b9d45f3b415fd91","id":"e7a09e6286c042eaaea57dab439ec6b5"},{"type":"Edge","source_node_id":"e1212db8e15444998b9d45f3b415fd91","target_node_id":"a259b2f04a294c468297fe2615e295b1","id":"266969b8e2164cf68bc40b96dc66c49a"}],"id":"primary"}],"script_variables":[],"glide_variables":[{"type":"Reference","table":"sys_user","auto_select":false,"id":"current-user","name":"user","formatType":"text","secure":false,"sensitive":false,"aiInput":false,"list":false},{"type":"String","name":"student_rentals","description":"","list":false,"id":"269d9832b2694cfc97e2f9507da25ecb","formatType":"text","metadata":{"libraryMappingType":"output"},"secure":false,"sensitive":false,"aiInput":false}],"applicability":{"type":"Applicability","mode":"script","value":"true"},"roles":[],"scope":"9978ef26745703107f4432944eb191bd","domain":"global","topic_type":"STANDARD","channels":[],"dialog_acts_enabled":false,"id":"148b44b160fb03107f44f411117ee3d1","name":"_PRVW__6b21f35ac7b64140a5e9db71765f6161","key_phrases":[],"nlu_provider":"","nlu_model":"","nlu_model_label":"","nlu_intent":"","nlu_intent_label":"","flexible_conversation_switching":false,"autopilot_topic":false,"design_categories":[],"triggerable_by_notification":false,"description":"Help students view their active campus asset rentals. Students can ask to see the assets they currently have rented, rental ID, asset name, rental status, checkout date, due date, and renewal information. This topic handles questions such as \"Show my rentals\", \"What assets am I currently using?\", \"When is my laptop due?\", and \"What is the status of my rental?\"","model_type":"llm","foundational":false,"modify_confirmation_enabled":false,"context_profiles":["e13840cf77d53110569156391e5a99ba"],"title":"My Rentals","library":false,"csTopicId":"3c412575607743107f44f411117ee33b","readOnly":false,"nluMapping":"[]"}</design_definition>
+        <design_topic_id>148b44b160fb03107f44f411117ee3d1</design_topic_id>
+        <graph>{
+  "graph_api_version": "1.0.82",
+  "goals": {
+    "primary": {
+      "id": "primary",
+      "trigger": {
+        "type": "primary"
+      },
+      "name": "primary",
+      "applicability": "",
+      "description": "",
+      "nodes": {
+        "04df4ff722c149ea91b244b9d0099bb9": {
+          "id": "04df4ff722c149ea91b244b9d0099bb9",
+          "stepType": "Start",
+          "name": "Start",
+          "greetingResponse": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "a259b2f04a294c468297fe2615e295b1": {
+          "id": "a259b2f04a294c468297fe2615e295b1",
+          "stepType": "TerminateGoal",
+          "name": "End",
+          "confirmationMessage": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "ce7a500598174870a7294414712f53a4": {
+          "id": "ce7a500598174870a7294414712f53a4",
+          "stepType": "AITextOutput",
+          "name": "Welcome Message",
+          "description": {
+            "value": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "Tell the student that you can help them view their current campus asset rentals, including the asset name, rental ID, rental status, checkout date, and due date."
+                  }
+                ]
+              }
+            ],
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "043a2f7d288244b78bea06147a41f9bf": {
+          "id": "043a2f7d288244b78bea06147a41f9bf",
+          "name": "Get Student Rentals",
+          "invocationType": "action",
+          "stepType": "FlowAction",
+          "actionSpoke": "9978ef26745703107f4432944eb191bd",
+          "actionSpokeAction": "f6189db1603743107f44f411117ee338",
+          "actionWaitType": "sync",
+          "actionRunAs": "system_user",
+          "permissionsNote": "By default, the Action executes based on the permissions of the user who initiated the conversation. For elevated privileges, you can set to System User.",
+          "actionSecureField": false,
+          "actionSelectSecureField": "",
+          "actionPromptSecureField": {
+            "mode": "simple",
+            "value": ""
+          },
+          "actionConfirmPromptSecureField": {
+            "mode": "simple",
+            "value": ""
+          },
+          "actionNonSecureChannelMessage": {
+            "mode": "simple",
+            "value": ""
+          },
+          "actionInputs": {
+            "input-student": {
+              "value": "(function execute() {\n    /* Return a quoted string.  For example:\n\n       if (vaInputs.first_name == 'Bill') {\n           return gs.getMessageLang(\"hi there {0}\", vaContext.getRequesterLang(), [vaInputs.first_name]);\n       } else {\n           return gs.getMessageLang(\"how are you {0}\", vaContext.getRequesterLang(), [vaInputs.last_name]);\n       }\n    */\n    return gs.getUserID();\n})()\n",
+              "mode": "script"
+            }
+          },
+          "actionOutputs": {
+            "output-student_rentals": [
+              {
+                "id": "269d9832b2694cfc97e2f9507da25ecb",
+                "mapping": "student_rentals",
+                "disabled": false,
+                "type": "records",
+                "value": "Student Rentals",
+                "description": "",
+                "is_list_data_entry": false,
+                "dependent_on_field": "",
+                "table": "u_student_rental",
+                "variable": "Student_rentals",
+                "variableName": "student_rentals"
+              }
+            ],
+            "output-__action_status__": [
+              {
+                "id": "a5f620a67cd94d2e90a61120289ce903",
+                "mapping": "",
+                "disabled": true,
+                "type": "object",
+                "value": "Action Status",
+                "description": "",
+                "is_list_data_entry": false,
+                "dependent_on_field": "",
+                "variable": "",
+                "variableName": ""
+              }
+            ],
+            "output-__dont_treat_as_error__": [
+              {
+                "id": "d96890f57f234c9b9fe16edd6f80c7e7",
+                "mapping": "",
+                "disabled": true,
+                "type": "boolean",
+                "value": "Don't Treat as Error",
+                "description": "",
+                "is_list_data_entry": false,
+                "dependent_on_field": "",
+                "variable": "",
+                "variableName": ""
+              }
+            ]
+          },
+          "actionDefinition": {
+            "id": "f6189db1603743107f44f411117ee338",
+            "latest_snapshot_id": "f6189db1603743107f44f411117ee338",
+            "parent_id": "ba0e0cf560fb03107f44f411117ee36a",
+            "type": "action",
+            "name": "get_student_rentals",
+            "label": "Get Student Rentals",
+            "scope_id": "9978ef26745703107f4432944eb191bd",
+            "description": "",
+            "category": "",
+            "parameters_have_loaded": true,
+            "input_parameters": [
+              {
+                "supported_input_modes": [
+                  "script",
+                  "data_pill",
+                  "data_entry"
+                ],
+                "name": "student",
+                "label": "Student",
+                "type": "reference",
+                "order": 1,
+                "required": true,
+                "value": [],
+                "description": "",
+                "is_list_data_entry": false,
+                "dependent_on_field": "",
+                "query": "",
+                "table": "sys_user"
+              }
+            ],
+            "output_parameters": [
+              {
+                "name": "student_rentals",
+                "label": "Student Rentals",
+                "type": "records",
+                "order": 1,
+                "required": false,
+                "value": [],
+                "description": "",
+                "is_list_data_entry": false,
+                "dependent_on_field": "",
+                "table": "u_student_rental"
+              },
+              {
+                "name": "__action_status__",
+                "label": "Action Status",
+                "type": "object",
+                "order": 2,
+                "required": false,
+                "value": [],
+                "description": "",
+                "is_list_data_entry": false,
+                "dependent_on_field": ""
+              },
+              {
+                "name": "__dont_treat_as_error__",
+                "label": "Don't Treat as Error",
+                "type": "boolean",
+                "order": 3,
+                "required": false,
+                "value": [],
+                "description": "",
+                "is_list_data_entry": false,
+                "dependent_on_field": ""
+              }
+            ],
+            "is_data_stream": false
+          },
+          "subflowSecureField": false,
+          "subflowSelectSecureField": "",
+          "subflowPromptSecureField": {
+            "mode": "simple",
+            "value": ""
+          },
+          "subflowConfirmPromptSecureField": {
+            "mode": "simple",
+            "value": ""
+          },
+          "subflowNonSecureChannelMessage": {
+            "mode": "simple",
+            "value": "This action is not supported on this channel."
+          },
+          "variableIds": [
+            "269d9832b2694cfc97e2f9507da25ecb"
+          ],
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "e1212db8e15444998b9d45f3b415fd91": {
+          "id": "e1212db8e15444998b9d45f3b415fd91",
+          "stepType": "AITextOutput",
+          "name": "Display Rentals",
+          "description": {
+            "value": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "Tell the student:"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "\"Your rental information was retrieved successfully.\""
+                  }
+                ]
+              }
+            ],
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        }
+      },
+      "edges": [
+        {
+          "id": "11d259f5ae0946838957170831d7d079",
+          "edgeType": "Edge",
+          "source": "04df4ff722c149ea91b244b9d0099bb9",
+          "target": "ce7a500598174870a7294414712f53a4",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "f1dd8cc29d744648bc8e02985300e4f2",
+          "edgeType": "Edge",
+          "source": "ce7a500598174870a7294414712f53a4",
+          "target": "043a2f7d288244b78bea06147a41f9bf",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "e7a09e6286c042eaaea57dab439ec6b5",
+          "edgeType": "Edge",
+          "source": "043a2f7d288244b78bea06147a41f9bf",
+          "target": "e1212db8e15444998b9d45f3b415fd91",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "266969b8e2164cf68bc40b96dc66c49a",
+          "edgeType": "Edge",
+          "source": "e1212db8e15444998b9d45f3b415fd91",
+          "target": "a259b2f04a294c468297fe2615e295b1",
+          "sourcePort": "",
+          "targetPort": ""
+        }
+      ]
+    }
+  },
+  "variables": {
+    "current-user": {
+      "category": "vaInputs",
+      "id": "current-user",
+      "label": "User",
+      "name": "user",
+      "table": "sys_user",
+      "varType": "reference"
+    },
+    "269d9832b2694cfc97e2f9507da25ecb": {
+      "id": "269d9832b2694cfc97e2f9507da25ecb",
+      "name": "student_rentals",
+      "label": "Student_rentals",
+      "defaultValue": "Student Rentals",
+      "varType": "records",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      },
+      "description": "",
+      "is_list_data_entry": false,
+      "dependent_on_field": "",
+      "table": "u_student_rental",
+      "variable": "",
+      "variableName": "",
+      "nodeId": "043a2f7d288244b78bea06147a41f9bf",
+      "isHidden": false
+    }
+  }
+}</graph>
+        <name>_PRVW__6b21f35ac7b64140a5e9db71765f6161</name>
+        <sys_class_name>sys_cb_design_topic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 16:30:34</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>da38aecaf43b43107f44dc35ed319582</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>FlowTopic</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_cb_design_topic_da38aecaf43b43107f44dc35ed319582</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 16:30:34</sys_updated_on>
+        <type>FlowTopic</type>
+    </sys_cb_design_topic>
+</record_update>

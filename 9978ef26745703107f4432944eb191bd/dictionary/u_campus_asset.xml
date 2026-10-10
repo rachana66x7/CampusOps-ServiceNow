@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="c92927a6745703107f4432944eb191ce" label="Campus Asset" max_length="40" name="u_campus_asset" type="collection">
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="u_number" type="string"/>
+        <element label="Rental Price" max_length="40" name="u_rental_price" type="decimal"/>
+        <element choice="1" label="Condition" max_length="40" name="u_condition" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Critical" sequence="500" value="critical"/>
+                <element inactive_on_update="false" label="Excellent" sequence="100" value="excellent"/>
+                <element inactive_on_update="false" label="Good" sequence="200" value="good"/>
+                <element inactive_on_update="false" label="Damaged" sequence="400" value="damaged"/>
+                <element inactive_on_update="false" label="Fair" sequence="300" value="fair"/>
+            </choice>
+        </element>
+        <element display="true" label="Asset Name" mandatory="true" max_length="100" name="u_asset_name" type="string"/>
+        <element label="RFID Tag" max_length="100" name="u_rfid_tag" type="string"/>
+        <element label="Location" max_length="100" name="u_location" type="string"/>
+        <element label="Serial Number" max_length="100" name="u_serial_number" type="string"/>
+        <element label="Current Student" max_length="32" name="u_current_student" reference="sys_user" type="reference"/>
+        <element choice="1" label="Asset Type" mandatory="true" max_length="40" name="u_asset_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Textbook" sequence="100" value="textbook"/>
+                <element inactive_on_update="false" label="Laptop" sequence="300" value="laptop"/>
+                <element inactive_on_update="false" label="Lab Kit" sequence="200" value="lab_kit"/>
+                <element inactive_on_update="false" label="Other" sequence="400" value="other"/>
+                <element inactive_on_update="false" label="-- New choice --" value="-- New choice --"/>
+            </choice>
+        </element>
+        <element label="Purchase Date" max_length="40" name="u_purchase_date" type="glide_date"/>
+        <element choice="1" label="Maintenance Status" max_length="40" name="u_maintenance_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Required" sequence="200" value="required"/>
+                <element inactive_on_update="false" label="Completed" sequence="400" value="completed"/>
+                <element inactive_on_update="false" label="Not Required" sequence="100" value="not_required"/>
+                <element inactive_on_update="false" label="In Progress" sequence="300" value="in_progress"/>
+            </choice>
+        </element>
+        <element label="Asset ID" max_length="40" name="u_asset_id" type="string"/>
+        <element choice="1" label="Status" mandatory="true" max_length="40" name="u_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Retired" sequence="600" value="retired"/>
+                <element inactive_on_update="false" label="Available" sequence="100" value="available"/>
+                <element inactive_on_update="false" label="Maintenance" sequence="400" value="maintenance"/>
+                <element inactive_on_update="false" label="Overdue" sequence="300" value="overdue"/>
+                <element inactive_on_update="false" label="Rented" sequence="200" value="rented"/>
+                <element inactive_on_update="false" label="Lost" sequence="500" value="lost"/>
+            </choice>
+        </element>
+        <element label="QR Code" max_length="255" name="u_qr_code" type="string"/>
+        <index name="index">
+            <element name="u_current_student"/>
+        </index>
+    </element>
+</database>

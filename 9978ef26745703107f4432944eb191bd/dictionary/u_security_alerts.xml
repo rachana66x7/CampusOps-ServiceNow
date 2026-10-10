@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="76e2043e741b03107f4432944eb191c8" label="Security Alerts" max_length="40" name="u_security_alerts" type="collection">
+        <element choice="1" label="Status" mandatory="true" max_length="40" name="u_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="New" sequence="0" value="new"/>
+                <element inactive_on_update="false" label="Investigating" sequence="1" value="investing"/>
+                <element inactive_on_update="false" label="Closed" sequence="3" value="closed"/>
+                <element inactive_on_update="false" label="Resolved" sequence="2" value="resolved"/>
+            </choice>
+        </element>
+        <element label="Asset" max_length="32" name="u_asset" reference="u_campus_asset" type="reference"/>
+        <element label="Assigned To" max_length="32" name="u_assigned_to" reference="sys_user" type="reference"/>
+        <element label="Description" max_length="1000" name="u_description" type="string"/>
+        <element label="Created Date" mandatory="true" max_length="40" name="u_created_date" type="glide_date_time"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="u_number" type="string"/>
+        <element display="true" label="Alert ID" max_length="40" name="u_alert_id" type="string"/>
+        <element choice="1" label="Severity" mandatory="true" max_length="40" name="u_severity" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Critical" sequence="400" value="critical"/>
+                <element inactive_on_update="false" label="Medium" sequence="200" value="medium"/>
+                <element inactive_on_update="false" label="Low" sequence="100" value="low"/>
+                <element inactive_on_update="false" label="High" sequence="300" value="high"/>
+            </choice>
+        </element>
+        <element label="RFID Event" max_length="32" name="u_rfid_event" reference="u_rfid_scan_events" type="reference"/>
+        <element choice="1" label="Alert Type" mandatory="true" max_length="40" name="u_alert_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unknown RFID" sequence="200" value="unknown_rfid"/>
+                <element inactive_on_update="false" label="Unauthorized Exit" sequence="100" value="unauthorized_exit"/>
+                <element inactive_on_update="false" label="Suspicious Movement" sequence="300" value="suspicious_movement"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="u_assigned_to"/>
+        </index>
+        <index name="index2">
+            <element name="u_asset"/>
+        </index>
+        <index name="index3">
+            <element name="u_rfid_event"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="u_student_rental" version="2" view="">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_number</element>
+            <list_id display_value="u_student_rental" element="NULL" name="u_student_rental" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7197943a74db03107f4432944eb19127</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 17:22:43</sys_created_on>
+            <sys_id>f597943a74db03107f4432944eb19128</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 17:22:43</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_asset</element>
+            <list_id display_value="u_student_rental" element="NULL" name="u_student_rental" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7197943a74db03107f4432944eb19127</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 17:22:43</sys_created_on>
+            <sys_id>7597943a74db03107f4432944eb19129</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 17:22:43</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_due_date</element>
+            <list_id display_value="u_student_rental" element="NULL" name="u_student_rental" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7197943a74db03107f4432944eb19127</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 17:22:43</sys_created_on>
+            <sys_id>f997943a74db03107f4432944eb19129</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 17:22:43</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_remarks</element>
+            <list_id display_value="u_student_rental" element="NULL" name="u_student_rental" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7197943a74db03107f4432944eb19127</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 17:22:43</sys_created_on>
+            <sys_id>7197943a74db03107f4432944eb1912a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 17:22:43</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_rental_date</element>
+            <list_id display_value="u_student_rental" element="NULL" name="u_student_rental" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7197943a74db03107f4432944eb19127</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 17:22:43</sys_created_on>
+            <sys_id>7997943a74db03107f4432944eb191d8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 17:22:43</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_rental_id</element>
+            <list_id display_value="u_student_rental" element="NULL" name="u_student_rental" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7197943a74db03107f4432944eb19127</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 17:22:43</sys_created_on>
+            <sys_id>fd97943a74db03107f4432944eb191d8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 17:22:43</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_return_date</element>
+            <list_id display_value="u_student_rental" element="NULL" name="u_student_rental" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7197943a74db03107f4432944eb19127</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>6</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 17:22:43</sys_created_on>
+            <sys_id>7597943a74db03107f4432944eb191d9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 17:22:43</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_return_risk</element>
+            <list_id display_value="u_student_rental" element="NULL" name="u_student_rental" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7197943a74db03107f4432944eb19127</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>7</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 17:22:43</sys_created_on>
+            <sys_id>f997943a74db03107f4432944eb191d9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 17:22:43</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_status</element>
+            <list_id display_value="u_student_rental" element="NULL" name="u_student_rental" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7197943a74db03107f4432944eb19127</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>8</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 17:22:43</sys_created_on>
+            <sys_id>7197943a74db03107f4432944eb191da</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 17:22:43</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_student</element>
+            <list_id display_value="u_student_rental" element="NULL" name="u_student_rental" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">7197943a74db03107f4432944eb19127</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>9</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 17:22:43</sys_created_on>
+            <sys_id>f597943a74db03107f4432944eb191da</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 17:22:43</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>u_student_rental</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 17:22:43</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7197943a74db03107f4432944eb19127</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>u_student_rental</sys_name>
+            <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+            <sys_update_name>sys_ui_list_u_student_rental_null</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 17:22:43</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

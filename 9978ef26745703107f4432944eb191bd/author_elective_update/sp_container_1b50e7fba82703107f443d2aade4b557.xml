@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container">
+    <sp_container action="DELETE">
+        <aria_label/>
+        <background_color/>
+        <background_image/>
+        <background_style>default</background_style>
+        <bootstrap_alt>false</bootstrap_alt>
+        <class_name/>
+        <container_class_name/>
+        <name>Renew Asset - Container 2</name>
+        <order>2</order>
+        <semantic_tag/>
+        <sp_page display_value="renew_asset">1c10e7fba82703107f443d2aade4b512</sp_page>
+        <subheader>false</subheader>
+        <sys_class_name>sp_container</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-02 20:49:32</sys_created_on>
+        <sys_id>1b50e7fba82703107f443d2aade4b557</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Renew Asset - Container 2</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_container_1b50e7fba82703107f443d2aade4b557</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-02 20:49:32</sys_updated_on>
+        <title/>
+        <width>container</width>
+    </sp_container>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CampusOps">9978ef26745703107f4432944eb191bd</application>
+        <file_path/>
+        <instance_id>0ad18dc7c38fcf94a03197af050131d3</instance_id>
+        <instance_name>ltm-hck-2876-0037</instance_name>
+        <name>sp_container_1b50e7fba82703107f443d2aade4b557</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container"><sp_container action="INSERT_OR_UPDATE"><aria_label/><background_color/><background_image/><background_style>default</background_style><bootstrap_alt>false</bootstrap_alt><class_name/><container_class_name/><name>Renew Asset - Container 2</name><order>2</order><semantic_tag/><sp_page display_value="renew_asset">1c10e7fba82703107f443d2aade4b512</sp_page><subheader>false</subheader><sys_class_name>sp_container</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-10-02 20:49:32</sys_created_on><sys_id>1b50e7fba82703107f443d2aade4b557</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Renew Asset - Container 2</sys_name><sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package><sys_policy/><sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope><sys_update_name>sp_container_1b50e7fba82703107f443d2aade4b557</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-10-02 20:49:32</sys_updated_on><title/><width>container</width></sp_container></record_update>]]></payload>
+        <payload_hash>-2076329774</payload_hash>
+        <record_name>Renew Asset - Container 2</record_name>
+        <reverted_from/>
+        <source>f5785b0dc9a703107f449dae971dec2d</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-02 20:49:32</sys_created_on>
+        <sys_id>d350e7fba82703107f443d2aade4b55a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0fe611b9d0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-02 20:49:32</sys_updated_on>
+        <type>Container</type>
+        <update_guid>d350e7fb362703105e4b964a5e8da559</update_guid>
+        <update_guid_history>d350e7fb362703105e4b964a5e8da559:-2076329774</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Renew Asset - Container 2">9460233fa82703107f443d2aade4b5b1</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-02 20:49:36</sys_created_on>
+        <sys_db_object display_value="" name="sp_container">sp_container</sys_db_object>
+        <sys_id>016130dbe14847c28813df693593b221</sys_id>
+        <sys_metadata>1b50e7fba82703107f443d2aade4b557</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Renew Asset - Container 2</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_scope_delete display_value="">9bc7a4e05c8b4c4d862c4fb4630d5629</sys_scope_delete>
+        <sys_update_name>sp_container_1b50e7fba82703107f443d2aade4b557</sys_update_name>
+        <sys_update_version display_value="sp_container_1b50e7fba82703107f443d2aade4b557">d350e7fba82703107f443d2aade4b55a</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-02 20:49:36</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

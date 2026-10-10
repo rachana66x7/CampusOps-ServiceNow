@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+  var c = this;
+
+  c.form = {
+    asset: "",
+    issue: "",
+    priority: "medium",
+    description: ""
+  };
+
+  c.submitting = false;
+  c.message = "";
+  c.messageType = "success";
+  c.initial = ((c.data.studentName || "S").charAt(0)).toUpperCase();
+
+  c.submitReport = function() {
+    if (c.submitting) return;
+
+    if (!c.form.asset || !c.form.issue ||
+        !c.form.priority || !c.form.description ||
+        !c.form.description.trim()) {
+      c.message = "Please complete all required fields.";
+      c.messageType = "error";
+      return;
+    }
+
+    c.submitting = true;
+    c.message = "";
+
+    c.server.get({
+      action: "submitReport",
+      assetId: c.form.asset,
+      issue: c.form.issue,
+      priority: c.form.priority,
+      description: c.form.description.trim()
+    }).then(function(response) {
+      var result = response.data || {};
+
+      c.message = result.message ||
+        (result.success ? "Report submitted." : "Unable to submit report.");
+      c.messageType = result.success ? "success" : "error";
+
+      if (result.success) {
+        c.form = {
+          asset: "",
+          issue: "",
+          priority: "medium",
+          description: ""
+        };
+      }
+    }, function() {
+      c.message = "A server error occurred. Please try again.";
+      c.messageType = "error";
+    }).finally(function() {
+      c.submitting = false;
+    });
+  };
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>&#13;
+.co-report-page {&#13;
+  min-height: 100vh;&#13;
+  background: #f5f7fb;&#13;
+  color: #30234f;&#13;
+  font-family: Arial, Helvetica, sans-serif;&#13;
+}&#13;
+.co-report-layout {&#13;
+  display: grid;&#13;
+  grid-template-columns: 220px minmax(0, 1fr);&#13;
+  min-height: 100vh;&#13;
+}&#13;
+.co-report-sidebar {&#13;
+  background: #f8f4ff;&#13;
+  border-right: 1px solid #e6dcf7;&#13;
+  padding: 24px 15px;&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  gap: 7px;&#13;
+}&#13;
+.co-report-brand {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 10px;&#13;
+  text-decoration: none;&#13;
+  color: #30234f;&#13;
+  margin: 0 0 28px;&#13;
+}&#13;
+.co-report-brand-mark {&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  width: 38px;&#13;
+  height: 38px;&#13;
+  border-radius: 12px;&#13;
+  background: #8062c7;&#13;
+  color: white;&#13;
+  font-weight: 700;&#13;
+}&#13;
+.co-report-brand strong,&#13;
+.co-report-brand small,&#13;
+.co-report-sidebar-bottom strong,&#13;
+.co-report-sidebar-bottom small {&#13;
+  display: block;&#13;
+}&#13;
+.co-report-brand small,&#13;
+.co-report-sidebar-bottom small {&#13;
+  color: #837995;&#13;
+  font-size: 11px;&#13;
+  margin-top: 4px;&#13;
+}&#13;
+.co-report-nav-label {&#13;
+  color: #968aa8;&#13;
+  font-size: 10px;&#13;
+  letter-spacing: 1px;&#13;
+  font-weight: 700;&#13;
+  margin: 8px 8px;&#13;
+}&#13;
+.co-report-nav {&#13;
+  display: block;&#13;
+  padding: 11px 10px;&#13;
+  border-radius: 9px;&#13;
+  color: #625775;&#13;
+  text-decoration: none;&#13;
+  font-size: 13px;&#13;
+}&#13;
+.co-report-nav:hover,&#13;
+.co-report-nav-active {&#13;
+  background: #ece4fb;&#13;
+  color: #6747ad;&#13;
+}&#13;
+.co-report-sidebar-bottom {&#13;
+  margin-top: auto;&#13;
+  padding: 16px 4px 0;&#13;
+  border-top: 1px solid #e6dcf7;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 10px;&#13;
+  font-size: 12px;&#13;
+}&#13;
+.co-report-avatar {&#13;
+  width: 34px;&#13;
+  height: 34px;&#13;
+  border-radius: 50%;&#13;
+  background: #8062c7;&#13;
+  color: white;&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  font-weight: 700;&#13;
+}&#13;
+.co-report-main {&#13;
+  min-width: 0;&#13;
+  max-width: 1200px;&#13;
+  width: 100%;&#13;
+  padding: 38px 42px;&#13;
+  margin: 0 auto;&#13;
+}&#13;
+.co-report-header {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  align-items: center;&#13;
+  gap: 20px;&#13;
+  margin-bottom: 26px;&#13;
+}&#13;
+.co-report-eyebrow {&#13;
+  color: #8b7da4;&#13;
+  font-size: 10px;&#13;
+  font-weight: 700;&#13;
+  letter-spacing: 1.3px;&#13;
+}&#13;
+.co-report-header h1 {&#13;
+  margin: 10px 0;&#13;
+  font-size: 29px;&#13;
+  color: #30234f;&#13;
+}&#13;
+.co-report-header p,&#13;
+.co-report-intro p,&#13;
+.co-report-help p {&#13;
+  color: #81788e;&#13;
+  font-size: 13px;&#13;
+  line-height: 1.6;&#13;
+  margin: 0;&#13;
+}&#13;
+.co-report-back {&#13;
+  border: 1px solid #e1d8f0;&#13;
+  border-radius: 9px;&#13;
+  padding: 10px 14px;&#13;
+  color: #6747ad;&#13;
+  text-decoration: none;&#13;
+  font-size: 12px;&#13;
+  white-space: nowrap;&#13;
+}&#13;
+.co-report-intro {&#13;
+  display: flex;&#13;
+  gap: 15px;&#13;
+  align-items: center;&#13;
+  background: white;&#13;
+  border: 1px solid #e9e3f2;&#13;
+  border-radius: 13px;&#13;
+  padding: 20px;&#13;
+  margin-bottom: 20px;&#13;
+}&#13;
+.co-report-intro-icon {&#13;
+  width: 42px;&#13;
+  height: 42px;&#13;
+  border-radius: 12px;&#13;
+  background: #f0e9fc;&#13;
+  color: #7657b8;&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  font-size: 22px;&#13;
+  font-weight: 700;&#13;
+}&#13;
+.co-report-intro h2,&#13;
+.co-report-form h2 {&#13;
+  margin: 0 0 7px;&#13;
+  font-size: 17px;&#13;
+}&#13;
+.co-report-form {&#13;
+  background: white;&#13;
+  border: 1px solid #e9e3f2;&#13;
+  border-radius: 13px;&#13;
+  padding: 26px;&#13;
+}&#13;
+.co-report-form-heading {&#13;
+  margin-bottom: 24px;&#13;
+}&#13;
+.co-report-form-heading p {&#13;
+  color: #81788e;&#13;
+  font-size: 12px;&#13;
+  margin: 0;&#13;
+}&#13;
+.co-report-field {&#13;
+  margin-bottom: 22px;&#13;
+}&#13;
+.co-report-field label {&#13;
+  display: block;&#13;
+  font-size: 13px;&#13;
+  font-weight: 700;&#13;
+  margin-bottom: 9px;&#13;
+}&#13;
+.co-report-field select,&#13;
+.co-report-field textarea {&#13;
+  display: block;&#13;
+  width: 100%;&#13;
+  box-sizing: border-box;&#13;
+  background: #fff;&#13;
+  border: 1px solid #ddd5e9;&#13;
+  border-radius: 8px;&#13;
+  padding: 12px;&#13;
+  color: #30234f;&#13;
+  font: inherit;&#13;
+  font-size: 13px;&#13;
+}&#13;
+.co-report-field select:focus,&#13;
+.co-report-field textarea:focus {&#13;
+  outline: 2px solid #d8c8f7;&#13;
+  border-color: #8062c7;&#13;
+}&#13;
+.co-report-field textarea {&#13;
+  resize: vertical;&#13;
+  min-height: 120px;&#13;
+}&#13;
+.co-report-field small {&#13;
+  display: block;&#13;
+  color: #92889e;&#13;
+  font-size: 11px;&#13;
+  margin-top: 7px;&#13;
+}&#13;
+.co-report-actions {&#13;
+  display: flex;&#13;
+  justify-content: flex-end;&#13;
+  align-items: center;&#13;
+  gap: 12px;&#13;
+  padding-top: 8px;&#13;
+}&#13;
+.co-report-cancel {&#13;
+  color: #776c87;&#13;
+  font-size: 13px;&#13;
+  text-decoration: none;&#13;
+  padding: 12px;&#13;
+}&#13;
+.co-report-actions button {&#13;
+  background: #8062c7;&#13;
+  color: white;&#13;
+  border: 0;&#13;
+  border-radius: 9px;&#13;
+  padding: 12px 18px;&#13;
+  font-size: 13px;&#13;
+  font-weight: 700;&#13;
+  cursor: pointer;&#13;
+}&#13;
+.co-report-actions button:disabled {&#13;
+  opacity: .6;&#13;
+  cursor: wait;&#13;
+}&#13;
+.co-report-message {&#13;
+  border-radius: 9px;&#13;
+  padding: 13px 16px;&#13;
+  margin-bottom: 18px;&#13;
+  font-size: 13px;&#13;
+}&#13;
+.co-report-message.success {&#13;
+  background: #eaf7ef;&#13;
+  color: #21663e;&#13;
+}&#13;
+.co-report-message.error {&#13;
+  background: #fff0ee;&#13;
+  color: #a3322a;&#13;
+}&#13;
+.co-report-help {&#13;
+  margin-top: 20px;&#13;
+  padding: 20px;&#13;
+  border: 1px solid #e9e3f2;&#13;
+  background: #fbfaff;&#13;
+  border-radius: 12px;&#13;
+}&#13;
+.co-report-help strong {&#13;
+  font-size: 13px;&#13;
+}&#13;
+.co-report-help p {&#13;
+  margin-top: 6px;&#13;
+}&#13;
+.co-report-footer {&#13;
+  color: #958aa2;&#13;
+  text-align: center;&#13;
+  font-size: 11px;&#13;
+  padding: 24px 0 6px;&#13;
+}&#13;
+@media (max-width: 850px) {&#13;
+  .co-report-layout {&#13;
+    grid-template-columns: 1fr;&#13;
+  }&#13;
+  .co-report-sidebar {&#13;
+    display: none;&#13;
+  }&#13;
+  .co-report-main {&#13;
+    padding: 24px 16px;&#13;
+  }&#13;
+  .co-report-header {&#13;
+    align-items: flex-start;&#13;
+  }&#13;
+}&#13;
+@media (max-width: 520px) {&#13;
+  .co-report-header h1 {&#13;
+    font-size: 24px;&#13;
+  }&#13;
+  .co-report-back {&#13;
+    display: none;&#13;
+  }&#13;
+  .co-report-form {&#13;
+    padding: 18px;&#13;
+  }&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>campusops_report_issue</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CampusOps Report Issue</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  var userId = gs.getUserID();
+
+  data.studentName = gs.getUserDisplayName() || "Campus member";
+  data.assets = [];
+  data.success = false;
+  data.message = "";
+
+  function loadAssets() {
+    var asset = new GlideRecord("u_campus_asset");
+    asset.orderBy("u_asset_name");
+    asset.query();
+
+    while (asset.next()) {
+      data.assets.push({
+        id: asset.getUniqueValue(),
+        label: asset.getDisplayValue("u_asset_name") ||
+               asset.getDisplayValue()
+      });
+    }
+  }
+
+  if (input && input.action === "submitReport") {
+    var assetId = (input.assetId || "").toString();
+    var issue = (input.issue || "").toString();
+    var priority = (input.priority || "").toString();
+    var description = (input.description || "").toString().trim();
+
+    var validIssues = {
+      "Damaged": true,
+      "Missing": true,
+      "Malfunctioning": true,
+      "Incorrect Asset Information": true,
+      "Other": true
+    };
+
+    var validPriorities = {
+      "low": true,
+      "medium": true,
+      "high": true,
+      "critical": true
+    };
+
+    var assetCheck = new GlideRecord("u_campus_asset");
+    var assetExists = assetId && assetCheck.get(assetId);
+
+    if (!assetExists || !validIssues[issue] ||
+        !validPriorities[priority] ||
+        !description || description.length > 2000) {
+
+      data.success = false;
+      data.message = "Please check the asset and required fields, then try again.";
+
+    } else {
+      var maintenance = new GlideRecord("u_asset_maintenance");
+      maintenance.initialize();
+      maintenance.setValue("u_asset", assetId);
+      maintenance.setValue("u_issue", issue);
+      maintenance.setValue("u_priority", priority);
+      maintenance.setValue("u_status", "open");
+      maintenance.setValue("u_reported_date", new GlideDateTime());
+      maintenance.setValue("u_remarks", description);
+
+      var insertedId = maintenance.insert();
+
+      if (insertedId) {
+        data.success = true;
+        data.message = "Issue reported successfully. The campus team can now review it.";
+      } else {
+        data.success = false;
+        data.message = "The report could not be saved. Please try again.";
+        gs.error("CampusOps: Failed to create an asset maintenance record for user " + userId);
+      }
+    }
+  }
+
+  loadAssets();
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-10 03:37:30</sys_created_on>
+        <sys_id>587049d2f4fb83107f44dc35ed319588</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CampusOps Report Issue</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_widget_587049d2f4fb83107f44dc35ed319588</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-10 04:03:27</sys_updated_on>
+        <template><![CDATA[
+<div class="co-report-page">
+  <div class="co-report-layout">
+
+    <aside class="co-report-sidebar">
+      <a class="co-report-brand" href="/sp?id=student_home">
+        <span class="co-report-brand-mark">C</span>
+        <span><strong>CampusOps</strong><small>Campus resources</small></span>
+      </a>
+
+      <div class="co-report-nav-label">WORKSPACE</div>
+      <a class="co-report-nav" href="/sp?id=student_home">⌂ &nbsp; Home</a>
+      <a class="co-report-nav" href="/sp?id=browse_assets">▤ &nbsp; Browse assets</a>
+      <a class="co-report-nav" href="/sp?id=my_rentals">▣ &nbsp; My rentals</a>
+      <a class="co-report-nav" href="/sp?id=renew_asset">↻ &nbsp; Renew an item</a>
+      <a class="co-report-nav" href="/sp?id=return_asset">↩ &nbsp; Return an item</a>
+
+      <div class="co-report-nav-label">YOUR ACCOUNT</div>
+      <a class="co-report-nav" href="/sp?id=my_profile">○ &nbsp; My profile</a>
+      <a class="co-report-nav" href="/sp?id=quick_scan">⌕ &nbsp; Quick scan</a>
+      <a class="co-report-nav co-report-nav-active" href="/sp?id=report_issue">! &nbsp; Report an issue</a>
+
+      <div class="co-report-sidebar-bottom">
+        <div class="co-report-avatar">{{c.initial}}</div>
+        <div><strong>{{data.studentName}}</strong><small>Campus member</small></div>
+      </div>
+    </aside>
+
+    <main class="co-report-main">
+      <header class="co-report-header">
+        <div>
+          <div class="co-report-eyebrow">CAMPUSOPS / SUPPORT</div>
+          <h1>Report an issue</h1>
+          <p>Tell us what went wrong with a campus resource.</p>
+        </div>
+        <a href="/sp?id=my_rentals" class="co-report-back">My rentals ↗</a>
+      </header>
+
+      <section class="co-report-intro">
+        <div class="co-report-intro-icon">!</div>
+        <div>
+          <h2>Asset support request</h2>
+          <p>Submit the details below so the campus team can investigate.</p>
+        </div>
+      </section>
+
+      <div class="co-report-message"
+           ng-if="c.message"
+           ng-class="{'success': c.messageType === 'success',
+                      'error': c.messageType === 'error'}"
+           role="status">
+        {{c.message}}
+      </div>
+
+      <form class="co-report-form" ng-submit="c.submitReport()" novalidate>
+        <div class="co-report-form-heading">
+          <h2>Issue details</h2>
+          <p>Fields marked * are required.</p>
+        </div>
+
+        <div class="co-report-field">
+          <label for="coAsset">Campus asset *</label>
+          <select id="coAsset" ng-model="c.form.asset"
+                  ng-options="asset.id as asset.label for asset in data.assets"
+                  required>
+            <option value="">Select an asset</option>
+          </select>
+          <small>Choose the resource that needs attention.</small>
+        </div>
+
+        <div class="co-report-field">
+          <label for="coIssue">Issue type *</label>
+          <select id="coIssue" ng-model="c.form.issue" required>
+            <option value="">Select issue type</option>
+            <option value="Damaged">Damaged</option>
+            <option value="Missing">Missing</option>
+            <option value="Malfunctioning">Malfunctioning</option>
+            <option value="Incorrect Asset Information">Incorrect asset information</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="co-report-field">
+          <label for="coPriority">Priority *</label>
+          <select id="coPriority" ng-model="c.form.priority" required>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+          <small>Select Critical only for urgent issues requiring immediate attention.</small>
+        </div>
+
+        <div class="co-report-field">
+          <label for="coDescription">Describe the issue *</label>
+          <textarea id="coDescription" ng-model="c.form.description"
+                    rows="5" maxlength="2000"
+                    placeholder="Describe what happened and where you noticed it..."
+                    required></textarea>
+          <small>{{(c.form.description || '').length}} / 2000 characters</small>
+        </div>
+
+        <div class="co-report-actions">
+          <a href="/sp?id=my_rentals" class="co-report-cancel">Cancel</a>
+          <button type="submit" ng-disabled="c.submitting">
+            {{c.submitting ? 'Submitting...' : 'Submit report →'}}
+          </button>
+        </div>
+      </form>
+
+      <section class="co-report-help">
+        <div>
+          <strong>Need help with an urgent issue?</strong>
+          <p>Contact your campus support desk if an asset poses an immediate safety risk.</p>
+        </div>
+      </section>
+
+      <footer class="co-report-footer">
+        CampusOps · Campus Asset &amp; Textbook Lifecycle Management
+      </footer>
+    </main>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>587049d2f4fb83107f44dc35ed319588</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-10 03:37:29</sys_created_on>
+        <sys_id>e7d08516f4fb83107f44dc35ed319579</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-10 03:37:29</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

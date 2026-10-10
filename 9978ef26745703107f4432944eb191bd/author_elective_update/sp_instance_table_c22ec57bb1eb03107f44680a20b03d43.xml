@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_table">
+    <sp_instance_table action="DELETE">
+        <active>true</active>
+        <advanced_placeholder_dimensions>false</advanced_placeholder_dimensions>
+        <async_load>false</async_load>
+        <async_load_device_type>desktop,tablet,mobile</async_load_device_type>
+        <async_load_trigger>viewport</async_load_trigger>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <display_field/>
+        <field_list>u_number,u_asset,u_rental_date,u_due_date,u_status,u_return_risk</field_list>
+        <filter table="u_student_rental">u_studentDYNAMIC90d1921e5f510100a9ad2572f2b477fe<item endquery="false" field="u_student" goto="false" newquery="false" operator="DYNAMIC" or="false" value="90d1921e5f510100a9ad2572f2b477fe"/>
+        </filter>
+        <glyph/>
+        <id/>
+        <maximum_entries>5</maximum_entries>
+        <order>3</order>
+        <order_by>u_due_date</order_by>
+        <order_direction>asc</order_direction>
+        <placeholder_dimensions>{&#13;	"mobile": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	},&#13;	"desktop": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	},&#13;	"tablet": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	}&#13;}</placeholder_dimensions>
+        <placeholder_dimensions_script><![CDATA[function evaluateConfig(options) { return {	"mobile": {		"height": "250px",		"width": "100%"	},	"desktop": {		"height": "250px",		"width": "100%"	},	"tablet": {		"height": "250px",		"width": "100%"	}}; }]]></placeholder_dimensions_script>
+        <placeholder_template>&lt;!-- 
+	AngularJS template with configurable options.
+	Use the `options` object to control dynamic behavior.
+	Example: Display an element when max row count is 10:
+	&lt;div ng-if="options.maxRowCount === 10"&gt;&lt;/div&gt;
+	The `skeleton-container` class is used for loading placeholders.
+--&gt;
+	&lt;div class="skeleton-container"&gt;
+	&lt;!-- Header Skeleton --&gt;
+	&lt;div class="skeleton-box skeleton-header"&gt;&lt;/div&gt;
+	&lt;!-- Body Skeleton --&gt;
+	&lt;div class="skeleton-box skeleton-line"&gt;&lt;/div&gt;
+	&lt;div class="skeleton-box skeleton-line small"&gt;&lt;/div&gt;
+	&lt;div class="skeleton-box skeleton-line medium"&gt;&lt;/div&gt;
+&lt;/div&gt;</placeholder_template>
+        <preserve_placeholder_size>false</preserve_placeholder_size>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">b51e057bb1eb03107f44680a20b03d04</sp_column>
+        <sp_page/>
+        <sp_widget display_value="Data Table from Instance Definition">38058ff1cb11020000f8d856634c9c8c</sp_widget>
+        <sys_class_name>sp_instance_table</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-02 10:10:44</sys_created_on>
+        <sys_id>c22ec57bb1eb03107f44680a20b03d43</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>My Active &amp; Past Rentals</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_instance_table_c22ec57bb1eb03107f44680a20b03d43</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 09:27:56</sys_updated_on>
+        <table>u_student_rental</table>
+        <title>My Active &amp; Past Rentals</title>
+        <url/>
+        <widget_parameters/>
+    </sp_instance_table>
+    <sys_translated_text action="DELETE" query="documentkey=c22ec57bb1eb03107f44680a20b03d43"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CampusOps">9978ef26745703107f4432944eb191bd</application>
+        <file_path/>
+        <instance_id>0ad18dc7c38fcf94a03197af050131d3</instance_id>
+        <instance_name>ltm-hck-2876-0037</instance_name>
+        <name>sp_instance_table_c22ec57bb1eb03107f44680a20b03d43</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_instance_table"&gt;&lt;sp_instance_table action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;advanced_placeholder_dimensions&gt;false&lt;/advanced_placeholder_dimensions&gt;&lt;async_load&gt;false&lt;/async_load&gt;&lt;async_load_device_type&gt;desktop,tablet,mobile&lt;/async_load_device_type&gt;&lt;async_load_trigger&gt;viewport&lt;/async_load_trigger&gt;&lt;class_name/&gt;&lt;color&gt;default&lt;/color&gt;&lt;css/&gt;&lt;display_field/&gt;&lt;field_list&gt;u_number,u_asset,u_rental_date,u_due_date,u_status,u_return_risk&lt;/field_list&gt;&lt;filter table="u_student_rental"&gt;u_studentDYNAMIC90d1921e5f510100a9ad2572f2b477fe&lt;item endquery="false" field="u_student" goto="false" newquery="false" operator="DYNAMIC" or="false" value="90d1921e5f510100a9ad2572f2b477fe"/&gt;&lt;/filter&gt;&lt;glyph/&gt;&lt;id/&gt;&lt;maximum_entries&gt;5&lt;/maximum_entries&gt;&lt;order&gt;3&lt;/order&gt;&lt;order_by&gt;u_due_date&lt;/order_by&gt;&lt;order_direction&gt;asc&lt;/order_direction&gt;&lt;placeholder_dimensions&gt;{&amp;#13;	"mobile": {&amp;#13;		"height": "250px",&amp;#13;		"width": "100%"&amp;#13;	},&amp;#13;	"desktop": {&amp;#13;		"height": "250px",&amp;#13;		"width": "100%"&amp;#13;	},&amp;#13;	"tablet": {&amp;#13;		"height": "250px",&amp;#13;		"width": "100%"&amp;#13;	}&amp;#13;}&lt;/placeholder_dimensions&gt;&lt;placeholder_dimensions_script&gt;&lt;![CDATA[function evaluateConfig(options) { return {	"mobile": {		"height": "250px",		"width": "100%"	},	"desktop": {		"height": "250px",		"width": "100%"	},	"tablet": {		"height": "250px",		"width": "100%"	}}; }]]&gt;&lt;/placeholder_dimensions_script&gt;&lt;placeholder_template&gt;&amp;lt;!-- 
+	AngularJS template with configurable options.
+	Use the `options` object to control dynamic behavior.
+	Example: Display an element when max row count is 10:
+	&amp;lt;div ng-if="options.maxRowCount === 10"&amp;gt;&amp;lt;/div&amp;gt;
+	The `skeleton-container` class is used for loading placeholders.
+--&amp;gt;
+	&amp;lt;div class="skeleton-container"&amp;gt;
+	&amp;lt;!-- Header Skeleton --&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-header"&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;!-- Body Skeleton --&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-line"&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-line small"&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-line medium"&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/placeholder_template&gt;&lt;preserve_placeholder_size&gt;false&lt;/preserve_placeholder_size&gt;&lt;roles/&gt;&lt;short_description/&gt;&lt;size&gt;md&lt;/size&gt;&lt;sp_column display_value="1"&gt;b51e057bb1eb03107f44680a20b03d04&lt;/sp_column&gt;&lt;sp_page/&gt;&lt;sp_widget display_value="Data Table from Instance Definition"&gt;38058ff1cb11020000f8d856634c9c8c&lt;/sp_widget&gt;&lt;sys_class_name&gt;sp_instance_table&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-10-02 10:10:44&lt;/sys_created_on&gt;&lt;sys_id&gt;c22ec57bb1eb03107f44680a20b03d43&lt;/sys_id&gt;&lt;sys_mod_count&gt;9&lt;/sys_mod_count&gt;&lt;sys_name&gt;My Active &amp;amp; Past Rentals&lt;/sys_name&gt;&lt;sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd"&gt;9978ef26745703107f4432944eb191bd&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="CampusOps"&gt;9978ef26745703107f4432944eb191bd&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_instance_table_c22ec57bb1eb03107f44680a20b03d43&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-10-09 09:27:56&lt;/sys_updated_on&gt;&lt;table&gt;u_student_rental&lt;/table&gt;&lt;title&gt;My Active &amp;amp; Past Rentals&lt;/title&gt;&lt;url/&gt;&lt;widget_parameters/&gt;&lt;/sp_instance_table&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=c22ec57bb1eb03107f44680a20b03d43"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-839206445</payload_hash>
+        <record_name>My Active &amp; Past Rentals</record_name>
+        <reverted_from/>
+        <source>e37a6e73292503107f44f3a98c18249a</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 09:27:56</sys_created_on>
+        <sys_id>5777458af4bb03107f44dc35ed3195aa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a11ffd9ad40000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 09:27:56</sys_updated_on>
+        <type>Instance with Table</type>
+        <update_guid>9777458acebb0310e38f9d310ff60aa9</update_guid>
+        <update_guid_history>9777458acebb0310e38f9d310ff60aa9:-839206445,662ee6041b7b031063f5f15c0ff2e93a:1822243602,7ddd2ec09b7b0310c3ceee28452babe7:-536801491,57c993fff9e30310fbc98cef075f8018:2124648556,e359d7bfd2e303102890aa71304392b8:1885100236,0948973f72e3031090a0ce1593c50011:936154118,ec40d1b74feb031082f619d4756a60da:153673714,194f8133fd2f031081f37c3e9e424a11:738537292,649e0dfb13eb031049393dceff0af997:153673714,c22ec97ba3eb03105785603c734ca703:610913007</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="My Active &amp; Past Rentals">39c741caf4bb03107f44dc35ed3195f6</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 09:29:12</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance_table">sp_instance_table</sys_db_object>
+        <sys_id>2d9c050ad0224640ae53b72cd86c3709</sys_id>
+        <sys_metadata>c22ec57bb1eb03107f44680a20b03d43</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>My Active &amp; Past Rentals</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_scope_delete display_value="">9bc7a4e05c8b4c4d862c4fb4630d5629</sys_scope_delete>
+        <sys_update_name>sp_instance_table_c22ec57bb1eb03107f44680a20b03d43</sys_update_name>
+        <sys_update_version display_value="sp_instance_table_c22ec57bb1eb03107f44680a20b03d43">5777458af4bb03107f44dc35ed3195aa</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 09:29:12</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="u_asset_maintenance" section_id="14b6a6784dab03107f44aa992ac3267a" sys_domain="global" table="u_asset_maintenance" version="3" view="Student_Report_Issue">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_asset</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-23 09:00:36</sys_created_on>
+            <sys_id>f6c7a6f84dab03107f44aa992ac326b5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="u_asset_maintenance" display_value="u_asset_maintenance" name="u_asset_maintenance" sys_domain="global" view="08b6a6784dab03107f44aa992ac32633">14b6a6784dab03107f44aa992ac3267a</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-23 09:00:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_issue</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-23 09:00:36</sys_created_on>
+            <sys_id>f6c72af84dab03107f44aa992ac3266a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="u_asset_maintenance" display_value="u_asset_maintenance" name="u_asset_maintenance" sys_domain="global" view="08b6a6784dab03107f44aa992ac32633">14b6a6784dab03107f44aa992ac3267a</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-23 09:00:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_priority</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-23 09:00:36</sys_created_on>
+            <sys_id>b2c72af84dab03107f44aa992ac3266b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="u_asset_maintenance" display_value="u_asset_maintenance" name="u_asset_maintenance" sys_domain="global" view="08b6a6784dab03107f44aa992ac32633">14b6a6784dab03107f44aa992ac3267a</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-23 09:00:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_reported_date</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-23 09:00:36</sys_created_on>
+            <sys_id>7ec72af84dab03107f44aa992ac3266b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="u_asset_maintenance" display_value="u_asset_maintenance" name="u_asset_maintenance" sys_domain="global" view="08b6a6784dab03107f44aa992ac32633">14b6a6784dab03107f44aa992ac3267a</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-23 09:00:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_remarks</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-23 09:00:36</sys_created_on>
+            <sys_id>3ac72af84dab03107f44aa992ac3266c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="u_asset_maintenance" display_value="u_asset_maintenance" name="u_asset_maintenance" sys_domain="global" view="08b6a6784dab03107f44aa992ac32633">14b6a6784dab03107f44aa992ac3267a</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-23 09:00:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption>u_asset_maintenance</caption>
+            <header>false</header>
+            <name>u_asset_maintenance</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-23 08:55:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>14b6a6784dab03107f44aa992ac3267a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>u_asset_maintenance</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+            <sys_update_name>sys_ui_section_14b6a6784dab03107f44aa992ac3267a</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-23 08:55:47</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="Student Report Issue" name="Student_Report_Issue">08b6a6784dab03107f44aa992ac32633</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

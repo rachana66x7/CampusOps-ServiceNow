@@ -1,0 +1,1809 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope) {
+  var c = this;
+
+  c.searchText = "";
+  c.activeFilter = "all";
+  c.currentPage = 1;
+  c.pageSize = 4;
+  c.submittingId = "";
+  c.notice = "";
+  c.noticeType = "success";
+
+  c.filters = [
+    { label: "All rentals", value: "all" },
+    { label: "Due soon", value: "soon" },
+    { label: "Overdue", value: "overdue" },
+    { label: "Requested", value: "requested" }
+  ];
+
+  c.data.rentals = c.data.rentals || [];
+
+  c.filteredRentals = function() {
+    var search = (c.searchText || "").toLowerCase().trim();
+
+    return c.data.rentals.filter(function(rental) {
+      var matchesSearch = !search ||
+        (rental.assetName || "").toLowerCase().indexOf(search) > -1 ||
+        (rental.number || "").toLowerCase().indexOf(search) > -1 ||
+        (rental.type || "").toLowerCase().indexOf(search) > -1;
+
+      var matchesFilter = c.activeFilter === "all" ||
+        (c.activeFilter === "soon" &&
+          rental.isDueSoon && !rental.isOverdue) ||
+        (c.activeFilter === "overdue" && rental.isOverdue) ||
+        (c.activeFilter === "requested" && rental.requested);
+
+      return matchesSearch && matchesFilter;
+    });
+  };
+
+  c.filterCount = function(filter) {
+    if (filter === "all") return c.data.rentals.length;
+
+    return c.data.rentals.filter(function(rental) {
+      if (filter === "soon") {
+        return rental.isDueSoon && !rental.isOverdue;
+      }
+      if (filter === "overdue") return rental.isOverdue;
+      if (filter === "requested") return rental.requested;
+      return false;
+    }).length;
+  };
+
+  c.dueSoonCount = function() {
+    return c.filterCount("soon");
+  };
+
+  c.requestedCount = function() {
+    return c.filterCount("requested");
+  };
+
+  c.totalPages = function() {
+    return Math.max(
+      1,
+      Math.ceil(c.filteredRentals().length / c.pageSize)
+    );
+  };
+
+  c.pageRentals = function() {
+    var start = (c.currentPage - 1) * c.pageSize;
+    return c.filteredRentals().slice(start, start + c.pageSize);
+  };
+
+  c.startItem = function() {
+    return c.filteredRentals().length
+      ? (c.currentPage - 1) * c.pageSize + 1
+      : 0;
+  };
+
+  c.endItem = function() {
+    return Math.min(
+      c.currentPage * c.pageSize,
+      c.filteredRentals().length
+    );
+  };
+
+  c.pageNumbers = function() {
+    var pages = [];
+    for (var i = 1; i <= c.totalPages(); i++) {
+      pages.push(i);
+    }
+    return pages;
+  };
+
+  c.changePage = function(page) {
+    if (page >= 1 && page <= c.totalPages()) {
+      c.currentPage = page;
+    }
+  };
+
+  c.setFilter = function(filter) {
+    c.activeFilter = filter;
+    c.currentPage = 1;
+  };
+
+  c.resetFilters = function() {
+    c.searchText = "";
+    c.activeFilter = "all";
+    c.currentPage = 1;
+  };
+
+  $scope.$watchGroup([
+    function() { return c.searchText; },
+    function() { return c.activeFilter; }
+  ], function() {
+    c.currentPage = 1;
+  });
+
+  c.requestRenewal = function(rental) {
+    if (!rental || !rental.id || rental.requested ||
+        c.submittingId) {
+      return;
+    }
+
+    if (rental.isOverdue) {
+      c.notice = "Overdue items need assistance from the campus desk.";
+      c.noticeType = "error";
+      return;
+    }
+
+    c.notice = "";
+    c.submittingId = rental.id;
+
+    c.server.get({
+      action: "requestRenewal",
+      rentalId: rental.id
+    }).then(function(response) {
+      var result = response.data || {};
+
+      if (result.success) {
+        rental.requested = true;
+        rental.renewalRequested = true;
+
+        c.notice = result.message ||
+          "Your renewal request has been submitted.";
+        c.noticeType = "success";
+      } else {
+        c.notice = result.message ||
+          "We couldn't submit your request. Please try again.";
+        c.noticeType = "error";
+      }
+    }, function() {
+      c.notice = "A server error occurred. Please try again.";
+      c.noticeType = "error";
+    }).finally(function() {
+      c.submittingId = "";
+    });
+  };
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.co-renew-page {&#13;
+  --renew-purple: #8062c7;&#13;
+  --renew-purple-dark: #39285f;&#13;
+  --renew-border: #e6dcf7;&#13;
+  --renew-muted: #81749b;&#13;
+  --renew-bg: #f3f8f9;&#13;
+  font-family: inherit;&#13;
+  color: var(--renew-purple-dark);&#13;
+  background: var(--renew-bg);&#13;
+  min-height: 100vh;&#13;
+  padding: 10px;&#13;
+  box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.co-renew-page *,&#13;
+.co-renew-page *::before,&#13;
+.co-renew-page *::after {&#13;
+  box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.co-renew-layout {&#13;
+  display: grid;&#13;
+  grid-template-columns: 182px minmax(0, 1fr);&#13;
+  gap: 20px;&#13;
+  max-width: 1180px;&#13;
+  margin: 0 auto;&#13;
+  align-items: stretch;&#13;
+}&#13;
+&#13;
+/* Sidebar: shared CampusOps proportions */&#13;
+.co-renew-sidebar {&#13;
+  background: linear-gradient(180deg, #f8f4ff 0%, #f2edfc 100%);&#13;
+  border: 1px solid var(--renew-border);&#13;
+  border-radius: 17px;&#13;
+  padding: 18px 11px 12px;&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  min-height: 680px;&#13;
+}&#13;
+&#13;
+.co-renew-brand {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 9px;&#13;
+  padding: 0 6px 27px;&#13;
+  color: var(--renew-purple-dark);&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+.co-renew-brand-mark {&#13;
+  width: 32px;&#13;
+  height: 32px;&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  border-radius: 10px;&#13;
+  background: var(--renew-purple);&#13;
+  color: white;&#13;
+  font-size: 16px;&#13;
+  font-weight: 700;&#13;
+  flex-shrink: 0;&#13;
+}&#13;
+&#13;
+.co-renew-brand strong,&#13;
+.co-renew-brand small {&#13;
+  display: block;&#13;
+}&#13;
+&#13;
+.co-renew-brand strong {&#13;
+  font-size: 12px;&#13;
+  line-height: 1.4;&#13;
+}&#13;
+&#13;
+.co-renew-brand small {&#13;
+  font-size: 9px;&#13;
+  color: var(--renew-muted);&#13;
+  margin-top: 2px;&#13;
+}&#13;
+&#13;
+.co-renew-nav-label {&#13;
+  margin: 0 8px 9px;&#13;
+  color: #9485b2;&#13;
+  font-size: 8px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 1px;&#13;
+}&#13;
+&#13;
+.co-renew-nav {&#13;
+  min-height: 34px;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 10px;&#13;
+  padding: 8px 10px;&#13;
+  margin-bottom: 3px;&#13;
+  border-radius: 8px;&#13;
+  color: #5d4a80;&#13;
+  font-size: 10px;&#13;
+  text-decoration: none;&#13;
+  transition: background .16s ease, color .16s ease;&#13;
+}&#13;
+&#13;
+.co-renew-nav &gt; span {&#13;
+  width: 13px;&#13;
+  text-align: center;&#13;
+  color: var(--renew-purple);&#13;
+  font-size: 13px;&#13;
+}&#13;
+&#13;
+.co-renew-nav:hover,&#13;
+.co-renew-nav-active {&#13;
+  background: #e8defb;&#13;
+  color: #4c347e;&#13;
+}&#13;
+&#13;
+.co-renew-account-label {&#13;
+  margin-top: 23px;&#13;
+}&#13;
+&#13;
+.co-renew-sidebar-bottom {&#13;
+  margin-top: auto;&#13;
+  padding: 13px 5px 0;&#13;
+  border-top: 1px solid #e2d8f2;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 8px;&#13;
+}&#13;
+&#13;
+.co-renew-avatar {&#13;
+  width: 29px;&#13;
+  height: 29px;&#13;
+  flex-shrink: 0;&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  border-radius: 50%;&#13;
+  background: #e7dcfb;&#13;
+  color: #6547a5;&#13;
+  font-size: 11px;&#13;
+  font-weight: 700;&#13;
+}&#13;
+&#13;
+.co-renew-sidebar-bottom strong,&#13;
+.co-renew-sidebar-bottom small {&#13;
+  display: block;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-renew-sidebar-bottom strong {&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+.co-renew-sidebar-bottom small {&#13;
+  margin-top: 3px;&#13;
+  font-size: 8px;&#13;
+  color: var(--renew-muted);&#13;
+}&#13;
+&#13;
+/* Main page */&#13;
+.co-renew-main {&#13;
+  min-width: 0;&#13;
+  padding: 5px 0 0;&#13;
+}&#13;
+&#13;
+.co-renew-page-header {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  align-items: center;&#13;
+  gap: 15px;&#13;
+  margin-bottom: 19px;&#13;
+}&#13;
+&#13;
+.co-renew-eyebrow {&#13;
+  margin-bottom: 7px;&#13;
+  color: var(--renew-purple);&#13;
+  font-size: 8px;&#13;
+  font-weight: 800;&#13;
+  letter-spacing: 1.1px;&#13;
+}&#13;
+&#13;
+.co-renew-page-header h1 {&#13;
+  margin: 0 0 5px;&#13;
+  font-size: clamp(22px, 2.2vw, 28px);&#13;
+  line-height: 1.2;&#13;
+  letter-spacing: -.5px;&#13;
+  font-weight: 750;&#13;
+  color: #30224e;&#13;
+}&#13;
+&#13;
+.co-renew-page-header p,&#13;
+.co-renew-intro p,&#13;
+.co-renew-section-heading p {&#13;
+  margin: 0;&#13;
+  color: var(--renew-muted);&#13;
+  font-size: 10px;&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+.co-renew-outline-link {&#13;
+  flex-shrink: 0;&#13;
+  border: 1px solid var(--renew-border);&#13;
+  background: #fff;&#13;
+  color: #6547a5;&#13;
+  padding: 9px 12px;&#13;
+  border-radius: 9px;&#13;
+  font-size: 9px;&#13;
+  font-weight: 600;&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+.co-renew-outline-link:hover {&#13;
+  background: #f5f0ff;&#13;
+  border-color: #cbb8ef;&#13;
+}&#13;
+&#13;
+/* Compact intro, no oversized AI-style hero */&#13;
+.co-renew-intro {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 13px;&#13;
+  padding: 16px;&#13;
+  margin-bottom: 13px;&#13;
+  background: #fff;&#13;
+  border: 1px solid var(--renew-border);&#13;
+  border-radius: 12px;&#13;
+}&#13;
+&#13;
+.co-renew-intro-icon {&#13;
+  width: 39px;&#13;
+  height: 39px;&#13;
+  flex-shrink: 0;&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  border-radius: 10px;&#13;
+  background: #f0e8ff;&#13;
+  color: var(--renew-purple);&#13;
+  font-size: 23px;&#13;
+}&#13;
+&#13;
+.co-renew-intro h2 {&#13;
+  margin: 0 0 5px;&#13;
+  font-size: 14px;&#13;
+  font-weight: 700;&#13;
+}&#13;
+&#13;
+/* Small summary strip */&#13;
+.co-renew-stats {&#13;
+  display: grid;&#13;
+  grid-template-columns: repeat(4, minmax(0, 1fr));&#13;
+  background: #fff;&#13;
+  border: 1px solid var(--renew-border);&#13;
+  border-radius: 11px;&#13;
+  padding: 13px 4px;&#13;
+  margin-bottom: 24px;&#13;
+}&#13;
+&#13;
+.co-renew-stats &gt; div {&#13;
+  min-width: 0;&#13;
+  padding: 0 15px;&#13;
+  border-right: 1px solid #eee6f8;&#13;
+}&#13;
+&#13;
+.co-renew-stats &gt; div:last-child {&#13;
+  border-right: 0;&#13;
+}&#13;
+&#13;
+.co-renew-stats span,&#13;
+.co-renew-stats strong {&#13;
+  display: block;&#13;
+}&#13;
+&#13;
+.co-renew-stats span {&#13;
+  font-size: 9px;&#13;
+  color: var(--renew-muted);&#13;
+  margin-bottom: 5px;&#13;
+}&#13;
+&#13;
+.co-renew-stats strong {&#13;
+  font-size: 19px;&#13;
+  color: #38245d;&#13;
+}&#13;
+&#13;
+/* Rental list and search */&#13;
+.co-renew-list-section {&#13;
+  margin-bottom: 20px;&#13;
+}&#13;
+&#13;
+.co-renew-section-heading {&#13;
+  margin-bottom: 11px;&#13;
+}&#13;
+&#13;
+.co-renew-section-heading h2 {&#13;
+  margin: 0 0 4px;&#13;
+  font-size: 16px;&#13;
+  font-weight: 750;&#13;
+}&#13;
+&#13;
+.co-renew-search {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 9px;&#13;
+  height: 39px;&#13;
+  padding: 0 12px;&#13;
+  margin-bottom: 10px;&#13;
+  border: 1px solid var(--renew-border);&#13;
+  border-radius: 10px;&#13;
+  background: #fff;&#13;
+}&#13;
+&#13;
+.co-renew-search &gt; span {&#13;
+  color: var(--renew-purple);&#13;
+  font-size: 16px;&#13;
+}&#13;
+&#13;
+.co-renew-search input {&#13;
+  width: 100%;&#13;
+  min-width: 0;&#13;
+  border: 0;&#13;
+  outline: 0;&#13;
+  background: transparent;&#13;
+  color: #382b54;&#13;
+  font-family: inherit;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-renew-filter-row {&#13;
+  display: flex;&#13;
+  flex-wrap: wrap;&#13;
+  gap: 6px;&#13;
+  margin-bottom: 12px;&#13;
+}&#13;
+&#13;
+.co-renew-filter-row button {&#13;
+  border: 1px solid var(--renew-border);&#13;
+  border-radius: 8px;&#13;
+  background: #fff;&#13;
+  color: #6b598b;&#13;
+  padding: 7px 10px;&#13;
+  font-family: inherit;&#13;
+  font-size: 9px;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+.co-renew-filter-row button:hover {&#13;
+  border-color: #b9a3e6;&#13;
+}&#13;
+&#13;
+.co-renew-filter-row button.selected {&#13;
+  border-color: var(--renew-purple);&#13;
+  background: var(--renew-purple);&#13;
+  color: #fff;&#13;
+}&#13;
+&#13;
+/* Two-column cards, compact like Browse Assets */&#13;
+.co-renew-card-list {&#13;
+  display: grid;&#13;
+  grid-template-columns: repeat(2, minmax(0, 1fr));&#13;
+  gap: 12px;&#13;
+}&#13;
+&#13;
+.co-renew-card {&#13;
+  min-width: 0;&#13;
+  padding: 14px;&#13;
+  background: #fff;&#13;
+  border: 1px solid var(--renew-border);&#13;
+  border-radius: 13px;&#13;
+  transition: border-color .15s ease, box-shadow .15s ease;&#13;
+}&#13;
+&#13;
+.co-renew-card:hover {&#13;
+  border-color: #cbb8ef;&#13;
+  box-shadow: 0 4px 13px rgba(70, 48, 105, .05);&#13;
+}&#13;
+&#13;
+.co-renew-card-top {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: space-between;&#13;
+  gap: 8px;&#13;
+  margin-bottom: 12px;&#13;
+}&#13;
+&#13;
+.co-renew-resource-icon {&#13;
+  width: 34px;&#13;
+  height: 34px;&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  border-radius: 9px;&#13;
+  background: #f0e8ff;&#13;
+  color: var(--renew-purple);&#13;
+  font-size: 16px;&#13;
+}&#13;
+&#13;
+.co-renew-status {&#13;
+  padding: 5px 8px;&#13;
+  border-radius: 20px;&#13;
+  font-size: 8px;&#13;
+  font-weight: 700;&#13;
+  white-space: nowrap;&#13;
+}&#13;
+&#13;
+.co-renew-status::before {&#13;
+  content: "• ";&#13;
+}&#13;
+&#13;
+.co-renew-status.status-active {&#13;
+  background: #e9f7ef;&#13;
+  color: #26784e;&#13;
+}&#13;
+&#13;
+.co-renew-status.status-due {&#13;
+  background: #fff3df;&#13;
+  color: #a76513;&#13;
+}&#13;
+&#13;
+.co-renew-status.status-overdue {&#13;
+  background: #fdebef;&#13;
+  color: #b23a53;&#13;
+}&#13;
+&#13;
+.co-renew-status.status-requested {&#13;
+  background: #f0e8ff;&#13;
+  color: #6947a7;&#13;
+}&#13;
+&#13;
+.co-renew-resource-type {&#13;
+  margin-bottom: 4px;&#13;
+  color: #8b7ba7;&#13;
+  font-size: 8px;&#13;
+  letter-spacing: .5px;&#13;
+}&#13;
+&#13;
+.co-renew-card h3 {&#13;
+  margin: 0 0 4px;&#13;
+  color: #35234f;&#13;
+  font-size: 13px;&#13;
+  line-height: 1.4;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-renew-number {&#13;
+  margin: 0 0 12px;&#13;
+  color: var(--renew-muted);&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+.co-renew-details {&#13;
+  display: grid;&#13;
+  grid-template-columns: repeat(3, minmax(0, 1fr));&#13;
+  gap: 8px;&#13;
+  padding: 11px 0;&#13;
+  border-top: 1px solid #eee7f8;&#13;
+  border-bottom: 1px solid #eee7f8;&#13;
+}&#13;
+&#13;
+.co-renew-details span,&#13;
+.co-renew-details strong {&#13;
+  display: block;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-renew-details span {&#13;
+  margin-bottom: 5px;&#13;
+  color: var(--renew-muted);&#13;
+  font-size: 8px;&#13;
+}&#13;
+&#13;
+.co-renew-details strong {&#13;
+  color: #44315f;&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+.co-renew-note {&#13;
+  margin: 10px 0;&#13;
+  padding: 9px 10px;&#13;
+  border-radius: 8px;&#13;
+  background: #f7f3fd;&#13;
+  color: #6a5886;&#13;
+  font-size: 9px;&#13;
+  line-height: 1.5;&#13;
+}&#13;
+&#13;
+.co-renew-note-due {&#13;
+  background: #fff6e8;&#13;
+  color: #93601d;&#13;
+}&#13;
+&#13;
+.co-renew-action {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  align-items: center;&#13;
+  gap: 8px;&#13;
+  width: 100%;&#13;
+  min-height: 36px;&#13;
+  padding: 9px 11px;&#13;
+  border: 0;&#13;
+  border-radius: 8px;&#13;
+  background: var(--renew-purple);&#13;
+  color: #fff;&#13;
+  font-family: inherit;&#13;
+  font-size: 10px;&#13;
+  font-weight: 650;&#13;
+  text-align: left;&#13;
+  cursor: pointer;&#13;
+  transition: background .15s ease;&#13;
+}&#13;
+&#13;
+.co-renew-action:hover:not(:disabled) {&#13;
+  background: #6d4db4;&#13;
+}&#13;
+&#13;
+.co-renew-action:disabled {&#13;
+  background: #b9abd9;&#13;
+  cursor: not-allowed;&#13;
+}&#13;
+&#13;
+/* Empty state and help */&#13;
+.co-renew-empty {&#13;
+  padding: 28px 15px;&#13;
+  border: 1px dashed #d8c9f1;&#13;
+  border-radius: 12px;&#13;
+  background: #fff;&#13;
+  text-align: center;&#13;
+}&#13;
+&#13;
+.co-renew-empty strong {&#13;
+  font-size: 13px;&#13;
+}&#13;
+&#13;
+.co-renew-empty p {&#13;
+  margin: 7px 0 12px;&#13;
+  color: var(--renew-muted);&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-renew-empty a,&#13;
+.co-renew-help a {&#13;
+  color: #6d4db4;&#13;
+  font-size: 10px;&#13;
+  font-weight: 650;&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+.co-renew-help {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  align-items: center;&#13;
+  gap: 12px;&#13;
+  padding: 14px 16px;&#13;
+  margin-bottom: 18px;&#13;
+  border: 1px solid var(--renew-border);&#13;
+  border-radius: 11px;&#13;
+  background: #faf7ff;&#13;
+}&#13;
+&#13;
+.co-renew-help strong {&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-renew-help p {&#13;
+  margin: 4px 0 0;&#13;
+  color: var(--renew-muted);&#13;
+  font-size: 9px;&#13;
+  line-height: 1.5;&#13;
+}&#13;
+&#13;
+.co-renew-footer {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  gap: 10px;&#13;
+  padding: 13px 2px;&#13;
+  border-top: 1px solid #e5dcef;&#13;
+  color: var(--renew-muted);&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+.co-renew-footer strong {&#13;
+  color: #45345f;&#13;
+}&#13;
+&#13;
+/* Responsive */&#13;
+@media (max-width: 760px) {&#13;
+  .co-renew-layout {&#13;
+    grid-template-columns: 1fr;&#13;
+    gap: 14px;&#13;
+  }&#13;
+&#13;
+  .co-renew-sidebar {&#13;
+    min-height: auto;&#13;
+  }&#13;
+&#13;
+  .co-renew-sidebar-bottom {&#13;
+    margin-top: 16px;&#13;
+  }&#13;
+&#13;
+  .co-renew-card-list {&#13;
+    grid-template-columns: 1fr;&#13;
+  }&#13;
+}&#13;
+&#13;
+@media (max-width: 480px) {&#13;
+  .co-renew-page {&#13;
+    padding: 8px;&#13;
+  }&#13;
+&#13;
+  .co-renew-page-header {&#13;
+    align-items: flex-start;&#13;
+  }&#13;
+&#13;
+  .co-renew-page-header h1 {&#13;
+    font-size: 22px;&#13;
+  }&#13;
+&#13;
+  .co-renew-stats {&#13;
+    grid-template-columns: repeat(2, minmax(0, 1fr));&#13;
+    row-gap: 14px;&#13;
+  }&#13;
+&#13;
+  .co-renew-stats &gt; div:nth-child(2) {&#13;
+    border-right: 0;&#13;
+  }&#13;
+&#13;
+  .co-renew-details {&#13;
+    gap: 5px;&#13;
+  }&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+/* =====================================================&#13;
+   CAMPUSOPS RENEW PAGE — LAYOUT &amp; TYPOGRAPHY CORRECTION&#13;
+   Append this after the existing CSS.&#13;
+   ===================================================== */&#13;
+&#13;
+.co-renew-page {&#13;
+  padding: 14px 16px;&#13;
+  min-height: 100vh;&#13;
+  font-size: 14px;&#13;
+  color: #30234f;&#13;
+}&#13;
+&#13;
+.co-renew-layout {&#13;
+  grid-template-columns: 220px minmax(0, 1fr);&#13;
+  gap: 24px;&#13;
+  max-width: 1440px;&#13;
+  align-items: stretch;&#13;
+}&#13;
+&#13;
+/* Sidebar: match My Rentals proportions */&#13;
+.co-renew-sidebar {&#13;
+  padding: 18px 10px 14px;&#13;
+  min-height: calc(100vh - 28px);&#13;
+  border-radius: 16px;&#13;
+}&#13;
+&#13;
+.co-renew-brand {&#13;
+  gap: 10px;&#13;
+  padding: 0 5px 28px;&#13;
+}&#13;
+&#13;
+.co-renew-brand-mark {&#13;
+  width: 36px;&#13;
+  height: 36px;&#13;
+  border-radius: 11px;&#13;
+  font-size: 17px;&#13;
+}&#13;
+&#13;
+.co-renew-brand strong {&#13;
+  font-size: 13px;&#13;
+}&#13;
+&#13;
+.co-renew-brand small {&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-renew-nav-label {&#13;
+  margin: 0 8px 10px;&#13;
+  font-size: 9px;&#13;
+}&#13;
+&#13;
+.co-renew-nav {&#13;
+  min-height: 38px;&#13;
+  gap: 10px;&#13;
+  padding: 10px;&#13;
+  margin-bottom: 3px;&#13;
+  border-radius: 9px;&#13;
+  font-size: 12px;&#13;
+}&#13;
+&#13;
+.co-renew-nav &gt; span {&#13;
+  width: 15px;&#13;
+  font-size: 14px;&#13;
+}&#13;
+&#13;
+.co-renew-account-label {&#13;
+  margin-top: 25px;&#13;
+}&#13;
+&#13;
+.co-renew-avatar {&#13;
+  width: 32px;&#13;
+  height: 32px;&#13;
+  font-size: 12px;&#13;
+}&#13;
+&#13;
+.co-renew-sidebar-bottom strong {&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-renew-sidebar-bottom small {&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+/* Main heading */&#13;
+.co-renew-main {&#13;
+  min-width: 0;&#13;
+  padding: 5px 0 0;&#13;
+}&#13;
+&#13;
+.co-renew-page-header {&#13;
+  align-items: flex-start;&#13;
+  margin-bottom: 22px;&#13;
+  gap: 18px;&#13;
+}&#13;
+&#13;
+.co-renew-eyebrow {&#13;
+  margin-bottom: 8px;&#13;
+  font-size: 9px;&#13;
+  letter-spacing: 1.2px;&#13;
+}&#13;
+&#13;
+.co-renew-page-header h1 {&#13;
+  margin-bottom: 7px;&#13;
+  font-size: clamp(26px, 2.4vw, 32px);&#13;
+  line-height: 1.2;&#13;
+  letter-spacing: -0.7px;&#13;
+}&#13;
+&#13;
+.co-renew-page-header p,&#13;
+.co-renew-intro p,&#13;
+.co-renew-section-heading p {&#13;
+  font-size: 12px;&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+.co-renew-outline-link {&#13;
+  padding: 10px 13px;&#13;
+  border-radius: 9px;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+/* Intro panel */&#13;
+.co-renew-intro {&#13;
+  gap: 15px;&#13;
+  padding: 18px;&#13;
+  margin-bottom: 14px;&#13;
+  border-radius: 13px;&#13;
+}&#13;
+&#13;
+.co-renew-intro-icon {&#13;
+  width: 42px;&#13;
+  height: 42px;&#13;
+  font-size: 23px;&#13;
+}&#13;
+&#13;
+.co-renew-intro h2 {&#13;
+  margin-bottom: 6px;&#13;
+  font-size: 16px;&#13;
+}&#13;
+&#13;
+/* Summary strip */&#13;
+.co-renew-stats {&#13;
+  padding: 16px 5px;&#13;
+  margin-bottom: 25px;&#13;
+  border-radius: 12px;&#13;
+}&#13;
+&#13;
+.co-renew-stats &gt; div {&#13;
+  padding: 0 18px;&#13;
+}&#13;
+&#13;
+.co-renew-stats span {&#13;
+  margin-bottom: 6px;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-renew-stats strong {&#13;
+  font-size: 23px;&#13;
+}&#13;
+&#13;
+/* Feedback: integrated notification, not a browser-looking alert */&#13;
+.co-renew-notice {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: space-between;&#13;
+  gap: 12px;&#13;
+  padding: 12px 15px;&#13;
+  margin: -8px 0 20px;&#13;
+  border: 1px solid #d8c9f1;&#13;
+  border-radius: 10px;&#13;
+  background: #f7f3ff;&#13;
+  color: #543b82;&#13;
+  font-size: 12px;&#13;
+  line-height: 1.5;&#13;
+}&#13;
+&#13;
+.co-renew-notice-success {&#13;
+  border-color: #c8e8d5;&#13;
+  background: #f0faf4;&#13;
+  color: #246a47;&#13;
+}&#13;
+&#13;
+.co-renew-notice-error {&#13;
+  border-color: #f0c8d0;&#13;
+  background: #fff3f5;&#13;
+  color: #a12e48;&#13;
+}&#13;
+&#13;
+.co-renew-notice button {&#13;
+  flex-shrink: 0;&#13;
+  width: 28px;&#13;
+  height: 28px;&#13;
+  border: 1px solid currentColor;&#13;
+  border-radius: 7px;&#13;
+  background: transparent;&#13;
+  color: inherit;&#13;
+  font-size: 17px;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+/* Rentals section */&#13;
+.co-renew-list-section {&#13;
+  margin-bottom: 22px;&#13;
+}&#13;
+&#13;
+.co-renew-section-heading {&#13;
+  margin-bottom: 13px;&#13;
+}&#13;
+&#13;
+.co-renew-section-heading h2 {&#13;
+  margin-bottom: 5px;&#13;
+  font-size: 19px;&#13;
+  line-height: 1.3;&#13;
+}&#13;
+&#13;
+.co-renew-search {&#13;
+  height: 44px;&#13;
+  gap: 11px;&#13;
+  padding: 0 14px;&#13;
+  margin-bottom: 11px;&#13;
+  border-radius: 10px;&#13;
+}&#13;
+&#13;
+.co-renew-search &gt; span {&#13;
+  font-size: 17px;&#13;
+}&#13;
+&#13;
+.co-renew-search input {&#13;
+  font-size: 12px;&#13;
+}&#13;
+&#13;
+.co-renew-search button {&#13;
+  border: 0;&#13;
+  background: transparent;&#13;
+  color: #6947a7;&#13;
+  font-size: 11px;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+.co-renew-filter-row {&#13;
+  gap: 7px;&#13;
+  margin-bottom: 14px;&#13;
+}&#13;
+&#13;
+.co-renew-filter-row button {&#13;
+  padding: 9px 12px;&#13;
+  border-radius: 8px;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-renew-filter-row button span {&#13;
+  margin-left: 3px;&#13;
+}&#13;
+&#13;
+/* Rental cards */&#13;
+.co-renew-card-list {&#13;
+  grid-template-columns: repeat(2, minmax(0, 1fr));&#13;
+  gap: 14px;&#13;
+}&#13;
+&#13;
+.co-renew-card {&#13;
+  min-width: 0;&#13;
+  padding: 16px;&#13;
+  border-radius: 13px;&#13;
+}&#13;
+&#13;
+.co-renew-card-top {&#13;
+  margin-bottom: 13px;&#13;
+}&#13;
+&#13;
+.co-renew-resource-icon {&#13;
+  width: 36px;&#13;
+  height: 36px;&#13;
+  border-radius: 10px;&#13;
+  font-size: 17px;&#13;
+}&#13;
+&#13;
+.co-renew-status {&#13;
+  padding: 6px 9px;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-renew-resource-type {&#13;
+  margin-bottom: 5px;&#13;
+  font-size: 10px;&#13;
+  letter-spacing: 0.4px;&#13;
+}&#13;
+&#13;
+.co-renew-card h3 {&#13;
+  margin-bottom: 5px;&#13;
+  font-size: 15px;&#13;
+  line-height: 1.4;&#13;
+}&#13;
+&#13;
+.co-renew-number {&#13;
+  margin-bottom: 13px;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-renew-details {&#13;
+  gap: 10px;&#13;
+  padding: 13px 0;&#13;
+}&#13;
+&#13;
+.co-renew-details span {&#13;
+  margin-bottom: 6px;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-renew-details strong {&#13;
+  font-size: 11px;&#13;
+  line-height: 1.45;&#13;
+}&#13;
+&#13;
+.co-renew-note {&#13;
+  margin: 11px 0;&#13;
+  padding: 11px 12px;&#13;
+  border-radius: 9px;&#13;
+  font-size: 11px;&#13;
+  line-height: 1.55;&#13;
+}&#13;
+&#13;
+.co-renew-action {&#13;
+  min-height: 40px;&#13;
+  padding: 11px 13px;&#13;
+  border-radius: 8px;&#13;
+  font-size: 12px;&#13;
+}&#13;
+&#13;
+/* Empty states and pagination */&#13;
+.co-renew-empty {&#13;
+  padding: 32px 18px;&#13;
+  border-radius: 13px;&#13;
+}&#13;
+&#13;
+.co-renew-empty strong {&#13;
+  font-size: 15px;&#13;
+}&#13;
+&#13;
+.co-renew-empty p,&#13;
+.co-renew-empty a {&#13;
+  font-size: 12px;&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+.co-renew-empty button {&#13;
+  padding: 9px 13px;&#13;
+  border: 1px solid #d8c9f1;&#13;
+  border-radius: 8px;&#13;
+  background: #fff;&#13;
+  color: #6947a7;&#13;
+  font-size: 11px;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+.co-renew-pagination {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: space-between;&#13;
+  flex-wrap: wrap;&#13;
+  gap: 12px;&#13;
+  margin-top: 14px;&#13;
+  color: #81749b;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+.co-renew-page-controls {&#13;
+  display: flex;&#13;
+  flex-wrap: wrap;&#13;
+  gap: 5px;&#13;
+}&#13;
+&#13;
+.co-renew-page-controls button {&#13;
+  min-width: 34px;&#13;
+  min-height: 32px;&#13;
+  padding: 7px 10px;&#13;
+  border: 1px solid #e6dcf7;&#13;
+  border-radius: 8px;&#13;
+  background: #fff;&#13;
+  color: #604687;&#13;
+  font-family: inherit;&#13;
+  font-size: 11px;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+.co-renew-page-controls button.selected {&#13;
+  border-color: #8062c7;&#13;
+  background: #8062c7;&#13;
+  color: #fff;&#13;
+}&#13;
+&#13;
+.co-renew-page-controls button:disabled {&#13;
+  opacity: 0.45;&#13;
+  cursor: not-allowed;&#13;
+}&#13;
+&#13;
+/* Support and footer */&#13;
+.co-renew-help {&#13;
+  padding: 16px 18px;&#13;
+  margin-bottom: 20px;&#13;
+  border-radius: 12px;&#13;
+}&#13;
+&#13;
+.co-renew-help strong {&#13;
+  font-size: 13px;&#13;
+}&#13;
+&#13;
+.co-renew-help p,&#13;
+.co-renew-help a {&#13;
+  font-size: 11px;&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+.co-renew-footer {&#13;
+  flex-wrap: wrap;&#13;
+  align-items: center;&#13;
+  gap: 12px;&#13;
+  padding: 15px 2px;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-renew-footer-links {&#13;
+  display: flex;&#13;
+  gap: 15px;&#13;
+}&#13;
+&#13;
+.co-renew-footer a {&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+/* Responsive layout */&#13;
+@media (max-width: 900px) {&#13;
+  .co-renew-layout {&#13;
+    grid-template-columns: 190px minmax(0, 1fr);&#13;
+    gap: 16px;&#13;
+  }&#13;
+&#13;
+  .co-renew-card-list {&#13;
+    grid-template-columns: 1fr;&#13;
+  }&#13;
+}&#13;
+&#13;
+@media (max-width: 650px) {&#13;
+  .co-renew-page {&#13;
+    padding: 10px;&#13;
+  }&#13;
+&#13;
+  .co-renew-layout {&#13;
+    grid-template-columns: 1fr;&#13;
+    gap: 16px;&#13;
+  }&#13;
+&#13;
+  .co-renew-sidebar {&#13;
+    min-height: auto;&#13;
+  }&#13;
+&#13;
+  .co-renew-sidebar-bottom {&#13;
+    margin-top: 16px;&#13;
+  }&#13;
+&#13;
+  .co-renew-page-header {&#13;
+    flex-direction: column;&#13;
+  }&#13;
+&#13;
+  .co-renew-stats {&#13;
+    grid-template-columns: repeat(2, minmax(0, 1fr));&#13;
+    row-gap: 15px;&#13;
+  }&#13;
+&#13;
+  .co-renew-stats &gt; div:nth-child(2) {&#13;
+    border-right: 0;&#13;
+  }&#13;
+&#13;
+  .co-renew-details {&#13;
+    gap: 8px;&#13;
+  }&#13;
+&#13;
+  .co-renew-pagination {&#13;
+    align-items: flex-start;&#13;
+    flex-direction: column;&#13;
+  }&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>campusops-renewal-centre</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CampusOps Renewal Centre</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  var userId = gs.getUserID();
+  var nowMs = new GlideDateTime().getNumericValue();
+  var DAY_MS = 86400000;
+
+  data.rentals = [];
+  data.activeCount = 0;
+  data.dueSoonCount = 0;
+  data.overdueCount = 0;
+  data.requestedCount = 0;
+
+  // Response fields expected by the Client Controller.
+  data.success = false;
+  data.message = "";
+
+  function formatDate(value) {
+    if (!value) return "";
+
+    try {
+      return new GlideDateTime(value)
+        .getLocalDate()
+        .getByFormat("dd MMM yyyy");
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function getRental(rentalId) {
+    if (!rentalId) return null;
+
+    var gr = new GlideRecord("u_student_rental");
+
+    if (!gr.get(rentalId)) return null;
+
+    // Only allow the signed-in student to request their own rental.
+    if (gr.getValue("u_student") !== userId) return null;
+
+    if ((gr.getValue("u_status") || "").toLowerCase() !== "active") {
+      return null;
+    }
+
+    return gr;
+  }
+
+  /*
+   * ACTION: Request renewal
+   */
+  if (input && input.action === "requestRenewal") {
+    var record = getRental(
+      (input.rentalId || "").toString()
+    );
+
+    if (!record) {
+      data.success = false;
+      data.message =
+        "This active rental could not be found for your account.";
+      return;
+    }
+
+    if (record.getValue("u_renewal_requested") === "true") {
+      data.success = false;
+      data.message =
+        "A renewal request has already been submitted.";
+      return;
+    }
+
+    // Do not allow overdue rentals to be submitted through this action.
+    var dueValue = record.getValue("u_due_date");
+
+    if (dueValue &&
+        new GlideDateTime(dueValue).getNumericValue() < nowMs) {
+      data.success = false;
+      data.message =
+        "This rental is overdue. Please contact the campus desk.";
+      return;
+    }
+
+    record.setValue("u_renewal_requested", true);
+
+    var updatedId = record.update();
+
+    if (!updatedId) {
+      data.success = false;
+      data.message =
+        "The request could not be saved. Please try again.";
+      return;
+    }
+
+    data.success = true;
+    data.message =
+      "Your renewal request has been submitted for processing.";
+    return;
+  }
+
+  /*
+   * LOAD ACTIVE RENTALS FOR THE SIGNED-IN STUDENT
+   */
+  var rental = new GlideRecord("u_student_rental");
+  rental.addQuery("u_student", userId);
+  rental.addQuery("u_status", "active");
+  rental.orderBy("u_due_date");
+  rental.query();
+
+  while (rental.next()) {
+    data.activeCount++;
+
+    var dueValue = rental.getValue("u_due_date");
+    var dueMs = dueValue
+      ? new GlideDateTime(dueValue).getNumericValue()
+      : null;
+
+    var daysLeft = dueMs === null
+      ? null
+      : Math.ceil((dueMs - nowMs) / DAY_MS);
+
+    var isOverdue = dueMs !== null && dueMs < nowMs;
+
+    var isDueSoon = !isOverdue &&
+      daysLeft !== null &&
+      daysLeft >= 0 &&
+      daysLeft <= 2;
+
+    if (isOverdue) {
+      data.overdueCount++;
+    } else if (isDueSoon) {
+      data.dueSoonCount++;
+    }
+
+    var assetName =
+      rental.getDisplayValue("u_asset") || "Campus resource";
+
+    var assetType = "";
+
+    var asset = rental.u_asset.getRefRecord();
+
+    if (asset && asset.isValidRecord()) {
+      assetType = asset.getDisplayValue("u_asset_type") || "";
+    }
+
+    var requested =
+      rental.getValue("u_renewal_requested") === "true";
+
+    if (requested) {
+      data.requestedCount++;
+    }
+
+    data.rentals.push({
+      id: rental.getUniqueValue(),
+      number: rental.getDisplayValue("u_number"),
+      assetName: assetName,
+      type: assetType,
+      dueDate: formatDate(dueValue),
+      dueMs: dueMs,
+      isOverdue: isOverdue,
+      isDueSoon: isDueSoon,
+      renewalCount: parseInt(
+        rental.getValue("u_renewal_count") || "0",
+        10
+      ) || 0,
+      requested: requested,
+      renewalRequested: requested,
+      riskLabel:
+        rental.getDisplayValue("u_return_risk") || "Not assessed"
+    });
+  }
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-10 02:58:00</sys_created_on>
+        <sys_id>5567f092f4bb83107f44dc35ed3195f9</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>CampusOps Renewal Centre</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_widget_5567f092f4bb83107f44dc35ed3195f9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-10 03:31:34</sys_updated_on>
+        <template><![CDATA[<div class="co-renew-page">
+  <div class="co-renew-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="co-renew-sidebar">
+      <a class="co-renew-brand" href="/sp?id=student_home">
+        <span class="co-renew-brand-mark">C</span>
+        <span>
+          <strong>CampusOps</strong>
+          <small>Campus resources</small>
+        </span>
+      </a>
+
+      <div class="co-renew-nav-label">WORKSPACE</div>
+
+      <a class="co-renew-nav" href="/sp?id=student_home">
+        <span>⌂</span> Home
+      </a>
+      <a class="co-renew-nav" href="/sp?id=browse_assets">
+        <span>▤</span> Browse assets
+      </a>
+      <a class="co-renew-nav" href="/sp?id=my_rentals">
+        <span>▣</span> My rentals
+      </a>
+      <a class="co-renew-nav co-renew-nav-active"
+         href="/sp?id=renew_asset">
+        <span>↻</span> Renew an item
+      </a>
+      <a class="co-renew-nav" href="/sp?id=return_asset">
+        <span>↩</span> Return an item
+      </a>
+
+      <div class="co-renew-nav-label co-renew-account-label">
+        YOUR ACCOUNT
+      </div>
+
+      <a class="co-renew-nav" href="/sp?id=my_profile">
+        <span>○</span> My profile
+      </a>
+      <a class="co-renew-nav" href="/sp?id=quick_scan">
+        <span>⌕</span> Quick scan
+      </a>
+      <a class="co-renew-nav" href="/sp?id=report_issue">
+        <span>!</span> Report an issue
+      </a>
+
+      <div class="co-renew-sidebar-bottom">
+        <div class="co-renew-avatar">
+          {{(data.studentName || 'S').charAt(0)}}
+        </div>
+        <div class="co-renew-user-copy">
+          <strong>{{data.studentName || 'Campus member'}}</strong>
+          <small>Campus member</small>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="co-renew-main">
+
+      <header class="co-renew-page-header">
+        <div>
+          <div class="co-renew-eyebrow">
+            CAMPUSOPS / BORROWING SERVICES
+          </div>
+          <h1>Renew an item</h1>
+          <p>
+            Need more time with a resource? Review your active rentals
+            and request an extension.
+          </p>
+        </div>
+
+        <a class="co-renew-outline-link"
+           href="/sp?id=my_rentals">
+          My rentals ↗
+        </a>
+      </header>
+
+      <!-- INTRODUCTION -->
+      <section class="co-renew-intro">
+        <div class="co-renew-intro-icon">↻</div>
+        <div>
+          <h2>Request more time</h2>
+          <p>
+            Choose an eligible rental below. Requests are subject to
+            campus policy and approval.
+          </p>
+        </div>
+      </section>
+
+      <!-- SUMMARY -->
+      <section class="co-renew-stats">
+        <div>
+          <span>Active rentals</span>
+          <strong>{{data.activeCount || 0}}</strong>
+        </div>
+        <div>
+          <span>Due soon</span>
+          <strong>{{c.dueSoonCount()}}</strong>
+        </div>
+        <div>
+          <span>Overdue</span>
+          <strong>{{data.overdueCount || 0}}</strong>
+        </div>
+        <div>
+          <span>Requests shown</span>
+          <strong>{{c.requestedCount()}}</strong>
+        </div>
+      </section>
+
+      <!-- FEEDBACK -->
+      <div class="co-renew-notice"
+           ng-if="c.notice"
+           ng-class="{
+             'co-renew-notice-success': c.noticeType === 'success',
+             'co-renew-notice-error': c.noticeType === 'error'
+           }"
+           role="status">
+        <span>{{c.notice}}</span>
+        <button type="button"
+                ng-click="c.notice = ''"
+                aria-label="Dismiss message">×</button>
+      </div>
+
+      <!-- RENTALS -->
+      <section class="co-renew-list-section">
+
+        <div class="co-renew-section-heading">
+          <div>
+            <h2>Your active rentals</h2>
+            <p>Find the resource you want to extend.</p>
+          </div>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="co-renew-search">
+          <span aria-hidden="true">⌕</span>
+          <input type="text"
+                 ng-model="c.searchText"
+                 placeholder="Search by resource or rental number..."
+                 aria-label="Search active rentals">
+          <button type="button"
+                  ng-if="c.searchText"
+                  ng-click="c.resetFilters()">
+            Clear
+          </button>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="co-renew-filter-row">
+          <button type="button"
+                  ng-repeat="filter in c.filters"
+                  ng-click="c.setFilter(filter.value)"
+                  ng-class="{'selected': c.activeFilter === filter.value}">
+            {{filter.label}}
+            <span>{{c.filterCount(filter.value)}}</span>
+          </button>
+        </div>
+
+        <!-- RENTAL CARD GRID -->
+        <div class="co-renew-card-list"
+             ng-if="c.filteredRentals().length > 0">
+
+          <article class="co-renew-card"
+                   ng-repeat="rental in c.pageRentals() track by rental.id">
+
+            <div class="co-renew-card-top">
+              <div class="co-renew-resource-icon">▤</div>
+
+              <span class="co-renew-status"
+                    ng-class="{
+                      'status-overdue': rental.isOverdue,
+                      'status-due': rental.isDueSoon && !rental.isOverdue,
+                      'status-requested': rental.requested,
+                      'status-active': !rental.isOverdue &&
+                        !rental.isDueSoon && !rental.requested
+                    }">
+                {{rental.requested ? 'Requested' :
+                  (rental.isOverdue ? 'Overdue' :
+                  (rental.isDueSoon ? 'Due soon' : 'Active'))}}
+              </span>
+            </div>
+
+            <div class="co-renew-resource-type">
+              {{rental.type || 'CAMPUS RESOURCE'}}
+            </div>
+
+            <h3>{{rental.assetName}}</h3>
+            <p class="co-renew-number">{{rental.number}}</p>
+
+            <div class="co-renew-details">
+              <div>
+                <span>Due date</span>
+                <strong>{{rental.dueDate || 'Not set'}}</strong>
+              </div>
+              <div>
+                <span>Renewals</span>
+                <strong>{{rental.renewalCount || 0}}</strong>
+              </div>
+              <div>
+                <span>Return risk</span>
+                <strong>{{rental.riskLabel || 'Not assessed'}}</strong>
+              </div>
+            </div>
+
+            <p class="co-renew-note"
+               ng-if="rental.isOverdue">
+              This item is overdue. Contact the campus desk to discuss
+              your options.
+            </p>
+
+            <p class="co-renew-note co-renew-note-due"
+               ng-if="rental.isDueSoon && !rental.isOverdue">
+              Your due date is approaching. Consider requesting an extension.
+            </p>
+
+            <p class="co-renew-note co-renew-note-requested"
+               ng-if="rental.requested">
+              A renewal request has already been submitted for this rental.
+            </p>
+
+            <button type="button"
+                    class="co-renew-action"
+                    ng-click="c.requestRenewal(rental)"
+                    ng-disabled="rental.requested ||
+                      rental.isOverdue ||
+                      c.submittingId === rental.id">
+
+              <span>
+                {{c.submittingId === rental.id
+                  ? 'Submitting...'
+                  : (rental.requested
+                    ? 'Request submitted'
+                    : (rental.isOverdue
+                      ? 'Contact campus desk'
+                      : 'Request renewal'))}}
+              </span>
+
+              <span>→</span>
+            </button>
+
+          </article>
+        </div>
+
+        <!-- EMPTY FILTER RESULTS -->
+        <div class="co-renew-empty"
+             ng-if="c.filteredRentals().length === 0 &&
+                    data.rentals && data.rentals.length > 0">
+          <strong>No matching rentals</strong>
+          <p>Try another search or choose a different filter.</p>
+          <button type="button" ng-click="c.resetFilters()">
+            Show all rentals
+          </button>
+        </div>
+
+        <!-- NO RENTALS -->
+        <div class="co-renew-empty"
+             ng-if="!data.rentals || data.rentals.length === 0">
+          <strong>No active rentals to renew</strong>
+          <p>When you borrow a campus resource, it will appear here.</p>
+          <a href="/sp?id=browse_assets">
+            Browse available resources →
+          </a>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="co-renew-pagination"
+             ng-if="c.filteredRentals().length > 0">
+
+          <span>
+            Showing {{c.startItem()}}–{{c.endItem()}}
+            of {{c.filteredRentals().length}} rentals
+          </span>
+
+          <div class="co-renew-page-controls">
+            <button type="button"
+                    ng-click="c.changePage(c.currentPage - 1)"
+                    ng-disabled="c.currentPage === 1">
+              ← Previous
+            </button>
+
+            <button type="button"
+                    ng-repeat="page in c.pageNumbers()"
+                    ng-click="c.changePage(page)"
+                    ng-class="{'selected': c.currentPage === page}">
+              {{page}}
+            </button>
+
+            <button type="button"
+                    ng-click="c.changePage(c.currentPage + 1)"
+                    ng-disabled="c.currentPage === c.totalPages()">
+              Next →
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SUPPORT -->
+      <section class="co-renew-help">
+        <div>
+          <strong>Need help with an extension?</strong>
+          <p>
+            Overdue items may require assistance from the campus desk.
+          </p>
+        </div>
+        <a href="/sp?id=report_issue">Contact support →</a>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="co-renew-footer">
+        <div>
+          <strong>CampusOps</strong>
+          <span>Campus resources, made easier.</span>
+        </div>
+        <div class="co-renew-footer-links">
+          <a href="/sp?id=report_issue">Help &amp; queries</a>
+          <a href="/sp?id=my_profile">My account</a>
+        </div>
+        <small>
+          CampusOps · Campus Asset &amp; Textbook Lifecycle Management
+        </small>
+      </footer>
+
+    </main>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>5567f092f4bb83107f44dc35ed3195f9</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-10 02:57:58</sys_created_on>
+        <sys_id>3cd7f892f4bb83107f44dc35ed3195fa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-10 02:57:58</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

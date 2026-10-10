@@ -1,0 +1,980 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, $timeout) {
+  var c = this;
+
+  c.isOpen = false;
+  c.message = "";
+  c.messages = [];
+  c.sending = false;
+
+  c.sendMessage = function() {
+    var text = (c.message || "").trim();
+
+    if (!text || c.sending) return;
+
+    c.messages.push({
+      type: "user",
+      text: text
+    });
+
+    c.message = "";
+    c.sending = true;
+
+    c.server.get({
+      message: text
+    }).then(function(response) {
+      var result = response.data || {};
+
+      c.messages.push({
+        type: "assistant",
+        text: result.reply || "I couldn't prepare a response. Please try again.",
+        links: result.links || [],
+        results: result.results || []
+      });
+
+      scrollToBottom();
+    }, function() {
+      c.messages.push({
+        type: "assistant",
+        text: "Sorry, I couldn't reach CampusOps just now. Please try again.",
+        links: [],
+        results: []
+      });
+
+      scrollToBottom();
+    }).finally(function() {
+      c.sending = false;
+      scrollToBottom();
+    });
+
+    scrollToBottom();
+  };
+
+  function scrollToBottom() {
+    $timeout(function() {
+      var panel = document.getElementById("co-chat-messages");
+
+      if (panel) {
+        panel.scrollTop = panel.scrollHeight;
+      }
+    }, 100);
+  }
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* CampusOps assistant */&#13;
+.co-chat-widget {&#13;
+  font-family: inherit;&#13;
+  color: #30234f;&#13;
+}&#13;
+&#13;
+/* Floating launcher */&#13;
+.co-chat-launcher {&#13;
+  position: fixed !important;&#13;
+  right: 24px !important;&#13;
+  bottom: 24px !important;&#13;
+  top: auto !important;&#13;
+  left: auto !important;&#13;
+  z-index: 2147483000 !important;&#13;
+&#13;
+  width: 58px;&#13;
+  height: 58px;&#13;
+  padding: 0;&#13;
+  border: 1px solid rgba(255,255,255,.7);&#13;
+  border-radius: 50%;&#13;
+  background: #8062c7;&#13;
+  color: #fff;&#13;
+  box-shadow: 0 6px 22px rgba(61,43,99,.25);&#13;
+  cursor: pointer;&#13;
+&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  transition: transform .2s ease, box-shadow .2s ease;&#13;
+}&#13;
+&#13;
+.co-chat-launcher:hover {&#13;
+  transform: translateY(-3px);&#13;
+  box-shadow: 0 10px 28px rgba(61,43,99,.3);&#13;
+}&#13;
+&#13;
+.co-launcher-mark {&#13;
+  font-size: 23px;&#13;
+  font-weight: 700;&#13;
+}&#13;
+&#13;
+/* Floating chat panel */&#13;
+.co-chat-panel {&#13;
+  position: fixed !important;&#13;
+  right: 24px !important;&#13;
+  bottom: 94px !important;&#13;
+  top: auto !important;&#13;
+  left: auto !important;&#13;
+  z-index: 2147483000 !important;&#13;
+&#13;
+  width: 370px;&#13;
+  height: min(540px, calc(100vh - 125px));&#13;
+  min-height: 300px;&#13;
+  max-height: calc(100vh - 125px);&#13;
+&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  overflow: hidden;&#13;
+&#13;
+  background: #fff;&#13;
+  border: 1px solid #e5d9fb;&#13;
+  border-radius: 18px;&#13;
+  box-shadow: 0 14px 50px rgba(45,32,75,.24);&#13;
+  animation: co-chat-appear .18s ease-out;&#13;
+}&#13;
+&#13;
+@keyframes co-chat-appear {&#13;
+  from {&#13;
+    opacity: 0;&#13;
+    transform: translateY(8px);&#13;
+  }&#13;
+  to {&#13;
+    opacity: 1;&#13;
+    transform: translateY(0);&#13;
+  }&#13;
+}&#13;
+&#13;
+/* Header */&#13;
+.co-chat-header {&#13;
+  flex: 0 0 auto;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: space-between;&#13;
+  gap: 12px;&#13;
+  padding: 15px 16px;&#13;
+  background: linear-gradient(110deg,#f0e7ff,#fceefa);&#13;
+  border-bottom: 1px solid #e6dafa;&#13;
+}&#13;
+&#13;
+.co-chat-brand {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 11px;&#13;
+}&#13;
+&#13;
+.co-chat-logo {&#13;
+  width: 38px;&#13;
+  height: 38px;&#13;
+  flex: 0 0 38px;&#13;
+  border-radius: 12px;&#13;
+  background: #8062c7;&#13;
+  color: #fff;&#13;
+  display: grid;&#13;
+  place-items: center;&#13;
+  font-size: 17px;&#13;
+  font-weight: 700;&#13;
+}&#13;
+&#13;
+.co-chat-header h3 {&#13;
+  margin: 0 0 4px;&#13;
+  font-size: 15px;&#13;
+  font-weight: 700;&#13;
+  color: #30234f;&#13;
+}&#13;
+&#13;
+.co-chat-header p {&#13;
+  margin: 0;&#13;
+  font-size: 11px;&#13;
+  color: #796a96;&#13;
+}&#13;
+&#13;
+.co-chat-close {&#13;
+  flex: 0 0 30px;&#13;
+  width: 30px;&#13;
+  height: 30px;&#13;
+  border: 0;&#13;
+  border-radius: 8px;&#13;
+  background: transparent;&#13;
+  color: #68528f;&#13;
+  font-size: 24px;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+.co-chat-close:hover {&#13;
+  background: rgba(128,98,199,.12);&#13;
+}&#13;
+&#13;
+/* Conversation: scroll only inside this area */&#13;
+.co-chat-messages {&#13;
+  flex: 1 1 auto;&#13;
+  min-height: 0;&#13;
+  overflow-x: hidden;&#13;
+  overflow-y: auto;&#13;
+  overscroll-behavior: contain;&#13;
+  scrollbar-width: thin;&#13;
+  scrollbar-color: #c6b4ed transparent;&#13;
+&#13;
+  padding: 16px 13px;&#13;
+  background: #fdfbff;&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  gap: 13px;&#13;
+}&#13;
+&#13;
+.co-chat-messages::-webkit-scrollbar {&#13;
+  width: 5px;&#13;
+}&#13;
+&#13;
+.co-chat-messages::-webkit-scrollbar-track {&#13;
+  background: transparent;&#13;
+}&#13;
+&#13;
+.co-chat-messages::-webkit-scrollbar-thumb {&#13;
+  background: #c6b4ed;&#13;
+  border-radius: 10px;&#13;
+}&#13;
+&#13;
+.co-chat-welcome,&#13;
+.co-chat-answer {&#13;
+  align-self: flex-start;&#13;
+  max-width: 88%;&#13;
+  padding: 11px 12px;&#13;
+  border: 1px solid #e6dafa;&#13;
+  border-radius: 13px 13px 13px 4px;&#13;
+  background: #f3edff;&#13;
+  color: #392958;&#13;
+  font-size: 12px;&#13;
+  line-height: 1.6;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-chat-message {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+  gap: 8px;&#13;
+}&#13;
+&#13;
+.co-chat-user {&#13;
+  align-self: flex-end;&#13;
+  max-width: 85%;&#13;
+  padding: 10px 13px;&#13;
+  border-radius: 13px 13px 4px 13px;&#13;
+  background: #8062c7;&#13;
+  color: #fff;&#13;
+  font-size: 12px;&#13;
+  line-height: 1.5;&#13;
+  overflow-wrap: anywhere;&#13;
+}&#13;
+&#13;
+.co-chat-answer p {&#13;
+  margin: 0 0 7px;&#13;
+}&#13;
+&#13;
+.co-chat-link {&#13;
+  display: block;&#13;
+  margin-top: 7px;&#13;
+  color: #6849b4;&#13;
+  font-size: 12px;&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+.co-chat-link:hover {&#13;
+  text-decoration: underline;&#13;
+}&#13;
+&#13;
+.co-chat-result {&#13;
+  display: block;&#13;
+  margin-top: 8px;&#13;
+  padding: 10px;&#13;
+  border: 1px solid #e5d9fb;&#13;
+  border-radius: 9px;&#13;
+  background: #fff;&#13;
+  color: #35254f;&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+.co-chat-result:hover {&#13;
+  border-color: #b7a0ed;&#13;
+  background: #faf7ff;&#13;
+}&#13;
+&#13;
+.co-chat-result strong,&#13;
+.co-chat-result small {&#13;
+  display: block;&#13;
+}&#13;
+&#13;
+.co-chat-result strong {&#13;
+  font-size: 12px;&#13;
+}&#13;
+&#13;
+.co-chat-result small {&#13;
+  margin-top: 3px;&#13;
+  color: #806f9b;&#13;
+  font-size: 10px;&#13;
+}&#13;
+&#13;
+.co-chat-typing {&#13;
+  align-self: flex-start;&#13;
+  color: #806f9b;&#13;
+  font-size: 11px;&#13;
+}&#13;
+&#13;
+/* Input stays at the bottom of the panel */&#13;
+.co-chat-input-row {&#13;
+  flex: 0 0 auto;&#13;
+  display: flex;&#13;
+  gap: 8px;&#13;
+  padding: 11px;&#13;
+  background: #fff;&#13;
+  border-top: 1px solid #eee6fa;&#13;
+}&#13;
+&#13;
+.co-chat-input-row input {&#13;
+  flex: 1 1 auto;&#13;
+  min-width: 0;&#13;
+  height: 40px;&#13;
+  padding: 0 11px;&#13;
+  border: 1px solid #ddcff8;&#13;
+  border-radius: 10px;&#13;
+  outline: none;&#13;
+  background: #fdfbff;&#13;
+  color: #30234f;&#13;
+  font-family: inherit;&#13;
+  font-size: 12px;&#13;
+}&#13;
+&#13;
+.co-chat-input-row input:focus {&#13;
+  border-color: #8062c7;&#13;
+  box-shadow: 0 0 0 2px rgba(128,98,199,.1);&#13;
+}&#13;
+&#13;
+.co-chat-input-row button {&#13;
+  flex: 0 0 auto;&#13;
+  padding: 0 13px;&#13;
+  border: 0;&#13;
+  border-radius: 10px;&#13;
+  background: #8062c7;&#13;
+  color: #fff;&#13;
+  font-family: inherit;&#13;
+  font-size: 12px;&#13;
+  font-weight: 600;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+.co-chat-input-row button:disabled {&#13;
+  opacity: .55;&#13;
+  cursor: not-allowed;&#13;
+}&#13;
+&#13;
+/* Mobile layout */&#13;
+@media (max-width: 480px) {&#13;
+  .co-chat-launcher {&#13;
+    right: 16px !important;&#13;
+    bottom: 16px !important;&#13;
+  }&#13;
+&#13;
+  .co-chat-panel {&#13;
+    right: 10px !important;&#13;
+    bottom: 84px !important;&#13;
+    width: calc(100vw - 20px);&#13;
+    height: min(600px, calc(100vh - 105px));&#13;
+    min-height: 280px;&#13;
+    max-height: calc(100vh - 105px);&#13;
+  }&#13;
+}&#13;
+&#13;
+/* Short screens */&#13;
+@media (max-height: 420px) {&#13;
+  .co-chat-panel {&#13;
+    height: calc(100vh - 100px);&#13;
+    min-height: 220px;&#13;
+    max-height: calc(100vh - 100px);&#13;
+  }&#13;
+}&#13;
+&#13;
+&#13;
+/* Force the assistant to float independently of page content */&#13;
+.co-chat-widget {&#13;
+  position: static !important;&#13;
+  width: 0 !important;&#13;
+  height: 0 !important;&#13;
+  overflow: visible !important;&#13;
+  z-index: 2147483000 !important;&#13;
+}&#13;
+&#13;
+.co-chat-launcher {&#13;
+  position: fixed !important;&#13;
+  right: 24px !important;&#13;
+  bottom: 24px !important;&#13;
+  top: auto !important;&#13;
+  left: auto !important;&#13;
+  z-index: 2147483000 !important;&#13;
+}&#13;
+&#13;
+.co-chat-panel {&#13;
+  position: fixed !important;&#13;
+  right: 24px !important;&#13;
+  bottom: 94px !important;&#13;
+  top: auto !important;&#13;
+  left: auto !important;&#13;
+  z-index: 2147483000 !important;&#13;
+  margin: 0 !important;&#13;
+}&#13;
+&#13;
+@media (max-width: 480px) {&#13;
+  .co-chat-panel {&#13;
+    right: 10px !important;&#13;
+    bottom: 84px !important;&#13;
+    width: calc(100vw - 20px) !important;&#13;
+  }&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+/* CampusOps assistant — wider, softer floating panel */&#13;
+.co-chat-panel {&#13;
+  width: 420px !important;&#13;
+  height: min(600px, calc(100vh - 120px)) !important;&#13;
+&#13;
+  right: 24px !important;&#13;
+  bottom: 94px !important;&#13;
+&#13;
+  border: 1px solid #e5d9fb !important;&#13;
+  border-radius: 24px !important;&#13;
+&#13;
+  background: linear-gradient(&#13;
+    145deg,&#13;
+    #ffffff 0%,&#13;
+    #fcf9ff 55%,&#13;
+    #f8f2ff 100%&#13;
+  ) !important;&#13;
+&#13;
+  box-shadow:&#13;
+    0 18px 55px rgba(61, 43, 99, 0.18),&#13;
+    0 4px 14px rgba(128, 98, 199, 0.08) !important;&#13;
+&#13;
+  overflow: hidden !important;&#13;
+}&#13;
+&#13;
+/* Softer rounded header */&#13;
+.co-chat-header {&#13;
+  border-radius: 23px 23px 0 0 !important;&#13;
+  padding: 17px 18px !important;&#13;
+  background: linear-gradient(&#13;
+    110deg,&#13;
+    #eee5ff,&#13;
+    #fceeff&#13;
+  ) !important;&#13;
+}&#13;
+&#13;
+/* Round the bottom input area */&#13;
+.co-chat-input-row {&#13;
+  border-radius: 0 0 23px 23px !important;&#13;
+  padding: 13px !important;&#13;
+  background: rgba(255, 255, 255, 0.96) !important;&#13;
+}&#13;
+&#13;
+.co-chat-input-row input {&#13;
+  height: 44px !important;&#13;
+  border-radius: 13px !important;&#13;
+}&#13;
+&#13;
+.co-chat-input-row button {&#13;
+  border-radius: 13px !important;&#13;
+  min-width: 64px;&#13;
+}&#13;
+&#13;
+/* Keep the launcher consistent with the panel */&#13;
+.co-chat-launcher {&#13;
+  border-radius: 50% !important;&#13;
+}&#13;
+&#13;
+/* Responsive layout */&#13;
+@media (max-width: 480px) {&#13;
+  .co-chat-panel {&#13;
+    width: calc(100vw - 20px) !important;&#13;
+    height: min(620px, calc(100vh - 100px)) !important;&#13;
+    right: 10px !important;&#13;
+    bottom: 84px !important;&#13;
+    border-radius: 22px !important;&#13;
+  }&#13;
+&#13;
+  .co-chat-header {&#13;
+    border-radius: 21px 21px 0 0 !important;&#13;
+  }&#13;
+}&#13;
+&#13;
+&#13;
+.co-launcher-icon {&#13;
+  width: 30px;&#13;
+  height: 30px;&#13;
+  display: block;&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Shared student assistant for campus resources and rentals</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>campusops-assistant</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>CampusOps Assistant</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[
+(function() {
+  data.firstName = gs.getUser().getFirstName() || "there";
+  data.reply = "";
+  data.links = [];
+  data.results = [];
+
+  var userId = gs.getUserID();
+  var message = "";
+
+  if (input && input.message) {
+    message = (input.message + "").toLowerCase().trim();
+  }
+
+  function addLink(label, url) {
+    data.links.push({
+      label: label,
+      url: url
+    });
+  }
+
+  function formatDate(value) {
+    if (!value) return "Not set";
+
+    var parts = value.substring(0, 10).split("-");
+    if (parts.length !== 3) return value;
+
+    var months = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+
+    var month = parseInt(parts[1], 10) - 1;
+    var day = parseInt(parts[2], 10);
+
+    if (month < 0 || month > 11) return value;
+
+    return day + " " + months[month] + " " + parts[0];
+  }
+
+  // Search available campus resources.
+  function showAssets(searchTerm) {
+    var asset = new GlideRecord("u_campus_asset");
+    asset.addQuery("u_status", "available");
+
+    if (searchTerm) {
+      var condition = asset.addQuery(
+        "u_asset_name", "CONTAINS", searchTerm
+      );
+
+      condition.addOrCondition(
+        "u_asset_id", "CONTAINS", searchTerm
+      );
+
+      condition.addOrCondition(
+        "u_asset_type", "CONTAINS", searchTerm
+      );
+
+      condition.addOrCondition(
+        "u_location", "CONTAINS", searchTerm
+      );
+    }
+
+    asset.orderBy("u_asset_name");
+    asset.setLimit(5);
+    asset.query();
+
+    while (asset.next()) {
+      data.results.push({
+        name: asset.getDisplayValue("u_asset_name") ||
+              "Campus resource",
+
+        detail:
+          (asset.getDisplayValue("u_asset_type") || "Resource") +
+          " · " +
+          (asset.getDisplayValue("u_location") ||
+           "Location not listed"),
+
+        url: "/sp?id=asset_details&sys_id=" +
+             asset.getUniqueValue()
+      });
+    }
+
+    if (data.results.length > 0) {
+      data.reply = searchTerm
+        ? "Here are the available resources matching your search:"
+        : "Here are some resources currently marked available.";
+    } else {
+      data.reply = searchTerm
+        ? "I couldn't find an available resource matching that search. Try another name, type, or location."
+        : "No available resources were found right now. Please check the catalogue again later.";
+    }
+
+    addLink("Browse all assets", "/sp?id=browse_assets");
+  }
+
+  // Show the signed-in student's active rentals.
+  function showRentals(dueOnly) {
+    var rental = new GlideRecord("u_student_rental");
+    rental.addQuery("u_student", userId);
+    rental.addQuery("u_status", "active");
+    rental.orderBy("u_due_date");
+    rental.setLimit(50);
+    rental.query();
+
+    var now = new GlideDateTime().getNumericValue();
+    var dayMs = 86400000;
+    var overdueCount = 0;
+    var dueSoonCount = 0;
+    var shownCount = 0;
+
+    while (rental.next()) {
+      var dueValue = rental.getValue("u_due_date");
+      var daysLeft = null;
+
+      if (dueValue) {
+        daysLeft = Math.ceil(
+          (new GlideDateTime(dueValue).getNumericValue() - now) /
+          dayMs
+        );
+      }
+
+      var overdue = daysLeft !== null && daysLeft < 0;
+      var dueSoon = daysLeft !== null && daysLeft <= 2;
+
+      if (overdue) {
+        overdueCount++;
+      } else if (dueSoon) {
+        dueSoonCount++;
+      }
+
+      if (dueOnly && !dueSoon) {
+        continue;
+      }
+
+      var dueText = dueValue
+        ? formatDate(dueValue)
+        : "Due date not set";
+
+      var detail;
+
+      if (overdue) {
+        detail = "Overdue · Due " + dueText;
+      } else if (dueSoon) {
+        detail = "Due soon · " + dueText;
+      } else {
+        detail = "Due " + dueText;
+      }
+
+      data.results.push({
+        name: rental.getDisplayValue("u_asset") ||
+              "Campus resource",
+        detail: detail,
+        url: "/sp?id=my_rentals"
+      });
+
+      shownCount++;
+
+      if (shownCount >= 5) {
+        break;
+      }
+    }
+
+    if (dueOnly) {
+      data.reply = shownCount > 0
+        ? "Here are your active rentals that are overdue or due within the next two days."
+        : "You have no active rentals currently overdue or due within the next two days.";
+
+      if (overdueCount > 0) {
+        data.reply += " You have " + overdueCount +
+          " overdue rental(s).";
+      }
+
+      if (dueSoonCount > 0) {
+        data.reply += " You also have " + dueSoonCount +
+          " rental(s) due soon.";
+      }
+    } else {
+      data.reply = shownCount > 0
+        ? "Here are your active rentals, ordered by due date."
+        : "You don't have any active rentals right now.";
+    }
+
+    addLink("Open My Rentals", "/sp?id=my_rentals");
+  }
+
+  if (!message) {
+    data.reply =
+      "I can help you find campus resources, check your rentals and due dates, request a renewal, return an item, or report an issue.";
+    return;
+  }
+
+  // Greetings
+  if (/^(hi|hello|hey)\b/.test(message)) {
+    data.reply = "Hi " + data.firstName +
+      "! What can I help you with today?";
+
+    addLink("Browse assets", "/sp?id=browse_assets");
+    addLink("My rentals", "/sp?id=my_rentals");
+    addLink("Report an issue", "/sp?id=report_issue");
+    return;
+  }
+
+  // Issue reporting
+  if (
+    message.indexOf("report") > -1 ||
+    message.indexOf("problem") > -1 ||
+    message.indexOf("damaged") > -1 ||
+    message.indexOf("broken") > -1 ||
+    message.indexOf("malfunction") > -1 ||
+    message.indexOf("missing asset") > -1
+  ) {
+    data.reply =
+      "Use the issue-reporting form to report a damaged, missing, or malfunctioning campus resource.";
+
+    addLink("Report an issue", "/sp?id=report_issue");
+    return;
+  }
+
+  // Renewal guidance
+  if (
+    message.indexOf("renew") > -1 ||
+    message.indexOf("extension") > -1
+  ) {
+    data.reply =
+      "Open Renew an Item to review an active rental and request an extension. Approval depends on your campus renewal workflow.";
+
+    addLink("Renew an item", "/sp?id=renew_asset");
+    addLink("My rentals", "/sp?id=my_rentals");
+    return;
+  }
+
+  // Return guidance
+  if (
+    message.indexOf("return") > -1 ||
+    message.indexOf("give back") > -1
+  ) {
+    data.reply =
+      "Review your active rentals and use the return options to record an item's return.";
+
+    addLink("My rentals", "/sp?id=my_rentals");
+    addLink("Return an item", "/sp?id=return_asset");
+    return;
+  }
+
+  // Due dates and overdue items
+  if (
+    message.indexOf("due") > -1 ||
+    message.indexOf("overdue") > -1 ||
+    message.indexOf("deadline") > -1 ||
+    message.indexOf("attention") > -1
+  ) {
+    showRentals(true);
+    return;
+  }
+
+  // Current student's rentals
+  if (
+    message.indexOf("my rental") > -1 ||
+    message.indexOf("my borrow") > -1 ||
+    message.indexOf("borrowed") > -1 ||
+    message.indexOf("what have i") > -1
+  ) {
+    showRentals(false);
+    return;
+  }
+
+  // Asset search with improved phrase cleanup.
+  if (
+    message.indexOf("available") > -1 ||
+    message.indexOf("find") > -1 ||
+    message.indexOf("search") > -1 ||
+    message.indexOf("asset") > -1 ||
+    message.indexOf("book") > -1 ||
+    message.indexOf("laptop") > -1 ||
+    message.indexOf("kit") > -1 ||
+    message.indexOf("resource") > -1 ||
+    message.indexOf("library") > -1 ||
+    message.indexOf("location") > -1 ||
+    message.indexOf("textbook") > -1 ||
+    message.indexOf("operating system") > -1 ||
+    message.indexOf("programming") > -1 ||
+    message.indexOf("machine learning") > -1
+  ) {
+    var searchTerm = message
+      .replace(/\b(find|search|show|me|please|is|are|the|a|an|do|you|have|has|any|available|availability|campus|resources?|assets?|what|which|can|i|borrow|want|to|get|for|right|now|my)\b/g, " ")
+      .replace(/[?!.,]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    if (
+      /^(all|everything|all resources|available resources|available assets|campus resources)$/.test(searchTerm)
+    ) {
+      searchTerm = "";
+    }
+
+    // Match common catalogue names.
+    if (searchTerm.indexOf("operating system book") > -1 ||
+        searchTerm.indexOf("operating systems book") > -1) {
+      searchTerm = "Operating Systems Book";
+    } else if (searchTerm.indexOf("programming book") > -1) {
+      searchTerm = "Programming Book";
+    } else if (searchTerm.indexOf("machine learning") > -1) {
+      searchTerm = "Machine Learning";
+    } else if (searchTerm.indexOf("laptop") > -1) {
+      searchTerm = "Laptop";
+    } else if (searchTerm.indexOf("book") > -1) {
+      searchTerm = "Book";
+    } else if (searchTerm.indexOf("kit") > -1) {
+      searchTerm = "Kit";
+    }
+
+    showAssets(searchTerm);
+    return;
+  }
+
+  // Fallback
+  data.reply =
+    "I can help with finding resources, checking rentals and due dates, requesting a renewal, returning an item, or reporting a problem. Choose an option below.";
+
+  addLink("Browse assets", "/sp?id=browse_assets");
+  addLink("My rentals", "/sp?id=my_rentals");
+  addLink("Renew an item", "/sp?id=renew_asset");
+  addLink("Report an issue", "/sp?id=report_issue");
+
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 23:01:07</sys_created_on>
+        <sys_id>e001449af4f383107f44dc35ed319572</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>CampusOps Assistant</sys_name>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sp_widget_e001449af4f383107f44dc35ed319572</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 23:50:32</sys_updated_on>
+        <template><![CDATA[<div class="co-chat-widget"
+     ng-class="{'co-chat-open': c.isOpen}"
+     style="position:static;width:0;height:0;overflow:visible;">
+
+  <!-- Floating launcher -->
+  <button class="co-chat-launcher"
+          ng-click="c.isOpen = !c.isOpen"
+          aria-label="Open CampusOps assistant"
+          ng-if="!c.isOpen">
+    <svg class="co-launcher-icon" viewBox="0 0 48 48" aria-hidden="true">
+      <rect x="7" y="6" width="23" height="29" rx="4" fill="#D9CCFA"/>
+      <rect x="13" y="11" width="24" height="29" rx="4" fill="#B8A2F2"/>
+      <rect x="20" y="17" width="21" height="25" rx="4" fill="#FFFFFF"/>
+      <path d="M26 24h9M26 29h9M26 34h6"
+            fill="none" stroke="#8062C7"
+            stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <!-- Floating chat panel -->
+  <section class="co-chat-panel" ng-if="c.isOpen">
+
+    <header class="co-chat-header">
+      <div class="co-chat-brand">
+        <div class="co-chat-logo">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="8" y="7" width="22" height="28" rx="4" fill="#9B83E6"/>
+            <rect x="15" y="12" width="22" height="28" rx="4" fill="#B9A5F5"/>
+            <rect x="21" y="17" width="19" height="24" rx="4" fill="#8062C7"/>
+            <path d="M27 24h7M27 29h7M27 34h5"
+                  stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h3>CampusOps help</h3>
+          <p>Here to help with campus resources</p>
+        </div>
+      </div>
+
+      <button class="co-chat-close"
+              ng-click="c.isOpen = false"
+              aria-label="Close assistant">×</button>
+    </header>
+
+    <div class="co-chat-messages" id="co-chat-messages">
+
+      <div class="co-chat-welcome">
+        Hi {{c.data.firstName}}! What can I help you with today?
+      </div>
+
+      <div class="co-chat-message"
+           ng-repeat="item in c.messages track by $index">
+
+        <div class="co-chat-user"
+             ng-if="item.type === 'user'">
+          {{item.text}}
+        </div>
+
+        <div class="co-chat-answer"
+             ng-if="item.type === 'assistant'">
+
+          <p>{{item.text}}</p>
+
+          <a class="co-chat-link"
+             ng-repeat="link in item.links track by $index"
+             ng-href="{{link.url}}">
+            {{link.label}} →
+          </a>
+
+          <a class="co-chat-result"
+             ng-repeat="result in item.results track by $index"
+             ng-href="{{result.url}}">
+            <strong>{{result.name}}</strong>
+            <small>{{result.detail}}</small>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="co-chat-typing" ng-if="c.sending">
+        Checking your campus resources…
+      </div>
+
+    </div>
+
+    <form class="co-chat-input-row" ng-submit="c.sendMessage()">
+      <input type="text"
+             ng-model="c.message"
+             placeholder="Ask about resources or rentals…"
+             aria-label="Message CampusOps assistant"
+             autocomplete="off"
+             required>
+
+      <button type="submit"
+              ng-disabled="c.sending || !c.message.trim()">
+        Send
+      </button>
+    </form>
+
+  </section>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>e001449af4f383107f44dc35ed319572</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-09 23:01:05</sys_created_on>
+        <sys_id>629140daf4f383107f44dc35ed3195cf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-09 23:01:05</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

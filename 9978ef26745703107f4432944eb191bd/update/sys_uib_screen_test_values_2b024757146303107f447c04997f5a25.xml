@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_uib_screen_test_values">
+    <sys_uib_screen_test_values action="INSERT_OR_UPDATE">
+        <macroponent display_value="Request Renewal default">b20143d3146303107f447c04997f5a79</macroponent>
+        <macroponent_config>{
+    "mcpTestValues": {
+        "sysId": "d1aa98be74db03107f4432944eb191cb"
+    },
+    "modalModelessSizing": {
+        "modelessHeight": "600",
+        "modelessWidth": "380",
+        "modalSize": "md"
+    },
+    "dataTestValues": {}
+}</macroponent_config>
+        <screen/>
+        <sys_class_name>sys_uib_screen_test_values</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 05:20:09</sys_created_on>
+        <sys_id>2b024757146303107f447c04997f5a25</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CampusOps" source="9978ef26745703107f4432944eb191bd">9978ef26745703107f4432944eb191bd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CampusOps">9978ef26745703107f4432944eb191bd</sys_scope>
+        <sys_update_name>sys_uib_screen_test_values_2b024757146303107f447c04997f5a25</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 06:45:51</sys_updated_on>
+    </sys_uib_screen_test_values>
+</record_update>
